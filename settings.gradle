@@ -1,0 +1,3 @@
+include ':module-test'
+include ':app'
+rootProject.name = "xproject-mvvm-kotlin"
