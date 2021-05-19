@@ -1,16 +1,18 @@
+import com.mcgrady.xproject.plugin.BuildConfig
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.mcgrady.module_test"
-        minSdkVersion 21
-        targetSdkVersion 30
+        applicationId "com.mcgrady.xproject.module_test"
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
         versionCode 1
         versionName "1.0"
 

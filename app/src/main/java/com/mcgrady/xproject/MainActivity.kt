@@ -1,11 +1,22 @@
 package com.mcgrady.xproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import com.mcgrady.xarchitecture.BaseActivity
+import com.mcgrady.xproject.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+@AndroidEntryPoint
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+    val viewModel by viewModels<MainViewModel>()
+
+    override fun observeViewModel() {
     }
+
+    override fun initView(savedInstanceState: Bundle?) {
+
+
+    }
+
 }
