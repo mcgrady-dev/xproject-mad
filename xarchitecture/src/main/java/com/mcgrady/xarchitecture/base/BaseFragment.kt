@@ -1,12 +1,11 @@
-package com.mcgrady.xarchitecture
+package com.mcgrady.xarchitecture.base
 
-import androidx.annotation.LayoutRes
-import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 
 /**
  * Created by mcgrady on 2021/5/13.
  */
-abstract class BaseFragment<V : ViewDataBinding> constructor(@LayoutRes private val contentLayoutId: Int) : BindingFragment<V>(contentLayoutId) {
+abstract class BaseFragment : Fragment() {
 
     private var isLoaded = false
 
@@ -23,5 +22,11 @@ abstract class BaseFragment<V : ViewDataBinding> constructor(@LayoutRes private 
         isLoaded = false
     }
 
-    abstract fun lazyInit()
+    private fun lazyInit() {
+        initView()
+        initData()
+    }
+
+    abstract fun initView()
+    abstract fun initData()
 }

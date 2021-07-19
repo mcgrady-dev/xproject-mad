@@ -1,16 +1,14 @@
-package com.mcgrady.xarchitecture
+package com.mcgrady.xarchitecture.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 
 /**
  * Created by mcgrady on 5/5/21.
  */
-abstract class BaseActivity<V : ViewDataBinding> constructor(@LayoutRes private val contentLayoutId: Int) :
-    BindingActivity<V>(contentLayoutId) {
-
-    abstract fun observeViewModel()
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +17,10 @@ abstract class BaseActivity<V : ViewDataBinding> constructor(@LayoutRes private 
 
     private fun init(savedInstanceState: Bundle?) {
         initView(savedInstanceState)
-        observeViewModel()
+        initData()
     }
 
     abstract fun initView(savedInstanceState: Bundle?)
+
+    abstract fun initData()
 }

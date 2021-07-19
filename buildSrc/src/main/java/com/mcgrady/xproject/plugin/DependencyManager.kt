@@ -18,6 +18,8 @@ object Versions {
     val recyclerview = "1.0.0"
     val fragment = "1.2.1"
     val anko = "0.10.8"
+    val coroutines = "1.4.3"
+    val lifecycle = "2.3.1"
 
     val material = "1.3.0"
 
@@ -37,15 +39,19 @@ object AndroidX {
         "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
     val pagingRuntime = "androidx.paging:paging-runtime:${Versions.paging}"
 
-    val activityKtx = "androidx.activity:activity-ktx:1.2.0-rc01"
+    val activityKtx = "androidx.activity:activity-ktx:1.3.0-alpha07"
+    val fragmentKtx = ""
 
     val workRuntime = "androidx.work:work-runtime:${Versions.work}"
     val workTesting = "androidx.work:work-testing:${Versions.work}"
     val cardview = "androidx.cardview:cardview:${Versions.cardview}"
     val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
 
-    val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
-    val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0"
+    val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle}"
+
+    val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+
 }
 
 object Google {
@@ -73,6 +79,8 @@ object Kt {
     val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     val test = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
     val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 }
 
 object Koin {
