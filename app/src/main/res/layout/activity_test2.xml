@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_total"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ll_header"
+        android:background="@android:color/black"
+        app:layout_constraintHorizontal_weight="0.23">
+
+
+        <TextView
+            android:id="@+id/tv_total_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共0首曲谱"
+            android:textSize="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/medley_fragment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@id/fl_total"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#00ffff"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_weight="0.73"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

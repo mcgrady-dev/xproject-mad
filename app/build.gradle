@@ -1,21 +1,19 @@
-import com.mcgrady.xproject.plugin.*
-
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-platform-android'
-apply plugin: 'dagger.hilt.android.plugin'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+//    id 'dagger.hilt.android.plugin'
+}
 
 android {
-    compileSdkVersion BuildConfig.compileSdkVersion
-    buildToolsVersion BuildConfig.buildToolsVersion
+    compileSdk 30
 
     defaultConfig {
         applicationId "com.mcgrady.xproject"
-        minSdkVersion BuildConfig.minSdkVersion
-        targetSdkVersion BuildConfig.targetSdkVersion
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
+        minSdk 21
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,18 +39,22 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Kt.stdlib
-    implementation AndroidX.coreKtx
-    implementation AndroidX.constraintlayout
-
-    implementation Dagger.hiltAndroid
-    kapt Dagger.hiltDaggerCompiler
-    kapt Dagger.hiltAndroidXCompiler
-
     implementation project(':xarchitecture')
 
-    testImplementation Depend.junit
-    androidTestImplementation Depend.androidTestJunit
-    androidTestImplementation Depend.espressoCore
+    //view
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+
+    //hilt
+//    kapt 'com.google.dagger:hilt-compiler:2.38.1'
+//    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+kapt {
+    correctErrorTypes true
 }
