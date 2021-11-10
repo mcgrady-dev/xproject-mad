@@ -1,12 +1,13 @@
-package com.mcgrady.xproject
+package com.mcgrady.xproject.network
 
+import com.mcgrady.xproject.PokemonResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
  * Created by mcgrady on 2021/8/12.
  */
-interface ApiService {
+interface PokedexService {
 
     @GET("pokemon")
     suspend fun fetchPokemonList(

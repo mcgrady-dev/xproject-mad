@@ -1,7 +1,9 @@
-package com.mcgrady.xproject
+package com.mcgrady.xproject.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.mcgrady.xproject.network.PokedexClient
+import com.mcgrady.xproject.network.PokedexService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,13 +50,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun providePokedexService(retrofit: Retrofit): PokedexService {
+        return retrofit.create(PokedexService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideApiClient(apiService: ApiService): ApiClient {
-        return ApiClient(apiService)
+    fun providePokedexClient(pokedexService: PokedexService): PokedexClient {
+        return PokedexClient(pokedexService)
     }
 }
