@@ -1,11 +1,9 @@
 package com.mcgrady.xarchitecture.viewbind
 
 import android.app.Activity
-import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
 import com.mcgrady.xarchitecture.base.delegate.ActivityDelegate
-import com.mcgrady.xarchitecture.ext.infateMethod
-import kotlin.properties.ReadOnlyProperty
+import com.mcgrady.xarchitecture.ext.inflateMethod
 import kotlin.reflect.KProperty
 
 /**
@@ -16,7 +14,7 @@ class ActivityViewBinding<T : ViewBinding>(
     val activity: Activity
 ) : ActivityDelegate<T>(activity) {
 
-    private var layoutInflater = bindingClass.infateMethod()
+    private var layoutInflater = bindingClass.inflateMethod()
 
     @Suppress("UNCHECKED_CAST")
     override fun getValue(thisRef: Activity, property: KProperty<*>): T {

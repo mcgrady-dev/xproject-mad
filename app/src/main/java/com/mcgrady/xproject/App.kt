@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.blankj.utilcode.util.Utils
-import com.mcgrady.xproject.common_core.app.BaseApplication
+import com.mcgrady.xproject.common.core.app.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 /**

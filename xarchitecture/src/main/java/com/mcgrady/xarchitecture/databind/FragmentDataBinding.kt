@@ -4,7 +4,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.mcgrady.xarchitecture.base.delegate.FragmentDelegate
-import com.mcgrady.xarchitecture.ext.infateMethod
+import com.mcgrady.xarchitecture.ext.inflateMethod
 import java.lang.IllegalStateException
 import kotlin.reflect.KProperty
 
@@ -17,7 +17,7 @@ class FragmentDataBinding<T: ViewDataBinding>(
     private var block: (T.() -> Unit)? = null
 ) : FragmentDelegate<T>(fragment) {
 
-    private val layoutInflater = bindingClass.infateMethod()
+    private val layoutInflater = bindingClass.inflateMethod()
 
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
         return binding?.run {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mcgrady.xproject.module_test">
+    package="com.mcgrady.xproject.testing.test">
 
     <application
-        android:name="com.mcgrady.xproject.common_core.app.BaseApplication"
+        android:name="com.mcgrady.xproject.common.core.app.BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Xprojectmvvm">
         <activity
-            android:name=".customview.SlideViewByLayoutActivity"
+            android:name="com.mcgrady.xproject.testing.test.customview.SlideViewByLayoutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CardViewActivity"
+            android:name="com.mcgrady.xproject.testing.test.CardViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,14 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DialogThemeActivity"
+            android:name="com.mcgrady.xproject.testing.test.DialogThemeActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".NormalActivity"
+            android:name="com.mcgrady.xproject.testing.test.NormalActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.mcgrady.xproject.testing.test.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mcgrady.xproject.module_samples">
+    package="com.mcgrady.xproject.testing.samples">
     <!-- 勿扰模式 -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Xprojectmvvm">
         <activity
-            android:name=".bundle.BundleActivity"
+            android:name="com.mcgrady.xproject.testing.samples.bundle.BundleActivity"
             android:exported="false" />
         <activity
-            android:name=".window_insets_controller.WindowInsetsControllerActivity"
+            android:name="com.mcgrady.xproject.testing.samples.window_insets_controller.WindowInsetsControllerActivity"
             android:exported="true"
             android:label="@string/title_activity_window_insets_controller"
             android:theme="@style/Theme.Xprojectmvvm.NoActionBar">
@@ -24,14 +24,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageViewScaleTypeActivity"
+            android:name="com.mcgrady.xproject.testing.samples.ImageViewScaleTypeActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ShapeActivity"
+            android:name="com.mcgrady.xproject.testing.samples.ShapeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

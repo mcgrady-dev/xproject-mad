@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.*
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ThreadUtils
-import com.mcgrady.xproject.common_core.SingleLiveData
+import com.mcgrady.xproject.common.core.SingleLiveData
 
 /**
  * Created by mcgrady on 2021/8/9.

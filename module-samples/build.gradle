@@ -7,7 +7,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.mcgrady.xproject.module_samples"
+        applicationId "com.mcgrady.xproject.testing.samples"
         minSdk 21
         targetSdk 31
         versionCode 1

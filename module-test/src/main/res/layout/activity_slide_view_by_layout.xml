@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customview.SlideViewByLayoutActivity">
+    tools:context="com.mcgrady.xproject.testing.test.customview.SlideViewByLayoutActivity">
 
-    <com.mcgrady.xproject.module_test.customview.CustomView
+    <com.mcgrady.xproject.testing.test.customview.CustomView
         android:id="@+id/custom_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

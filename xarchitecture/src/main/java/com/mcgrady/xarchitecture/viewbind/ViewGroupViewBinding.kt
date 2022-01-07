@@ -3,8 +3,8 @@ package com.mcgrady.xarchitecture.viewbind
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.kuke.kukemusic.kkarchitecture.ext.inflateMethod
-import com.kuke.kukemusic.kkarchitecture.ext.inflateMethodWithViewGroup
+import com.mcgrady.xarchitecture.ext.inflateMethod
+import com.mcgrady.xarchitecture.ext.inflateMethodWithViewGroup
 import java.lang.reflect.Method
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
