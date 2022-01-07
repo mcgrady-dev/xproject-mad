@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="xproject-mvvm.app" target="11" />
+      <module name="xproject-mvvm.common-core" target="11" />
+      <module name="xproject-mvvm.common-widget" target="11" />
+      <module name="xproject-mvvm.module-main" target="11" />
+      <module name="xproject-mvvm.module-pokemon" target="11" />
+      <module name="xproject-mvvm.module-samples" target="11" />
+      <module name="xproject-mvvm.module-test" target="11" />
+      <module name="xproject-mvvm.screen-match" target="11" />
+      <module name="xproject-mvvm.xarchitecture" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

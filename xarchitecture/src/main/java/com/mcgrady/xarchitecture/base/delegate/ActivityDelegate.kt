@@ -2,6 +2,7 @@ package com.mcgrady.xarchitecture.base.delegate
 
 import android.app.Activity
 import android.os.Build
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
@@ -29,6 +30,7 @@ abstract class ActivityDelegate<T: ViewBinding>(activity: Activity) : ReadOnlyPr
         }
     }
 
+    @Suppress("DEPRECATION")
     fun addLifecycleFragment(activity: Activity) {
         if (activity is FragmentActivity || activity is AppCompatActivity) return
 
@@ -44,6 +46,11 @@ abstract class ActivityDelegate<T: ViewBinding>(activity: Activity) : ReadOnlyPr
     }
 
     private fun destroyed() {
+        Log.d(TAG, "set binding null")
         binding = null
+    }
+
+    companion object {
+        const val TAG = "ActivityDelegate"
     }
 }

@@ -1,6 +1,8 @@
 package com.mcgrady.xarchitecture.ext
 
 import android.app.Activity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -9,6 +11,7 @@ import com.mcgrady.xarchitecture.databind.ActivityDataBinding
 import com.mcgrady.xarchitecture.databind.FragmentDataBinding
 import com.mcgrady.xarchitecture.viewbind.ActivityViewBinding
 import com.mcgrady.xarchitecture.viewbind.FragmentViewBinding
+import com.mcgrady.xarchitecture.viewbind.ViewGroupViewBinding
 
 /**
  * Created by mcgrady on 2021/7/19.
@@ -35,3 +38,14 @@ inline fun <reified T : ViewDataBinding> Fragment.databind() =
 inline fun <reified T: ViewDataBinding> Fragment.databind(noinline block: T.() -> Unit) =
     FragmentDataBinding<T>(T::class.java, this, block = block)
 
+inline fun <reified T : ViewBinding> ViewGroup.viewbind() = ViewGroupViewBinding(
+    T::class.java,
+    LayoutInflater.from(context)
+)
+
+inline fun <reified T : ViewBinding> ViewGroup.viewbind(viewGroup: ViewGroup) =
+    ViewGroupViewBinding(
+        T::class.java,
+        LayoutInflater.from(context),
+        viewGroup
+    )

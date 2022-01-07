@@ -10,7 +10,7 @@ import kotlin.reflect.KProperty
 /**
  * Created by mcgrady on 2021/7/19.
  */
-class FragmentViewBinding<T: ViewBinding>(
+class FragmentViewBinding<T : ViewBinding>(
     bindingClass: Class<T>,
     fragment: Fragment
 ) : FragmentDelegate<T>(fragment) {
@@ -19,15 +19,17 @@ class FragmentViewBinding<T: ViewBinding>(
     private val bindView = bindingClass.bindMethod()
 
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        binding?.let { return it }
+        return binding?.run {
+            return this
+        } ?: let {
+            val bind: T = if (thisRef.view == null) {
+                //这里为了兼容在 navigation 中使用 Fragment
+                layoutInflater.invoke(null, thisRef.layoutInflater) as T
+            } else {
+                bindView.invoke(null, thisRef.view) as T
+            }
 
-        val invoke: T
-        if (thisRef.view == null) {
-            invoke = layoutInflater.invoke(null, thisRef.layoutInflater) as T
-        } else {
-            invoke = bindView.invoke(null, thisRef.view) as T
+            return bind.apply { binding = this }
         }
-
-        return invoke.also { this.binding = it }
     }
 }

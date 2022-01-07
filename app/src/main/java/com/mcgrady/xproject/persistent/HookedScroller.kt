@@ -105,6 +105,7 @@ class HookedScroller(context: Context, persistentProvider: () -> PersistentRecyc
     /**
      * 获取刷新频率
      */
+    @Suppress("DEPRECATION")
     private fun getRefreshRate(context: Context): Float {
         var windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         return windowManager.defaultDisplay.refreshRate

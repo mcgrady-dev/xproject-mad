@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.mcgrady.xproject"
@@ -20,14 +20,30 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled true
+
+            zipAlignEnabled = true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // As of Gradle Android plugin 1.1.0, the test APK has a separate config
+            testProguardFile 'proguard-rules-test.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -39,12 +55,12 @@ android {
 }
 
 dependencies {
-    implementation project(':xarchitecture')
+    implementation project(':common-core')
 
     //view
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
 
     //hilt
 //    kapt 'com.google.dagger:hilt-compiler:2.38.1'
@@ -53,8 +69,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }
 
-kapt {
-    correctErrorTypes true
-}
+//kapt {
+//    correctErrorTypes true
+//}

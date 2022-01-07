@@ -78,6 +78,7 @@ class LifecycleCallbacks(var destroyed: (() -> Unit)? = null) : Application.Acti
     }
 }
 
+@Suppress("DEPRECATION")
 class LifecycleFragment : Fragment {
 
     var destroyed: (() -> Unit)? = null

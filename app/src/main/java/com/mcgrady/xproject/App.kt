@@ -1,17 +1,24 @@
 package com.mcgrady.xproject
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import com.blankj.utilcode.util.Utils
+import com.mcgrady.xproject.common_core.app.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 /**
  * Created by mcgrady on 2021/5/10.
  */
 @HiltAndroidApp
-class App : Application(), LifecycleObserver {
+class App : BaseApplication(), LifecycleObserver {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Utils.init(this)
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onForeground() {

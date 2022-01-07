@@ -20,12 +20,15 @@ class ActivityViewBinding<T : ViewBinding>(
 
     @Suppress("UNCHECKED_CAST")
     override fun getValue(thisRef: Activity, property: KProperty<*>): T {
+        return binding?.run {
+            this
+        } ?: let {
+            addLifecycleFragment(activity)
 
-        binding?.let { return it }
-        //当继承 Activity 且 Build.VERSION.SDK_INT < Build.VERSION_CODES.Q 时触发
-        addLifecycleFragment(activity)
-        val invokeLayout = layoutInflater.invoke(null, thisRef.layoutInflater) as T
-        thisRef.setContentView(invokeLayout.root)
-        return invokeLayout.also { this.binding = it }
+            //获取 ViewBinding
+            val bind = layoutInflater.invoke(null, thisRef.layoutInflater) as T
+            thisRef.setContentView(bind.root)
+            return bind.apply { binding = this }
+        }
     }
 }

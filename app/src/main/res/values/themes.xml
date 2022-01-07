@@ -12,6 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+<!--        <item name="dividerVertical">@drawable/abc_list_divider_mtrl_alpha</item>-->
+<!--        <item name="dividerHorizontal">@drawable/abc_list_divider_mtrl_alpha</item>-->
+
     </style>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

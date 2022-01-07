@@ -4,8 +4,20 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 //        jcenter() // Warning: this repository is going to shut down soon
+        maven { url "https://jitpack.io" }
+        // RxAndroid
+        maven { url "https://oss.jfrog.org/libs-snapshot" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
 rootProject.name = "xproject-mvvm"
 include ':app'
 include ':xarchitecture'
+include ':screen-match'
+include ':module-pokemon'
+include ':common-core'
+include ':common-widget'
+include ':module-main'
+include ':module-test'
+include ':module-kotlin-test'
+include ':module-samples'

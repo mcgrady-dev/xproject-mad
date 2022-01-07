@@ -1,5 +1,6 @@
 package com.mcgrady.xarchitecture.base.delegate
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.mcgrady.xarchitecture.ext.observerWhenCreated
@@ -28,6 +29,11 @@ abstract class FragmentDelegate<T : ViewBinding>(
     }
 
     private fun destroyed() {
+        Log.d(TAG, "set binding null")
         binding = null
+    }
+
+    companion object {
+        const val TAG = "FragmentDelegate"
     }
 }
