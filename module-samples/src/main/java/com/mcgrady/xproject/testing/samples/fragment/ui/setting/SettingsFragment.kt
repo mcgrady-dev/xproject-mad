@@ -2,6 +2,7 @@ package com.mcgrady.xproject.testing.samples.fragment.ui.setting
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.mcgrady.xproject.testing.samples.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

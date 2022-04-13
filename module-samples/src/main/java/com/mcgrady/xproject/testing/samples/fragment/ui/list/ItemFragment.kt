@@ -1,13 +1,13 @@
 package com.mcgrady.xproject.testing.samples.fragment.ui.list
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.mcgrady.xproject.testing.samples.R
 import com.mcgrady.xproject.testing.samples.fragment.ui.list.placeholder.PlaceholderContent
 
@@ -30,7 +30,7 @@ class ItemFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list2, container, false)
+        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {

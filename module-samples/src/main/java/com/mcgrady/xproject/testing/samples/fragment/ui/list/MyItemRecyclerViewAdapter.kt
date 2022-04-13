@@ -1,14 +1,12 @@
 package com.mcgrady.xproject.testing.samples.fragment.ui.list
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.mcgrady.xproject.testing.samples.R
-
+import androidx.recyclerview.widget.RecyclerView
+import com.mcgrady.xproject.testing.samples.databinding.FragmentItemBinding
 import com.mcgrady.xproject.testing.samples.fragment.ui.list.placeholder.PlaceholderContent.PlaceholderItem
-import com.mcgrady.xproject.testing.samples.fragment.ui.list.databinding.FragmentItem2Binding
+
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
@@ -21,7 +19,7 @@ class MyItemRecyclerViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            FragmentItem2Binding.inflate(
+            FragmentItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -38,7 +36,7 @@ class MyItemRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentItem2Binding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val idView: TextView = binding.itemNumber
         val contentView: TextView = binding.content
 

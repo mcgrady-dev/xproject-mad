@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mcgrady.xproject.testing.samples.window_insets_controller.FirstFragment">
+    tools:context="com.mcgrady.xproject.testing.samples.jetpack.navigation.FirstFragment">
 
     <TextView
         android:id="@+id/textview_first"

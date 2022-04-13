@@ -1,14 +1,14 @@
 package com.mcgrady.xproject.testing.samples.fragment.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mcgrady.xproject.testing.samples.fragment.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.mcgrady.xproject.testing.samples.R
 
-class SampleFragment : Fragment() {
+class SampleFragment private constructor(): Fragment() {
 
     companion object {
         fun newInstance() = SampleFragment()
@@ -26,7 +26,7 @@ class SampleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SampleFragmentViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
+        retainInstance = true
+    }
 }

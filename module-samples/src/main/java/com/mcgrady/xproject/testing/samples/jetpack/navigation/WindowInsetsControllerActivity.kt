@@ -1,10 +1,9 @@
-package com.mcgrady.xproject.testing.samples.window_insets_controller
+package com.mcgrady.xproject.testing.samples.jetpack.navigation
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -13,8 +12,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.blankj.utilcode.util.ThreadUtils
+import com.google.android.material.snackbar.Snackbar
 import com.mcgrady.xproject.testing.samples.R
 import com.mcgrady.xproject.testing.samples.databinding.ActivityWindowInsetsControllerBinding
+import com.mcgrady.xproject.testing.samples.service.SampleService
 
 class WindowInsetsControllerActivity : AppCompatActivity() {
 
@@ -42,6 +43,12 @@ class WindowInsetsControllerActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        startService(Intent(this, SampleService::class.java))
     }
 
     override fun onSupportNavigateUp(): Boolean {

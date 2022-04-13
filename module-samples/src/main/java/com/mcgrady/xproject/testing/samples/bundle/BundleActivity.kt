@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.mcgrady.xproject.testing.samples.R
-import com.mcgrady.xproject.testing.samples.ShapeActivity
+import com.mcgrady.xproject.testing.samples.image.ShapeActivity
 
 class BundleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

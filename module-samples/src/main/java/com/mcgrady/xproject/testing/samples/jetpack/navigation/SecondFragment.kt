@@ -1,10 +1,10 @@
-package com.mcgrady.xproject.testing.samples.window_insets_controller
+package com.mcgrady.xproject.testing.samples.jetpack.navigation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mcgrady.xproject.testing.samples.R
 import com.mcgrady.xproject.testing.samples.databinding.FragmentSecondBinding

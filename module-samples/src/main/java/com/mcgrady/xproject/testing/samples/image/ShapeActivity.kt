@@ -1,10 +1,11 @@
-package com.mcgrady.xproject.testing.samples
+package com.mcgrady.xproject.testing.samples.image
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.mcgrady.xarchitecture.base.BaseActivity
 import com.mcgrady.xarchitecture.ext.viewbind
+import com.mcgrady.xproject.testing.samples.R
 import com.mcgrady.xproject.testing.samples.databinding.ActivityShapeSampleBinding
 
 class ShapeActivity : BaseActivity() {
@@ -23,5 +24,4 @@ class ShapeActivity : BaseActivity() {
             }
         }
     }
-
 }

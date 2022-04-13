@@ -1,14 +1,11 @@
 package com.mcgrady.xproject.testing.samples.recyclerview
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.mcgrady.xproject.testing.samples.R
-
+import androidx.recyclerview.widget.RecyclerView
+import com.mcgrady.xproject.testing.samples.databinding.FragmentItemBinding
 import com.mcgrady.xproject.testing.samples.recyclerview.placeholder.PlaceholderContent.PlaceholderItem
-import com.mcgrady.xproject.testing.samples.recyclerview.databinding.FragmentItemBinding
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
