@@ -16,7 +16,7 @@
 
 @file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
-package com.skydoves.transformationlayout
+package com.mcgrady.xproject.common.widget.transformationlayout
 
 import android.app.Activity
 import android.app.ActivityOptions
@@ -35,6 +35,7 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.mcgrady.xproject.common.widget.R
 import kotlinx.parcelize.Parcelize
 
 public class TransformationLayout : FrameLayout, TransformationParams {

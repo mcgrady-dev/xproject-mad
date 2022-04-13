@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.skydoves.transformationlayout
+package com.mcgrady.xproject.common.widget.transformationlayout
 
 import android.view.View
 

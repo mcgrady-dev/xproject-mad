@@ -1,9 +1,8 @@
-package com.mcgrady.xproject.pokemon.repository
+package com.mcgrady.xproject.pokemon.repo
 
 import androidx.annotation.WorkerThread
-import com.mcgrady.xarchitecture.repository.Repository
+import com.mcgrady.xarchitecture.repo.Repository
 import com.mcgrady.xproject.pokemon.model.Pokemon
-import com.mcgrady.xproject.pokemon.model.PokemonResponse
 import com.mcgrady.xproject.pokemon.network.PokedexClient
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException

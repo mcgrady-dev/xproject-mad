@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.skydoves.transformationlayout
+package com.mcgrady.xproject.common.widget.transformationlayout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.skydoves.transformationlayout.TransformationCompat.activityTransitionName
+import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCompat.activityTransitionName
 
 /** An abstract activity extending [AppCompatActivity] with registering transformation automatically. */
 public abstract class TransformationAppCompatActivity : AppCompatActivity() {

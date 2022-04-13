@@ -1,4 +1,4 @@
-package com.mcgrady.xproject.main
+package com.mcgrady.xproject.ui.main
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

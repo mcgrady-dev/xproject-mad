@@ -1,6 +1,6 @@
 package com.mcgrady.xproject
 
-import retrofit.http.GET
+import retrofit2.http.GET
 import retrofit2.http.Headers
 
 /**

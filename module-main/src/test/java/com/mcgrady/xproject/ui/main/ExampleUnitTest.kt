@@ -1,4 +1,4 @@
-package com.mcgrady.xproject.main
+package com.mcgrady.xproject.ui.main
 
 import org.junit.Test
 

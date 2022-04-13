@@ -1,4 +1,4 @@
-package com.mcgrady.xarchitecture.repository
+package com.mcgrady.xarchitecture.repo
 
 /**
  * Repository is an interface for configuring base repository classes.

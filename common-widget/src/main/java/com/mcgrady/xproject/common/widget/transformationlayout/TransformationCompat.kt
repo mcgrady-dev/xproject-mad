@@ -16,7 +16,7 @@
 
 @file:Suppress("unused")
 
-package com.skydoves.transformationlayout
+package com.mcgrady.xproject.common.widget.transformationlayout
 
 import android.app.Activity
 import android.content.Intent
