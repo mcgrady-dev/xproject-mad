@@ -11,12 +11,4 @@ import com.mcgrady.xproject.databinding.ActivityTestBinding
 class TestViewBindingActivity : BaseActivity() {
 
     val binding: ActivityTestBinding by viewbind()
-
-    override fun initView(savedInstanceState: Bundle?) {
-
-    }
-
-    override fun initData() {
-
-    }
 }

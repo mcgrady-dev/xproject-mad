@@ -9,15 +9,11 @@ class CardViewActivity : BaseActivity() {
 
     private val binding: ActivityCardViewBinding by viewbind()
 
-    override fun initView(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         with(binding) {
 
         }
     }
-
-    override fun initData() {
-
-    }
-
 
 }
