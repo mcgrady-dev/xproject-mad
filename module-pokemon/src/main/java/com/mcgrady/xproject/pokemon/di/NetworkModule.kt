@@ -1,17 +1,17 @@
 package com.mcgrady.xproject.pokemon.di
 
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.mcgrady.xproject.pokemon.network.PokedexClient
 import com.mcgrady.xproject.pokemon.network.PokedexService
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import retrofit.GsonConverterFactory
-import retrofit2.Converter
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -23,34 +23,28 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return GsonBuilder()
-            .serializeNulls() //序列化null
-            .enableComplexMapKeySerialization()
-            .create()
-    }
-
-    @Provides
-    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun provideRetrofit(okhttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-            .client(okHttpClient)
+            .client(okhttpClient)
             .baseUrl("https://pokeapi.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create(gson) as Converter.Factory)
-//            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun providePokedexService(retrofit: Retrofit): com.mcgrady.xproject.pokemon.network.PokedexService {
+    fun providePokedexService(retrofit: Retrofit): PokedexService {
         return retrofit.create(PokedexService::class.java)
     }
 

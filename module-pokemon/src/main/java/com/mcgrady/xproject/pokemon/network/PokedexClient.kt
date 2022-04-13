@@ -1,6 +1,7 @@
 package com.mcgrady.xproject.pokemon.network
 
-import com.mcgrady.xproject.pokemon.PokemonResponse
+import com.mcgrady.xproject.pokemon.model.PokemonResponse
+import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
 /**
@@ -10,7 +11,7 @@ class PokedexClient @Inject constructor(private val service: PokedexService) {
 
     suspend fun fetchPokemonList(
         page: Int
-    ): PokemonResponse = service.fetchPokemonList(
+    ): ApiResponse<PokemonResponse> = service.fetchPokemonList(
         limit = PAGING_SIZE,
         offset = page * PAGING_SIZE
     )

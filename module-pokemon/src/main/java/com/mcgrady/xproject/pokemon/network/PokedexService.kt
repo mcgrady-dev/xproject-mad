@@ -1,6 +1,7 @@
 package com.mcgrady.xproject.pokemon.network
 
-import com.mcgrady.xproject.pokemon.PokemonResponse
+import com.mcgrady.xproject.pokemon.model.PokemonResponse
+import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,5 +14,5 @@ interface PokedexService {
     suspend fun fetchPokemonList(
         @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 0
-    ): PokemonResponse
+    ): ApiResponse<PokemonResponse>
 }
