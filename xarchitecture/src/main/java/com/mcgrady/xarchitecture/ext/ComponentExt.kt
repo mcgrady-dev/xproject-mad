@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.mcgrady.xarchitecture.databind.ActivityDataBinding
 import com.mcgrady.xarchitecture.databind.FragmentDataBinding
+import com.mcgrady.xarchitecture.databind.ViewHolderDataBinding
 import com.mcgrady.xarchitecture.viewbind.ActivityViewBinding
 import com.mcgrady.xarchitecture.viewbind.FragmentViewBinding
 import com.mcgrady.xarchitecture.viewbind.ViewGroupViewBinding
@@ -49,3 +51,9 @@ inline fun <reified T : ViewBinding> ViewGroup.viewbind(viewGroup: ViewGroup) =
         LayoutInflater.from(context),
         viewGroup
     )
+
+inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind() =
+    ViewHolderDataBinding(T::class.java)
+
+inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind(noinline block: (T.() -> Unit)) =
+    ViewHolderDataBinding(T::class.java, block)

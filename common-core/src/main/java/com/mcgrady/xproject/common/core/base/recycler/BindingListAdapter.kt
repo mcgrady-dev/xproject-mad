@@ -2,18 +2,15 @@ package com.mcgrady.xproject.common.core.base.recycler
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.databinding.Bindable
-import androidx.databinding.PropertyChangeRegistry
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import kotlin.reflect.KProperty
+import com.mcgrady.xproject.common.core.extensions.binding
 
 /**
  * Created by mcgrady on 2022/2/17.
  */
-abstract class BindableListAdapter<T, BD : ViewDataBinding> constructor(
+abstract class BindingListAdapter<T, BD : ViewDataBinding> constructor(
     callback: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, BaseViewHolder<BD>>(callback) {
 
@@ -21,15 +18,13 @@ abstract class BindableListAdapter<T, BD : ViewDataBinding> constructor(
     abstract val layoutResId: Int
 
     abstract fun bind(binding: BD, item: T)
-}
 
-class BaseViewHolder<BD: ViewDataBinding>(val binding: BD) : RecyclerView.ViewHolder(binding.root) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BD> {
+        val binding = parent.binding<BD>(layoutResId, false)
+        return BaseViewHolder(binding)
+    }
 
-}
-
-interface ItemViewModel {
-    @get:LayoutRes
-    val layoutId: Int
-    val viewType: Int
-        get() = 0
+    override fun onBindViewHolder(holder: BaseViewHolder<BD>, position: Int) {
+        bind(holder.binding, getItem(position))
+    }
 }
