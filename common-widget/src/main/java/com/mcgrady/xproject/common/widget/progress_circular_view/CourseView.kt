@@ -1,4 +1,4 @@
-package com.kuke.kukey.c.common_core.widget.courseview
+package com.mcgrady.xproject.common.widget.progress_circular_view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -30,5 +30,27 @@ class CourseView @JvmOverloads constructor(
         val sizeHeight = MeasureSpec.getSize(heightMeasureSpec)
 
         measureChildren(widthMeasureSpec, heightMeasureSpec)
+
+
+        //width = progressView.width
+        //height = progressView.height
+
+        var width = 0
+        var height = 0
+
+        for (i in 0..childCount) {
+            val childView = getChildAt(i)
+            width = childView.width
+            height = childView.height
+        }
+
+        when (widthMode) {
+            MeasureSpec.EXACTLY -> {
+                setMeasuredDimension(width, height)
+            }
+            else -> {
+                setMeasuredDimension(sizeWidth, sizeHeight)
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.mcgrady.xproject.common.core.app
 
 import android.app.Application
-import com.blankj.utilcode.util.ToastUtils
+import android.os.Looper
 import com.mcgrady.xproject.common.core.lifecycle.ActivityLifecycleCallbacksImpl
 import com.mcgrady.xproject.common.core.log.Log
 
@@ -17,7 +17,9 @@ open class BaseApplication : Application() {
 
         registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
 
-        ToastUtils.showShort("")
+        Looper.getMainLooper().setMessageLogging { x: String ->
+            
+        }
     }
 
     override fun onTerminate() {

@@ -1,24 +1,21 @@
 package com.mcgrady.xproject
 
-import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.DisplayMetrics
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
+import com.blankj.utilcode.util.PathUtils
+import com.blankj.utilcode.util.SpanUtils
 import com.google.android.material.snackbar.Snackbar
 import com.mcgrady.xarchitecture.ext.viewbind
 import com.mcgrady.xproject.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-
-import android.util.DisplayMetrics
-import android.util.Log
-import com.blankj.utilcode.util.*
-import android.graphics.BitmapFactory
-
-import android.graphics.Bitmap
-import android.os.Build
-import android.os.Environment
 import java.io.File
 
 
