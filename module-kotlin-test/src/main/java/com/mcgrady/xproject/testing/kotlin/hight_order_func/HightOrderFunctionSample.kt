@@ -5,19 +5,35 @@ package com.mcgrady.xproject.testing.kotlin.hight_order_func
  */
 fun main() {
 
-    println("$TAG: plus = ${num1Andnum2(10, 10, ::plus)}")
-    println("$TAG: minus = ${num1Andnum2(10, 10, ::minus)}")
-    val plusResult = num1Andnum2(10, 10) { n1, n2 ->
-        n1 + n2
-    }
-    val minusResult = num1Andnum2(10, 10) { n1, n2 ->
-        n1 - n2
-    }
-    println("$TAG: lambda plus = $plusResult")
-    println("$TAG: lambda minus = $minusResult")
+//    println("$TAG: plus = ${num1Andnum2(10, 10, ::plus)}")
+//    println("$TAG: minus = ${num1Andnum2(10, 10, ::minus)}")
+//    val plusResult = num1Andnum2(10, 10) { n1, n2 ->
+//        n1 + n2
+//    }
+//    val minusResult = num1Andnum2(10, 10) { n1, n2 ->
+//        n1 - n2
+//    }
+//    println("$TAG: lambda plus = $plusResult")
+//    println("$TAG: lambda minus = $minusResult")
+//
+//    val builder = StringBuilder().build {
+//
+//    }
 
-    val builder = StringBuilder().build {
+    val base: Base = Extended()
+    base.run()
+}
 
+open class Base {
+
+    open fun run() {
+        println("Base run")
+    }
+}
+
+class Extended : Base() {
+    override fun run() {
+        println("Extended run")
     }
 }
 

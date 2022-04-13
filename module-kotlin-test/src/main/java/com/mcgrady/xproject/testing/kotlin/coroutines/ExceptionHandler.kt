@@ -1,12 +1,13 @@
 package com.mcgrady.xproject.testing.kotlin.coroutines
 
 import kotlinx.coroutines.*
+import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by mcgrady on 2022/1/20.
  */
-fun main() = runBlocking {
+suspend fun main() {
 
 //    Thread.setDefaultUncaughtExceptionHandler { t: Thread, e: Throwable ->
 //        println("Thread '${t.name}' throws an exception with message '${e.message}'")
@@ -18,22 +19,22 @@ fun main() = runBlocking {
         log("${coroutineContext[CoroutineName]} Thread an exception with message: ${throwable.message}")
     }
 
-//    log("1")
-//    GlobalScope.launch(GlobalCoroutineExceptionHandler() + Dispatchers.Default) {
-//        throw ArithmeticException("Hey!")
-//    }.join()
-//    log("2")
-
-
-//    val job = GlobalScope.launch {
-//        log("Throwing exception from launch")
-//        throw IndexOutOfBoundsException()
-//    }
+////    log("1")
+////    GlobalScope.launch(GlobalCoroutineExceptionHandler() + Dispatchers.Default) {
+////        throw ArithmeticException("Hey!")
+////    }.join()
+////    log("2")
 //
+//
+//    val job = GlobalScope.launch(exceptionHandler + CoroutineName("1")) {
+//        log("Throwing exception from launch")
+//        throw IndexOutOfBoundsException("Hey!!")
+//    }
+
 //    job.join()
 //    log("Joined failed job")
 //
-//    val deferred = GlobalScope.async {
+//    val deferred = GlobalScope.async(exceptionHandler + CoroutineName("2")) {
 //        log("Throwing exception from async")
 //        throw ArithmeticException()
 //    }
@@ -76,14 +77,91 @@ fun main() = runBlocking {
 //    }
 //    log(13)
 
-    launch(exceptionHandler + Dispatchers.Default) {
-        throw ArithmeticException("Hey!!")
+//    val job = GlobalScope.launch(exceptionHandler + CoroutineName("①")) {
+//        throw ArithmeticException("Hey!!")
+//    }
+//
+//    try {
+//        job.join()
+//    } catch (e: ArithmeticException) {
+//        log("Caught ArithmeticException form launch")
+//    }
+//
+//    val deferred =
+//        GlobalScope.async(exceptionHandler + CoroutineName("②")) {
+//            throw ArithmeticException("Hey!!")
+//        }
+//
+//    try {
+//        deferred.await()
+//    } catch (e: ArithmeticException) {
+//        log("Caught ArithmeticException form async")
+//    }
+
+//    try {
+//        GlobalScope.launch {
+//            val job = launch(exceptionHandler + CoroutineName("①")) {
+//                log("①")
+//                throw ArithmeticException("Hey!!")
+//            }
+//
+//            try {
+//                log("① join")
+//                job.join()
+//            } catch (e: ArithmeticException) {
+//                log("Caught ArithmeticException form launch")
+//            }
+//
+//            val deferred =
+//                async(exceptionHandler + CoroutineName("②")) {
+//                    log("②")
+//                    throw ArithmeticException("Hey!!")
+//                }
+//
+//            try {
+//                log("② await")
+//                deferred.await()
+//            } catch (e: ArithmeticException) {
+//                log("Caught ArithmeticException form async")
+//            }
+//        }
+//    } catch (e: ArithmeticException) {
+//        log("Caught ArithmeticException form coroutineScope")
+//    }
+//
+//    delay(100)
+
+
+    val job = GlobalScope.launch(exceptionHandler) {
+        launch {
+            try {
+                delay(Long.MAX_VALUE)
+            } catch (e: Exception) {
+                log("Caught Exception ${e.message}")
+            } finally {
+//                withContext(NonCancellable) {
+//                    log("Children are cancelled, but exception is not handled until all children terminate")
+//                    delay(100)
+//                    log("The first child finished its non cancellable block")
+//                }
+                throw IOException()
+            }
+        }
+
+        launch {
+            delay(100)
+            log("Second child throws an exception")
+            throw ArithmeticException()
+        }
+        delay(Long.MAX_VALUE)
     }
+    job.join()
+
 }
 
-fun log(int: Int) = log(int.toString())
+//fun log(int: Int) = log(int.toString())
 
-class GlobalCoroutineExceptionHandler: CoroutineExceptionHandler {
+class GlobalCoroutineExceptionHandler : CoroutineExceptionHandler {
 
     override val key: CoroutineContext.Key<*> = CoroutineExceptionHandler
 

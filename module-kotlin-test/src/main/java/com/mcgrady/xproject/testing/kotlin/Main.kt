@@ -2,11 +2,11 @@ package com.mcgrady.xproject.testing.kotlin
 
 fun main() {
 
-    val text: String? = " "
-
-    val name = text?.ifEmpty {
-        "xxx"
-    }
+//    val text: String? = " "
+//
+//    val name = text?.ifEmpty {
+//        "xxx"
+//    }
 //
 //    println("text is null or empty = ${text.isNullOrBlank()}")
 //
@@ -24,9 +24,24 @@ fun main() {
 //    println(boxedA === anotherBoxedA) // true
 //    println(boxedB === anotherBoxedB) // false
 
-    pascal().take(10).forEach(::println)
+//    pascal().take(10).forEach(::println)
 
+//    val list = listOf<Int>()
+//    list.map { it * 2 }
+//    println("list size ${list.size  }")
+//    list.forEach {
+//        println("index $it")
+//    }
 
+//    foo {
+//        return@foo
+//    }
+}
+
+inline fun foo(returning: () -> Unit) {
+    println("before local return")
+    returning()
+    println("after local return")
 }
 
 fun pascal() = generateSequence(listOf(1)) { prev ->
