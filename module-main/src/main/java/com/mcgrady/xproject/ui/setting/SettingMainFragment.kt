@@ -1,22 +1,16 @@
-package com.mcgrady.xproject.setting
+package com.mcgrady.xproject.ui.setting
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mcgrady.xarchitecture.base.BaseFragment
 import com.mcgrady.xarchitecture.ext.databind
-import com.mcgrady.xproject.main.R
-import com.mcgrady.xproject.main.databinding.SettingMainFragmentBinding
+import com.mcgrady.xproject.ui.adapter.SettingMainListAdapter
+
+import com.mcgrady.xproject.ui.main.R
+import com.mcgrady.xproject.ui.main.databinding.SettingMainFragmentBinding
 
 class SettingMainFragment : BaseFragment(R.layout.setting_main_fragment) {
-
-    companion object {
-        fun newInstance() = SettingMainFragment()
-    }
 
     private val binding: SettingMainFragmentBinding by databind()
     private val viewModel: SettingMainViewModel by viewModels()
@@ -25,7 +19,8 @@ class SettingMainFragment : BaseFragment(R.layout.setting_main_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
+            vm = viewModel
+            adapter = SettingMainListAdapter()
         }
     }
 

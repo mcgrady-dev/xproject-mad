@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+
+    <import type="android.text.TextUtils" />
+
+    <variable
+        name="model"
+        type="com.mcgrady.xproject.model.SettingMainModel" />
+
+<!--    <variable-->
+<!--        name="handler"-->
+<!--        type="com.mcgrady.xproject.util.SettingHandlers" />-->
+</data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:selectableItemBackground">
+    android:foreground="?android:selectableItemBackground"
+    android:onClick="@{(view) -> handler.settingItemClick(view, model.action)}">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/main_iv_setting"
@@ -18,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/main_tv_setting"
         android:layout_marginEnd="15dp"
-        tools:src="@mipmap/ic_launcher"/>
+        android:src="@{model.iconRes}"/>
 
     <TextView
         android:id="@+id/main_tv_setting"
@@ -30,8 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/main_iv_setting"
         app:layout_constraintBottom_toBottomOf="@id/main_iv_setting"
-        tools:textColor="@color/black"
-        tools:text="账号信息"/>
+        android:text="@{model.name}"/>
 
     <TextView
         android:id="@+id/main_tv_setting_dec"
@@ -42,6 +56,8 @@
         android:layout_marginStart="15dp"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:visibility="gone"/>
+        android:text="@{model.desc}"
+        app:goneUnless="@{TextUtils.isEmpty(model.desc)}"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

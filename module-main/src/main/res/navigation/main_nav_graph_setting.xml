@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/main_nav_graph_setting.xml">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/SettingMainFragment">
+
+    <fragment
+        android:id="@+id/SettingMainFragment"
+        android:name="com.mcgrady.xproject.ui.setting.SettingMainFragment"
+        android:label="@string/main_setting"
+        tools:layout="@layout/setting_main_fragment">
+
+        <action
+            android:id="@+id/action_SettingMainFragment_to_SettingAccountFragment"
+            app:destination="@id/SettingAccountFragment" />
+
+        <action
+            android:id="@+id/action_SettingMainFragment_to_SettingAppInfoFragment"
+            app:destination="@id/SettingAppInfoFragment" />
+
+        <action
+            android:id="@+id/action_SettingMainFragment_to_SettingDeviceInfoFragment"
+            app:destination="@id/SettingDeviceInfoFragment" />
+
+        <action
+            android:id="@+id/action_SettingMainFragment_to_LogoutDialog"
+            app:destination="@+id/LogoutDialog" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SettingAccountFragment"
+        android:name="com.mcgrady.xproject.ui.setting.SettingAccountFragment"
+        android:label="@string/main_account_info"
+        tools:layout="@layout/fragment_setting_secondary_page" />
+
+    <fragment
+        android:id="@+id/SettingAppInfoFragment"
+        android:name="com.mcgrady.xproject.ui.setting.SettingAppInfoFragment"
+        android:label="@string/main_current_version"
+        tools:layout="@layout/fragment_setting_secondary_page" />
+
+    <fragment
+        android:id="@+id/SettingDeviceInfoFragment"
+        android:name="com.mcgrady.xproject.ui.setting.SettingDeviceInfoFragment"
+        android:label="@string/main_device_info"
+        tools:layout="@layout/fragment_setting_secondary_page" />
+
+    <dialog
+        android:id="@+id/LogoutDialog"
+        android:name="com.mcgrady.xproject.ui.main.LogoutDialog"
+        android:label="@string/main_logout"
+        tools:layout="@layout/dialog_logout"/>
 
 </navigation>
