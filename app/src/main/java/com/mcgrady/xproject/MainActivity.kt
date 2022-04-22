@@ -6,7 +6,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.DisplayMetrics
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,9 @@ import com.blankj.utilcode.util.PathUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.google.android.material.snackbar.Snackbar
 import com.mcgrady.xarchitecture.ext.viewbind
+import com.mcgrady.xproject.common.core.log.Log
 import com.mcgrady.xproject.databinding.ActivityMainBinding
+import com.tencent.vasdolly.helper.ChannelReaderUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "MainActivity"
     }
 
-    val binding: ActivityMainBinding by viewbind()
+    private val binding: ActivityMainBinding by viewbind()
 
     @VisibleForTesting
     val viewModel: MainViewModel by viewModels()
@@ -34,22 +35,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.apply {
+        with(binding) {
             tvTitle.text = "HELLO WORLD"
             tvTitle.setTextColor(Color.BLACK)
             tvTitle.setOnClickListener {
                 val dm = DisplayMetrics()
                 windowManager.defaultDisplay.getMetrics(dm)
                 val width = Math.min(dm.widthPixels, dm.heightPixels)
-                Log.d(TAG,"MainActivity: dpi : " + dm.densityDpi + "   smallest width pixels : " + width)
+
+                Log.d(TAG,"MainActivity: dpi : ${dm.densityDpi} smallest width pixels : $width")
+
+
                 Log.d(TAG,"MainActivity: 计算出来的smallestWidth : " + width / (dm.densityDpi / 160.0) + "dp")
 //                LogUtils.d("实际使用的smallestWidth :  " + resources.getString(R.string.base_dpi))
             }
+
+            tvChannel.text = ChannelReaderUtil.getChannel(applicationContext) ?: "null"
         }
 
-        viewModel.currentName.observe(this, {
+        viewModel.currentName.observe(this) {
             binding.tvTitle.text = it
-        })
+        }
 
         viewModel.currentName.value = "XXXXX"
 
@@ -59,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
 //        viewModel.taskUpdate.call()
 
-        NetworkLiveData.getInstance(this).observe(this, {
+        NetworkLiveData.getInstance(this).observe(this) {
             when (it) {
                 NetworkState.UNAVAILABLE -> {
                     Snackbar.make(binding.root, "网络不可用", Snackbar.LENGTH_SHORT).show()
@@ -79,12 +85,9 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                 }
             }
-        })
+        }
 
-
-        testShareMedia()
-
-        android.R.attr.listDivider
+//        testShareMedia()
     }
 
     private fun testShareMedia() {

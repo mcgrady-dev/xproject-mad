@@ -1,0 +1,39 @@
+{
+  "defaultExtraInfo": {
+    "DEVICE_TYPE": "DEBUG",
+    "UMENG_CHANNEL": "DEBUG"
+  },
+
+  "defaultExtraInfoStrategy": "always",
+
+  "channelInfoList": [
+    {
+      "channel": "8810",
+      "extraInfo": {
+        "DEVICE_TYPE": "8810",
+        "UMENG_CHANNEL": "8810"
+      }
+    },
+    {
+      "channel": "8820",
+      "extraInfo": {
+        "DEVICE_TYPE": "8820",
+        "UMENG_CHANNEL": "8820"
+      }
+    },
+    {
+      "channel": "8830",
+      "extraInfo": {
+        "DEVICE_TYPE": "8830",
+        "UMENG_CHANNEL": "8830"
+      }
+    },
+    {
+      "channel": "huawei",
+      "extraInfo": {
+        "DEVICE_TYPE": "huawei",
+        "UMENG_CHANNEL": "huawei"
+      }
+    }
+  ]
+}
