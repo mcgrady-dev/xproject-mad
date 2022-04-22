@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mcgrady.xproject.testing.samples">
     <!-- 勿扰模式 -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
@@ -12,20 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Xprojectmvvm">
-        <activity
-            android:name=".customview.CustomViewActivity"
-            android:exported="true">
 
+        <activity
+            android:name=".handler.SampleHandlerActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".customview.CustomViewActivity"
+            android:exported="true">
 
         </activity>
         <activity
             android:name=".service.SampleServiceActivity"
             android:exported="true">
+            
         </activity>
 
         <service
@@ -46,7 +53,7 @@
             android:name=".jetpack.navigation.WindowInsetsControllerActivity"
             android:exported="true"
             android:label="@string/title_activity_window_insets_controller"
-            android:theme="@style/Theme.Xprojectmvvm.NoActionBar"></activity>
+            android:theme="@style/Theme.Xprojectmvvm.NoActionBar" />
         <activity
             android:name=".image.ImageViewScaleTypeActivity"
             android:exported="true">

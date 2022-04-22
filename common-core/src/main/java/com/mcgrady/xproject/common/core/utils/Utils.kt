@@ -11,4 +11,6 @@ object Utils {
             return it.digitToInt() > 1
         }
     }
+
+    fun currentUsedMemory() = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()
 }
