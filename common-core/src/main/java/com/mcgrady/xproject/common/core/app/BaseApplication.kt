@@ -1,7 +1,6 @@
 package com.mcgrady.xproject.common.core.app
 
 import android.app.Application
-import android.os.Looper
 import com.mcgrady.xproject.common.core.lifecycle.ActivityLifecycleCallbacksImpl
 import com.mcgrady.xproject.common.core.log.Log
 
@@ -16,10 +15,6 @@ open class BaseApplication : Application() {
         Log.init(this)
 
         registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
-
-        Looper.getMainLooper().setMessageLogging { x: String ->
-            
-        }
     }
 
     override fun onTerminate() {

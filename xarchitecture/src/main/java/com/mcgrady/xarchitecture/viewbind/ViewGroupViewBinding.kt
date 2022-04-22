@@ -29,9 +29,9 @@ class ViewGroupViewBinding<T : ViewBinding>(
         return binding?.run {
             this
         } ?: let {
-            val bind: T = if (viewGroup != null) {
+            val bind: T = viewGroup?.let {
                 layoutInflater.invoke(null, inflater, viewGroup) as T
-            } else {
+            } ?: let {
                 layoutInflater.invoke(null, inflater) as T
             }
 

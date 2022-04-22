@@ -63,11 +63,11 @@ open class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbac
 
     override fun registerFragmentCallbacks(activity: Activity) {
         Log.i("$TAG ${activity::class.simpleName} registerFragmentLifecycleCallbacks")
-        (activity as FragmentActivity)?.supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
+        (activity as FragmentActivity).supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
     }
 
     override fun unregisterFragmentCallbacks(activity: Activity) {
         Log.i("$TAG ${activity::class.simpleName} unregisterFragmentLifecycleCallbacks")
-        (activity as FragmentActivity)?.supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
+        (activity as FragmentActivity).supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
     }
 }

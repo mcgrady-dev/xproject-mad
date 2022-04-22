@@ -5,7 +5,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.mcgrady.xarchitecture.base.delegate.FragmentDelegate
 import com.mcgrady.xarchitecture.ext.inflateMethod
-import java.lang.IllegalStateException
 import kotlin.reflect.KProperty
 
 /**
@@ -23,14 +22,14 @@ class FragmentDataBinding<T: ViewDataBinding>(
         return binding?.run {
             return this
         } ?: let {
-            val bind: T? = if (thisRef.view == null) {
+            val bind: T = thisRef.view?.let {
+                DataBindingUtil.bind(thisRef.requireView())
+            } ?: let {
                 //这里为了兼容在 navigation 中使用 Fragment
                 layoutInflater.invoke(null, thisRef.layoutInflater) as T
-            } else {
-                DataBindingUtil.bind(thisRef.requireView())
             }
 
-            return bind?.apply {
+            return bind.apply {
                 binding = this
                 lifecycleOwner = fragment.viewLifecycleOwner
                 block?.invoke(this)

@@ -2,7 +2,6 @@ package com.mcgrady.xarchitecture.base.delegate
 
 import android.app.Activity
 import android.os.Build
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
@@ -14,7 +13,8 @@ import kotlin.properties.ReadOnlyProperty
 /**
  * Created by mcgrady on 2021/7/19.
  */
-abstract class ActivityDelegate<T: ViewBinding>(activity: Activity) : ReadOnlyProperty<Activity, T> {
+abstract class ActivityDelegate<T : ViewBinding>(activity: Activity) :
+    ReadOnlyProperty<Activity, T> {
 
     protected var binding: T? = null
     private val LIFECYCLE_FRAGMENT_TAG = "com.mcgrady.xarchitecture.lifecycle_fragment"
@@ -36,21 +36,17 @@ abstract class ActivityDelegate<T: ViewBinding>(activity: Activity) : ReadOnlyPr
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return
 
-        val fragmentManager = activity.fragmentManager
-        if (fragmentManager.findFragmentByTag(LIFECYCLE_FRAGMENT_TAG) == null) {
-            val transaction = fragmentManager.beginTransaction()
-            transaction.add(LifecycleFragment { destroyed() }, LIFECYCLE_FRAGMENT_TAG)
-                .commit()
-            fragmentManager.executePendingTransactions()
+        with(activity.fragmentManager) {
+            if (findFragmentByTag(LIFECYCLE_FRAGMENT_TAG) == null) {
+                beginTransaction()
+                    .add(LifecycleFragment { destroyed() }, LIFECYCLE_FRAGMENT_TAG)
+                    .commit()
+                executePendingTransactions()
+            }
         }
     }
 
     private fun destroyed() {
-        Log.d(TAG, "set binding null")
         binding = null
-    }
-
-    companion object {
-        const val TAG = "ActivityDelegate"
     }
 }

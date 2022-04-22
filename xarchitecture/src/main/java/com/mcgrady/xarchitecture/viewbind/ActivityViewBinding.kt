@@ -1,6 +1,7 @@
 package com.mcgrady.xarchitecture.viewbind
 
 import android.app.Activity
+import android.util.Log
 import androidx.viewbinding.ViewBinding
 import com.mcgrady.xarchitecture.base.delegate.ActivityDelegate
 import com.mcgrady.xarchitecture.ext.inflateMethod
@@ -22,8 +23,6 @@ class ActivityViewBinding<T : ViewBinding>(
             this
         } ?: let {
             addLifecycleFragment(activity)
-
-            //获取 ViewBinding
             val bind = layoutInflater.invoke(null, thisRef.layoutInflater) as T
             thisRef.setContentView(bind.root)
             return bind.apply { binding = this }

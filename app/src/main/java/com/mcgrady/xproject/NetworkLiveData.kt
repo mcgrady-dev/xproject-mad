@@ -1,10 +1,13 @@
 package com.mcgrady.xproject
 
 import android.content.Context
-import android.net.*
-import com.blankj.utilcode.util.LogUtils
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import com.blankj.utilcode.util.ThreadUtils
 import com.mcgrady.xproject.common.core.SingleLiveData
+import com.mcgrady.xproject.common.core.log.Log
 
 /**
  * Created by mcgrady on 2021/8/9.
@@ -20,18 +23,18 @@ class NetworkLiveData private constructor(context: Context): SingleLiveData<Int>
     private val networkCallback = object: ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
-            LogUtils.d("NetworkLiveData: onAvailable")
+            Log.d("NetworkLiveData: onAvailable")
             sendMessage(NetworkState.CONNECT)
         }
         override fun onLost(network: Network) {
             super.onLost(network)
-            LogUtils.d("NetworkLiveData: onLost")
+            Log.d("NetworkLiveData: onLost")
             sendMessage(NetworkState.NONE)
         }
 
         override fun onUnavailable() {
             super.onUnavailable()
-            LogUtils.d("NetworkLiveData: onUnavailable")
+            Log.d("NetworkLiveData: onUnavailable")
             sendMessage(NetworkState.UNAVAILABLE)
         }
 
@@ -40,7 +43,7 @@ class NetworkLiveData private constructor(context: Context): SingleLiveData<Int>
             networkCapabilities: NetworkCapabilities
         ) {
             super.onCapabilitiesChanged(network, networkCapabilities)
-            LogUtils.d("NetworkLiveData: onCapabilitiesChanged = $network $networkCapabilities")
+            Log.d("NetworkLiveData: onCapabilitiesChanged = $network $networkCapabilities")
             if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
                 sendMessage(NetworkState.WIFI)
             } else if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
@@ -55,13 +58,13 @@ class NetworkLiveData private constructor(context: Context): SingleLiveData<Int>
 
     override fun onActive() {
         super.onActive()
-        LogUtils.d("NetworkLiveData: onActive")
+        Log.d("NetworkLiveData: onActive")
         connectivityManager.registerNetworkCallback(request, networkCallback)
     }
 
     override fun onInactive() {
         super.onInactive()
-        LogUtils.d("NetworkLiveData: onInactive")
+        Log.d("NetworkLiveData: onInactive")
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 }

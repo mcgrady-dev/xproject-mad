@@ -33,7 +33,7 @@ class HookedScroller(context: Context, persistentProvider: () -> PersistentRecyc
     init {
         val scrollerYField = OverScroller::class.java.getDeclaredField("mScrollerY")
         scrollerYField.isAccessible = true
-        scrollerYObj = scrollerYField.get(this)
+        scrollerYObj = scrollerYField.get(this) as Any
 
         // Android 9.0及以上，非公开Api接口被禁用，无法获取mDuration字段
         // 此处伪装成系统身份，绕过 @hide 检查

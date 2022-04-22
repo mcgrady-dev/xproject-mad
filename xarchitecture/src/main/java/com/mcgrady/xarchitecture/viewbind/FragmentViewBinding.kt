@@ -22,11 +22,11 @@ class FragmentViewBinding<T : ViewBinding>(
         return binding?.run {
             return this
         } ?: let {
-            val bind: T = if (thisRef.view == null) {
+            val bind = thisRef.view?.let {
+                bindView.invoke(null, it) as T
+            } ?: let {
                 //这里为了兼容在 navigation 中使用 Fragment
                 layoutInflater.invoke(null, thisRef.layoutInflater) as T
-            } else {
-                bindView.invoke(null, thisRef.view) as T
             }
 
             return bind.apply { binding = this }

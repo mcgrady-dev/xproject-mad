@@ -1,14 +1,13 @@
 package com.mcgrady.xproject
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.blankj.utilcode.util.LogUtils
 
 /**
  * Created by mcgrady on 2021/10/27.
  */
-open class AppLifecycleObserver : LifecycleObserver {
+open class AppLifecycleObserver : DefaultLifecycleObserver {
 
     companion object {
         val TAG = AppLifecycleObserver::class.simpleName
@@ -17,48 +16,42 @@ open class AppLifecycleObserver : LifecycleObserver {
     /**
      * ON_CREATE 在应用程序的整个生命周期中只会被调用一次
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    open fun onCreate() {
+    override fun onCreate(owner: LifecycleOwner) {
         LogUtils.d("$TAG Lifecycle.Event.ON_CREATE")
     }
 
     /**
      * 应用程序出现到前台时调用
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    open fun onStart() {
+    override fun onStart(owner: LifecycleOwner) {
         LogUtils.d("$TAG Lifecycle.Event.ON_START")
     }
 
     /**
      * 应用程序出现到前台时调用
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    open fun onResume() {
+    override fun onResume(owner: LifecycleOwner) {
         LogUtils.d("$TAG Lifecycle.Event.ON_RESUME")
     }
 
     /**
      * 应用程序退出到后台时调用
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    open fun onPause() {
+    override fun onPause(owner: LifecycleOwner) {
         LogUtils.d("$TAG Lifecycle.Event.ON_PAUSE")
     }
 
     /**
      * 应用程序退出到后台时调用
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    open fun onStop() {
+    override fun onStop(owner: LifecycleOwner) {
         LogUtils.d("$TAG Lifecycle.Event.ON_STOP")
     }
 
     /**
      * 永远不会被调用到，系统不会分发调用ON_DESTROY事件
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    open fun onDestroy() {
+    override fun onDestroy(owner: LifecycleOwner) {
         LogUtils.d("$TAG Lifecycle.Event.ON_DESTROY")
     }
 }

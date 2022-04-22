@@ -24,7 +24,6 @@ class ActivityDataBinding<T : ViewDataBinding>(
             //当继承 Activity 且 Build.VERSION.SDK_INT < Build.VERSION_CODES.Q 时触发
             addLifecycleFragment(activity)
 
-            //获取 ViewDataBinding
             val bind: T = DataBindingUtil.setContentView(thisRef, resId)
             return bind.apply {
                 if (activity is ComponentActivity) {
