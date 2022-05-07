@@ -13,11 +13,8 @@ dependencyResolutionManagement {
 rootProject.name = "xproject-mvvm"
 include ':app'
 include ':xarchitecture'
-include ':screen-match'
 include ':module-pokemon'
 include ':common-core'
 include ':common-widget'
 include ':module-main'
-include ':module-test'
-include ':module-kotlin-test'
-include ':module-samples'
+include ':component-base'
