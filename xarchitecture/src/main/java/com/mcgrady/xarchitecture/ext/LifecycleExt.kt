@@ -3,12 +3,16 @@ package com.mcgrady.xarchitecture.ext
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
-import android.app.Fragment
 import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.BindingLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import com.mcgrady.xarchitecture.delegate.ActivityDelegate.Companion.LIFECYCLE_FRAGMENT_TAG
 
 /**
  * Created by mcgrady on 2021/7/19.
@@ -22,10 +26,9 @@ fun Lifecycle.observerWhenDestroyed(destroyed: () -> Unit) {
     addObserver(LifecycleObserver(lifecycle = this, destroyed = destroyed))
 }
 
+@RequiresApi(api = Build.VERSION_CODES.Q)
 fun Activity.observerWhenDestroyed(destroyed: () -> Unit) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        registerActivityLifecycleCallbacks(LifecycleCallbacks(destroyed))
-    }
+    registerActivityLifecycleCallbacks(LifecycleCallbacks(destroyed))
 }
 
 class LifecycleObserver(
@@ -49,7 +52,7 @@ class LifecycleObserver(
     }
 }
 
-class LifecycleCallbacks(var destroyed: (() -> Unit)? = null) : Application.ActivityLifecycleCallbacks{
+class LifecycleCallbacks(var destroyed: (() -> Unit)? = null) : Application.ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
     }
@@ -78,21 +81,49 @@ class LifecycleCallbacks(var destroyed: (() -> Unit)? = null) : Application.Acti
     }
 }
 
+@SuppressLint("ValidFragment")
 @Suppress("DEPRECATION")
-class LifecycleFragment : Fragment {
-    var destroyed: (() -> Unit)? = null
-
-    constructor()
-
-    @SuppressLint("ValidFragment")
-    constructor(destroyed: () -> Unit) : this() {
-        this.destroyed = destroyed
-    }
+class LifecycleFragment constructor(private var destroyed: (() -> Unit)? = null) : android.app.Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
         destroyed?.invoke()
         destroyed = null
     }
+}
 
+/**
+ * 当继承 Activity 且 Build.VERSION.SDK_INT < Build.VERSION_CODES.Q 以下的时候，
+ * 会添加一个 空白的 Fragment, 当生命周期处于 onDestroy 时销毁数据
+ */
+internal inline fun Activity.addLifecycleFragment(crossinline destroyed: () -> Unit) {
+    if (this is FragmentActivity || this is AppCompatActivity) return
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return
+
+    @Suppress("DEPRECATION")
+    with(this.fragmentManager) {
+        if (findFragmentByTag(LIFECYCLE_FRAGMENT_TAG) == null) {
+            beginTransaction()
+                .add(LifecycleFragment { destroyed() }, LIFECYCLE_FRAGMENT_TAG)
+                .commit()
+            executePendingTransactions()
+        }
+    }
+}
+
+/**
+ * 对LiveData订阅的简化封装
+ *
+ * @receiver LifecycleOwner
+ * @param liveData LiveData<T> 需要进行订阅的LiveData
+ * @param action action: (t: T) -> Unit 处理订阅内容的方法
+ * @return Unit
+ */
+//@kotlin.internal.InlineOnly
+inline fun <T> LifecycleOwner.observeLiveData(
+    liveData: LiveData<T>,
+    crossinline action: (t: T) -> Unit
+) {
+    liveData.observe(this) { it?.let { t -> action(t) } }
 }

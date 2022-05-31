@@ -1,4 +1,4 @@
-package com.kuke.product.common_core.util
+package com.mcgrady.xarchitecture.ext
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.DialogFragment
@@ -8,10 +8,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 
 /**
- * 扩展Fragment及Activity,使用add+show+hide模式下的Fragment的懒加载
- * 当调用 Fragment.showHideFragment ，确保已经先调用 Fragment.loadFragments
- * 当调用 FragmentActivity.showHideFragment，确保已经先调用 FragmentActivity.loadFragments
- *
  * Created by mcgrady on 2021/6/10.
  */
 
@@ -40,6 +36,7 @@ fun Fragment.loadFragments(
 
 /**
  * 显示目标fragment，并隐藏其他fragment
+ * 当调用 Fragment.showHideFragment ，确保已经先调用 Fragment.loadFragments
  * @param showFragment 需要显示的fragment
  */
 fun Fragment.showHideFragment(showFragment: Fragment) {
@@ -72,7 +69,7 @@ fun FragmentActivity.loadFragments(
 
 
 /**
- * 显示目标fragment，并隐藏其他fragment
+ * 显示目标fragment，并隐藏其他fragment，调用前确保已经先调用 FragmentActivity.loadFragments
  * @param showFragment 需要显示的fragment
  */
 fun FragmentActivity.showHideFragment(showFragment: Fragment) {
@@ -142,3 +139,102 @@ private fun showHideFragmentTransaction(fragmentManager: FragmentManager, showFr
 fun DialogFragment.isShowing(): Boolean {
     return dialog?.isShowing ?: false
 }
+
+//inline fun <reified T : Any> Fragment.intent(
+//    key: String,
+//    crossinline defaultValue: () -> Unit
+//) = lazy(LazyThreadSafetyMode.NONE) {
+//    val value = arguments?.get(key)
+//    if (value is T) value else defaultValue()
+//}
+//
+///**
+// * Example:
+// *
+// * ```
+// * private val userPassword by intent<String>(KEY_USER_PASSWORD)
+// * ```
+// */
+//inline fun <reified T : Any> Fragment.intent(
+//    key: String
+//) = lazy(LazyThreadSafetyMode.NONE) {
+//    arguments?.get(key)
+//}
+//
+///**
+// * Example:
+// *
+// * ```
+// * fun newInstance(): Fragment {
+// *     return LoginFragment().makeBundle(
+// *         ProfileActivity.KEY_USER_NAME to "ByteCode",
+// *         ProfileActivity.KEY_USER_PASSWORD to "1024",
+// *         ProfileActivity.KEY_PEOPLE_PARCELIZE to PeopleModel("hi-dhl")
+// *     )
+// * }
+// * ```
+// */
+////@kotlin.internal.InlineOnly
+//inline fun Fragment.makeBundle(
+//    vararg params: Pair<String, Any>
+//): Fragment {
+//    makeBundle {
+//        params
+//    }
+//    return this
+//}
+//
+///**
+// * Example:
+// *
+// * ```
+// * fun newInstance(): Fragment {
+// *     return LoginFragment().makeBundle {
+// *         arrayOf(
+// *             KEY_USER_NAME to "ByteCode",
+// *             KEY_USER_PASSWORD to "1024",
+// *             KEY_PEOPLE_PARCELIZE to PeopleModel("hi-dhl")
+// *         )
+// *     }
+// * }
+// * ```
+// */
+//inline fun Fragment.makeBundle(
+//    params: () -> Array<out Pair<String, Any>>
+//): Fragment {
+//    return apply {
+//        arguments = Bundle().apply {
+//            val arry = params()
+//            for ((_, value) in arry.withIndex()) {
+//                makeParams(value)
+//            }
+//        }
+//    }
+//}
+//
+//
+////@kotlin.internal.InlineOnly
+//inline fun Bundle.makeParams(it: Pair<String, Any>) {
+//    when (val value = it.second) {
+//        is Int -> putInt(it.first, value)
+//        is Long -> putLong(it.first, value)
+//        is CharSequence -> putCharSequence(it.first, value)
+//        is String -> putString(it.first, value)
+//        is Float -> putFloat(it.first, value)
+//        is Double -> putDouble(it.first, value)
+//        is Char -> putChar(it.first, value)
+//        is Short -> putShort(it.first, value)
+//        is Boolean -> putBoolean(it.first, value)
+//        is java.io.Serializable -> putSerializable(it.first, value)
+//        is Bundle -> putBundle(it.first, value)
+//        is Parcelable -> putParcelable(it.first, value)
+//        is IntArray -> putIntArray(it.first, value)
+//        is LongArray -> putLongArray(it.first, value)
+//        is FloatArray -> putFloatArray(it.first, value)
+//        is DoubleArray -> putDoubleArray(it.first, value)
+//        is CharArray -> putCharArray(it.first, value)
+//        is ShortArray -> putShortArray(it.first, value)
+//        is BooleanArray -> putBooleanArray(it.first, value)
+//        else -> throw IllegalArgumentException("Intent extra ${it.first} has wrong type ${value.javaClass.name}")
+//    }
+//}

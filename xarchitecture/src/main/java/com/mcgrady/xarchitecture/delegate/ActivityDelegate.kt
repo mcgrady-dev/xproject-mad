@@ -1,4 +1,4 @@
-package com.mcgrady.xarchitecture.base.delegate
+package com.mcgrady.xarchitecture.delegate
 
 import android.app.Activity
 import android.os.Build

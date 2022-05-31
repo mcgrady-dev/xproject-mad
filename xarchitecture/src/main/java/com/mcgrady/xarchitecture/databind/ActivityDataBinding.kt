@@ -1,11 +1,13 @@
 package com.mcgrady.xarchitecture.databind
 
 import android.app.Activity
+import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.mcgrady.xarchitecture.base.delegate.ActivityDelegate
+import com.mcgrady.xarchitecture.delegate.ActivityDelegate
+import com.mcgrady.xarchitecture.ext.addLifecycleFragment
 import kotlin.reflect.KProperty
 
 /**
@@ -21,8 +23,9 @@ class ActivityDataBinding<T : ViewDataBinding>(
         return binding?.run {
             this
         } ?: let {
-            //当继承 Activity 且 Build.VERSION.SDK_INT < Build.VERSION_CODES.Q 时触发
-            addLifecycleFragment(activity)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                activity.addLifecycleFragment { destroyed() }
+            }
 
             val bind: T = DataBindingUtil.setContentView(thisRef, resId)
             return bind.apply {

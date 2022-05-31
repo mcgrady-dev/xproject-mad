@@ -1,8 +1,8 @@
 package com.mcgrady.xproject.common.core.extensions
 
+import android.content.Context
 import androidx.core.content.ContextCompat
-import com.blankj.utilcode.util.Utils
 
-fun Int.asColor() = ContextCompat.getColor(Utils.getApp(), this)
+fun Int.asColor(context: Context) = ContextCompat.getColor(context, this)
 
-fun Int.asDrawable() = ContextCompat.getDrawable(Utils.getApp(), this)
+fun Int.asDrawable(context: Context) = ContextCompat.getDrawable(context, this)

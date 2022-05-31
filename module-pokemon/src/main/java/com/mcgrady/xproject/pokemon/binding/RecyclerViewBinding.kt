@@ -37,7 +37,7 @@ object RecyclerViewBinding {
     @BindingAdapter("submitPokemonList")
     fun bindSubmitPokemonList(recycler: RecyclerView, pokemonList: List<Pokemon>?) {
         if (!pokemonList.isNullOrEmpty()) {
-            (recycler.adapter as PokemonAdapter)?.run {
+            (recycler.adapter as PokemonAdapter?)?.run {
                 setPokemonList(pokemonList)
             }
         }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.mcgrady.xarchitecture.databind.ActivityDataBinding
 import com.mcgrady.xarchitecture.databind.FragmentDataBinding
+import com.mcgrady.xarchitecture.databind.ViewGroupDataBinding
 import com.mcgrady.xarchitecture.databind.ViewHolderDataBinding
 import com.mcgrady.xarchitecture.viewbind.ActivityViewBinding
 import com.mcgrady.xarchitecture.viewbind.FragmentViewBinding
@@ -41,15 +42,16 @@ inline fun <reified T: ViewDataBinding> Fragment.databind(noinline block: T.() -
     FragmentDataBinding<T>(T::class.java, this, block = block)
 
 inline fun <reified T : ViewBinding> ViewGroup.viewbind() = ViewGroupViewBinding(
-    T::class.java,
-    LayoutInflater.from(context)
+    bindingClass = T::class.java,
+    inflater = LayoutInflater.from(context),
+    viewGroup = this
 )
 
 inline fun <reified T : ViewBinding> ViewGroup.viewbind(viewGroup: ViewGroup) =
     ViewGroupViewBinding(
-        T::class.java,
-        LayoutInflater.from(context),
-        viewGroup
+        bindingClass = T::class.java,
+        inflater = LayoutInflater.from(context),
+        viewGroup = viewGroup
     )
 
 inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind() =
@@ -57,3 +59,22 @@ inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind() =
 
 inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind(noinline block: (T.() -> Unit)) =
     ViewHolderDataBinding(T::class.java, block)
+
+inline fun <reified T : ViewBinding> ViewGroup.databind(@LayoutRes resId: Int) =
+    ViewGroupDataBinding(
+        bindingClass = T::class.java,
+        resId = resId,
+        inflater = LayoutInflater.from(context),
+        viewGroup = this
+    )
+
+inline fun <reified T : ViewBinding> ViewGroup.databind(
+    @LayoutRes resId: Int,
+    noinline block: (T.() -> Unit)
+) = ViewGroupDataBinding(
+    bindingClass = T::class.java,
+    resId = resId,
+    inflater = LayoutInflater.from(context),
+    viewGroup = this,
+    block = block
+)
