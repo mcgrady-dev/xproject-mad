@@ -3,18 +3,60 @@
 package com.mcgrady.xarchitecture.ext
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Build
+import android.preference.PreferenceManager
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
+import android.widget.Toast
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import java.lang.ref.WeakReference
 
 /**
  * Created by mcgrady on 2022/5/31.
  */
+
+@Suppress("DEPRECATION")
+inline val Context.defaultSharedPreferences: SharedPreferences
+    get() = PreferenceManager.getDefaultSharedPreferences(this)
+
+@Suppress("DEPRECATION")
+inline val Fragment.defaultSharedPreferences: SharedPreferences
+    get() = PreferenceManager.getDefaultSharedPreferences(activity)
+
+@Deprecated(message = "Inline", replaceWith = ReplaceWith("this"))
+inline val Context.ctx: Context
+    get() = this
+
+@Deprecated(message = "Inline", replaceWith = ReplaceWith("this"))
+inline val Activity.act: Activity
+    get() = this
+
+/**
+ * Returns the content view of this Activity if set, null otherwise.
+ */
+inline val Activity.contentView: View?
+    get() = findOptional<ViewGroup>(android.R.id.content)?.getChildAt(0)
+
+inline fun <reified T : View> View.findOptional(@IdRes id: Int): T? = findViewById(id) as? T
+inline fun <reified T : View> Activity.findOptional(@IdRes id: Int): T? = findViewById(id) as? T
+inline fun <reified T : View> Fragment.findOptional(@IdRes id: Int): T? = view?.findViewById(id) as? T
+inline fun <reified T : View> Dialog.findOptional(@IdRes id: Int): T? = findViewById(id) as? T
+
+inline val Configuration.portrait: Boolean
+    get() = orientation == Configuration.ORIENTATION_PORTRAIT
+
+inline val Configuration.landscape: Boolean
+    get() = orientation == Configuration.ORIENTATION_LANDSCAPE
+
+inline val Configuration.long: Boolean
+    get() = (screenLayout and Configuration.SCREENLAYOUT_LONG_YES) != 0
 
 /**
  * Return the handle to a system-level service by class.
@@ -25,7 +67,7 @@ import java.lang.ref.WeakReference
  *
  * @see Context.getSystemService(Class)
  */
-@RequiresApi(23)
+@RequiresApi(Build.VERSION_CODES.M)
 @Suppress("HasPlatformType") // Intentionally propagating platform type with unknown nullability.
 inline fun <reified T> Context.systemService() = getSystemService(T::class.java)
 
@@ -40,7 +82,7 @@ fun Context.statusBarColor(@ColorRes colorResId: Int) {
 private fun Context.statusBarColor(context: WeakReference<Activity>, @ColorRes colorResId: Int) {
     context.get()?.run {
         @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.statusBarColor = resources.getColor(colorResId)
@@ -55,3 +97,12 @@ inline fun Context.drawable(@DrawableRes id: Int) = ContextCompat.getDrawable(th
 // 获取 color
 //@kotlin.internal.InlineOnly
 inline fun Context.color(@ColorRes id: Int) = ContextCompat.getColor(this, id)
+
+// toast
+inline fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
+}
+
+inline fun Context.toast(@StringRes stringResId: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, getString(stringResId), duration).show()
+}

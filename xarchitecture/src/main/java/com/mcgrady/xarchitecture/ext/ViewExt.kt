@@ -7,7 +7,6 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.view.View
-import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
@@ -30,28 +29,6 @@ inline fun View.gone() {
 inline fun View.invisible() {
     visibility = View.INVISIBLE
 }
-
-// 屏幕宽度(px)
-inline val Context.screenWidth: Int
-    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        val wm = systemService<WindowManager?>()
-        wm?.currentWindowMetrics?.bounds?.width() ?: -1
-    } else {
-        resources.displayMetrics.widthPixels
-    }
-
-// 屏幕高度(px)
-inline val Context.screenHeight: Int
-    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        val wm = systemService<WindowManager?>()
-        wm?.currentWindowMetrics?.bounds?.height() ?: -1
-    } else {
-        resources.displayMetrics.heightPixels
-    }
-
-// 屏幕的密度
-inline val Context.density: Float
-    get() = resources.displayMetrics.density
 
 inline fun Context.appStandbyBucket(context: Context): Int =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

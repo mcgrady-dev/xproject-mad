@@ -6,7 +6,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import com.mcgrady.xproject.common.core.SingleLiveData
-import org.jetbrains.anko.runOnUiThread
+import com.mcgrady.xarchitecture.ext.runOnUiThread
 import timber.log.Timber
 
 /**
