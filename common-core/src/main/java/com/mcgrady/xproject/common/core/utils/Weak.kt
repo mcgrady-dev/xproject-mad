@@ -1,6 +1,6 @@
 package com.mcgrady.xproject.common.core.utils
 
-import com.mcgrady.xproject.common.core.log.Log
+import timber.log.Timber
 import java.lang.ref.WeakReference
 import kotlin.reflect.KProperty
 
@@ -16,12 +16,12 @@ class Weak<T : Any>(initializer: () -> T?) {
     })
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T? {
-        Log.d("Weak Delegate", "getValue")
+        Timber.d("Weak Delegate", "getValue")
         return weakReference.get()
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-        Log.d("Weak Delegate", "setValue")
+        Timber.d("Weak Delegate", "setValue")
         weakReference = WeakReference(value)
     }
 }

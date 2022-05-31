@@ -5,12 +5,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import com.mcgrady.xarchitecture.base.BaseActivity
-import com.mcgrady.xproject.common.core.log.Log
+import com.mcgrady.xproject.common.core.base.BaseActivity
 import com.mcgrady.xproject.ui.main.R
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class SettingActivity : BaseActivity(), NavController.OnDestinationChangedListener {
-
 //    private val binding: ActivitySettingBinding by viewbind()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,14 +28,12 @@ class SettingActivity : BaseActivity(), NavController.OnDestinationChangedListen
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        Log.d("destination=$destination")
+        Timber.d("destination=$destination")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        findNavController(R.id.nav_host_fragment_main_setting)?.removeOnDestinationChangedListener(
-            this
-        )
+        findNavController(R.id.nav_host_fragment_main_setting).removeOnDestinationChangedListener(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -2,7 +2,7 @@ package com.mcgrady.xproject
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.blankj.utilcode.util.LogUtils
+import timber.log.Timber
 
 /**
  * Created by mcgrady on 2021/10/27.
@@ -17,41 +17,42 @@ open class AppLifecycleObserver : DefaultLifecycleObserver {
      * ON_CREATE 在应用程序的整个生命周期中只会被调用一次
      */
     override fun onCreate(owner: LifecycleOwner) {
-        LogUtils.d("$TAG Lifecycle.Event.ON_CREATE")
+//        Timber.d("$TAG Lifecycle.Event.ON_CREATE")
+        Timber.d("$TAG Lifecycle.Event.ON_CREATE")
     }
 
     /**
      * 应用程序出现到前台时调用
      */
     override fun onStart(owner: LifecycleOwner) {
-        LogUtils.d("$TAG Lifecycle.Event.ON_START")
+        Timber.d("$TAG Lifecycle.Event.ON_START")
     }
 
     /**
      * 应用程序出现到前台时调用
      */
     override fun onResume(owner: LifecycleOwner) {
-        LogUtils.d("$TAG Lifecycle.Event.ON_RESUME")
+        Timber.d("$TAG Lifecycle.Event.ON_RESUME")
     }
 
     /**
      * 应用程序退出到后台时调用
      */
     override fun onPause(owner: LifecycleOwner) {
-        LogUtils.d("$TAG Lifecycle.Event.ON_PAUSE")
+        Timber.d("$TAG Lifecycle.Event.ON_PAUSE")
     }
 
     /**
      * 应用程序退出到后台时调用
      */
     override fun onStop(owner: LifecycleOwner) {
-        LogUtils.d("$TAG Lifecycle.Event.ON_STOP")
+        Timber.d("$TAG Lifecycle.Event.ON_STOP")
     }
 
     /**
      * 永远不会被调用到，系统不会分发调用ON_DESTROY事件
      */
     override fun onDestroy(owner: LifecycleOwner) {
-        LogUtils.d("$TAG Lifecycle.Event.ON_DESTROY")
+        Timber.d("$TAG Lifecycle.Event.ON_DESTROY")
     }
 }
