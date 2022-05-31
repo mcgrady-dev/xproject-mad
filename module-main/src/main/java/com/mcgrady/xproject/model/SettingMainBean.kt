@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 /**
  * Created by mcgrady on 2022/2/17.
  */
-data class SettingMainModel(
+data class SettingMainBean(
     val action: Int,
     val name: String,
     val iconRes: Int,
@@ -17,15 +17,15 @@ data class SettingMainModel(
 //    fun hasDesc(): Boolean = !desc.isNullOrEmpty()
 
     companion object {
-        val CALLBACK: DiffUtil.ItemCallback<SettingMainModel> = object: DiffUtil.ItemCallback<SettingMainModel>() {
+        val CALLBACK: DiffUtil.ItemCallback<SettingMainBean> = object: DiffUtil.ItemCallback<SettingMainBean>() {
             override fun areItemsTheSame(
-                oldItem: SettingMainModel,
-                newItem: SettingMainModel
+                oldItem: SettingMainBean,
+                newItem: SettingMainBean
             ): Boolean = oldItem.name == newItem.name
 
             override fun areContentsTheSame(
-                oldItem: SettingMainModel,
-                newItem: SettingMainModel
+                oldItem: SettingMainBean,
+                newItem: SettingMainBean
             ): Boolean = true
         }
     }

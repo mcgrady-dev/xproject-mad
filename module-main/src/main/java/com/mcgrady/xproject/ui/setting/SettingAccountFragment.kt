@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.mcgrady.xarchitecture.base.BaseFragment
+import com.mcgrady.xproject.common.core.base.BaseFragment
 import com.mcgrady.xarchitecture.ext.viewbind
 import com.mcgrady.xproject.ui.main.R
 import com.mcgrady.xproject.ui.main.databinding.FragmentSettingSecondaryPageBinding

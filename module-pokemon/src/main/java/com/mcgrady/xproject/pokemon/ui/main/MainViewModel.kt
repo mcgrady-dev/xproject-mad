@@ -3,11 +3,10 @@ package com.mcgrady.xproject.pokemon.ui.main
 import androidx.annotation.MainThread
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.*
-import com.mcgrady.xarchitecture.base.BaseViewModel
+import com.mcgrady.xproject.common.core.base.BaseViewModel
 import com.mcgrady.xproject.pokemon.model.Pokemon
 import com.mcgrady.xproject.pokemon.repo.PokedexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
@@ -39,7 +38,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+//    @OptIn(ExperimentalCoroutinesApi::class)
     fun fetchPokemonInfoInLiveData(page: Int) = liveData<List<Pokemon>> {
         repository.fetchPokemonList(
             page = page,
@@ -49,7 +48,7 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+//    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun fetchPokemonInfoAsLiveData(page: Int) = repository.fetchPokemonList(
         page = page,
         onStart = {},

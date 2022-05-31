@@ -13,11 +13,6 @@ import androidx.fragment.app.DialogFragment
  */
 class LogoutDialog : DialogFragment() {
 
-
-    companion object {
-        fun newInstance() = LogoutDialog()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +21,7 @@ class LogoutDialog : DialogFragment() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var dialog: Dialog? = null
         activity?.let {

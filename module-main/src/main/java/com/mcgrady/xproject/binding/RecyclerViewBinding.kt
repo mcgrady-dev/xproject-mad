@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 object RecyclerViewBinding {
 
+    @Suppress("UNCHECKED_CAST")
     @JvmStatic
     @BindingAdapter("submitList")
     fun bindSubmitList(view: RecyclerView, itemList: List<Any>?) {

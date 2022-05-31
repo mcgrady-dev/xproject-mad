@@ -1,4 +1,4 @@
-package com.mcgrady.xarchitecture.base
+package com.mcgrady.xproject.common.core.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

@@ -1,17 +1,25 @@
 package com.mcgrady.xproject.pokemon.di
 
+
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.google.gson.Gson
+import com.mcgrady.xproject.pokemon.BuildConfig
 import com.mcgrady.xproject.pokemon.network.PokedexClient
 import com.mcgrady.xproject.pokemon.network.PokedexService
-import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import javax.inject.Singleton
 
 /**
@@ -23,11 +31,45 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
+    fun provideOkHttpClient(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
+        return with(OkHttpClient.Builder()) {
+            if (BuildConfig.DEBUG) {
+                addInterceptor(chuckerInterceptor)
+//                addInterceptor(chuckerInterceptor.activeForType(InterceptorType.APPLICATION, interceptorTypeProvider))
+//                addNetworkInterceptor(chuckerInterceptor.activeForType(InterceptorType.NETWORK, interceptorTypeProvider))
+            }
+            addInterceptor(HttpLoggingInterceptor { message -> Timber.d(message) }.apply {
+                level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
             })
+            build()
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideChuckerInterceptor(@ApplicationContext appContext: Context): ChuckerInterceptor {
+        return ChuckerInterceptor.Builder(appContext)
+            // The previously created Collector
+            .collector(
+                ChuckerCollector(
+                    context = appContext,
+                    showNotification = true,
+                    retentionPeriod = RetentionManager.Period.ONE_HOUR
+                )
+            )
+            // The max body content length in bytes, after this responses will be truncated.
+            .maxContentLength(250_000L)
+            // List of headers to replace with ** in the Chucker UI
+//            .redactHeaders("Auth-Token", "Bearer")
+            // Read the whole response body even when the client does not consume the response completely.
+            // This is useful in case of parsing errors or when the response body
+            // is closed before being read like in Retrofit with Void and Unit types.
+            .alwaysReadResponseBody(true)
+            // Use decoder when processing request and response bodies. When multiple decoders are installed they
+            // are applied in an order they were added.
+//            .addBodyDecoder(decoder)
+            // Controls Android shortcut creation. Available in SNAPSHOTS versions only at the moment
+            .createShortcut(true)
             .build()
     }
 
@@ -38,7 +80,7 @@ object NetworkModule {
             .client(okhttpClient)
             .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
     }
 

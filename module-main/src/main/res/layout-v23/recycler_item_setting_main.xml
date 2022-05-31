@@ -9,7 +9,7 @@ xmlns:tools="http://schemas.android.com/tools">
 
     <variable
         name="model"
-        type="com.mcgrady.xproject.model.SettingMainModel" />
+        type="com.mcgrady.xproject.model.SettingMainBean" />
 
 <!--    <variable-->
 <!--        name="handler"-->

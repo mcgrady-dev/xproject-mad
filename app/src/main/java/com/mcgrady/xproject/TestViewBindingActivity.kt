@@ -1,7 +1,6 @@
 package com.mcgrady.xproject
 
-import android.os.Bundle
-import com.mcgrady.xarchitecture.base.BaseActivity
+import com.mcgrady.xproject.common.core.base.BaseActivity
 import com.mcgrady.xarchitecture.ext.viewbind
 import com.mcgrady.xproject.databinding.ActivityTestBinding
 

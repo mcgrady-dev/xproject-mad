@@ -25,7 +25,7 @@
             android:adapter="@{adapter}"
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:submitList="@{vm.liveData}"
+            app:submitList="@{vm.list}"
             tools:listitem="@layout/recycler_item_setting_main" />
 
     </FrameLayout>

@@ -1,14 +1,10 @@
 package com.mcgrady.xproject.pokemon.ui.adapter
 
 import android.content.Intent
-import android.os.SystemClock
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
-import com.blankj.utilcode.util.ActivityUtils
-import com.blankj.utilcode.util.ClickUtils
 import com.mcgrady.xarchitecture.ext.databind
 import com.mcgrady.xproject.common.widget.extensions.inflate
 import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCompat
@@ -27,15 +23,24 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val view = parent.inflate(R.layout.item_pokemon)
         return PokemonViewHolder(view).apply {
-            binding.root.setOnClickListener(object: ClickUtils.OnDebouncingClickListener() {
-                override fun onDebouncingClick(v: View?) {
-                    val position = bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return
-                    val intent = Intent(v?.context, MainActivity::class.java).apply {
-                        putExtra("EXTRA_POKEMON", items[position])
-                    }
-                    TransformationCompat.startActivity(binding.transformationLayout, intent)
+
+//            binding.root.setOnClickListener(object: ClickUtils.OnDebouncingClickListener() {
+//                override fun onDebouncingClick(v: View?) {
+//                    val position = bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return
+//                    val intent = Intent(v?.context, MainActivity::class.java).apply {
+//                        putExtra("EXTRA_POKEMON", items[position])
+//                    }
+//                    TransformationCompat.startActivity(binding.transformationLayout, intent)
+//                }
+//            })
+
+            binding.root.setOnClickListener { v ->
+                val position = bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
+                val intent = Intent(v?.context, MainActivity::class.java).apply {
+                    putExtra("EXTRA_POKEMON", items[position])
                 }
-            })
+                TransformationCompat.startActivity(binding.transformationLayout, intent)
+            }
         }
     }
 
@@ -56,6 +61,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
 
         val binding: ItemPokemonBinding by databind()
 
+        @Suppress("UNUSED_PARAMETER")
         fun bindData(data: Pokemon?, position: Int) {
             binding.apply {
                 pokemon = data

@@ -1,7 +1,7 @@
 package com.mcgrady.xproject.pokemon.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * Created by mcgrady on 2022/1/7.

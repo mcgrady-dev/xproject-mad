@@ -1,7 +1,7 @@
 package com.mcgrady.xproject.pokemon.repo
 
 import androidx.annotation.WorkerThread
-import com.mcgrady.xarchitecture.repo.Repository
+import com.mcgrady.xproject.common.core.repo.Repository
 import com.mcgrady.xproject.pokemon.model.Pokemon
 import com.mcgrady.xproject.pokemon.network.PokedexClient
 import com.skydoves.sandwich.onError
@@ -22,6 +22,7 @@ class PokedexRepository @Inject constructor(
     private val pokedexClient: PokedexClient
 ) : Repository {
 
+    @Suppress("KDocUnresolvedReference")
     @WorkerThread
     fun fetchPokemonList(
         page: Int,
@@ -38,11 +39,11 @@ class PokedexRepository @Inject constructor(
              */
             val response = pokedexClient.fetchPokemonList(page = page)
             response.suspendOnSuccess {
-                data?.let { response ->
+                data.let { response ->
                     pokemons = response.results
                     pokemons.forEach { pokemon -> pokemon.page = page }
-//                    pokemonDao.insertPokemonList(pokemons)
-//                    emit(pokemonDao.getAllPokemonList(page))
+            //                    pokemonDao.insertPokemonList(pokemons)
+            //                    emit(pokemonDao.getAllPokemonList(page))
                     emit(pokemons)
                 }
             }

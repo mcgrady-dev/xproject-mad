@@ -34,9 +34,10 @@ android {
 
 dependencies {
 
-
+    //kotlin
     api 'androidx.core:core-ktx:1.7.0'
-    api "org.jetbrains.kotlin:kotlin-stdlib:1.7.0"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21"
+    api "org.jetbrains.anko:anko-commons:0.10.8"
 
     api 'androidx.appcompat:appcompat:1.4.1'
     api 'androidx.activity:activity-ktx:1.4.0'

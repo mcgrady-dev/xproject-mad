@@ -5,14 +5,14 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import com.blankj.utilcode.util.ThreadUtils
 import com.mcgrady.xproject.common.core.SingleLiveData
+import org.jetbrains.anko.runOnUiThread
 import timber.log.Timber
 
 /**
  * Created by mcgrady on 2021/8/9.
  */
-class NetworkLiveData private constructor(context: Context): SingleLiveData<Int>() {
+class NetworkLiveData private constructor(private val context: Context): SingleLiveData<Int>() {
 
     companion object : SingletonHolder<NetworkLiveData, Context>(::NetworkLiveData)
 

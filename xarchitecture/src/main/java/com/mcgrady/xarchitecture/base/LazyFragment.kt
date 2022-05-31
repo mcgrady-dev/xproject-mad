@@ -1,12 +1,11 @@
-package com.mcgrady.xproject.common.core.base
+package com.mcgrady.xarchitecture.base
 
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 
 /**
  * Created by mcgrady on 2021/5/13.
  */
-abstract class BaseFragment constructor(@LayoutRes private val contentLayoutId: Int = 0) : Fragment(contentLayoutId) {
+abstract class LazyFragment constructor() : Fragment() {
 
     private var isLoaded = false
 
@@ -24,11 +23,5 @@ abstract class BaseFragment constructor(@LayoutRes private val contentLayoutId: 
         isLoaded = false
     }
 
-    private fun lazyInit() {
-//        initView()
-        initData()
-    }
-
-//    abstract fun initView()
-    abstract fun initData()
+    protected abstract fun lazyInit()
 }
