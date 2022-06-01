@@ -29,7 +29,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.UIUtil.dp2px
+import com.mcgrady.xproject.common.widget.util.UIUtil.dp2px
 
 /**
  *

@@ -18,15 +18,18 @@ package com.mcgrady.xproject.common.widget.shadow
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import com.mcgrady.xproject.common.widget.R
+import com.mcgrady.xproject.common.widget.util.ShapeUtil
 
 /**
  * Created by mcgrady on 2021/5/28.
@@ -133,7 +136,7 @@ class ShadowLayout @JvmOverloads constructor(
             a.getDimensionPixelSize(R.styleable.ShadowLayout_shadowRadius, SIZE_DEFAULT).toFloat()
         val d = a.getDrawable(R.styleable.ShadowLayout_android_foreground)
         if (d != null) {
-            setForeground(d)
+            foreground = d
         }
         val shadowMargin =
             a.getDimensionPixelSize(R.styleable.ShadowLayout_shadowMargin, SIZE_UNSET)
@@ -284,11 +287,11 @@ class ShadowLayout @JvmOverloads constructor(
     ) {
         val count = childCount
 
-        val parentLeft = getPaddingLeftWithForeground()
-        val parentRight = right - left - getPaddingRightWithForeground()
+        val parentLeft = paddingLeft
+        val parentRight = right - left - paddingRight
 
-        val parentTop = getPaddingTopWithForeground()
-        val parentBottom = bottom - top - getPaddingBottomWithForeground()
+        val parentTop = paddingTop
+        val parentBottom = bottom - top - paddingBottom
 
         for (i in 0 until count) {
             val child = getChildAt(i)
@@ -325,16 +328,14 @@ class ShadowLayout @JvmOverloads constructor(
                     }
                     else -> childLeft = parentLeft + lp.leftMargin + shadowMarginLeft
                 }
-                when (verticalGravity) {
-                    Gravity.TOP -> childTop = parentTop + lp.topMargin + shadowMarginTop
+                childTop = when (verticalGravity) {
+                    Gravity.TOP -> parentTop + lp.topMargin + shadowMarginTop
                     Gravity.CENTER_VERTICAL ->
-                        childTop =
-                            parentTop + (parentBottom - parentTop - height) / 2 +
+                        parentTop + (parentBottom - parentTop - height) / 2 +
                             lp.topMargin - lp.bottomMargin + shadowMarginTop - shadowMarginBottom
                     Gravity.BOTTOM ->
-                        childTop =
-                            parentBottom - height - lp.bottomMargin - shadowMarginBottom
-                    else -> childTop = parentTop + lp.topMargin + shadowMarginTop
+                        parentBottom - height - lp.bottomMargin - shadowMarginBottom
+                    else -> parentTop + lp.topMargin + shadowMarginTop
                 }
                 child.layout(childLeft, childTop, childLeft + width, childTop + height)
             }
@@ -347,7 +348,7 @@ class ShadowLayout @JvmOverloads constructor(
         canvas?.let {
             val w = measuredWidth
             val h = measuredHeight
-            val path = ShapeUtils.roundedRect(
+            val path = ShapeUtil.roundedRect(
                 shadowMarginLeft.toFloat(),
                 shadowMarginTop.toFloat(),
                 (w - shadowMarginRight).toFloat(),
@@ -369,7 +370,7 @@ class ShadowLayout @JvmOverloads constructor(
             canvas.save()
             val w = measuredWidth
             val h = measuredHeight
-            val path = ShapeUtils.roundedRect(
+            val path = ShapeUtil.roundedRect(
                 shadowMarginLeft.toFloat(),
                 shadowMarginTop.toFloat(),
                 (w - shadowMarginRight).toFloat(),
@@ -424,10 +425,6 @@ class ShadowLayout @JvmOverloads constructor(
         foregroundDrawBoundsChanged = true
     }
 
-    override fun getForegroundGravity(): Int {
-        return foregroundDrawGravity
-    }
-
     override fun setForegroundGravity(vaule: Int) {
         var foregroundGravity = vaule
         if (foregroundDrawGravity != foregroundGravity) {
@@ -452,7 +449,7 @@ class ShadowLayout @JvmOverloads constructor(
 
     override fun jumpDrawablesToCurrentState() {
         super.jumpDrawablesToCurrentState()
-        foregroundDraw?.let { it.jumpToCurrentState() }
+        foregroundDraw?.jumpToCurrentState()
     }
 
     override fun drawableStateChanged() {
@@ -490,7 +487,7 @@ class ShadowLayout @JvmOverloads constructor(
 
     override fun drawableHotspotChanged(x: Float, y: Float) {
         super.drawableHotspotChanged(x, y)
-        foregroundDraw?.let { it.setHotspot(x, y) }
+        foregroundDraw?.setHotspot(x, y)
     }
 
     fun setShadowMargin(left: Int, top: Int, right: Int, bottom: Int) {
@@ -526,26 +523,6 @@ class ShadowLayout @JvmOverloads constructor(
         return LayoutParams(lp)
     }
 
-    override fun getAccessibilityClassName(): CharSequence {
-        return FrameLayout::class.java.name
-    }
-
-    fun getPaddingLeftWithForeground(): Int {
-        return paddingLeft
-    }
-
-    fun getPaddingRightWithForeground(): Int {
-        return paddingRight
-    }
-
-    private fun getPaddingTopWithForeground(): Int {
-        return paddingTop
-    }
-
-    private fun getPaddingBottomWithForeground(): Int {
-        return paddingBottom
-    }
-
     class LayoutParams : MarginLayoutParams {
         var gravity = UNSPECIFIED_GRAVITY
 
@@ -559,7 +536,7 @@ class ShadowLayout @JvmOverloads constructor(
         constructor(source: ViewGroup.LayoutParams) : super(source)
 
         companion object {
-            val UNSPECIFIED_GRAVITY = -1
+            const val UNSPECIFIED_GRAVITY = -1
         }
     }
 }

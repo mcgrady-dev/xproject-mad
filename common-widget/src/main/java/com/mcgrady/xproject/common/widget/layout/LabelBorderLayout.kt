@@ -34,7 +34,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toBitmap
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.UIUtil
+import com.mcgrady.xproject.common.widget.util.UIUtil
 
 /**
  * Created by mcgrady on 2021/5/26.

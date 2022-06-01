@@ -36,11 +36,11 @@ import android.view.ViewOutlineProvider
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.UIUtil
 import com.mcgrady.xproject.common.widget.progressview.animation.AnimationDrawingState
 import com.mcgrady.xproject.common.widget.progressview.animation.DefaultAnimationOrchestrator
 import com.mcgrady.xproject.common.widget.progressview.animation.IAnimatorInterface
 import com.mcgrady.xproject.common.widget.progressview.animation.ViewAnimationOrchestrator
+import com.mcgrady.xproject.common.widget.util.UIUtil
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.math.*
