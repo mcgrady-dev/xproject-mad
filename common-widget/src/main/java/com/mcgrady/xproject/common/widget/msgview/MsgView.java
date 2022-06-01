@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.msgview;
 
 import android.content.Context;
@@ -7,11 +22,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-
 import androidx.appcompat.widget.AppCompatTextView;
-
 import com.mcgrady.xproject.common.widget.R;
-
 
 /**
  * 用于需要圆角矩形框背景的TextView的情况,减少直接使用TextView时引入的shape资源文件
@@ -74,7 +86,6 @@ public class MsgView extends AppCompatTextView {
             setBgSelector();
         }
     }
-
 
     public void setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
@@ -151,9 +162,9 @@ public class MsgView extends AppCompatTextView {
         StateListDrawable bg = new StateListDrawable();
 
         setDrawable(gd_background, backgroundColor, strokeColor);
-        bg.addState(new int[]{-android.R.attr.state_pressed}, gd_background);
+        bg.addState(new int[] {-android.R.attr.state_pressed}, gd_background);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {//16
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) { // 16
             setBackground(bg);
         } else {
             //noinspection deprecation

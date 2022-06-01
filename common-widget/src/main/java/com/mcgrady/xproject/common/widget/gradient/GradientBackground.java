@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.gradient;
 
 import android.content.Context;
@@ -5,13 +20,9 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-
 import com.mcgrady.xproject.common.widget.R;
 
-
-/**
- * Created by mcgrady on 2021/5/24.
- */
+/** Created by mcgrady on 2021/5/24. */
 public class GradientBackground {
 
     private int startColor;
@@ -23,16 +34,24 @@ public class GradientBackground {
     private float radiusCornerBottomLeft = 0;
 
     public GradientBackground(final Context context, final AttributeSet attrs) {
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GradientBackground, 0, 0);
+        final TypedArray a =
+                context.obtainStyledAttributes(attrs, R.styleable.GradientBackground, 0, 0);
         this.startColor = a.getColor(R.styleable.GradientBackground_start_color, -1);
         this.endColor = a.getColor(R.styleable.GradientBackground_end_color, -1);
 
-        this.radiusCornerTopLeft = a.getDimension(R.styleable.GradientBackground_radius_corner_top_left,0);
-        this.radiusCornerTopRight = a.getDimension(R.styleable.GradientBackground_radius_corner_top_right,0);
-        this.radiusCornerBottomLeft = a.getDimension(R.styleable.GradientBackground_radius_corner_bottom_left,0);
-        this.radiusCornerBottomRight = a.getDimension(R.styleable.GradientBackground_radius_corner_bottom_right,0);
+        this.radiusCornerTopLeft =
+                a.getDimension(R.styleable.GradientBackground_radius_corner_top_left, 0);
+        this.radiusCornerTopRight =
+                a.getDimension(R.styleable.GradientBackground_radius_corner_top_right, 0);
+        this.radiusCornerBottomLeft =
+                a.getDimension(R.styleable.GradientBackground_radius_corner_bottom_left, 0);
+        this.radiusCornerBottomRight =
+                a.getDimension(R.styleable.GradientBackground_radius_corner_bottom_right, 0);
 
-        final int attrOrientation = a.getInt(R.styleable.GradientBackground_orientation, GradientDrawable.Orientation.LEFT_RIGHT.ordinal());
+        final int attrOrientation =
+                a.getInt(
+                        R.styleable.GradientBackground_orientation,
+                        GradientDrawable.Orientation.LEFT_RIGHT.ordinal());
         this.orientation = intToOrientation(attrOrientation);
         a.recycle();
     }
@@ -56,27 +75,29 @@ public class GradientBackground {
         this.radiusCornerTopLeft = radius;
         return this;
     }
+
     public GradientBackground setRadiusCornerTopRight(final float radius) {
         this.radiusCornerTopRight = radius;
         return this;
     }
+
     public GradientBackground setRadiusCornerBottomRight(final float radius) {
         this.radiusCornerBottomRight = radius;
         return this;
     }
+
     public GradientBackground setRadiusCornerBottomLeft(final float radius) {
         this.radiusCornerBottomLeft = radius;
         return this;
     }
 
-
-
     public GradientDrawable generate() {
         populateMissingColors();
         final int colors[] = {this.startColor, this.endColor};
-        final GradientDrawable.Orientation validOrientation = this.orientation == null
-                ? GradientDrawable.Orientation.TOP_BOTTOM
-                : this.orientation;
+        final GradientDrawable.Orientation validOrientation =
+                this.orientation == null
+                        ? GradientDrawable.Orientation.TOP_BOTTOM
+                        : this.orientation;
         GradientDrawable drawable = new GradientDrawable(validOrientation, colors);
         float[] radii = new float[8];
         radii[0] = radiusCornerTopLeft;
@@ -116,7 +137,7 @@ public class GradientBackground {
     private void populateMissingColors() {
         if (this.endColor == -1 && this.startColor == -1) {
             this.startColor = Color.RED;
-//            this.startColor = ColorUtils.getRandomColor();
+            //            this.startColor = ColorUtils.getRandomColor();
         }
 
         if (this.endColor == -1) {

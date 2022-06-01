@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.rounded;
 
 import android.content.Context;
@@ -11,15 +26,11 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.mcgrady.xproject.common.widget.R;
 import com.mcgrady.xproject.common.widget.gradient.GradientBackground;
 
-/**
- * Created by mcgrady on 2021/5/28.
- */
+/** Created by mcgrady on 2021/5/28. */
 public class RoundedLayout extends ConstraintLayout {
     private Path mClipPath = new Path();
     private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -61,25 +72,33 @@ public class RoundedLayout extends ConstraintLayout {
         initLayouts(context, attrs, defStyleAttr, 0);
     }
 
-    private void initLayouts(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    private void initLayouts(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         if (isInEditMode()) {
             return;
         }
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundedLayout, defStyleAttr, defStyleRes);
-        mRoundedCornerRadius = a.getDimensionPixelSize(R.styleable.RoundedLayout_rlRoundedCornerRadius, 0);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.RoundedLayout, defStyleAttr, defStyleRes);
+        mRoundedCornerRadius =
+                a.getDimensionPixelSize(R.styleable.RoundedLayout_rlRoundedCornerRadius, 0);
         mRoundAsCircle = a.getBoolean(R.styleable.RoundedLayout_rlRoundAsCircle, false);
         mRoundTopLeft = a.getBoolean(R.styleable.RoundedLayout_rlRoundTopLeft, true);
         mRoundTopRight = a.getBoolean(R.styleable.RoundedLayout_rlRoundTopRight, true);
         mRoundBottomLeft = a.getBoolean(R.styleable.RoundedLayout_rlRoundBottomLeft, true);
         mRoundBottomRight = a.getBoolean(R.styleable.RoundedLayout_rlRoundBottomRight, true);
-        mRoundingBorderWidth = a.getDimensionPixelSize(R.styleable.RoundedLayout_rlRoundingBorderWidth, 0);
+        mRoundingBorderWidth =
+                a.getDimensionPixelSize(R.styleable.RoundedLayout_rlRoundingBorderWidth, 0);
         mRoundingBorderColor = a.getColor(R.styleable.RoundedLayout_rlRoundingBorderColor, 0);
         bgColor = a.getColor(R.styleable.RoundedLayout_rlBgColor, 0);
         bgStartColor = a.getColor(R.styleable.RoundedLayout_rlBgStartColor, 0);
         bgEndColor = a.getColor(R.styleable.RoundedLayout_rlBgEndColor, 0);
         if (a.hasValue(R.styleable.RoundedLayout_rlColorOrientation)) {
-            int attrOrientation = a.getInt(R.styleable.RoundedLayout_rlColorOrientation, GradientDrawable.Orientation.LEFT_RIGHT.ordinal());
+            int attrOrientation =
+                    a.getInt(
+                            R.styleable.RoundedLayout_rlColorOrientation,
+                            GradientDrawable.Orientation.LEFT_RIGHT.ordinal());
             intToOrientation(attrOrientation);
         }
         a.recycle();
@@ -93,9 +112,10 @@ public class RoundedLayout extends ConstraintLayout {
 
         if (bgStartColor != 0 && bgEndColor != 0) {
             int colors[] = {bgStartColor, bgEndColor};
-            final GradientDrawable.Orientation validOrientation = this.orientation == null
-                    ? GradientDrawable.Orientation.LEFT_RIGHT
-                    : this.orientation;
+            final GradientDrawable.Orientation validOrientation =
+                    this.orientation == null
+                            ? GradientDrawable.Orientation.LEFT_RIGHT
+                            : this.orientation;
 
             mBackground.setColors(colors);
             mBackground.setOrientation(validOrientation);
@@ -118,11 +138,11 @@ public class RoundedLayout extends ConstraintLayout {
     }
 
     public void setBackground() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            super.setBackground(mBackground);
-//        } else {
+        //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        //            super.setBackground(mBackground);
+        //        } else {
         super.setBackgroundDrawable(mBackground);
-//        }
+        //        }
     }
 
     @Override
@@ -156,7 +176,8 @@ public class RoundedLayout extends ConstraintLayout {
             cornerRadius = Math.max(mLayoutBounds.width(), mLayoutBounds.height()) / 2f;
         }
         mClipPath.reset();
-        mClipPath.addRoundRect(mLayoutBounds, buildRoundCornerRadii(cornerRadius), Path.Direction.CW);
+        mClipPath.addRoundRect(
+                mLayoutBounds, buildRoundCornerRadii(cornerRadius), Path.Direction.CW);
         mClipPath.close();
 
         mBackground.setCornerRadii(buildRoundCornerRadii(cornerRadius));
@@ -226,12 +247,13 @@ public class RoundedLayout extends ConstraintLayout {
             int colors[] = {bgStartColor, bgEndColor};
             mBackground.setColors(colors);
 
-            final GradientDrawable.Orientation validOrientation = this.orientation == null
-                    ? GradientDrawable.Orientation.LEFT_RIGHT
-                    : this.orientation;
+            final GradientDrawable.Orientation validOrientation =
+                    this.orientation == null
+                            ? GradientDrawable.Orientation.LEFT_RIGHT
+                            : this.orientation;
             mBackground.setOrientation(validOrientation);
             mBackground.setCornerRadii(buildRoundCornerRadii(mRoundedCornerRadius));
-//            postInvalidate();
+            //            postInvalidate();
 
         }
     }
@@ -262,16 +284,22 @@ public class RoundedLayout extends ConstraintLayout {
      * Set the radius of the corner angle and whether the edges are enabled
      *
      * @param cornerRadius The radius of the angle of the circle. Unit px
-     * @param topLeft      Whether to enable top left fillet
-     * @param topRight     Whether to enable top right fillet
-     * @param bottomLeft   Whether to enable bottom left fillet
-     * @param bottomRight  Whether to enable bottom right fillet
+     * @param topLeft Whether to enable top left fillet
+     * @param topRight Whether to enable top right fillet
+     * @param bottomLeft Whether to enable bottom left fillet
+     * @param bottomRight Whether to enable bottom right fillet
      */
-    public void setRoundedCornerRadius(int cornerRadius, boolean topLeft, boolean topRight,
-                                       boolean bottomRight, boolean bottomLeft) {
+    public void setRoundedCornerRadius(
+            int cornerRadius,
+            boolean topLeft,
+            boolean topRight,
+            boolean bottomRight,
+            boolean bottomLeft) {
         if (mRoundedCornerRadius != cornerRadius
-                || mRoundTopLeft != topLeft || mRoundTopRight != topRight
-                || mRoundBottomLeft != bottomLeft || mRoundBottomRight != bottomRight) {
+                || mRoundTopLeft != topLeft
+                || mRoundTopRight != topRight
+                || mRoundBottomLeft != bottomLeft
+                || mRoundBottomRight != bottomRight) {
             mRoundedCornerRadius = cornerRadius;
             mRoundTopLeft = topLeft;
             mRoundTopRight = topRight;
