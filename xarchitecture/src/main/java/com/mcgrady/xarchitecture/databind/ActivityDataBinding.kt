@@ -34,23 +34,23 @@ class ActivityDataBinding<T : ViewDataBinding>(
     private var block: (T.() -> Unit)? = null
 ) : ActivityDelegate<T>(activity) {
 
-  override fun getValue(thisRef: Activity, property: KProperty<*>): T {
-    return binding?.run {
-      this
-    } ?: let {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        activity.addLifecycleFragment { destroyed() }
-      }
+    override fun getValue(thisRef: Activity, property: KProperty<*>): T {
+        return binding?.run {
+            this
+        } ?: let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                activity.addLifecycleFragment { destroyed() }
+            }
 
-      val bind: T = DataBindingUtil.setContentView(thisRef, resId)
-      return bind.apply {
-        if (activity is ComponentActivity) {
-          bind.lifecycleOwner = activity
+            val bind: T = DataBindingUtil.setContentView(thisRef, resId)
+            return bind.apply {
+                if (activity is ComponentActivity) {
+                    bind.lifecycleOwner = activity
+                }
+                binding = this
+                block?.invoke(this)
+                block = null
+            }
         }
-        binding = this
-        block?.invoke(this)
-        block = null
-      }
     }
-  }
 }

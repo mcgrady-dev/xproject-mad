@@ -23,7 +23,7 @@ import androidx.navigation.findNavController
  */
 class SettingHandlers {
 
-  fun settingItemClick(view: View, action: Int) {
-    view.findNavController().navigate(action)
-  }
+    fun settingItemClick(view: View, action: Int) {
+        view.findNavController().navigate(action)
+    }
 }

@@ -32,7 +32,7 @@ import androidx.lifecycle.Lifecycle
  * @param rootFragment  根fragment
  */
 fun Fragment.loadRootFragment(@IdRes containerViewId: Int, rootFragment: Fragment) {
-  loadFragmentsTransaction(containerViewId, 0, childFragmentManager, rootFragment)
+    loadFragmentsTransaction(containerViewId, 0, childFragmentManager, rootFragment)
 }
 
 /**
@@ -46,7 +46,7 @@ fun Fragment.loadFragments(
     showPosition: Int = 0,
     vararg fragments: Fragment
 ) {
-  loadFragmentsTransaction(containerViewId, showPosition, childFragmentManager, *fragments)
+    loadFragmentsTransaction(containerViewId, showPosition, childFragmentManager, *fragments)
 }
 
 /**
@@ -55,7 +55,7 @@ fun Fragment.loadFragments(
  * @param showFragment 需要显示的fragment
  */
 fun Fragment.showHideFragment(showFragment: Fragment) {
-  showHideFragmentTransaction(childFragmentManager, showFragment)
+    showHideFragmentTransaction(childFragmentManager, showFragment)
 }
 
 /**
@@ -64,7 +64,7 @@ fun Fragment.showHideFragment(showFragment: Fragment) {
  * @param rootFragment  根fragment
  */
 fun FragmentActivity.loadRootFragment(@IdRes containerViewId: Int, rootFragment: Fragment) {
-  loadFragmentsTransaction(containerViewId, 0, supportFragmentManager, rootFragment)
+    loadFragmentsTransaction(containerViewId, 0, supportFragmentManager, rootFragment)
 }
 
 /**
@@ -78,7 +78,7 @@ fun FragmentActivity.loadFragments(
     showPosition: Int = 0,
     vararg fragments: Fragment
 ) {
-  loadFragmentsTransaction(containerViewId, showPosition, supportFragmentManager, *fragments)
+    loadFragmentsTransaction(containerViewId, showPosition, supportFragmentManager, *fragments)
 }
 
 /**
@@ -86,7 +86,7 @@ fun FragmentActivity.loadFragments(
  * @param showFragment 需要显示的fragment
  */
 fun FragmentActivity.showHideFragment(showFragment: Fragment) {
-  showHideFragmentTransaction(supportFragmentManager, showFragment)
+    showHideFragmentTransaction(supportFragmentManager, showFragment)
 }
 
 /**
@@ -106,24 +106,24 @@ private fun loadFragmentsTransaction(
     fragmentManager: FragmentManager,
     vararg fragments: Fragment
 ) {
-  if (fragments.isNotEmpty()) {
-    fragmentManager.beginTransaction().apply {
-      for (index in fragments.indices) {
-        val fragment = fragments[index]
-        add(containerViewId, fragment, fragment.javaClass.name)
-        if (showPosition == index) {
-          setMaxLifecycle(fragment, Lifecycle.State.RESUMED)
-        } else {
-          hide(fragment)
-          setMaxLifecycle(fragment, Lifecycle.State.STARTED)
-        }
-      }
-    }.commit()
-  } else {
-    throw IllegalStateException(
-        "fragments must not empty"
-    )
-  }
+    if (fragments.isNotEmpty()) {
+        fragmentManager.beginTransaction().apply {
+            for (index in fragments.indices) {
+                val fragment = fragments[index]
+                add(containerViewId, fragment, fragment.javaClass.name)
+                if (showPosition == index) {
+                    setMaxLifecycle(fragment, Lifecycle.State.RESUMED)
+                } else {
+                    hide(fragment)
+                    setMaxLifecycle(fragment, Lifecycle.State.STARTED)
+                }
+            }
+        }.commit()
+    } else {
+        throw IllegalStateException(
+            "fragments must not empty"
+        )
+    }
 }
 
 /**
@@ -133,23 +133,23 @@ private fun loadFragmentsTransaction(
  * @param showFragment
  */
 private fun showHideFragmentTransaction(fragmentManager: FragmentManager, showFragment: Fragment) {
-  fragmentManager.beginTransaction().apply {
-    show(showFragment)
-    setMaxLifecycle(showFragment, Lifecycle.State.RESUMED)
+    fragmentManager.beginTransaction().apply {
+        show(showFragment)
+        setMaxLifecycle(showFragment, Lifecycle.State.RESUMED)
 
-    // 获取其中所有的fragment,其他的fragment进行隐藏
-    val fragments = fragmentManager.fragments
-    for (fragment in fragments) {
-      if (fragment != showFragment) {
-        hide(fragment)
-        setMaxLifecycle(fragment, Lifecycle.State.STARTED)
-      }
-    }
-  }.commit()
+        // 获取其中所有的fragment,其他的fragment进行隐藏
+        val fragments = fragmentManager.fragments
+        for (fragment in fragments) {
+            if (fragment != showFragment) {
+                hide(fragment)
+                setMaxLifecycle(fragment, Lifecycle.State.STARTED)
+            }
+        }
+    }.commit()
 }
 
 fun DialogFragment.isShowing(): Boolean {
-  return dialog?.isShowing ?: false
+    return dialog?.isShowing ?: false
 }
 
 // inline fun <reified T : Any> Fragment.intent(

@@ -20,23 +20,23 @@ package com.mcgrady.xarchitecture.ext
  */
 
 enum class ScreenSize {
-  SMALL,
-  NORMAL,
-  LARGE,
-  XLARGE
+    SMALL,
+    NORMAL,
+    LARGE,
+    XLARGE
 }
 
 enum class Orientation {
-  PORTRAIT,
-  LANDSCAPE,
-  SQUARE
+    PORTRAIT,
+    LANDSCAPE,
+    SQUARE
 }
 
 enum class UiMode {
-  NORMAL,
-  CAR,
-  DESK,
-  TELEVISION,
-  APPLIANCE,
-  WATCH
+    NORMAL,
+    CAR,
+    DESK,
+    TELEVISION,
+    APPLIANCE,
+    WATCH
 }

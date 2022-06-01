@@ -22,8 +22,8 @@ import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCom
 /** An abstract activity extending [AppCompatActivity] with registering transformation automatically. */
 public abstract class TransformationAppCompatActivity : AppCompatActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    onTransformationEndContainer(intent.getParcelableExtra(activityTransitionName))
-    super.onCreate(savedInstanceState)
-  }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationEndContainer(intent.getParcelableExtra(activityTransitionName))
+        super.onCreate(savedInstanceState)
+    }
 }

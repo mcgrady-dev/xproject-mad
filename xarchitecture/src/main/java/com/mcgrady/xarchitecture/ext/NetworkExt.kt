@@ -45,13 +45,13 @@ const val NETWORK_LOWPAN = 7
 
 // @kotlin.internal.InlineOnly
 inline fun Context.connectivityManager() =
-  getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
 @Suppress("DEPRECATION")
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.activeNetworkInfo() =
-  connectivityManager().activeNetworkInfo
+    connectivityManager().activeNetworkInfo
 
 /**
  * 检查网络是否连接
@@ -60,15 +60,15 @@ inline fun Context.activeNetworkInfo() =
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.hasNetwork(): Boolean {
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-    val connectivityManager = connectivityManager()
-    val network = connectivityManager.activeNetwork ?: return false
-    val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-    return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-  } else {
-    val activeNetwork = activeNetworkInfo() ?: return false
-    return activeNetwork.isConnectedOrConnecting
-  }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val connectivityManager = connectivityManager()
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    } else {
+        val activeNetwork = activeNetworkInfo() ?: return false
+        return activeNetwork.isConnectedOrConnecting
+    }
 }
 
 /**
@@ -77,38 +77,38 @@ inline fun Context.hasNetwork(): Boolean {
 @Suppress("DEPRECATION")
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 fun Context.networkType(): Int {
-  // 获取网络类型，如果为空，返回无网络
+    // 获取网络类型，如果为空，返回无网络
 
-  if (!hasNetwork()) {
-    return NETWORK_NONE
-  }
-
-  val connectivityManager = connectivityManager()
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-    val network = connectivityManager.activeNetwork ?: return NETWORK_NONE
-    val capabilities =
-      connectivityManager.getNetworkCapabilities(network) ?: return NETWORK_NONE
-
-    return when {
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> NETWORK_WIFI
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> NETWORK_BLUETOOTH
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> NETWORK_MOBILE
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> NETWORK_ETHERNET
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> NETWORK_VPN
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE) -> NETWORK_WIFI_AWARE
-      capabilities.hasTransport(NetworkCapabilities.TRANSPORT_LOWPAN) -> NETWORK_LOWPAN
-      else -> return NETWORK_NONE
+    if (!hasNetwork()) {
+        return NETWORK_NONE
     }
-  }
 
-  val networkInfo = activeNetworkInfo() ?: return NETWORK_NONE
-  return when (networkInfo.type) {
-    ConnectivityManager.TYPE_WIFI -> NETWORK_WIFI
-    ConnectivityManager.TYPE_BLUETOOTH -> NETWORK_BLUETOOTH
-    ConnectivityManager.TYPE_MOBILE -> NETWORK_MOBILE
-    ConnectivityManager.TYPE_ETHERNET -> NETWORK_ETHERNET
-    else -> NETWORK_NONE
-  }
+    val connectivityManager = connectivityManager()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val network = connectivityManager.activeNetwork ?: return NETWORK_NONE
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(network) ?: return NETWORK_NONE
+
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> NETWORK_WIFI
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> NETWORK_BLUETOOTH
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> NETWORK_MOBILE
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> NETWORK_ETHERNET
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> NETWORK_VPN
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE) -> NETWORK_WIFI_AWARE
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_LOWPAN) -> NETWORK_LOWPAN
+            else -> return NETWORK_NONE
+        }
+    }
+
+    val networkInfo = activeNetworkInfo() ?: return NETWORK_NONE
+    return when (networkInfo.type) {
+        ConnectivityManager.TYPE_WIFI -> NETWORK_WIFI
+        ConnectivityManager.TYPE_BLUETOOTH -> NETWORK_BLUETOOTH
+        ConnectivityManager.TYPE_MOBILE -> NETWORK_MOBILE
+        ConnectivityManager.TYPE_ETHERNET -> NETWORK_ETHERNET
+        else -> NETWORK_NONE
+    }
 }
 
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
@@ -124,21 +124,21 @@ inline fun Context.isConnected2Bluetooth(): Boolean = networkType() == NETWORK_B
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.listenCellular(): Flow<Boolean> =
-  listenNetworkFlow(NetworkCapabilities.TRANSPORT_CELLULAR)
+    listenNetworkFlow(NetworkCapabilities.TRANSPORT_CELLULAR)
 
 // 监听 wifi
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.listenWifi(): Flow<Boolean> =
-  listenNetworkFlow(NetworkCapabilities.TRANSPORT_WIFI)
+    listenNetworkFlow(NetworkCapabilities.TRANSPORT_WIFI)
 
 // 监听蓝牙
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.listenBluetooth(): Flow<Boolean> =
-  listenNetworkFlow(NetworkCapabilities.TRANSPORT_BLUETOOTH)
+    listenNetworkFlow(NetworkCapabilities.TRANSPORT_BLUETOOTH)
 
 /**
  * 1. 动态监听指定网络的变化
@@ -151,72 +151,72 @@ inline fun Context.listenBluetooth(): Flow<Boolean> =
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.listenNetworkFlow(type: Int, bindNetWork: Boolean = false) =
-  callbackFlow {
-    val networkRequest = NetworkRequest.Builder()
-      .addTransportType(type)
-      .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-      .build()
+    callbackFlow {
+        val networkRequest = NetworkRequest.Builder()
+            .addTransportType(type)
+            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .build()
 
-    val connectivityManager = connectivityManager()
+        val connectivityManager = connectivityManager()
 
-    val callback = object : ConnectivityManager.NetworkCallback() {
-      override fun onLost(network: Network) {
+        val callback = object : ConnectivityManager.NetworkCallback() {
+            override fun onLost(network: Network) {
+                if (bindNetWork) {
+                    bindProcessToNetwork(null)
+                    safeOffer(false)
+                } else {
+                    safeOffer(false)
+                }
+            }
+
+            override fun onAvailable(network: Network) {
+                if (bindNetWork) {
+                    safeOffer(bindProcessToNetwork(network))
+                } else {
+                    safeOffer(true)
+                }
+            }
+
+            @Suppress("DEPRECATION")
+            private fun bindProcessToNetwork(network: Network?): Boolean {
+                return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    connectivityManager.bindProcessToNetwork(network)
+                } else {
+                    ConnectivityManager.setProcessDefaultNetwork(network)
+                }
+            }
+        }
+
         if (bindNetWork) {
-          bindProcessToNetwork(null)
-          safeOffer(false)
+            connectivityManager.requestNetwork(networkRequest, callback)
         } else {
-          safeOffer(false)
+            connectivityManager.registerNetworkCallback(networkRequest, callback)
         }
-      }
 
-      override fun onAvailable(network: Network) {
-        if (bindNetWork) {
-          safeOffer(bindProcessToNetwork(network))
-        } else {
-          safeOffer(true)
+        awaitClose {
+            connectivityManager.unregisterNetworkCallback(callback)
         }
-      }
-
-      @Suppress("DEPRECATION")
-      private fun bindProcessToNetwork(network: Network?): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-          connectivityManager.bindProcessToNetwork(network)
-        } else {
-          ConnectivityManager.setProcessDefaultNetwork(network)
-        }
-      }
     }
-
-    if (bindNetWork) {
-      connectivityManager.requestNetwork(networkRequest, callback)
-    } else {
-      connectivityManager.registerNetworkCallback(networkRequest, callback)
-    }
-
-    awaitClose {
-      connectivityManager.unregisterNetworkCallback(callback)
-    }
-  }
 
 // 连接高带宽网络 - wifi，如果曾经连接过 wifi，会强制绑定连接当前 wifi
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 // @kotlin.internal.InlineOnly
 inline fun Context.bindFastNetWorkWithWifi(): Flow<Boolean> =
-  listenNetworkFlow(NetworkCapabilities.TRANSPORT_WIFI, true)
+    listenNetworkFlow(NetworkCapabilities.TRANSPORT_WIFI, true)
 
 // 获取当前网络速度
 // @kotlin.internal.InlineOnly
 @RequiresApi(Build.VERSION_CODES.M)
 @RequiresPermission(value = Manifest.permission.ACCESS_NETWORK_STATE)
 fun Context.getBandwidthKbps(): Int {
-  if (!hasNetwork()) {
-    return 0
-  }
+    if (!hasNetwork()) {
+        return 0
+    }
 
-  val connectivityManager = connectivityManager()
-  val network = connectivityManager.boundNetworkForProcess ?: connectivityManager.activeNetwork ?: return 0
+    val connectivityManager = connectivityManager()
+    val network = connectivityManager.boundNetworkForProcess ?: connectivityManager.activeNetwork ?: return 0
 
-  val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return 0
-  return capabilities.linkDownstreamBandwidthKbps
+    val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return 0
+    return capabilities.linkDownstreamBandwidthKbps
 }

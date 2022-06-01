@@ -38,40 +38,40 @@ import kotlinx.coroutines.flow.onEach
 @CheckResult
 // @kotlin.internal.InlineOnly
 inline fun EditText.doAfterTextChangeFlow(): Flow<Editable?> = callbackFlow {
-  val textChangedListener = doAfterTextChanged {
-    safeOffer(it)
-  }
-  awaitClose {
-    removeTextChangedListener(textChangedListener)
-  }
+    val textChangedListener = doAfterTextChanged {
+        safeOffer(it)
+    }
+    awaitClose {
+        removeTextChangedListener(textChangedListener)
+    }
 }
 
 @CheckResult
 // @kotlin.internal.InlineOnly
 inline fun EditText.doBeforeTextChangeFlow(): Flow<CharSequence?> = callbackFlow {
-  val textChangeListener = doBeforeTextChanged { text, _, _, _ ->
-    safeOffer(text)
-  }
-  awaitClose { removeTextChangedListener(textChangeListener) }
+    val textChangeListener = doBeforeTextChanged { text, _, _, _ ->
+        safeOffer(text)
+    }
+    awaitClose { removeTextChangedListener(textChangeListener) }
 }
 
 @CheckResult
 // @kotlin.internal.InlineOnly
 inline fun EditText.doTextChangedFlow(): Flow<CharSequence?> = callbackFlow {
-  val textChangeListener = doOnTextChanged { text, _, _, _ ->
-    safeOffer(text)
-  }
-  awaitClose { removeTextChangedListener(textChangeListener) }
+    val textChangeListener = doOnTextChanged { text, _, _, _ ->
+        safeOffer(text)
+    }
+    awaitClose { removeTextChangedListener(textChangeListener) }
 }
 
 inline fun EditText.textChange(
     lifecycle: LifecycleCoroutineScope,
     crossinline onChange: (s: String) -> Unit
 ) {
-  doAfterTextChangeFlow()
-    .onEach {
-      onChange(it.toString())
-    }.launchIn(lifecycle)
+    doAfterTextChangeFlow()
+        .onEach {
+            onChange(it.toString())
+        }.launchIn(lifecycle)
 }
 
 inline fun EditText.textChange(
@@ -79,21 +79,21 @@ inline fun EditText.textChange(
     timeoutMillis: Long = 500,
     crossinline onChange: (s: String) -> Unit
 ) {
-  doAfterTextChangeFlow()
-    .debounce(timeoutMillis)
-    .onEach {
-      onChange(it.toString())
-    }.launchIn(lifecycle)
+    doAfterTextChangeFlow()
+        .debounce(timeoutMillis)
+        .onEach {
+            onChange(it.toString())
+        }.launchIn(lifecycle)
 }
 
 inline fun EditText.textChangeBefore(
     lifecycle: LifecycleCoroutineScope,
     crossinline onChange: (s: String) -> Unit
 ) {
-  doBeforeTextChangeFlow()
-    .onEach {
-      onChange(it.toString())
-    }.launchIn(lifecycle)
+    doBeforeTextChangeFlow()
+        .onEach {
+            onChange(it.toString())
+        }.launchIn(lifecycle)
 }
 
 inline fun EditText.textChangeBefore(
@@ -101,21 +101,21 @@ inline fun EditText.textChangeBefore(
     timeoutMillis: Long = 500,
     crossinline onChange: (s: String) -> Unit
 ) {
-  doBeforeTextChangeFlow()
-    .debounce(timeoutMillis)
-    .onEach {
-      onChange(it.toString())
-    }.launchIn(lifecycle)
+    doBeforeTextChangeFlow()
+        .debounce(timeoutMillis)
+        .onEach {
+            onChange(it.toString())
+        }.launchIn(lifecycle)
 }
 
 inline fun EditText.textChangeAfter(
     lifecycle: LifecycleCoroutineScope,
     crossinline onChange: (s: String) -> Unit
 ) {
-  doAfterTextChangeFlow()
-    .onEach {
-      onChange(it.toString())
-    }.launchIn(lifecycle)
+    doAfterTextChangeFlow()
+        .onEach {
+            onChange(it.toString())
+        }.launchIn(lifecycle)
 }
 
 inline fun EditText.textChangeAfter(
@@ -123,9 +123,9 @@ inline fun EditText.textChangeAfter(
     timeoutMillis: Long = 500,
     crossinline onChange: (s: String) -> Unit
 ) {
-  doAfterTextChangeFlow()
-    .debounce(timeoutMillis)
-    .onEach {
-      onChange(it.toString())
-    }.launchIn(lifecycle)
+    doAfterTextChangeFlow()
+        .debounce(timeoutMillis)
+        .onEach {
+            onChange(it.toString())
+        }.launchIn(lifecycle)
 }

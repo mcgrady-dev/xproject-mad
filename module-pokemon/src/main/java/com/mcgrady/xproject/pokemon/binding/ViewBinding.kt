@@ -29,31 +29,31 @@ import com.google.android.material.card.MaterialCardView
  */
 object ViewBinding {
 
-  @JvmStatic
-  @BindingAdapter("toast")
-  fun bindToast(view: View, text: String?) {
-    text?.let {
-      Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
+    @JvmStatic
+    @BindingAdapter("toast")
+    fun bindToast(view: View, text: String?) {
+        text?.let {
+            Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
+        }
     }
-  }
 
-  @JvmStatic
-  @BindingAdapter("paletteImage", "paletteCard")
-  fun bindLoadImagePaletteView(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
-    val context = view.context
-    Glide.with(context)
-      .load(url)
-      .listener(
-          GlidePalette.with(url)
-            .use(BitmapPalette.Profile.MUTED_LIGHT)
-            .intoCallBack { palette ->
-                val rgb = palette?.dominantSwatch?.rgb
-              if (rgb != null) {
-                paletteCard.setCardBackgroundColor(rgb)
-              }
-              }.crossfade(true)
-      ).into(view)
-  }
+    @JvmStatic
+    @BindingAdapter("paletteImage", "paletteCard")
+    fun bindLoadImagePaletteView(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
+        val context = view.context
+        Glide.with(context)
+            .load(url)
+            .listener(
+                GlidePalette.with(url)
+                    .use(BitmapPalette.Profile.MUTED_LIGHT)
+                    .intoCallBack { palette ->
+                        val rgb = palette?.dominantSwatch?.rgb
+                        if (rgb != null) {
+                            paletteCard.setCardBackgroundColor(rgb)
+                        }
+                    }.crossfade(true)
+            ).into(view)
+    }
 
 //    @JvmStatic
 //    @BindingAdapter("paletteImage", "paletteView")
@@ -90,13 +90,13 @@ object ViewBinding {
 //            ).into(view)
 //    }
 
-  @JvmStatic
-  @BindingAdapter("gone")
-  fun bindGone(view: View, shouldBeGone: Boolean) {
-    view.visibility = if (shouldBeGone) {
-      View.GONE
-    } else {
-      View.VISIBLE
+    @JvmStatic
+    @BindingAdapter("gone")
+    fun bindGone(view: View, shouldBeGone: Boolean) {
+        view.visibility = if (shouldBeGone) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
     }
-  }
 }

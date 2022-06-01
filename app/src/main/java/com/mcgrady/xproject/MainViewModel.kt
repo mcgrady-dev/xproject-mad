@@ -26,11 +26,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
 
-  val currentName: MutableLiveData<String> by lazy {
-    MutableLiveData<String>()
-  }
+    val currentName: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-  val taskUpdate: SingleLiveEvent<Unit> by lazy {
-    SingleLiveEvent()
-  }
+    val taskUpdate: SingleLiveEvent<Unit> by lazy {
+        SingleLiveEvent()
+    }
 }

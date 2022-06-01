@@ -39,41 +39,41 @@ class ViewGroupDataBinding<T : ViewBinding>(
     private var block: (T.() -> Unit)? = null
 ) : ReadOnlyProperty<ViewGroup, T> {
 
-  private var viewBinding: T? = null
+    private var viewBinding: T? = null
 
-  init {
-    viewGroup?.apply {
-      when (context) {
-        is ComponentActivity -> {
-          (context as ComponentActivity?)?.lifecycle?.observerWhenDestroyed { destroyed() }
+    init {
+        viewGroup?.apply {
+            when (context) {
+                is ComponentActivity -> {
+                    (context as ComponentActivity?)?.lifecycle?.observerWhenDestroyed { destroyed() }
+                }
+                is Activity -> {
+                    val activity = context as Activity
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        activity.observerWhenDestroyed { destroyed() }
+                    } else {
+                        activity.addLifecycleFragment { destroyed() }
+                    }
+                }
+            }
         }
-        is Activity -> {
-          val activity = context as Activity
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            activity.observerWhenDestroyed { destroyed() }
-          } else {
-            activity.addLifecycleFragment { destroyed() }
-          }
+    }
+
+    override fun getValue(thisRef: ViewGroup, property: KProperty<*>): T {
+        return viewBinding?.run {
+            this
+        } ?: let {
+            val bind = DataBindingUtil.inflate(inflater, resId, thisRef, true) as T
+            val value = block
+            bind.apply {
+                viewBinding = this
+                value?.invoke(this)
+                block = null
+            }
         }
-      }
     }
-  }
 
-  override fun getValue(thisRef: ViewGroup, property: KProperty<*>): T {
-    return viewBinding?.run {
-      this
-    } ?: let {
-      val bind = DataBindingUtil.inflate(inflater, resId, thisRef, true) as T
-      val value = block
-      bind.apply {
-        viewBinding = this
-        value?.invoke(this)
-        block = null
-      }
+    private fun destroyed() {
+        viewBinding = null
     }
-  }
-
-  private fun destroyed() {
-    viewBinding = null
-  }
 }

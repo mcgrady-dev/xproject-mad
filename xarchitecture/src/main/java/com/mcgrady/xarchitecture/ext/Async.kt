@@ -29,14 +29,14 @@ import java.util.concurrent.Future
  * Execute [f] on the application UI thread.
  */
 fun Context.runOnUiThread(f: Context.() -> Unit) {
-  if (Looper.getMainLooper() === Looper.myLooper()) f() else ContextHelper.handler.post { f() }
+    if (Looper.getMainLooper() === Looper.myLooper()) f() else ContextHelper.handler.post { f() }
 }
 
 /**
  * Execute [f] on the application UI thread.
  */
 inline fun Fragment.runOnUiThread(crossinline f: () -> Unit) {
-  activity?.runOnUiThread { f() }
+    activity?.runOnUiThread { f() }
 }
 
 class AnkoAsyncContext<T>(val weakRef: WeakReference<T>)
@@ -47,12 +47,12 @@ class AnkoAsyncContext<T>(val weakRef: WeakReference<T>)
  *  [f] gets it as a parameter ([f] gets null if the receiver does not exist anymore).
  */
 fun <T> AnkoAsyncContext<T>.onComplete(f: (T?) -> Unit) {
-  val ref = weakRef.get()
-  if (Looper.getMainLooper() === Looper.myLooper()) {
-    f(ref)
-  } else {
-    ContextHelper.handler.post { f(ref) }
-  }
+    val ref = weakRef.get()
+    if (Looper.getMainLooper() === Looper.myLooper()) {
+        f(ref)
+    } else {
+        ContextHelper.handler.post { f(ref) }
+    }
 }
 
 /**
@@ -61,13 +61,13 @@ fun <T> AnkoAsyncContext<T>.onComplete(f: (T?) -> Unit) {
  * If the receiver does not exist anymore (it was collected by GC), [f] will not be executed.
  */
 fun <T> AnkoAsyncContext<T>.uiThread(f: (T) -> Unit): Boolean {
-  val ref = weakRef.get() ?: return false
-  if (Looper.getMainLooper() === Looper.myLooper()) {
-    f(ref)
-  } else {
-    ContextHelper.handler.post { f(ref) }
-  }
-  return true
+    val ref = weakRef.get() ?: return false
+    if (Looper.getMainLooper() === Looper.myLooper()) {
+        f(ref)
+    } else {
+        ContextHelper.handler.post { f(ref) }
+    }
+    return true
 }
 
 /**
@@ -76,35 +76,35 @@ fun <T> AnkoAsyncContext<T>.uiThread(f: (T) -> Unit): Boolean {
  *  If it is not exist anymore or if it was finished, [f] will not be called.
  */
 fun <T : Activity> AnkoAsyncContext<T>.activityUiThread(f: (T) -> Unit): Boolean {
-  val activity = weakRef.get() ?: return false
-  if (activity.isFinishing) return false
-  activity.runOnUiThread { f(activity) }
-  return true
+    val activity = weakRef.get() ?: return false
+    if (activity.isFinishing) return false
+    activity.runOnUiThread { f(activity) }
+    return true
 }
 
 fun <T : Activity> AnkoAsyncContext<T>.activityUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
-  val activity = weakRef.get() ?: return false
-  if (activity.isFinishing) return false
-  activity.runOnUiThread { activity.f(activity) }
-  return true
+    val activity = weakRef.get() ?: return false
+    if (activity.isFinishing) return false
+    activity.runOnUiThread { activity.f(activity) }
+    return true
 }
 
 @Deprecated(message = "Use support library fragments instead. Framework fragments were deprecated in API 28.")
 fun <T : Fragment> AnkoAsyncContext<T>.fragmentUiThread(f: (T) -> Unit): Boolean {
-  val fragment = weakRef.get() ?: return false
-  if (fragment.isDetached) return false
-  val activity = fragment.activity ?: return false
-  activity.runOnUiThread { f(fragment) }
-  return true
+    val fragment = weakRef.get() ?: return false
+    if (fragment.isDetached) return false
+    val activity = fragment.activity ?: return false
+    activity.runOnUiThread { f(fragment) }
+    return true
 }
 
 @Deprecated(message = "Use support library fragments instead. Framework fragments were deprecated in API 28.")
 fun <T : Fragment> AnkoAsyncContext<T>.fragmentUiThreadWithContext(f: Context.(T) -> Unit): Boolean {
-  val fragment = weakRef.get() ?: return false
-  if (fragment.isDetached) return false
-  val activity = fragment.activity ?: return false
-  activity.runOnUiThread { activity.f(fragment) }
-  return true
+    val fragment = weakRef.get() ?: return false
+    if (fragment.isDetached) return false
+    val activity = fragment.activity ?: return false
+    activity.runOnUiThread { activity.f(fragment) }
+    return true
 }
 
 private val crashLogger = { throwable: Throwable -> throwable.printStackTrace() }
@@ -120,19 +120,19 @@ fun <T> T.doAsync(
     exceptionHandler: ((Throwable) -> Unit)? = crashLogger,
     task: AnkoAsyncContext<T>.() -> Unit
 ): Future<Unit> {
-  val context = AnkoAsyncContext(WeakReference(this))
-  return BackgroundExecutor.submit {
-    return@submit try {
-      context.task()
-    } catch (thr: Throwable) {
-      val result = exceptionHandler?.invoke(thr)
-      if (result != null) {
-        result
-      } else {
-        Unit
-      }
+    val context = AnkoAsyncContext(WeakReference(this))
+    return BackgroundExecutor.submit {
+        return@submit try {
+            context.task()
+        } catch (thr: Throwable) {
+            val result = exceptionHandler?.invoke(thr)
+            if (result != null) {
+                result
+            } else {
+                Unit
+            }
+        }
     }
-  }
 }
 
 fun <T> T.doAsync(
@@ -140,29 +140,29 @@ fun <T> T.doAsync(
     executorService: ExecutorService,
     task: AnkoAsyncContext<T>.() -> Unit
 ): Future<Unit> {
-  val context = AnkoAsyncContext(WeakReference(this))
-  return executorService.submit<Unit> {
-    try {
-      context.task()
-    } catch (thr: Throwable) {
-      exceptionHandler?.invoke(thr)
+    val context = AnkoAsyncContext(WeakReference(this))
+    return executorService.submit<Unit> {
+        try {
+            context.task()
+        } catch (thr: Throwable) {
+            exceptionHandler?.invoke(thr)
+        }
     }
-  }
 }
 
 fun <T, R> T.doAsyncResult(
     exceptionHandler: ((Throwable) -> Unit)? = crashLogger,
     task: AnkoAsyncContext<T>.() -> R
 ): Future<R> {
-  val context = AnkoAsyncContext(WeakReference(this))
-  return BackgroundExecutor.submit {
-    try {
-      context.task()
-    } catch (thr: Throwable) {
-      exceptionHandler?.invoke(thr)
-      throw thr
+    val context = AnkoAsyncContext(WeakReference(this))
+    return BackgroundExecutor.submit {
+        try {
+            context.task()
+        } catch (thr: Throwable) {
+            exceptionHandler?.invoke(thr)
+            throw thr
+        }
     }
-  }
 }
 
 fun <T, R> T.doAsyncResult(
@@ -170,24 +170,24 @@ fun <T, R> T.doAsyncResult(
     executorService: ExecutorService,
     task: AnkoAsyncContext<T>.() -> R
 ): Future<R> {
-  val context = AnkoAsyncContext(WeakReference(this))
-  return executorService.submit<R> {
-    try {
-      context.task()
-    } catch (thr: Throwable) {
-      exceptionHandler?.invoke(thr)
-      throw thr
+    val context = AnkoAsyncContext(WeakReference(this))
+    return executorService.submit<R> {
+        try {
+            context.task()
+        } catch (thr: Throwable) {
+            exceptionHandler?.invoke(thr)
+            throw thr
+        }
     }
-  }
 }
 
 internal object BackgroundExecutor {
-  var executor: ExecutorService =
-    Executors.newScheduledThreadPool(2 * Runtime.getRuntime().availableProcessors())
+    var executor: ExecutorService =
+        Executors.newScheduledThreadPool(2 * Runtime.getRuntime().availableProcessors())
 
-  fun <T> submit(task: () -> T): Future<T> = executor.submit(task)
+    fun <T> submit(task: () -> T): Future<T> = executor.submit(task)
 }
 
 private object ContextHelper {
-  val handler = Handler(Looper.getMainLooper())
+    val handler = Handler(Looper.getMainLooper())
 }

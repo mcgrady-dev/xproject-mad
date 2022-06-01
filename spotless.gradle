@@ -18,13 +18,11 @@ spotless {
         target "**/*.kt"
         ktlint("0.45.2")
                 .userData([
-                        //'indent_size': '4',
-                        //'continuation_indent_size': '8',
-                        'disabled_rules': 'indent,no-wildcard-imports'
+                        'disabled_rules': 'no-wildcard-imports'
                 ])
         licenseHeaderFile "$rootDir/license.kt"
         trimTrailingWhitespace()
-        indentWithSpaces()
+        indentWithSpaces(4)
         endWithNewline()
     }
 }

@@ -26,12 +26,12 @@ import java.security.MessageDigest
  */
 
 inline fun String?.isNotNullOrEmpty(): Boolean {
-  return !this.isNullOrEmpty()
+    return !this.isNullOrEmpty()
 }
 
 // @kotlin.internal.InlineOnly
 inline fun String.isValidPhone(): Boolean {
-  return this.isNotNullOrEmpty() && Patterns.PHONE.matcher(this).matches()
+    return this.isNotNullOrEmpty() && Patterns.PHONE.matcher(this).matches()
 }
 
 // @kotlin.internal.InlineOnly
@@ -45,22 +45,22 @@ inline fun String.isValidPhone(): Boolean {
 
 // @kotlin.internal.InlineOnly
 inline fun String.isValidEmail(): Boolean {
-  return this.isNotNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    return this.isNotNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
 // @kotlin.internal.InlineOnly
 @Suppress("DEPRECATION")
 inline fun String.isIPAddress(): Boolean {
-  return this.isNotNullOrEmpty() && Patterns.IP_ADDRESS.matcher(this).matches()
+    return this.isNotNullOrEmpty() && Patterns.IP_ADDRESS.matcher(this).matches()
 }
 
 // @kotlin.internal.InlineOnly
 inline fun String.isDomainName(): Boolean {
-  return this.isNotNullOrEmpty() && Patterns.DOMAIN_NAME.matcher(this).matches()
+    return this.isNotNullOrEmpty() && Patterns.DOMAIN_NAME.matcher(this).matches()
 }
 
 // @kotlin.internal.InlineOnly
 inline fun String.md5(): String {
-  val md = MessageDigest.getInstance("MD5")
-  return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
+    val md = MessageDigest.getInstance("MD5")
+    return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
 }

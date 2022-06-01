@@ -38,28 +38,28 @@ const val MAXDPI: Int = 0xfffe
 
 // 屏幕宽度(px)
 inline val Context.screenWidth: Int
-  get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-    val wm = systemService<WindowManager?>()
-    wm?.currentWindowMetrics?.bounds?.width() ?: -1
-  } else {
-    resources.displayMetrics.widthPixels
-  }
+    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        val wm = systemService<WindowManager?>()
+        wm?.currentWindowMetrics?.bounds?.width() ?: -1
+    } else {
+        resources.displayMetrics.widthPixels
+    }
 
 // 屏幕高度(px)
 inline val Context.screenHeight: Int
-  get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-    val wm = systemService<WindowManager?>()
-    wm?.currentWindowMetrics?.bounds?.height() ?: -1
-  } else {
-    resources.displayMetrics.heightPixels
-  }
+    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        val wm = systemService<WindowManager?>()
+        wm?.currentWindowMetrics?.bounds?.height() ?: -1
+    } else {
+        resources.displayMetrics.heightPixels
+    }
 
 // 屏幕的密度
 inline val Context.density: Float
-  get() = resources.displayMetrics.density
+    get() = resources.displayMetrics.density
 
 inline val Context.scaledDensity: Float
-  get() = resources.displayMetrics.scaledDensity
+    get() = resources.displayMetrics.scaledDensity
 
 // returns dip(dp) dimension value in pixels
 fun Context.dp2px(value: Int): Int = (value * density).toInt()

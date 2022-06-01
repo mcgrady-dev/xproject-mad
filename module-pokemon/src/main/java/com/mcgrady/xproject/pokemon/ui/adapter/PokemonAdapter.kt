@@ -33,11 +33,11 @@ import com.mcgrady.xproject.pokemon.ui.main.MainActivity
  */
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
-  private val items: MutableList<Pokemon> = mutableListOf()
+    private val items: MutableList<Pokemon> = mutableListOf()
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-    val view = parent.inflate(R.layout.item_pokemon)
-    return PokemonViewHolder(view).apply {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
+        val view = parent.inflate(R.layout.item_pokemon)
+        return PokemonViewHolder(view).apply {
 //            binding.root.setOnClickListener(object: ClickUtils.OnDebouncingClickListener() {
 //                override fun onDebouncingClick(v: View?) {
 //                    val position = bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return
@@ -48,39 +48,40 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
 //                }
 //            })
 
-      binding.root.setOnClickListener { v ->
-        val position = bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
-        val intent = Intent(v?.context, MainActivity::class.java).apply {
-          putExtra("EXTRA_POKEMON", items[position])
+            binding.root.setOnClickListener { v ->
+                val position =
+                    bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
+                val intent = Intent(v?.context, MainActivity::class.java).apply {
+                    putExtra("EXTRA_POKEMON", items[position])
+                }
+                TransformationCompat.startActivity(binding.transformationLayout, intent)
+            }
         }
-        TransformationCompat.startActivity(binding.transformationLayout, intent)
-      }
     }
-  }
 
-  override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-    holder.bindData(items[position], position)
-  }
-
-  override fun getItemCount() = items.size
-
-  fun setPokemonList(list: List<Pokemon>) {
-    val previousItemSize = items.size
-    items.clear()
-    items.addAll(list)
-    notifyItemRangeChanged(previousItemSize, list.size)
-  }
-
-  class PokemonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    val binding: ItemPokemonBinding by databind()
-
-    @Suppress("UNUSED_PARAMETER")
-    fun bindData(data: Pokemon?, position: Int) {
-      binding.apply {
-        pokemon = data
-        executePendingBindings()
-      }
+    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
+        holder.bindData(items[position], position)
     }
-  }
+
+    override fun getItemCount() = items.size
+
+    fun setPokemonList(list: List<Pokemon>) {
+        val previousItemSize = items.size
+        items.clear()
+        items.addAll(list)
+        notifyItemRangeChanged(previousItemSize, list.size)
+    }
+
+    class PokemonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        val binding: ItemPokemonBinding by databind()
+
+        @Suppress("UNUSED_PARAMETER")
+        fun bindData(data: Pokemon?, position: Int) {
+            binding.apply {
+                pokemon = data
+                executePendingBindings()
+            }
+        }
+    }
 }

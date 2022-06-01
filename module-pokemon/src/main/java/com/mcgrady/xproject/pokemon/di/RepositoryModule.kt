@@ -30,9 +30,9 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @InstallIn(ViewModelComponent::class)
 object RepositoryModule {
 
-  @Provides
-  @ViewModelScoped
-  fun providePokedexRepository(pokedexClient: PokedexClient): PokedexRepository {
-    return PokedexRepository(pokedexClient)
-  }
+    @Provides
+    @ViewModelScoped
+    fun providePokedexRepository(pokedexClient: PokedexClient): PokedexRepository {
+        return PokedexRepository(pokedexClient)
+    }
 }

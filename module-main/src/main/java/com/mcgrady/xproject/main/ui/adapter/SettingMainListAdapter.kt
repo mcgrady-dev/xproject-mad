@@ -27,23 +27,23 @@ import com.mcgrady.xproject.main.util.SettingHandlers
  * Created by mcgrady on 2022/2/17.
  */
 class SettingMainListAdapter :
-  BindingListAdapter<SettingMainBean, RecyclerItemSettingMainBinding>(SettingMainBean.CALLBACK) {
+    BindingListAdapter<SettingMainBean, RecyclerItemSettingMainBinding>(SettingMainBean.CALLBACK) {
 
-  override val layoutResId: Int
-    get() = R.layout.recycler_item_setting_main
+    override val layoutResId: Int
+        get() = R.layout.recycler_item_setting_main
 
-  override fun onCreateViewHolder(
-      parent: ViewGroup,
-      viewType: Int
-  ): BaseViewHolder<RecyclerItemSettingMainBinding> {
-    return super.onCreateViewHolder(parent, viewType)
-  }
-
-  override fun bind(binding: RecyclerItemSettingMainBinding, item: SettingMainBean) {
-    binding.apply {
-      model = item
-      handler = SettingHandlers()
-      executePendingBindings()
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseViewHolder<RecyclerItemSettingMainBinding> {
+        return super.onCreateViewHolder(parent, viewType)
     }
-  }
+
+    override fun bind(binding: RecyclerItemSettingMainBinding, item: SettingMainBean) {
+        binding.apply {
+            model = item
+            handler = SettingHandlers()
+            executePendingBindings()
+        }
+    }
 }

@@ -30,23 +30,23 @@ class ViewHolderDataBinding<T : ViewDataBinding>(
     private var block: (T.() -> Unit)? = null
 ) : ReadOnlyProperty<RecyclerView.ViewHolder, T> {
 
-  private var binding: T? = null
+    private var binding: T? = null
 
-  override fun getValue(thisRef: RecyclerView.ViewHolder, property: KProperty<*>): T {
-    return binding?.run {
-      this
-    } ?: let {
-      val bind = DataBindingUtil.bind<T>(thisRef.itemView) as T
-      val value = block
-      bind.apply {
-        binding = this
-        value?.invoke(this)
-        block = null
-      }
+    override fun getValue(thisRef: RecyclerView.ViewHolder, property: KProperty<*>): T {
+        return binding?.run {
+            this
+        } ?: let {
+            val bind = DataBindingUtil.bind<T>(thisRef.itemView) as T
+            val value = block
+            bind.apply {
+                binding = this
+                value?.invoke(this)
+                block = null
+            }
+        }
     }
-  }
 
-  private fun destroyed() {
-    binding = null
-  }
+    private fun destroyed() {
+        binding = null
+    }
 }

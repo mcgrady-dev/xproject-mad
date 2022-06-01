@@ -29,17 +29,17 @@ abstract class BindingListAdapter<T, BD : ViewDataBinding> constructor(
     callback: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, BaseViewHolder<BD>>(callback) {
 
-  @get:LayoutRes
-  abstract val layoutResId: Int
+    @get:LayoutRes
+    abstract val layoutResId: Int
 
-  abstract fun bind(binding: BD, item: T)
+    abstract fun bind(binding: BD, item: T)
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BD> {
-    val binding = parent.binding<BD>(layoutResId, false)
-    return BaseViewHolder(binding)
-  }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BD> {
+        val binding = parent.binding<BD>(layoutResId, false)
+        return BaseViewHolder(binding)
+    }
 
-  override fun onBindViewHolder(holder: BaseViewHolder<BD>, position: Int) {
-    bind(holder.binding, getItem(position))
-  }
+    override fun onBindViewHolder(holder: BaseViewHolder<BD>, position: Int) {
+        bind(holder.binding, getItem(position))
+    }
 }

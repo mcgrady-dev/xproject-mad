@@ -25,16 +25,16 @@ import com.mcgrady.xproject.main.databinding.FragmentSettingSecondaryPageBinding
 
 class SettingAppInfoFragment : BaseFragment() {
 
-  private val binding: FragmentSettingSecondaryPageBinding by viewbind()
+    private val binding: FragmentSettingSecondaryPageBinding by viewbind()
 
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-    return binding.root
-  }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return binding.root
+    }
 
-  override fun initData() {
-  }
+    override fun initData() {
+    }
 }

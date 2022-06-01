@@ -275,11 +275,11 @@ open class ProgressCircularView @JvmOverloads constructor(
             attachOrchestrator(it)
         }
         set(value) {
-            if (field == value) return
-            field.cancel()
-            field = value
-            attachOrchestrator(field)
-        }
+                if (field == value) return
+                field.cancel()
+                field = value
+                attachOrchestrator(field)
+            }
 
     private fun attachOrchestrator(animationOrchestrator: ViewAnimationOrchestrator) {
         animationOrchestrator.attach(animatorInterface) {
@@ -686,8 +686,8 @@ open class ProgressCircularView @JvmOverloads constructor(
     private fun inTouchableArea(x: Float, y: Float): Boolean {
         return (x - boundsRect.centerX().toDouble()).pow(2.0) + (
             y - boundsRect.centerY()
-            .toDouble()
-        ).pow(2.0) <= boundsRadius.toDouble().pow(2.0)
+                .toDouble()
+            ).pow(2.0) <= boundsRadius.toDouble().pow(2.0)
     }
 
     /**

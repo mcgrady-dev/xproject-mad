@@ -32,64 +32,64 @@ import android.view.View
  */
 
 inline fun buildSpanned(f: SpannableStringBuilder.() -> Unit): Spanned =
-  SpannableStringBuilder().apply(f)
+    SpannableStringBuilder().apply(f)
 
 inline val SpannableStringBuilder.Bold: StyleSpan
-  get() = StyleSpan(Typeface.BOLD)
+    get() = StyleSpan(Typeface.BOLD)
 
 inline val SpannableStringBuilder.Italic: StyleSpan
-  get() = StyleSpan(Typeface.ITALIC)
+    get() = StyleSpan(Typeface.ITALIC)
 
 inline val SpannableStringBuilder.Underline: UnderlineSpan
-  get() = UnderlineSpan()
+    get() = UnderlineSpan()
 
 inline val SpannableStringBuilder.Strikethrough: StrikethroughSpan
-  get() = StrikethroughSpan()
+    get() = StrikethroughSpan()
 
 inline fun SpannableStringBuilder.foregroundColor(color: Int): ForegroundColorSpan =
-  ForegroundColorSpan(color)
+    ForegroundColorSpan(color)
 
 inline fun SpannableStringBuilder.backgroundColor(color: Int): BackgroundColorSpan =
-  BackgroundColorSpan(color)
+    BackgroundColorSpan(color)
 
 inline fun SpannableStringBuilder.clickable(crossinline onClick: (View) -> Unit): ClickableSpan {
-  return object : ClickableSpan() {
-    override fun onClick(widget: View) {
-      onClick(widget)
+    return object : ClickableSpan() {
+        override fun onClick(widget: View) {
+            onClick(widget)
+        }
     }
-  }
 }
 
 inline fun SpannableStringBuilder.link(url: String): URLSpan {
-  return URLSpan(url)
+    return URLSpan(url)
 }
 
 fun SpannableStringBuilder.append(text: CharSequence, vararg spans: Any) {
-  val textLength = text.length
-  append(text)
-  spans.forEach { span ->
-    setSpan(span, this.length - textLength, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-  }
+    val textLength = text.length
+    append(text)
+    spans.forEach { span ->
+        setSpan(span, this.length - textLength, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+    }
 }
 
 fun SpannableStringBuilder.append(text: CharSequence, span: Any) {
-  val textLength = text.length
-  append(text)
-  setSpan(span, this.length - textLength, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+    val textLength = text.length
+    append(text)
+    setSpan(span, this.length - textLength, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 }
 
 inline fun SpannableStringBuilder.append(span: Any, f: SpannableStringBuilder.() -> Unit) = apply {
-  val start = length
-  f()
-  setSpan(span, start, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+    val start = length
+    f()
+    setSpan(span, start, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
 }
 
 inline fun SpannableStringBuilder.appendln(text: CharSequence, vararg spans: Any) {
-  append(text, *spans)
-  appendln()
+    append(text, *spans)
+    appendln()
 }
 
 inline fun SpannableStringBuilder.appendln(text: CharSequence, span: Any) {
-  append(text, span)
-  appendln()
+    append(text, span)
+    appendln()
 }

@@ -22,7 +22,7 @@ import javax.inject.Inject
  */
 class NetDataRepository @Inject constructor() {
 
-  fun test() {
-    println(" NetDataRepository test ")
-  }
+    fun test() {
+        println(" NetDataRepository test ")
+    }
 }

@@ -30,12 +30,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object PersistenceModule {
 
-  @Provides
-  @Singleton
-  fun provideGson(): Gson {
-    return GsonBuilder()
-      .serializeNulls() // 序列化null
-      .enableComplexMapKeySerialization()
-      .create()
-  }
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .serializeNulls() // 序列化null
+            .enableComplexMapKeySerialization()
+            .create()
+    }
 }

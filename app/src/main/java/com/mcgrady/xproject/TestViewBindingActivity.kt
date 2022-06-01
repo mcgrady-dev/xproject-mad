@@ -24,5 +24,5 @@ import com.mcgrady.xproject.databinding.ActivityTestBinding
  */
 class TestViewBindingActivity : BaseActivity() {
 
-  val binding: ActivityTestBinding by viewbind()
+    val binding: ActivityTestBinding by viewbind()
 }

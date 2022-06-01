@@ -27,34 +27,34 @@ import com.mcgrady.xproject.pokemon.ui.main.PokemonViewModel
  */
 object RecyclerViewBinding {
 
-  @JvmStatic
-  @BindingAdapter("adapter")
-  fun bindAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
-    view.adapter = adapter.apply {
-      stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    @JvmStatic
+    @BindingAdapter("adapter")
+    fun bindAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
+        view.adapter = adapter.apply {
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
     }
-  }
 
-  @JvmStatic
-  @BindingAdapter("paginationPokemonList")
-  fun paginationPokemonList(recycler: RecyclerView, viewModel: PokemonViewModel) {
-    RecyclerViewPaginator(
-        recyclerView = recycler,
-        isLoading = { viewModel.isLoading.get() },
-        loadMore = { viewModel.fetchPokemonList() },
-        onLast = { false }
-    ).run {
-      threshold = 8
+    @JvmStatic
+    @BindingAdapter("paginationPokemonList")
+    fun paginationPokemonList(recycler: RecyclerView, viewModel: PokemonViewModel) {
+        RecyclerViewPaginator(
+            recyclerView = recycler,
+            isLoading = { viewModel.isLoading.get() },
+            loadMore = { viewModel.fetchPokemonList() },
+            onLast = { false }
+        ).run {
+            threshold = 8
+        }
     }
-  }
 
-  @JvmStatic
-  @BindingAdapter("submitPokemonList")
-  fun bindSubmitPokemonList(recycler: RecyclerView, pokemonList: List<Pokemon>?) {
-    if (!pokemonList.isNullOrEmpty()) {
-      (recycler.adapter as PokemonAdapter?)?.run {
-        setPokemonList(pokemonList)
-      }
+    @JvmStatic
+    @BindingAdapter("submitPokemonList")
+    fun bindSubmitPokemonList(recycler: RecyclerView, pokemonList: List<Pokemon>?) {
+        if (!pokemonList.isNullOrEmpty()) {
+            (recycler.adapter as PokemonAdapter?)?.run {
+                setPokemonList(pokemonList)
+            }
+        }
     }
-  }
 }

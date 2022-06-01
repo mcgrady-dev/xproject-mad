@@ -36,42 +36,42 @@ class PokedexRepository @Inject constructor(
     private val pokedexClient: PokedexClient
 ) : Repository {
 
-  @Suppress("KDocUnresolvedReference")
-  @WorkerThread
-  fun fetchPokemonList(
-      page: Int,
-      onStart: () -> Unit,
-      onComplete: () -> Unit,
-      onError: (String?) -> Unit
-  ) = flow {
+    @Suppress("KDocUnresolvedReference")
+    @WorkerThread
+    fun fetchPokemonList(
+        page: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ) = flow {
 //        var pokemons = pokemonDao.getPokemonList(page)
-    var pokemons: List<Pokemon> = listOf()
-    if (pokemons.isEmpty()) {
-      /**
-       * fetches a list of [Pokemon] from the network and getting [ApiResponse] asynchronously.
-       * @see [suspendOnSuccess](https://github.com/skydoves/sandwich#suspendonsuccess-suspendonerror-suspendonexception)
-       */
-      val response = pokedexClient.fetchPokemonList(page = page)
-      response.suspendOnSuccess {
-        data.let { response ->
-          pokemons = response.results
-          pokemons.forEach { pokemon -> pokemon.page = page }
-          //                    pokemonDao.insertPokemonList(pokemons)
-          //                    emit(pokemonDao.getAllPokemonList(page))
-          emit(pokemons)
-        }
-      }
-        // handles the case when the API request gets an error response.
-        // e.g., internal server error.
-        .onError {
-          /** maps the [ApiResponse.Failure.Error] to the [PokemonErrorResponse] using the mapper. */
+        var pokemons: List<Pokemon> = listOf()
+        if (pokemons.isEmpty()) {
+            /**
+             * fetches a list of [Pokemon] from the network and getting [ApiResponse] asynchronously.
+             * @see [suspendOnSuccess](https://github.com/skydoves/sandwich#suspendonsuccess-suspendonerror-suspendonexception)
+             */
+            val response = pokedexClient.fetchPokemonList(page = page)
+            response.suspendOnSuccess {
+                data.let { response ->
+                    pokemons = response.results
+                    pokemons.forEach { pokemon -> pokemon.page = page }
+                    //                    pokemonDao.insertPokemonList(pokemons)
+                    //                    emit(pokemonDao.getAllPokemonList(page))
+                    emit(pokemons)
+                }
+            }
+                // handles the case when the API request gets an error response.
+                // e.g., internal server error.
+                .onError {
+                    /** maps the [ApiResponse.Failure.Error] to the [PokemonErrorResponse] using the mapper. */
 //                    map(ErrorResponseMapper) { onError("[Code: $code]: $message") }
-        }
-        // handles the case when the API request gets an exception response.
-        // e.g., network connection error.
-        .onException { onError(message) }
-    } else {
+                }
+                // handles the case when the API request gets an exception response.
+                // e.g., network connection error.
+                .onException { onError(message) }
+        } else {
 //            emit(pokemonDao.getAllPokemonList(page))
-    }
-  }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
+        }
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
 }

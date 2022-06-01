@@ -19,7 +19,7 @@ import android.app.Activity
 
 interface IActivityLifecycle {
 
-  fun registerFragmentCallbacks(activity: Activity)
+    fun registerFragmentCallbacks(activity: Activity)
 
-  fun unregisterFragmentCallbacks(activity: Activity)
+    fun unregisterFragmentCallbacks(activity: Activity)
 }

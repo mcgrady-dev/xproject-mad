@@ -22,9 +22,9 @@ import com.mcgrady.xarchitecture.base.LazyFragment
  */
 abstract class BaseFragment : LazyFragment() {
 
-  override fun lazyInit() {
-    initData()
-  }
+    override fun lazyInit() {
+        initData()
+    }
 
-  abstract fun initData()
+    abstract fun initData()
 }

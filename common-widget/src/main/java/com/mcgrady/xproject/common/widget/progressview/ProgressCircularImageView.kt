@@ -61,7 +61,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     // 是否锁定
     private var isBlock = false
         set(value) {
-            if(field == value)
+            if (field == value)
                 return
 
             field = value
@@ -88,19 +88,19 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     var distanceToBorder = 25
         set(value) {
-            field = if(value <= 0) 0 else value
+            field = if (value <= 0) 0 else value
             setup()
         }
 
     var borderThickness = 12
         set(value) {
-            field = if(value <= 0) 0 else value
+            field = if (value <= 0) 0 else value
             setup()
         }
 
     var highlightedBorderThickness = 16
         set(value) {
-            field = if(value <= 0) 0 else value
+            field = if (value <= 0) 0 else value
             setup()
         }
 
@@ -268,15 +268,15 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             attachOrchestrator(it)
         }
         set(value) {
-            if(field == value) return
-            field.cancel()
-            field = value
-            attachOrchestrator(field)
-        }
+                if (field == value) return
+                field.cancel()
+                field = value
+                attachOrchestrator(field)
+            }
 
     private fun attachOrchestrator(animationOrchestrator: ViewAnimationOrchestrator) {
         animationOrchestrator.attach(animatorInterface) {
-            if(isReversedAnimating) {
+            if (isReversedAnimating) {
                 animationDrawingState = animationDrawingState.copy(
                     rotationProgress = 0f
                 )
@@ -288,12 +288,12 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private var isReversedAnimating = false
     var isAnimating = false
         set(value) {
-            if(value && !field) {
-                if(isReversedAnimating) {
+            if (value && !field) {
+                if (isReversedAnimating) {
                     animationOrchestrator.reverse()
                 }
                 animationOrchestrator.start()
-            } else if(!value && field) {
+            } else if (!value && field) {
                 isReversedAnimating = true
                 animationOrchestrator.cancel()
                 animationOrchestrator.reverse()
@@ -356,7 +356,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
      */
     var badgeStrokeWidth = 0
         set(value) {
-            field = if(value <= 0) 0 else value
+            field = if (value <= 0) 0 else value
             setup()
         }
 
@@ -527,16 +527,16 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         val progressGradientColors: Int =
             a.getResourceId(R.styleable.ProgressCircularView_cv_progress_colors, 0) // 圆弧颜色
 
-        if(progressGradientColors != 0) {
+        if (progressGradientColors != 0) {
             try {
                 val gradientColors = resources.getIntArray(progressGradientColors)
 
-                if(gradientColors.isEmpty()) { // 如果渐变色为数组为0，则尝试以单色读取色值
+                if (gradientColors.isEmpty()) { // 如果渐变色为数组为0，则尝试以单色读取色值
                     val color = ContextCompat.getColor(context, progressGradientColors)
                     this.progressGradientColors = IntArray(2)
                     this.progressGradientColors[0] = color
                     this.progressGradientColors[1] = color
-                } else if(gradientColors.size == 1) { // 如果渐变数组只有一种颜色，默认设为两种相同颜色
+                } else if (gradientColors.size == 1) { // 如果渐变数组只有一种颜色，默认设为两种相同颜色
                     this.progressGradientColors = IntArray(2)
                     this.progressGradientColors[0] = gradientColors[0]
                     this.progressGradientColors[1] = gradientColors[0]
@@ -576,15 +576,15 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun setup() {
-        if(isReadingAttributes) {
+        if (isReadingAttributes) {
             return
         }
-        if(width == 0 && height == 0) {
+        if (width == 0 && height == 0) {
             return
         }
 
         val innerDrawable = this.innerBitmap
-        if(innerDrawable == null) {
+        if (innerDrawable == null) {
             setImageResource(android.R.color.transparent)
             return
         }
@@ -610,7 +610,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 //        }
 
         val currentBorderThickness =
-            (if(isHighlighted) highlightedBorderThickness else borderThickness).toFloat()
+            (if (isHighlighted) highlightedBorderThickness else borderThickness).toFloat()
 
         boundsRect.set(calculateBounds())
         boundsRadius = min(
@@ -735,16 +735,16 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun getBitmapFromDrawable(drawable: Drawable?): Bitmap? {
-        if(drawable == null) {
+        if (drawable == null) {
             return null
         }
 
-        if(drawable is BitmapDrawable) {
+        if (drawable is BitmapDrawable) {
             return drawable.bitmap
         }
 
         return try {
-            val bitmap = if(drawable is ColorDrawable) {
+            val bitmap = if (drawable is ColorDrawable) {
                 Bitmap.createBitmap(
                     2,
                     2,
@@ -796,7 +796,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun animateClick() {
-        if(shouldBounceOnClick) scaleAnimator.start()
+        if (shouldBounceOnClick) scaleAnimator.start()
     }
 
     override fun performClick(): Boolean {
@@ -824,9 +824,9 @@ open class ProgressCircularImageView @JvmOverloads constructor(
      */
     private fun drawInner(canvas: Canvas) {
 
-        if(innerBackgroundColor != Color.TRANSPARENT) {
+        if (innerBackgroundColor != Color.TRANSPARENT) {
             innerBgPaint.alpha =
-                if(isBlock) 128 else 255
+                if (isBlock) 128 else 255
             canvas.drawCircle(
                 innerDrawableRect.centerX(),
                 innerDrawableRect.centerY(),
@@ -835,10 +835,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             )
         }
 
-        if(null != innerBitmap && hasInnerCircleDrawable()) {
+        if (null != innerBitmap && hasInnerCircleDrawable()) {
             bitmapPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
             bitmapPaint.alpha =
-                if(isBlock) 128 else 255
+                if (isBlock) 128 else 255
 //            canvas.drawCircle(
 //                innerDrawableRect.centerX(),
 //                innerDrawableRect.centerY(),
@@ -851,7 +851,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 0f,
                 bitmapPaint
             )
-        } else if(null != initials) {
+        } else if (null != initials) {
             canvas.drawText(
                 initials!!,
                 width.div(2f) - initialsRect.width().div(2f),
@@ -862,13 +862,13 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun drawMiddle(canvas: Canvas) {
-        if(middleThickness > 0) {
+        if (middleThickness > 0) {
             canvas.drawCircle(middleRect.centerX(), middleRect.centerY(), middleRadius, middlePaint)
         }
     }
 
     private fun drawBadge(canvas: Canvas, layerId: Int) {
-        if(!showBadge || badgeColor == Color.TRANSPARENT) {
+        if (!showBadge || badgeColor == Color.TRANSPARENT) {
             return
         }
 
@@ -889,7 +889,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         bitmapPaint.xfermode = null
         canvas.drawCircle(badgeCx, badgeCy, badgeRadius, badgePaint)
 
-        if(isBlock) {
+        if (isBlock) {
             badgeDrawable?.let {
                 canvas.drawBitmap(
                     it,
@@ -914,7 +914,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        if(innerBitmap == null && initials == null) {
+        if (innerBitmap == null && initials == null) {
             return
         }
 
@@ -952,7 +952,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         )
         canvas.drawArc(mRectF, 0f, sweepAngle, false, outRingPaint)
 
-        if(percent.isNaN() || percent <= 0f) {
+        if (percent.isNaN() || percent <= 0f) {
             canvas.restore()
             return
         }
@@ -1040,7 +1040,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun setProgress(current: Float, max: Float) {
-        if(current == progressCurValue && max == progressMaxValue)
+        if (current == progressCurValue && max == progressMaxValue)
             return
 
         percent = decFormat.format(current.div(max)).toFloat()

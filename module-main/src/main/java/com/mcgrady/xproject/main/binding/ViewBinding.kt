@@ -23,9 +23,9 @@ import androidx.databinding.BindingAdapter
  */
 object ViewBinding {
 
-  @JvmStatic
-  @BindingAdapter("goneUnless")
-  fun goneUnless(view: View, visible: Boolean) {
-    view.visibility = if (visible) View.VISIBLE else View.GONE
-  }
+    @JvmStatic
+    @BindingAdapter("goneUnless")
+    fun goneUnless(view: View, visible: Boolean) {
+        view.visibility = if (visible) View.VISIBLE else View.GONE
+    }
 }

@@ -34,27 +34,27 @@ import java.util.concurrent.CancellationException
  */
 // @kotlin.internal.InlineOnly
 inline fun <E> SendChannel<E>.safeOffer(value: E) = !isClosedForSend && try {
-  trySend(value).isSuccess
+    trySend(value).isSuccess
 } catch (e: CancellationException) {
-  false
+    false
 }
 
 @CheckResult
 // @kotlin.internal.InlineOnly
 inline fun View.clickFlow(): Flow<View> {
-  return callbackFlow {
-    setOnClickListener {
-      safeOffer(it)
+    return callbackFlow {
+        setOnClickListener {
+            safeOffer(it)
+        }
+        awaitClose { setOnClickListener(null) }
     }
-    awaitClose { setOnClickListener(null) }
-  }
 }
 
 // @kotlin.internal.InlineOnly
 inline fun View.click(lifecycle: LifecycleCoroutineScope, noinline onClick: (view: View) -> Unit) {
-  clickFlow().onEach {
-    onClick(this)
-  }.launchIn(lifecycle)
+    clickFlow().onEach {
+        onClick(this)
+    }.launchIn(lifecycle)
 }
 
 // 延迟第一次点击事件
@@ -64,10 +64,10 @@ inline fun View.clickDelayed(
     delayMillis: Long = 500,
     noinline onClick: (view: View) -> Unit
 ) {
-  clickFlow().onEach {
-    delay(delayMillis)
-    onClick(this)
-  }.launchIn(lifecycle)
+    clickFlow().onEach {
+        delay(delayMillis)
+        onClick(this)
+    }.launchIn(lifecycle)
 }
 
 /**
@@ -87,12 +87,12 @@ inline fun View.clickTrigger(
     intervalMillis: Long = 500,
     noinline onClick: (view: View) -> Unit
 ) {
-  clickFlow().onEach {
-    val curMillis = System.currentTimeMillis()
-    if (curMillis - lastMillis < intervalMillis) {
-      return@onEach
-    }
-    lastMillis = curMillis
-    onClick(this)
-  }.launchIn(lifecycle)
+    clickFlow().onEach {
+        val curMillis = System.currentTimeMillis()
+        if (curMillis - lastMillis < intervalMillis) {
+            return@onEach
+        }
+        lastMillis = curMillis
+        onClick(this)
+    }.launchIn(lifecycle)
 }

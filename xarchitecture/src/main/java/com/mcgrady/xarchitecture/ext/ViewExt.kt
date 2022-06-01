@@ -32,26 +32,26 @@ import com.google.android.material.snackbar.Snackbar
 
 // @kotlin.internal.InlineOnly
 inline fun View.visible() {
-  visibility = View.VISIBLE
+    visibility = View.VISIBLE
 }
 
 // @kotlin.internal.InlineOnly
 inline fun View.gone() {
-  visibility = View.GONE
+    visibility = View.GONE
 }
 
 // @kotlin.internal.InlineOnly
 inline fun View.invisible() {
-  visibility = View.INVISIBLE
+    visibility = View.INVISIBLE
 }
 
 inline fun Context.appStandbyBucket(context: Context): Int =
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-    val usm = systemService<UsageStatsManager?>()
-    usm?.appStandbyBucket ?: -1
-  } else {
-    -1
-  }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val usm = systemService<UsageStatsManager?>()
+        usm?.appStandbyBucket ?: -1
+    } else {
+        -1
+    }
 
 // @kotlin.internal.InlineOnly
 inline fun View.snackbar(
@@ -60,14 +60,14 @@ inline fun View.snackbar(
     actionName: String? = null,
     noinline block: (() -> Unit?)? = null
 ) {
-  Snackbar.make(this, message, duration).run {
-    if (actionName.isNotNullOrEmpty() && block != null) {
-      setAction(actionName) {
-        block()
-      }
+    Snackbar.make(this, message, duration).run {
+        if (actionName.isNotNullOrEmpty() && block != null) {
+            setAction(actionName) {
+                block()
+            }
+        }
+        show()
     }
-    show()
-  }
 }
 
 // @kotlin.internal.InlineOnly
@@ -77,14 +77,14 @@ inline fun View.snackbar(
     actionName: String? = null,
     noinline block: (() -> Unit?)? = null
 ) {
-  Snackbar.make(this, stringResId, duration).run {
-    if (actionName.isNotNullOrEmpty() && block != null) {
-      setAction(actionName) {
-        block()
-      }
+    Snackbar.make(this, stringResId, duration).run {
+        if (actionName.isNotNullOrEmpty() && block != null) {
+            setAction(actionName) {
+                block()
+            }
+        }
+        show()
     }
-    show()
-  }
 }
 
 // @kotlin.internal.InlineOnly
@@ -92,8 +92,8 @@ inline fun View.roundCornerBackground(
     @ColorInt color: Int,
     cornerRadius: Float = 15F
 ) {
-  background = GradientDrawable().apply {
-    setColor(color)
-    setCornerRadius(cornerRadius)
-  }
+    background = GradientDrawable().apply {
+        setColor(color)
+        setCornerRadius(cornerRadius)
+    }
 }

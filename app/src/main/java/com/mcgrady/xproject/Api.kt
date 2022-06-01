@@ -20,6 +20,6 @@ package com.mcgrady.xproject
  */
 object Api {
 
-  const val ZHIHU_DOMAIN_NAME = "zhihu"
-  const val ZHIHU_DOMAIN = "http://news-at.zhihu.com"
+    const val ZHIHU_DOMAIN_NAME = "zhihu"
+    const val ZHIHU_DOMAIN = "http://news-at.zhihu.com"
 }

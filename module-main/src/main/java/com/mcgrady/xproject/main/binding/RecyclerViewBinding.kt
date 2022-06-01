@@ -24,14 +24,14 @@ import androidx.recyclerview.widget.RecyclerView
  */
 object RecyclerViewBinding {
 
-  @Suppress("UNCHECKED_CAST")
-  @JvmStatic
-  @BindingAdapter("submitList")
-  fun bindSubmitList(view: RecyclerView, itemList: List<Any>?) {
-    val adapter = view.adapter as? ListAdapter<Any, *> ?: throw RuntimeException("adapter must be not null")
+    @Suppress("UNCHECKED_CAST")
+    @JvmStatic
+    @BindingAdapter("submitList")
+    fun bindSubmitList(view: RecyclerView, itemList: List<Any>?) {
+        val adapter = view.adapter as? ListAdapter<Any, *> ?: throw RuntimeException("adapter must be not null")
 
-    itemList?.let {
-      adapter.submitList(it)
+        itemList?.let {
+            adapter.submitList(it)
+        }
     }
-  }
 }

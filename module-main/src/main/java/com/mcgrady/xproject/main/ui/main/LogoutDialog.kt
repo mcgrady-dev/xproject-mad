@@ -29,28 +29,28 @@ import com.mcgrady.xproject.main.R
  */
 class LogoutDialog : DialogFragment() {
 
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-    return super.onCreateView(inflater, container, savedInstanceState)
-  }
-
-  @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    var dialog: Dialog? = null
-    activity?.let {
-      dialog = with(AlertDialog.Builder(it)) {
-        setTitle(R.string.main_logout_title)
-        setMessage(R.string.main_logout_msg)
-        setPositiveButton(R.string.main_confirm) { dialog, which ->
-        }
-        setNegativeButton(R.string.main_cancel) { dialog, which ->
-        }
-        create()
-      }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
-    return dialog ?: super.onCreateDialog(savedInstanceState)
-  }
+
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        var dialog: Dialog? = null
+        activity?.let {
+            dialog = with(AlertDialog.Builder(it)) {
+                setTitle(R.string.main_logout_title)
+                setMessage(R.string.main_logout_msg)
+                setPositiveButton(R.string.main_confirm) { dialog, which ->
+                }
+                setNegativeButton(R.string.main_cancel) { dialog, which ->
+                }
+                create()
+            }
+        }
+        return dialog ?: super.onCreateDialog(savedInstanceState)
+    }
 }

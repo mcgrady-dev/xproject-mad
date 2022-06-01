@@ -26,26 +26,26 @@ import kotlin.properties.ReadOnlyProperty
  * Created by mcgrady on 2021/7/19.
  */
 abstract class ActivityDelegate<T : ViewBinding>(activity: Activity) :
-  ReadOnlyProperty<Activity, T> {
+    ReadOnlyProperty<Activity, T> {
 
-  protected var binding: T? = null
+    protected var binding: T? = null
 
-  init {
-    when (activity) {
-      is ComponentActivity -> activity.lifecycle.observerWhenDestroyed { destroyed() }
-      else -> {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-          activity.observerWhenDestroyed { destroyed() }
+    init {
+        when (activity) {
+            is ComponentActivity -> activity.lifecycle.observerWhenDestroyed { destroyed() }
+            else -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    activity.observerWhenDestroyed { destroyed() }
+                }
+            }
         }
-      }
     }
-  }
 
-  protected fun destroyed() {
-    binding = null
-  }
+    protected fun destroyed() {
+        binding = null
+    }
 
-  companion object {
-    const val LIFECYCLE_FRAGMENT_TAG = "com.mcgrady.xarchitecture.lifecycle_fragment"
-  }
+    companion object {
+        const val LIFECYCLE_FRAGMENT_TAG = "com.mcgrady.xarchitecture.lifecycle_fragment"
+    }
 }

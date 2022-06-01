@@ -34,16 +34,16 @@ import com.mcgrady.xarchitecture.delegate.ActivityDelegate.Companion.LIFECYCLE_F
  */
 
 fun Lifecycle.observerWhenCreated(create: () -> Unit) {
-  addObserver(LifecycleObserver(lifecycle = this, create = create))
+    addObserver(LifecycleObserver(lifecycle = this, create = create))
 }
 
 fun Lifecycle.observerWhenDestroyed(destroyed: () -> Unit) {
-  addObserver(LifecycleObserver(lifecycle = this, destroyed = destroyed))
+    addObserver(LifecycleObserver(lifecycle = this, destroyed = destroyed))
 }
 
 @RequiresApi(api = Build.VERSION_CODES.Q)
 fun Activity.observerWhenDestroyed(destroyed: () -> Unit) {
-  registerActivityLifecycleCallbacks(LifecycleCallbacks(destroyed))
+    registerActivityLifecycleCallbacks(LifecycleCallbacks(destroyed))
 }
 
 class LifecycleObserver(
@@ -52,59 +52,59 @@ class LifecycleObserver(
     var create: (() -> Unit)? = null
 ) : BindingLifecycleObserver() {
 
-  override fun onCreate(owner: LifecycleOwner) {
-    create?.invoke()
-  }
-
-  override fun onDestroy(owner: LifecycleOwner) {
-    destroyed?.invoke()
-    lifecycle?.apply {
-      removeObserver(this@LifecycleObserver)
-      lifecycle = null
+    override fun onCreate(owner: LifecycleOwner) {
+        create?.invoke()
     }
-    create = null
-    destroyed = null
-  }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        destroyed?.invoke()
+        lifecycle?.apply {
+            removeObserver(this@LifecycleObserver)
+            lifecycle = null
+        }
+        create = null
+        destroyed = null
+    }
 }
 
 class LifecycleCallbacks(var destroyed: (() -> Unit)? = null) : Application.ActivityLifecycleCallbacks {
 
-  override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-  }
-
-  override fun onActivityStarted(activity: Activity) {
-  }
-
-  override fun onActivityResumed(activity: Activity) {
-  }
-
-  override fun onActivityPaused(activity: Activity) {
-  }
-
-  override fun onActivityStopped(activity: Activity) {
-  }
-
-  override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-  }
-
-  override fun onActivityDestroyed(activity: Activity) {
-    destroyed?.invoke()
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-      activity.unregisterActivityLifecycleCallbacks(this)
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
     }
-    destroyed = null
-  }
+
+    override fun onActivityStarted(activity: Activity) {
+    }
+
+    override fun onActivityResumed(activity: Activity) {
+    }
+
+    override fun onActivityPaused(activity: Activity) {
+    }
+
+    override fun onActivityStopped(activity: Activity) {
+    }
+
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+    }
+
+    override fun onActivityDestroyed(activity: Activity) {
+        destroyed?.invoke()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            activity.unregisterActivityLifecycleCallbacks(this)
+        }
+        destroyed = null
+    }
 }
 
 @SuppressLint("ValidFragment")
 @Suppress("DEPRECATION")
 class LifecycleFragment constructor(private var destroyed: (() -> Unit)? = null) : android.app.Fragment() {
 
-  override fun onDestroy() {
-    super.onDestroy()
-    destroyed?.invoke()
-    destroyed = null
-  }
+    override fun onDestroy() {
+        super.onDestroy()
+        destroyed?.invoke()
+        destroyed = null
+    }
 }
 
 /**
@@ -112,19 +112,19 @@ class LifecycleFragment constructor(private var destroyed: (() -> Unit)? = null)
  * 会添加一个 空白的 Fragment, 当生命周期处于 onDestroy 时销毁数据
  */
 internal inline fun Activity.addLifecycleFragment(crossinline destroyed: () -> Unit) {
-  if (this is FragmentActivity || this is AppCompatActivity) return
+    if (this is FragmentActivity || this is AppCompatActivity) return
 
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return
 
-  @Suppress("DEPRECATION")
-  with(this.fragmentManager) {
-    if (findFragmentByTag(LIFECYCLE_FRAGMENT_TAG) == null) {
-      beginTransaction()
-        .add(LifecycleFragment { destroyed() }, LIFECYCLE_FRAGMENT_TAG)
-        .commit()
-      executePendingTransactions()
+    @Suppress("DEPRECATION")
+    with(this.fragmentManager) {
+        if (findFragmentByTag(LIFECYCLE_FRAGMENT_TAG) == null) {
+            beginTransaction()
+                .add(LifecycleFragment { destroyed() }, LIFECYCLE_FRAGMENT_TAG)
+                .commit()
+            executePendingTransactions()
+        }
     }
-  }
 }
 
 /**
@@ -140,5 +140,5 @@ inline fun <T> LifecycleOwner.observeLiveData(
     liveData: LiveData<T>,
     crossinline action: (t: T) -> Unit
 ) {
-  liveData.observe(this) { it?.let { t -> action(t) } }
+    liveData.observe(this) { it?.let { t -> action(t) } }
 }

@@ -38,52 +38,52 @@ class ViewGroupViewBinding<T : ViewBinding>(
     private val viewGroup: ViewGroup? = null
 ) : ReadOnlyProperty<ViewGroup, T> {
 
-  private var binding: T? = null
-  private var layoutInflater: Method = if (viewGroup != null) {
-    bindingClass.inflateMethodWithViewGroup()
-  } else {
-    bindingClass.inflateMethod()
-  }
-
-  init {
-    viewGroup?.apply {
-      when (context) {
-        is ComponentActivity -> {
-          (context as ComponentActivity).lifecycle.observerWhenDestroyed { destroyed() }
-        }
-        is Activity -> {
-          val activity = context as Activity
-          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            activity.observerWhenDestroyed { destroyed() }
-          } else {
-            activity.addLifecycleFragment { destroyed() }
-          }
-        }
-      }
+    private var binding: T? = null
+    private var layoutInflater: Method = if (viewGroup != null) {
+        bindingClass.inflateMethodWithViewGroup()
+    } else {
+        bindingClass.inflateMethod()
     }
-  }
 
-  override fun getValue(thisRef: ViewGroup, property: KProperty<*>): T {
-    return binding?.run {
-      this
-    } ?: let {
-      @Suppress("UNCHECKED_CAST")
-      val bind: T = viewGroup?.let {
-        layoutInflater.invoke(null, inflater, viewGroup) as T
-      } ?: let {
-        layoutInflater.invoke(null, inflater) as T
-      }
-
-      bind.apply {
-        if (viewGroup == null) {
-          thisRef.addView(bind.root)
+    init {
+        viewGroup?.apply {
+            when (context) {
+                is ComponentActivity -> {
+                    (context as ComponentActivity).lifecycle.observerWhenDestroyed { destroyed() }
+                }
+                is Activity -> {
+                    val activity = context as Activity
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        activity.observerWhenDestroyed { destroyed() }
+                    } else {
+                        activity.addLifecycleFragment { destroyed() }
+                    }
+                }
+            }
         }
-        binding = this
-      }
     }
-  }
 
-  private fun destroyed() {
-    binding = null
-  }
+    override fun getValue(thisRef: ViewGroup, property: KProperty<*>): T {
+        return binding?.run {
+            this
+        } ?: let {
+            @Suppress("UNCHECKED_CAST")
+            val bind: T = viewGroup?.let {
+                layoutInflater.invoke(null, inflater, viewGroup) as T
+            } ?: let {
+                layoutInflater.invoke(null, inflater) as T
+            }
+
+            bind.apply {
+                if (viewGroup == null) {
+                    thisRef.addView(bind.root)
+                }
+                binding = this
+            }
+        }
+    }
+
+    private fun destroyed() {
+        binding = null
+    }
 }

@@ -54,22 +54,22 @@ object UIUtil {
     fun dp2px(context: Context, value: Float): Int {
         return (
             TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            value,
-            context.resources.displayMetrics
-        ) + 0.5f
-        ).toInt()
+                TypedValue.COMPLEX_UNIT_DIP,
+                value,
+                context.resources.displayMetrics
+            ) + 0.5f
+            ).toInt()
     }
 
     @JvmStatic
     fun sp2px(context: Context, value: Float): Int {
         return (
             TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP,
-            value,
-            context.resources.displayMetrics
-        ) + 0.5f
-        ).toInt()
+                TypedValue.COMPLEX_UNIT_SP,
+                value,
+                context.resources.displayMetrics
+            ) + 0.5f
+            ).toInt()
     }
 
     fun measure(measureSpec: Int, defaultSize: Int): Int {

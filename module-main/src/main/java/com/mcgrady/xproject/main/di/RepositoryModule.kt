@@ -31,9 +31,9 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @InstallIn(ViewModelComponent::class)
 object RepositoryModule {
 
-  @Provides
-  @ViewModelScoped
-  fun provideSettingRepository(@ApplicationContext context: Context): SettingRepository {
-    return SettingRepository(context)
-  }
+    @Provides
+    @ViewModelScoped
+    fun provideSettingRepository(@ApplicationContext context: Context): SettingRepository {
+        return SettingRepository(context)
+    }
 }

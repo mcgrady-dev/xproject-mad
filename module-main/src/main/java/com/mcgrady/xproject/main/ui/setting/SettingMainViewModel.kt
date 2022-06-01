@@ -26,10 +26,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingMainViewModel @Inject constructor(repository: SettingRepository) : ViewModel() {
 
-  private val _list = MutableLiveData<List<SettingMainBean>>()
-  val list: LiveData<List<SettingMainBean>> = _list
+    private val _list = MutableLiveData<List<SettingMainBean>>()
+    val list: LiveData<List<SettingMainBean>> = _list
 
-  init {
-    _list.value = repository.fetchList()
-  }
+    init {
+        _list.value = repository.fetchList()
+    }
 }

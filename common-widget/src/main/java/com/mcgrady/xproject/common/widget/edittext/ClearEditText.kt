@@ -42,9 +42,9 @@ class ClearEditText @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
 ) : AppCompatEditText(context, attrs, defStyleAttr),
-View.OnTouchListener,
+    View.OnTouchListener,
     View.OnFocusChangeListener,
-TextWatcher {
+    TextWatcher {
 
     private var drawableClear: Drawable? = null
     private var clearListener: OnClearListener? = null

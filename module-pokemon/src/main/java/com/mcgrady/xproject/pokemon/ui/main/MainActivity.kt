@@ -27,15 +27,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-  private val binding: ActivityMainBinding by databind(R.layout.activity_main)
-  private val viewModel: PokemonViewModel by viewModels()
+    private val binding: ActivityMainBinding by databind(R.layout.activity_main)
+    private val viewModel: PokemonViewModel by viewModels()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    binding.apply {
-      lifecycleOwner = this@MainActivity
-      adapter = PokemonAdapter()
-      vm = viewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding.apply {
+            lifecycleOwner = this@MainActivity
+            adapter = PokemonAdapter()
+            vm = viewModel
+        }
     }
-  }
 }

@@ -20,9 +20,9 @@ package com.mcgrady.xproject
  */
 object NetworkState {
 
-  const val UNAVAILABLE = -1
-  const val NONE = 0
-  const val CONNECT = 1
-  const val WIFI = 2
-  const val CELLULAR = 3
+    const val UNAVAILABLE = -1
+    const val NONE = 0
+    const val CONNECT = 1
+    const val WIFI = 2
+    const val CELLULAR = 3
 }

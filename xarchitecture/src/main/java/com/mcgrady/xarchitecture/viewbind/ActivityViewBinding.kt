@@ -30,18 +30,18 @@ class ActivityViewBinding<T : ViewBinding>(
     val activity: Activity
 ) : ActivityDelegate<T>(activity) {
 
-  private var layoutInflater = bindingClass.inflateMethod()
+    private var layoutInflater = bindingClass.inflateMethod()
 
-  @Suppress("UNCHECKED_CAST")
-  override fun getValue(thisRef: Activity, property: KProperty<*>): T {
-    return binding?.run {
-      this
-    } ?: let {
-      activity.addLifecycleFragment { destroyed() }
+    @Suppress("UNCHECKED_CAST")
+    override fun getValue(thisRef: Activity, property: KProperty<*>): T {
+        return binding?.run {
+            this
+        } ?: let {
+            activity.addLifecycleFragment { destroyed() }
 
-      val bind = layoutInflater.invoke(null, thisRef.layoutInflater) as T
-      thisRef.setContentView(bind.root)
-      return bind.apply { binding = this }
+            val bind = layoutInflater.invoke(null, thisRef.layoutInflater) as T
+            thisRef.setContentView(bind.root)
+            return bind.apply { binding = this }
+        }
     }
-  }
 }

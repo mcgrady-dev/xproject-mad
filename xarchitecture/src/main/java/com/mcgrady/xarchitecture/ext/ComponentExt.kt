@@ -36,10 +36,10 @@ import com.mcgrady.xarchitecture.viewbind.ViewGroupViewBinding
  */
 
 inline fun <reified T : ViewBinding> Activity.viewbind() =
-  ActivityViewBinding(T::class.java, this)
+    ActivityViewBinding(T::class.java, this)
 
 inline fun <reified T : ViewDataBinding> Activity.databind(@LayoutRes resId: Int) =
-  ActivityDataBinding<T>(this, resId)
+    ActivityDataBinding<T>(this, resId)
 
 inline fun <reified T : ViewDataBinding> Activity.databind(
     @LayoutRes resId: Int,
@@ -47,13 +47,13 @@ inline fun <reified T : ViewDataBinding> Activity.databind(
 ) = ActivityDataBinding<T>(this, resId, block)
 
 inline fun <reified T : ViewBinding> Fragment.viewbind() =
-  FragmentViewBinding(T::class.java, this)
+    FragmentViewBinding(T::class.java, this)
 
 inline fun <reified T : ViewDataBinding> Fragment.databind() =
-  FragmentDataBinding<T>(T::class.java, this)
+    FragmentDataBinding<T>(T::class.java, this)
 
 inline fun <reified T : ViewDataBinding> Fragment.databind(noinline block: T.() -> Unit) =
-  FragmentDataBinding<T>(T::class.java, this, block = block)
+    FragmentDataBinding<T>(T::class.java, this, block = block)
 
 inline fun <reified T : ViewBinding> ViewGroup.viewbind() = ViewGroupViewBinding(
     bindingClass = T::class.java,
@@ -62,25 +62,25 @@ inline fun <reified T : ViewBinding> ViewGroup.viewbind() = ViewGroupViewBinding
 )
 
 inline fun <reified T : ViewBinding> ViewGroup.viewbind(viewGroup: ViewGroup) =
-  ViewGroupViewBinding(
-      bindingClass = T::class.java,
-      inflater = LayoutInflater.from(context),
-      viewGroup = viewGroup
-  )
+    ViewGroupViewBinding(
+        bindingClass = T::class.java,
+        inflater = LayoutInflater.from(context),
+        viewGroup = viewGroup
+    )
 
 inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind() =
-  ViewHolderDataBinding(T::class.java)
+    ViewHolderDataBinding(T::class.java)
 
 inline fun <reified T : ViewDataBinding> RecyclerView.ViewHolder.databind(noinline block: (T.() -> Unit)) =
-  ViewHolderDataBinding(T::class.java, block)
+    ViewHolderDataBinding(T::class.java, block)
 
 inline fun <reified T : ViewBinding> ViewGroup.databind(@LayoutRes resId: Int) =
-  ViewGroupDataBinding(
-      bindingClass = T::class.java,
-      resId = resId,
-      inflater = LayoutInflater.from(context),
-      viewGroup = this
-  )
+    ViewGroupDataBinding(
+        bindingClass = T::class.java,
+        resId = resId,
+        inflater = LayoutInflater.from(context),
+        viewGroup = this
+    )
 
 inline fun <reified T : ViewBinding> ViewGroup.databind(
     @LayoutRes resId: Int,

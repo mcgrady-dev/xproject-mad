@@ -313,8 +313,8 @@ class ShadowLayout @JvmOverloads constructor(
                 when (absoluteGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
                     Gravity.CENTER_HORIZONTAL ->
                         childLeft =
-                        parentLeft + (parentRight - parentLeft - width) / 2 +
-                                lp.leftMargin - lp.rightMargin + shadowMarginLeft - shadowMarginRight
+                            parentLeft + (parentRight - parentLeft - width) / 2 +
+                            lp.leftMargin - lp.rightMargin + shadowMarginLeft - shadowMarginRight
                     Gravity.RIGHT -> {
                         if (!forceLeftGravity) {
                             childLeft = parentRight - width - lp.rightMargin - shadowMarginRight
@@ -329,11 +329,11 @@ class ShadowLayout @JvmOverloads constructor(
                     Gravity.TOP -> childTop = parentTop + lp.topMargin + shadowMarginTop
                     Gravity.CENTER_VERTICAL ->
                         childTop =
-                        parentTop + (parentBottom - parentTop - height) / 2 +
-                                lp.topMargin - lp.bottomMargin + shadowMarginTop - shadowMarginBottom
+                            parentTop + (parentBottom - parentTop - height) / 2 +
+                            lp.topMargin - lp.bottomMargin + shadowMarginTop - shadowMarginBottom
                     Gravity.BOTTOM ->
                         childTop =
-                        parentBottom - height - lp.bottomMargin - shadowMarginBottom
+                            parentBottom - height - lp.bottomMargin - shadowMarginBottom
                     else -> childTop = parentTop + lp.topMargin + shadowMarginTop
                 }
                 child.layout(childLeft, childTop, childLeft + width, childTop + height)

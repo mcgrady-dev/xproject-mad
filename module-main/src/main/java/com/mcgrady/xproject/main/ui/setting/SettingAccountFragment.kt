@@ -27,24 +27,24 @@ import com.mcgrady.xproject.main.databinding.FragmentSettingSecondaryPageBinding
 
 class SettingAccountFragment : BaseFragment() {
 
-  private val binding: FragmentSettingSecondaryPageBinding by viewbind()
+    private val binding: FragmentSettingSecondaryPageBinding by viewbind()
 
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-    return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    with(binding) {
-      message.text = "Hello Navigation"
-      context?.let { message.setTextColor(ContextCompat.getColor(it, R.color.white)) }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return binding.root
     }
-  }
 
-  override fun initData() {
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            message.text = "Hello Navigation"
+            context?.let { message.setTextColor(ContextCompat.getColor(it, R.color.white)) }
+        }
+    }
+
+    override fun initData() {
+    }
 }

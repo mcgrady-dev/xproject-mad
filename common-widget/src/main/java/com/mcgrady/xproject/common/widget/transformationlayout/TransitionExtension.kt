@@ -25,49 +25,49 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 
 /** sets an exit shared element callback to activity for implementing shared element transition. */
 public fun Activity.onTransformationStartContainer() {
-  window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-  setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-  window.sharedElementsUseOverlay = false
+    window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+    setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+    window.sharedElementsUseOverlay = false
 }
 
 /** sets an enter shared element callback to activity for implementing shared element transition. */
 public fun Activity.onTransformationEndContainer(
-  params: TransformationLayout.Params?
+    params: TransformationLayout.Params?
 ) {
-  requireNotNull(
-    params
-  ) { "TransformationLayout.Params must not be a null. check your intent key value is correct." }
-  window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-  ViewCompat.setTransitionName(findViewById(android.R.id.content), params.transitionName)
-  setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-  window.sharedElementEnterTransition = params.getMaterialContainerTransform()
-  window.sharedElementReturnTransition = params.getMaterialContainerTransform()
+    requireNotNull(
+        params
+    ) { "TransformationLayout.Params must not be a null. check your intent key value is correct." }
+    window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+    ViewCompat.setTransitionName(findViewById(android.R.id.content), params.transitionName)
+    setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+    window.sharedElementEnterTransition = params.getMaterialContainerTransform()
+    window.sharedElementReturnTransition = params.getMaterialContainerTransform()
 }
 
 /** sets an exit shared element callback to fragment for implementing shared element transition. */
 public fun Fragment.onTransformationStartContainer() {
-  exitTransition = Hold()
+    exitTransition = Hold()
 }
 
 /** sets an enter shared element callback to fragment for implementing shared element transition. */
 public fun Fragment.onTransformationEndContainer(
-  params: TransformationLayout.Params?
+    params: TransformationLayout.Params?
 ) {
-  requireNotNull(
-    params
-  ) { "TransformationLayout.Params must not be a null. check your intent key value is correct." }
-  sharedElementEnterTransition = params.getMaterialFragmentTransform()
+    requireNotNull(
+        params
+    ) { "TransformationLayout.Params must not be a null. check your intent key value is correct." }
+    sharedElementEnterTransition = params.getMaterialFragmentTransform()
 }
 
 /** adds a shared element transformation to FragmentTransaction. */
 @JvmOverloads
 public fun FragmentTransaction.addTransformation(
-  transformationLayout: TransformationLayout,
-  transitionName: String? = null
+    transformationLayout: TransformationLayout,
+    transitionName: String? = null
 ): FragmentTransaction {
-  if (transitionName != null && transformationLayout.transitionName == null) {
-    ViewCompat.setTransitionName(transformationLayout, transitionName)
-  }
-  addSharedElement(transformationLayout, transformationLayout.transitionName)
-  return this
+    if (transitionName != null && transformationLayout.transitionName == null) {
+        ViewCompat.setTransitionName(transformationLayout, transitionName)
+    }
+    addSharedElement(transformationLayout, transformationLayout.transitionName)
+    return this
 }

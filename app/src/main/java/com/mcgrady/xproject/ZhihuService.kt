@@ -23,12 +23,12 @@ import retrofit2.http.Headers
  */
 interface ZhihuService {
 
-  /**
-   * 最新日报
-   */
-  @Headers(Api.ZHIHU_DOMAIN + Api.ZHIHU_DOMAIN_NAME)
-  @GET("/api/4/news/latest")
-  suspend fun getDailyList()
+    /**
+     * 最新日报
+     */
+    @Headers(Api.ZHIHU_DOMAIN + Api.ZHIHU_DOMAIN_NAME)
+    @GET("/api/4/news/latest")
+    suspend fun getDailyList()
 
 //    @Headers(DOMAIN_NAME_HEADER + Api.ZHIHU_DOMAIN_NAME)
 //    @retrofit2.http.GET("/api/4/news/latest")

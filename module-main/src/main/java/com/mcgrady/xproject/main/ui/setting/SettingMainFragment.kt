@@ -29,23 +29,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingMainFragment : BaseFragment() {
 
-  private val binding: SettingMainFragmentBinding by databind()
-  private val viewModel: SettingMainViewModel by viewModels()
+    private val binding: SettingMainFragmentBinding by databind()
+    private val viewModel: SettingMainViewModel by viewModels()
 
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-    return binding.apply {
-      lifecycleOwner = this@SettingMainFragment
-      vm = viewModel
-      adapter = SettingMainListAdapter()
-    }.root
-  }
-
-  override fun initData() {
-    with(binding) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return binding.apply {
+            lifecycleOwner = this@SettingMainFragment
+            vm = viewModel
+            adapter = SettingMainListAdapter()
+        }.root
     }
-  }
+
+    override fun initData() {
+        with(binding) {
+        }
+    }
 }

@@ -31,21 +31,21 @@ data class SettingMainBean(
 
 //    fun hasDesc(): Boolean = !desc.isNullOrEmpty()
 
-  companion object {
-    val CALLBACK: DiffUtil.ItemCallback<SettingMainBean> = object : DiffUtil.ItemCallback<SettingMainBean>() {
-      override fun areItemsTheSame(
-          oldItem: SettingMainBean,
-          newItem: SettingMainBean
-      ): Boolean = oldItem.name == newItem.name
+    companion object {
+        val CALLBACK: DiffUtil.ItemCallback<SettingMainBean> = object : DiffUtil.ItemCallback<SettingMainBean>() {
+            override fun areItemsTheSame(
+                oldItem: SettingMainBean,
+                newItem: SettingMainBean
+            ): Boolean = oldItem.name == newItem.name
 
-      override fun areContentsTheSame(
-          oldItem: SettingMainBean,
-          newItem: SettingMainBean
-      ): Boolean = true
+            override fun areContentsTheSame(
+                oldItem: SettingMainBean,
+                newItem: SettingMainBean
+            ): Boolean = true
+        }
     }
-  }
 
-  fun itemClick(view: View) {
-    view.findNavController().navigate(action)
-  }
+    fun itemClick(view: View) {
+        view.findNavController().navigate(action)
+    }
 }

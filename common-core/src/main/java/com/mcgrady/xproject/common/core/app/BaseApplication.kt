@@ -28,21 +28,21 @@ import timber.log.Timber
  */
 open class BaseApplication : Application() {
 
-  override fun onCreate() {
-    super.onCreate()
+    override fun onCreate() {
+        super.onCreate()
 
-    if (BuildConfig.DEBUG) {
-      Timber.plant(Timber.DebugTree())
-    } else {
-      Timber.plant(ReleaseTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(ReleaseTree())
 //            val file: Int? = null
-      Timber.plant(FileLoggingTree(internalAppCachePath()))
+            Timber.plant(FileLoggingTree(internalAppCachePath()))
+        }
+
+        registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
     }
 
-    registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
-  }
-
-  override fun onTerminate() {
-    super.onTerminate()
-  }
+    override fun onTerminate() {
+        super.onTerminate()
+    }
 }

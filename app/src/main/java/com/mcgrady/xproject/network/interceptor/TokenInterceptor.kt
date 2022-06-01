@@ -24,29 +24,29 @@ import okhttp3.Response
  */
 class TokenInterceptor : Interceptor {
 
-  companion object {
+    companion object {
 
-    const val RESPONSE_CODE_TOKEN_EXPIRED = 210
-  }
-
-  override fun intercept(chain: Interceptor.Chain): Response {
-    val request: Request = chain.request()
-    val response: Response = chain.proceed(request)
-
-    if (isTokenExpired(response)) {
-      // val token: String = call.execute().body()
-      val token = ""
-      val newRequest = chain.request()
-        .newBuilder()
-        .header("x-access-token", token)
-        .build()
-      return chain.proceed(newRequest)
+        const val RESPONSE_CODE_TOKEN_EXPIRED = 210
     }
 
-    return response
-  }
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request: Request = chain.request()
+        val response: Response = chain.proceed(request)
 
-  private fun isTokenExpired(response: Response): Boolean {
-    return response.code == RESPONSE_CODE_TOKEN_EXPIRED
-  }
+        if (isTokenExpired(response)) {
+            // val token: String = call.execute().body()
+            val token = ""
+            val newRequest = chain.request()
+                .newBuilder()
+                .header("x-access-token", token)
+                .build()
+            return chain.proceed(newRequest)
+        }
+
+        return response
+    }
+
+    private fun isTokenExpired(response: Response): Boolean {
+        return response.code == RESPONSE_CODE_TOKEN_EXPIRED
+    }
 }
