@@ -15,13 +15,16 @@
  */
 package com.mcgrady.xproject.pokemon.binding
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
+import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.github.florent37.glidepalette.BitmapPalette
-import com.github.florent37.glidepalette.GlidePalette
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.card.MaterialCardView
 
 /**
@@ -41,18 +44,34 @@ object ViewBinding {
     @BindingAdapter("paletteImage", "paletteCard")
     fun bindLoadImagePaletteView(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
         val context = view.context
+//        Glide.with(context)
+//            .load(url)
+//            .listener(
+//                GlidePalette.with(url)
+//                    .use(BitmapPalette.Profile.MUTED_LIGHT)
+//                    .intoCallBack { palette ->
+//                        val rgb = palette?.dominantSwatch?.rgb
+//                        if (rgb != null) {
+//                            paletteCard.setCardBackgroundColor(rgb)
+//                        }
+//                    }.crossfade(true)
+//            ).into(view)
+
         Glide.with(context)
+            .asBitmap()
             .load(url)
-            .listener(
-                GlidePalette.with(url)
-                    .use(BitmapPalette.Profile.MUTED_LIGHT)
-                    .intoCallBack { palette ->
-                        val rgb = palette?.dominantSwatch?.rgb
-                        if (rgb != null) {
-                            paletteCard.setCardBackgroundColor(rgb)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    Palette.from(resource)
+                        .generate { palette ->
+                            palette?.dominantSwatch?.rgb?.let {
+                                paletteCard.setCardBackgroundColor(it)
+                            }
                         }
-                    }.crossfade(true)
-            ).into(view)
+                }
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
     }
 
 //    @JvmStatic

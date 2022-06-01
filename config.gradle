@@ -54,9 +54,7 @@ android {
                     PrintWriter pw = new PrintWriter(manifestFile)
                     pw.write(groovy.xml.XmlUtil.serialize(xml))
                     pw.close()
-
                 }
-
             }
         }
     }

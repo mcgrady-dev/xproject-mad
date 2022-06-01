@@ -14,6 +14,18 @@ spotless {
         endWithNewline()
     }
 
+    java {
+        target '**/*.java'
+        googleJavaFormat('1.8').aosp().reflowLongStrings()
+
+        importOrder()
+        removeUnusedImports()
+
+        trimTrailingWhitespace()
+        endWithNewline()
+        licenseHeaderFile "$rootDir/license.kt"
+    }
+
     kotlin {
         target "**/*.kt"
         ktlint("0.45.2")
@@ -32,16 +44,16 @@ task spotlessPreCommitHook() {
     if (!gitHooksDirectory.exists()) gitHooksDirectory.mkdirs()
     new File("$project.rootDir/.git/hooks", "pre-commit").text = """
 #!/bin/bash
-echo "Running spotless check"
+echo "Running spotless apply"
 set -e
   ./gradlew -PdisableSpotlessCheck spotlessApply
 result=\$?
-printf "the spotless check result code is \$result"
+printf "The spotless apply result code is \$result"
 if [[ "\$result" = 0 ]] ; then
     echo "\\033[32m
     ....
     ....
-    SpotlessCheck Pass!!
+    SpotlessApply Pass!!
     ....
     ....
     \\033[0m"
@@ -51,7 +63,7 @@ else
     echo "\\033[31m
     ....
     ....
-    SpotlessCheck Failed!!
+    SpotlessApply Failed!!
     代码格式有问题;
     ....
     已经自动调整格式,review代码后再git add . && git commit
