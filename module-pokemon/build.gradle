@@ -59,5 +59,3 @@ dependencies {
     debugImplementation 'com.github.chuckerteam.chucker:library:develop-SNAPSHOT'
     //debugImplementation 'com.github.chuckerteam.chucker:library:3.5.2'
 }
-
-apply from: '../spotless.gradle'
