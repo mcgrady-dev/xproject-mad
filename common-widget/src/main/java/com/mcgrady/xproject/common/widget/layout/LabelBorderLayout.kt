@@ -1,9 +1,32 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.layout
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Paint
 import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.graphics.Path
+import android.graphics.PointF
+import android.graphics.Rect
+import android.graphics.Shader
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -11,7 +34,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toBitmap
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.UIUtils
+import com.mcgrady.xproject.common.widget.UIUtil
 
 /**
  * Created by mcgrady on 2021/5/26.
@@ -53,7 +76,7 @@ class LabelBorderLayout @JvmOverloads constructor(
 
     private val borderGapPoint = PointF(60.0f, 0.0f)
 
-    private var spacing = UIUtils.dp2px(context, 3f)
+    private var spacing = UIUtil.dp2px(context, 3f)
 
     private val paint = Paint(ANTI_ALIAS_FLAG).apply {
         color = borderColor
@@ -99,16 +122,18 @@ class LabelBorderLayout @JvmOverloads constructor(
         paint.shader = null
         paint.style = Paint.Style.FILL
         if (labelBitmap != null) {
-//            val src = Rect(0, 0, labelBitmap!!.width, labelBitmap!!.height)
-//            val dst = Rect(
-//                borderGapPoint.x.toInt(),
-//                paint.strokeWidth.div(2).toInt(),
-//                labelImageSize.toInt() + borderGapPoint.x.toInt(),
-//                labelImageSize.toInt()
-//            )
-//            canvas.drawBitmap(labelBitmap!!, src, dst, null)
+            /*
+            val src = Rect(0, 0, labelBitmap!!.width, labelBitmap!!.height)
+            val dst = Rect(
+                borderGapPoint.x.toInt(),
+                paint.strokeWidth.div(2).toInt(),
+                labelImageSize.toInt() + borderGapPoint.x.toInt(),
+                labelImageSize.toInt()
+            )
+            canvas.drawBitmap(labelBitmap!!, src, dst, null)
+            */
 
-            //FIXME 图片资源未适配情况下，会按资源大小进行绘制 by mcgrady
+            // FIXME 图片资源未适配情况下，会按资源大小进行绘制 by mcgrady
             canvas.drawBitmap(
                 labelBitmap!!,
                 borderGapPoint.x,
@@ -140,15 +165,13 @@ class LabelBorderLayout @JvmOverloads constructor(
     }
 
     private fun initAttrs(attributeSet: AttributeSet) {
-        with(
-            context.obtainStyledAttributes(
-                attributeSet,
-                R.styleable.LabelBorderLayout,
-                defStyleRes,
-                0
-            )
-        ) {
-
+        val typedArray = context.obtainStyledAttributes(
+            attributeSet,
+            R.styleable.LabelBorderLayout,
+            defStyleRes,
+            0
+        )
+        with(typedArray) {
             borderColorStart = getColor(R.styleable.LabelBorderLayout_borderColorStart, -1)
             borderColorEnd = getColor(R.styleable.LabelBorderLayout_borderColorEnd, -1)
 
@@ -163,9 +186,7 @@ class LabelBorderLayout @JvmOverloads constructor(
             labelTextSize = getDimension(
                 R.styleable.LabelBorderLayout_labelTextSize,
                 paint.textSize
-            ).also {
-                paint.textSize = it
-            }
+            ).also { paint.textSize = it }
             labelTextColor =
                 getColor(R.styleable.LabelBorderLayout_labelTextColor, Color.TRANSPARENT)
 

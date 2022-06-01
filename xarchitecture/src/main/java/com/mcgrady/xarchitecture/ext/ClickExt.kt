@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 @file:Suppress("NOTHING_TO_INLINE")
 
 package com.mcgrady.xarchitecture.ext
@@ -17,42 +32,42 @@ import java.util.concurrent.CancellationException
 /**
  * Created by mcgrady on 2022/5/31.
  */
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun <E> SendChannel<E>.safeOffer(value: E) = !isClosedForSend && try {
-    trySend(value).isSuccess
+  trySend(value).isSuccess
 } catch (e: CancellationException) {
-    false
+  false
 }
 
 @CheckResult
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun View.clickFlow(): Flow<View> {
-    return callbackFlow {
-        setOnClickListener {
-            safeOffer(it)
-        }
-        awaitClose { setOnClickListener(null) }
+  return callbackFlow {
+    setOnClickListener {
+      safeOffer(it)
     }
+    awaitClose { setOnClickListener(null) }
+  }
 }
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun View.click(lifecycle: LifecycleCoroutineScope, noinline onClick: (view: View) -> Unit) {
-    clickFlow().onEach {
-        onClick(this)
-    }.launchIn(lifecycle)
+  clickFlow().onEach {
+    onClick(this)
+  }.launchIn(lifecycle)
 }
 
-//延迟第一次点击事件
-//@kotlin.internal.InlineOnly
+// 延迟第一次点击事件
+// @kotlin.internal.InlineOnly
 inline fun View.clickDelayed(
     lifecycle: LifecycleCoroutineScope,
     delayMillis: Long = 500,
     noinline onClick: (view: View) -> Unit
 ) {
-    clickFlow().onEach {
-        delay(delayMillis)
-        onClick(this)
-    }.launchIn(lifecycle)
+  clickFlow().onEach {
+    delay(delayMillis)
+    onClick(this)
+  }.launchIn(lifecycle)
 }
 
 /**
@@ -66,18 +81,18 @@ inline fun View.clickDelayed(
  */
 var lastMillis: Long = 0
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun View.clickTrigger(
     lifecycle: LifecycleCoroutineScope,
     intervalMillis: Long = 500,
     noinline onClick: (view: View) -> Unit
 ) {
-    clickFlow().onEach {
-        val curMillis = System.currentTimeMillis()
-        if (curMillis - lastMillis < intervalMillis) {
-            return@onEach
-        }
-        lastMillis = curMillis
-        onClick(this)
-    }.launchIn(lifecycle)
+  clickFlow().onEach {
+    val curMillis = System.currentTimeMillis()
+    if (curMillis - lastMillis < intervalMillis) {
+      return@onEach
+    }
+    lastMillis = curMillis
+    onClick(this)
+  }.launchIn(lifecycle)
 }

@@ -120,4 +120,3 @@ ext {
         "java -jar ${rein360ForceJarPath} -jiagu ${apk.path} ${outPutPath.path} -autosign -automulpkg".execute().waitForProcessOutput(System.out, System.err)
     }
 }
-

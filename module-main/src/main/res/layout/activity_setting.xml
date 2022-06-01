@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mcgrady.xproject.ui.setting.SettingActivity">
+    tools:context="com.mcgrady.xproject.main.ui.setting.SettingActivity">
 
 <!--    <fragment-->
     <androidx.fragment.app.FragmentContainerView

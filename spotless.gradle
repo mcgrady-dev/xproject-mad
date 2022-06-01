@@ -1,0 +1,30 @@
+apply plugin: 'com.diffplug.spotless'
+
+spotless {
+    // optional: limit format enforcement to just the files changed by this feature branch
+    //ratchetFrom 'origin/develop'
+
+    format 'misc', {
+        // define the files to apply `misc` to
+        target '*.gradle', '*.md', '.gitignore'
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    kotlin {
+        target "**/*.kt"
+        ktlint("0.45.2")
+                .userData([
+                        //'indent_size': '4',
+                        //'continuation_indent_size': '8',
+                        'disabled_rules': 'indent,no-wildcard-imports'
+                ])
+        licenseHeaderFile "$rootDir/license.kt"
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+}

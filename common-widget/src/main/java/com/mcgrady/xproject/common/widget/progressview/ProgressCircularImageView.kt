@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.progressview
 
 import android.animation.ValueAnimator
@@ -23,7 +38,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.UIUtils
+import com.mcgrady.xproject.common.widget.UIUtil
 import com.mcgrady.xproject.common.widget.progressview.animation.AnimationDrawingState
 import com.mcgrady.xproject.common.widget.progressview.animation.DefaultAnimationOrchestrator
 import com.mcgrady.xproject.common.widget.progressview.animation.IAnimatorInterface
@@ -31,7 +46,6 @@ import com.mcgrady.xproject.common.widget.progressview.animation.ViewAnimationOr
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.math.*
-
 
 /**
  * Created by mcgrady on 2021/05/26.
@@ -44,10 +58,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     private val decFormat = DecimalFormat("#.##")
 
-    //是否锁定
+    // 是否锁定
     private var isBlock = false
         set(value) {
-            if (field == value)
+            if(field == value)
                 return
 
             field = value
@@ -60,7 +74,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     private val mRectF = RectF()
 
-    //中心点
+    // 中心点
     private var mCenterPoint = Point()
 
     private val initialsPaint = Paint(ANTI_ALIAS_FLAG).apply {
@@ -74,26 +88,25 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     var distanceToBorder = 25
         set(value) {
-            field = if (value <= 0) 0 else value
+            field = if(value <= 0) 0 else value
             setup()
         }
 
     var borderThickness = 12
         set(value) {
-            field = if (value <= 0) 0 else value
+            field = if(value <= 0) 0 else value
             setup()
         }
 
     var highlightedBorderThickness = 16
         set(value) {
-            field = if (value <= 0) 0 else value
+            field = if(value <= 0) 0 else value
             setup()
         }
 
     private val boundsRect = RectF()
     private val boardMatrix = Matrix()
     private var boundsRadius = 0f
-
 
     /*********************** Inner Circle Start ***********************/
 
@@ -138,7 +151,6 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     /*********************** Inner Circle End ***********************/
 
-
     /*********************** Middle Start ***********************/
 
     private val middlePaint = Paint()
@@ -156,7 +168,6 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private val middleRect = RectF()
 
     /*********************** Middle End ***********************/
-
 
     /*********************** Out Ring Start ***********************/
 
@@ -188,7 +199,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     private var progressPaint = Paint()
 
-    //配置颜色的渐变至
+    // 配置颜色的渐变至
     private var progressGradientColors =
         intArrayOf(
             Color.parseColor("#ffb900"),
@@ -257,7 +268,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             attachOrchestrator(it)
         }
         set(value) {
-            if (field == value) return
+            if(field == value) return
             field.cancel()
             field = value
             attachOrchestrator(field)
@@ -265,7 +276,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     private fun attachOrchestrator(animationOrchestrator: ViewAnimationOrchestrator) {
         animationOrchestrator.attach(animatorInterface) {
-            if (isReversedAnimating) {
+            if(isReversedAnimating) {
                 animationDrawingState = animationDrawingState.copy(
                     rotationProgress = 0f
                 )
@@ -277,12 +288,12 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private var isReversedAnimating = false
     var isAnimating = false
         set(value) {
-            if (value && !field) {
-                if (isReversedAnimating) {
+            if(value && !field) {
+                if(isReversedAnimating) {
                     animationOrchestrator.reverse()
                 }
                 animationOrchestrator.start()
-            } else if (!value && field) {
+            } else if(!value && field) {
                 isReversedAnimating = true
                 animationOrchestrator.cancel()
                 animationOrchestrator.reverse()
@@ -293,13 +304,12 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     /*********************** Out Ring End ***********************/
 
-
     /*********************** Badge Start ***********************/
 
-    //文字进度
+    // 文字进度
     private var badgerText: String? = null
 
-    //右下角圆圈的alpha
+    // 右下角圆圈的alpha
     private var badgerAlpha = 0f
 
     var badgeDrawableId = -1
@@ -346,11 +356,11 @@ open class ProgressCircularImageView @JvmOverloads constructor(
      */
     var badgeStrokeWidth = 0
         set(value) {
-            field = if (value <= 0) 0 else value
+            field = if(value <= 0) 0 else value
             setup()
         }
 
-    //右下角圆圈的半径
+    // 右下角圆圈的半径
     var badgeRadius = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         15f,
@@ -373,7 +383,6 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private var badgeDrawable: Bitmap? = null
 
     /*********************** Badge End ***********************/
-
 
     var shouldBounceOnClick = true
 
@@ -402,7 +411,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         decFormat.roundingMode = RoundingMode.CEILING
         scaleType = ImageView.ScaleType.CENTER_CROP
         outlineProvider = OutlineProvider()
-        defaultSize = UIUtils.dp2px(150.toFloat())
+        defaultSize = UIUtil.dp2px(150.toFloat())
         animator = ValueAnimator()
         setProgress(progressCurValue, progressMaxValue)
         setup()
@@ -481,7 +490,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             a.getBoolean(R.styleable.ProgressCircularView_cv_highlighted, false)
 
         outRingBgColor =
-            a.getColor(R.styleable.ProgressCircularView_cv_outring_bg_color, Color.parseColor("#33000000"))
+            a.getColor(
+                R.styleable.ProgressCircularView_cv_outring_bg_color,
+                Color.parseColor("#33000000")
+            )
         outRingWidth = a.getDimension(
             R.styleable.ProgressCircularView_cv_outring_width,
             15f
@@ -501,7 +513,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         progressMaxValue = a.getFloat(
             R.styleable.ProgressCircularView_cv_progress_max_value,
             0f
-        ) //100
+        ) // 100
 
         startAngle = a.getFloat(
             R.styleable.ProgressCircularView_cv_progress_start_angle,
@@ -513,18 +525,18 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         )
 
         val progressGradientColors: Int =
-            a.getResourceId(R.styleable.ProgressCircularView_cv_progress_colors, 0) //圆弧颜色
+            a.getResourceId(R.styleable.ProgressCircularView_cv_progress_colors, 0) // 圆弧颜色
 
-        if (progressGradientColors != 0) {
+        if(progressGradientColors != 0) {
             try {
                 val gradientColors = resources.getIntArray(progressGradientColors)
 
-                if (gradientColors.isEmpty()) { //如果渐变色为数组为0，则尝试以单色读取色值
+                if(gradientColors.isEmpty()) { // 如果渐变色为数组为0，则尝试以单色读取色值
                     val color = ContextCompat.getColor(context, progressGradientColors)
                     this.progressGradientColors = IntArray(2)
                     this.progressGradientColors[0] = color
                     this.progressGradientColors[1] = color
-                } else if (gradientColors.size == 1) { //如果渐变数组只有一种颜色，默认设为两种相同颜色
+                } else if(gradientColors.size == 1) { // 如果渐变数组只有一种颜色，默认设为两种相同颜色
                     this.progressGradientColors = IntArray(2)
                     this.progressGradientColors[0] = gradientColors[0]
                     this.progressGradientColors[1] = gradientColors[0]
@@ -539,7 +551,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     private fun initBadgeAttrs(a: TypedArray) {
         showBadge = a.getBoolean(R.styleable.ProgressCircularView_cv_show_badge, false)
-        badgeColor = a.getColor(R.styleable.ProgressCircularView_cv_badge_color, Color.parseColor("#66000000"))
+        badgeColor = a.getColor(
+            R.styleable.ProgressCircularView_cv_badge_color,
+            Color.parseColor("#66000000")
+        )
 //        badgeStrokeColor =
 //            a.getColor(R.styleable.CourseView_cv_badge_stroke_color, Defaults.BADGE_STROKE_COLOR)
         badgeStrokeWidth = a.getDimensionPixelSize(
@@ -549,7 +564,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         badgeRadius = a.getDimension(R.styleable.ProgressCircularView_cv_badge_radius, badgeRadius)
 
         badgeTextPaint.textSize =
-            a.getDimension(R.styleable.ProgressCircularView_cv_badge_text_size, initialsPaint.textSize)
+            a.getDimension(
+                R.styleable.ProgressCircularView_cv_badge_text_size,
+                initialsPaint.textSize
+            )
         badgeTextPaint.color =
             a.getColor(R.styleable.ProgressCircularView_cv_badge_text_color, initialsPaint.color)
 
@@ -558,15 +576,15 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun setup() {
-        if (isReadingAttributes) {
+        if(isReadingAttributes) {
             return
         }
-        if (width == 0 && height == 0) {
+        if(width == 0 && height == 0) {
             return
         }
 
         val innerDrawable = this.innerBitmap
-        if (innerDrawable == null) {
+        if(innerDrawable == null) {
             setImageResource(android.R.color.transparent)
             return
         }
@@ -592,7 +610,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 //        }
 
         val currentBorderThickness =
-            (if (isHighlighted) highlightedBorderThickness else borderThickness).toFloat()
+            (if(isHighlighted) highlightedBorderThickness else borderThickness).toFloat()
 
         boundsRect.set(calculateBounds())
         boundsRadius = min(
@@ -634,21 +652,21 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
         mCenterPoint.x = boundsRect.centerX().toInt()
         mCenterPoint.y = boundsRect.centerY().toInt()
-        //外部圆环和图片中间部分
+        // 外部圆环和图片中间部分
         middlePaint.apply {
             style = Paint.Style.STROKE
             isAntiAlias = true
             color = middleColor
             strokeWidth = middleThickness
         }
-        //圆环背景
+        // 圆环背景
         innerBgPaint.apply {
             style = Paint.Style.FILL
             isAntiAlias = true
             color = innerBackgroundColor
         }
 
-        //右小角的圈圈
+        // 右小角的圈圈
         badgePaint.apply {
             style = Paint.Style.FILL
             isAntiAlias = true
@@ -661,7 +679,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 //            isAntiAlias = true
 //            color = badgeStrokeColor
 //        }
-        //获取位置
+        // 获取位置
         updateShaderMatrix()
         invalidate()
     }
@@ -680,9 +698,9 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private fun setProgressPaint() {
         progressPaint.apply {
             isAntiAlias = true
-            style = Paint.Style.STROKE //画圆环必有,不然是扇弧
+            style = Paint.Style.STROKE // 画圆环必有,不然是扇弧
             strokeWidth = progressWidth
-            strokeCap = Paint.Cap.ROUND //作用于圆环结尾
+            strokeCap = Paint.Cap.ROUND // 作用于圆环结尾
             isAntiAlias = true
             textSize = progressTextSize
             color = progressColor
@@ -717,16 +735,16 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun getBitmapFromDrawable(drawable: Drawable?): Bitmap? {
-        if (drawable == null) {
+        if(drawable == null) {
             return null
         }
 
-        if (drawable is BitmapDrawable) {
+        if(drawable is BitmapDrawable) {
             return drawable.bitmap
         }
 
         return try {
-            val bitmap = if (drawable is ColorDrawable) {
+            val bitmap = if(drawable is ColorDrawable) {
                 Bitmap.createBitmap(
                     2,
                     2,
@@ -752,7 +770,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
 
     private fun initializeBitmap(bm: Bitmap?) {
 //        if (bm == null) {
-            innerBitmap = getBitmapFromDrawable(drawable)
+        innerBitmap = getBitmapFromDrawable(drawable)
 //        } else {
 //            innerBitmap = bm
 //        }
@@ -778,7 +796,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun animateClick() {
-        if (shouldBounceOnClick) scaleAnimator.start()
+        if(shouldBounceOnClick) scaleAnimator.start()
     }
 
     override fun performClick(): Boolean {
@@ -806,9 +824,9 @@ open class ProgressCircularImageView @JvmOverloads constructor(
      */
     private fun drawInner(canvas: Canvas) {
 
-        if (innerBackgroundColor != Color.TRANSPARENT) {
+        if(innerBackgroundColor != Color.TRANSPARENT) {
             innerBgPaint.alpha =
-                if (isBlock) 128 else 255
+                if(isBlock) 128 else 255
             canvas.drawCircle(
                 innerDrawableRect.centerX(),
                 innerDrawableRect.centerY(),
@@ -817,10 +835,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             )
         }
 
-        if (null != innerBitmap && hasInnerCircleDrawable()) {
+        if(null != innerBitmap && hasInnerCircleDrawable()) {
             bitmapPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
             bitmapPaint.alpha =
-                if (isBlock) 128 else 255
+                if(isBlock) 128 else 255
 //            canvas.drawCircle(
 //                innerDrawableRect.centerX(),
 //                innerDrawableRect.centerY(),
@@ -833,8 +851,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 0f,
                 bitmapPaint
             )
-
-        } else if (null != initials) {
+        } else if(null != initials) {
             canvas.drawText(
                 initials!!,
                 width.div(2f) - initialsRect.width().div(2f),
@@ -845,20 +862,20 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun drawMiddle(canvas: Canvas) {
-        if (middleThickness > 0) {
+        if(middleThickness > 0) {
             canvas.drawCircle(middleRect.centerX(), middleRect.centerY(), middleRadius, middlePaint)
         }
     }
 
     private fun drawBadge(canvas: Canvas, layerId: Int) {
-        if (!showBadge || badgeColor == Color.TRANSPARENT) {
+        if(!showBadge || badgeColor == Color.TRANSPARENT) {
             return
         }
 
         val radius = badgeRadius.plus(badgeStrokeWidth)
 
-        //X坐标= a + Math.sin(角度 * (Math.PI / 180)) * r
-        //Y坐标= b + Math.cos(角数 * (Math.PI / 180)) * r
+        // X坐标= a + Math.sin(角度 * (Math.PI / 180)) * r
+        // Y坐标= b + Math.cos(角数 * (Math.PI / 180)) * r
 
         // 默认为右下角，即45°
         val badgeCx = mCenterPoint.x + sin(45 * (Math.PI / 180)).toFloat() * mRadius
@@ -872,7 +889,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         bitmapPaint.xfermode = null
         canvas.drawCircle(badgeCx, badgeCy, badgeRadius, badgePaint)
 
-        if (isBlock) {
+        if(isBlock) {
             badgeDrawable?.let {
                 canvas.drawBitmap(
                     it,
@@ -885,7 +902,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             progressText?.let {
                 val rect = Rect()
                 badgeTextPaint.getTextBounds(it, 0, it.length, rect)
-                //绘制文字进度
+                // 绘制文字进度
                 canvas.drawText(
                     it,
                     badgeCx,
@@ -897,7 +914,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        if (innerBitmap == null && initials == null) {
+        if(innerBitmap == null && initials == null) {
             return
         }
 
@@ -935,7 +952,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         )
         canvas.drawArc(mRectF, 0f, sweepAngle, false, outRingPaint)
 
-        if (percent.isNaN() || percent <= 0f) {
+        if(percent.isNaN() || percent <= 0f) {
             canvas.restore()
             return
         }
@@ -948,13 +965,16 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun startAnimator(start: Float, end: Float, animTime: Int?) {
-        animator = ValueAnimator.ofFloat(start, end)//获取%区间 当前进度，[0.0f,1.0f]
+        animator = ValueAnimator.ofFloat(start, end) // 获取%区间 当前进度，[0.0f,1.0f]
         animator?.apply {
             duration = animTime?.toLong() ?: 0
             addUpdateListener { animation ->
                 percent = animation?.getAnimatedValue() as Float
                 progressCurValue = percent * progressMaxValue
-                Log.d("onAnimationUpdate", "percent = $percent progressCurrentValue = $progressCurValue progressMaxValue = $progressMaxValue")
+                Log.d(
+                    "onAnimationUpdate",
+                    "percent = $percent progressCurrentValue = $progressCurValue progressMaxValue = $progressMaxValue"
+                )
                 invalidate()
             }
             start()
@@ -976,8 +996,8 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(
-            UIUtils.measure(widthMeasureSpec, defaultSize),
-            UIUtils.measure(heightMeasureSpec, defaultSize)
+            UIUtil.measure(widthMeasureSpec, defaultSize),
+            UIUtil.measure(heightMeasureSpec, defaultSize)
         )
     }
 
@@ -985,24 +1005,24 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
 
         val maxArcWidth: Float = progressWidth.coerceAtLeast(outRingWidth)
-        //求最小值作为实际值
+        // 求最小值作为实际值
         val minSize = (w - paddingLeft - paddingRight - 2 * maxArcWidth.toInt())
             .coerceAtMost(h - paddingTop - paddingBottom - 2 * maxArcWidth.toInt())
 
-        //获取圆心,圆半径
+        // 获取圆心,圆半径
         mRadius = minSize.div(2).toFloat()
-        //获取圆的相关参数
+        // 获取圆的相关参数
         mCenterPoint.x = w / 2
         mCenterPoint.y = h / 2
 
-        //绘制圆弧的边界(画圆弧(或圆环)先要画矩形)
+        // 绘制圆弧的边界(画圆弧(或圆环)先要画矩形)
         mRectF.left = (mCenterPoint.x - mRadius - maxArcWidth / 2)
         mRectF.top = mCenterPoint.y - mRadius - maxArcWidth / 2
         mRectF.right = mCenterPoint.x + mRadius + maxArcWidth / 2
         mRectF.bottom = mCenterPoint.y + mRadius + maxArcWidth / 2
-        //计算文字绘制时的 baseline
-        //由于文字的baseline、descent、ascent等属性只与textSize和typeface有关，所以此时可以直接计算
-        //若value、hint、unit由同一个画笔绘制或者需要动态设置文字的大小，则需要在每次更新后再次计算
+        // 计算文字绘制时的 baseline
+        // 由于文字的baseline、descent、ascent等属性只与textSize和typeface有关，所以此时可以直接计算
+        // 若value、hint、unit由同一个画笔绘制或者需要动态设置文字的大小，则需要在每次更新后再次计算
 //        valueOffset = (mCenterPoint.y + getBaselineOffsetFromY(mValuePaint)).toInt() //value处在中间
         updateArchesPaint()
         setup()
@@ -1020,7 +1040,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun setProgress(current: Float, max: Float) {
-        if (current == progressCurValue && max == progressMaxValue)
+        if(current == progressCurValue && max == progressMaxValue)
             return
 
         percent = decFormat.format(current.div(max)).toFloat()
@@ -1038,7 +1058,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun getBaselineOffsetFromY(paint: Paint): Float {
-        return UIUtils.measureTextHeight(paint) / 2
+        return UIUtil.measureTextHeight(paint) / 2
     }
 
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
@@ -1076,7 +1096,6 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         badgeShader = null
         badgeDrawable?.recycle()
         badgeDrawable = null
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -1088,7 +1107,6 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         }
     }
 
-
     inner class AnimatorInterface : IAnimatorInterface {
         private val currentAnimationState: AnimationDrawingState
             get() = animationDrawingState
@@ -1097,7 +1115,5 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             animationDrawingState = update(currentAnimationState)
             invalidate()
         }
-
-
     }
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.edittext
 
 import android.annotation.SuppressLint
@@ -14,7 +29,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.UIUtils.dp2px
+import com.mcgrady.xproject.common.widget.UIUtil.dp2px
 
 /**
  *
@@ -26,8 +41,10 @@ class ClearEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
-) : AppCompatEditText(context, attrs, defStyleAttr), View.OnTouchListener,
-    View.OnFocusChangeListener, TextWatcher {
+) : AppCompatEditText(context, attrs, defStyleAttr),
+View.OnTouchListener,
+    View.OnFocusChangeListener,
+TextWatcher {
 
     private var drawableClear: Drawable? = null
     private var clearListener: OnClearListener? = null
@@ -39,8 +56,8 @@ class ClearEditText @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     private fun initialize(context: Context) {
         ContextCompat.getDrawable(context, R.mipmap.common_ic_search_clear)?.let {
-            //Wrap the drawable so that it can be tinted pre Lollipop
-            //DrawableCompat.setTint(wrappedDrawable, getCurrentHintTextColor());
+            // Wrap the drawable so that it can be tinted pre Lollipop
+            // DrawableCompat.setTint(wrappedDrawable, getCurrentHintTextColor());
             drawableClear = DrawableCompat.wrap(it).apply {
                 setBounds(0, 0, dp2px(16f), dp2px(16f))
             }
@@ -67,8 +84,9 @@ class ClearEditText @JvmOverloads constructor(
     }
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        if (drawableClear?.alpha == 255
-            && motionEvent.x.toInt() > (width - paddingRight - (drawableClear?.intrinsicWidth ?: 0))) {
+        if (drawableClear?.alpha == 255 &&
+            motionEvent.x.toInt() > (width - paddingRight - (drawableClear?.intrinsicWidth ?: 0))
+        ) {
             if (motionEvent.action == MotionEvent.ACTION_UP) {
                 setText("")
             }

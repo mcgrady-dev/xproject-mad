@@ -6,17 +6,17 @@
     <data>
         <variable
             name="vm"
-            type="com.mcgrady.xproject.ui.setting.SettingMainViewModel" />
+            type="com.mcgrady.xproject.main.ui.setting.SettingMainViewModel" />
 
         <variable
             name="adapter"
-            type="com.mcgrady.xproject.ui.adapter.SettingMainListAdapter" />
+            type="com.mcgrady.xproject.main.ui.adapter.SettingMainListAdapter" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.mcgrady.xproject.ui.setting.SettingMainFragment">
+        tools:context="com.mcgrady.xproject.main.ui.setting.SettingMainFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xarchitecture.ext
 
 import androidx.annotation.IdRes
@@ -17,7 +32,7 @@ import androidx.lifecycle.Lifecycle
  * @param rootFragment  根fragment
  */
 fun Fragment.loadRootFragment(@IdRes containerViewId: Int, rootFragment: Fragment) {
-    loadFragmentsTransaction(containerViewId, 0, childFragmentManager, rootFragment)
+  loadFragmentsTransaction(containerViewId, 0, childFragmentManager, rootFragment)
 }
 
 /**
@@ -31,7 +46,7 @@ fun Fragment.loadFragments(
     showPosition: Int = 0,
     vararg fragments: Fragment
 ) {
-    loadFragmentsTransaction(containerViewId, showPosition, childFragmentManager, *fragments)
+  loadFragmentsTransaction(containerViewId, showPosition, childFragmentManager, *fragments)
 }
 
 /**
@@ -40,7 +55,7 @@ fun Fragment.loadFragments(
  * @param showFragment 需要显示的fragment
  */
 fun Fragment.showHideFragment(showFragment: Fragment) {
-    showHideFragmentTransaction(childFragmentManager, showFragment)
+  showHideFragmentTransaction(childFragmentManager, showFragment)
 }
 
 /**
@@ -49,7 +64,7 @@ fun Fragment.showHideFragment(showFragment: Fragment) {
  * @param rootFragment  根fragment
  */
 fun FragmentActivity.loadRootFragment(@IdRes containerViewId: Int, rootFragment: Fragment) {
-    loadFragmentsTransaction(containerViewId, 0, supportFragmentManager, rootFragment)
+  loadFragmentsTransaction(containerViewId, 0, supportFragmentManager, rootFragment)
 }
 
 /**
@@ -63,17 +78,15 @@ fun FragmentActivity.loadFragments(
     showPosition: Int = 0,
     vararg fragments: Fragment
 ) {
-    loadFragmentsTransaction(containerViewId, showPosition, supportFragmentManager, *fragments)
+  loadFragmentsTransaction(containerViewId, showPosition, supportFragmentManager, *fragments)
 }
-
-
 
 /**
  * 显示目标fragment，并隐藏其他fragment，调用前确保已经先调用 FragmentActivity.loadFragments
  * @param showFragment 需要显示的fragment
  */
 fun FragmentActivity.showHideFragment(showFragment: Fragment) {
-    showHideFragmentTransaction(supportFragmentManager, showFragment)
+  showHideFragmentTransaction(supportFragmentManager, showFragment)
 }
 
 /**
@@ -93,25 +106,24 @@ private fun loadFragmentsTransaction(
     fragmentManager: FragmentManager,
     vararg fragments: Fragment
 ) {
-    if (fragments.isNotEmpty()) {
-        fragmentManager.beginTransaction().apply {
-            for (index in fragments.indices) {
-                val fragment = fragments[index]
-                add(containerViewId, fragment, fragment.javaClass.name)
-                if (showPosition == index) {
-                    setMaxLifecycle(fragment, Lifecycle.State.RESUMED)
-                } else {
-                    hide(fragment)
-                    setMaxLifecycle(fragment, Lifecycle.State.STARTED)
-                }
-            }
-
-        }.commit()
-    } else {
-        throw IllegalStateException(
-            "fragments must not empty"
-        )
-    }
+  if (fragments.isNotEmpty()) {
+    fragmentManager.beginTransaction().apply {
+      for (index in fragments.indices) {
+        val fragment = fragments[index]
+        add(containerViewId, fragment, fragment.javaClass.name)
+        if (showPosition == index) {
+          setMaxLifecycle(fragment, Lifecycle.State.RESUMED)
+        } else {
+          hide(fragment)
+          setMaxLifecycle(fragment, Lifecycle.State.STARTED)
+        }
+      }
+    }.commit()
+  } else {
+    throw IllegalStateException(
+        "fragments must not empty"
+    )
+  }
 }
 
 /**
@@ -121,47 +133,47 @@ private fun loadFragmentsTransaction(
  * @param showFragment
  */
 private fun showHideFragmentTransaction(fragmentManager: FragmentManager, showFragment: Fragment) {
-    fragmentManager.beginTransaction().apply {
-        show(showFragment)
-        setMaxLifecycle(showFragment, Lifecycle.State.RESUMED)
+  fragmentManager.beginTransaction().apply {
+    show(showFragment)
+    setMaxLifecycle(showFragment, Lifecycle.State.RESUMED)
 
-        //获取其中所有的fragment,其他的fragment进行隐藏
-        val fragments = fragmentManager.fragments
-        for (fragment in fragments) {
-            if (fragment != showFragment) {
-                hide(fragment)
-                setMaxLifecycle(fragment, Lifecycle.State.STARTED)
-            }
-        }
-    }.commit()
+    // 获取其中所有的fragment,其他的fragment进行隐藏
+    val fragments = fragmentManager.fragments
+    for (fragment in fragments) {
+      if (fragment != showFragment) {
+        hide(fragment)
+        setMaxLifecycle(fragment, Lifecycle.State.STARTED)
+      }
+    }
+  }.commit()
 }
 
 fun DialogFragment.isShowing(): Boolean {
-    return dialog?.isShowing ?: false
+  return dialog?.isShowing ?: false
 }
 
-//inline fun <reified T : Any> Fragment.intent(
+// inline fun <reified T : Any> Fragment.intent(
 //    key: String,
 //    crossinline defaultValue: () -> Unit
-//) = lazy(LazyThreadSafetyMode.NONE) {
+// ) = lazy(LazyThreadSafetyMode.NONE) {
 //    val value = arguments?.get(key)
 //    if (value is T) value else defaultValue()
-//}
+// }
 //
-///**
+// /**
 // * Example:
 // *
 // * ```
 // * private val userPassword by intent<String>(KEY_USER_PASSWORD)
 // * ```
 // */
-//inline fun <reified T : Any> Fragment.intent(
+// inline fun <reified T : Any> Fragment.intent(
 //    key: String
-//) = lazy(LazyThreadSafetyMode.NONE) {
+// ) = lazy(LazyThreadSafetyMode.NONE) {
 //    arguments?.get(key)
-//}
+// }
 //
-///**
+// /**
 // * Example:
 // *
 // * ```
@@ -174,17 +186,17 @@ fun DialogFragment.isShowing(): Boolean {
 // * }
 // * ```
 // */
-////@kotlin.internal.InlineOnly
-//inline fun Fragment.makeBundle(
+// //@kotlin.internal.InlineOnly
+// inline fun Fragment.makeBundle(
 //    vararg params: Pair<String, Any>
-//): Fragment {
+// ): Fragment {
 //    makeBundle {
 //        params
 //    }
 //    return this
-//}
+// }
 //
-///**
+// /**
 // * Example:
 // *
 // * ```
@@ -199,9 +211,9 @@ fun DialogFragment.isShowing(): Boolean {
 // * }
 // * ```
 // */
-//inline fun Fragment.makeBundle(
+// inline fun Fragment.makeBundle(
 //    params: () -> Array<out Pair<String, Any>>
-//): Fragment {
+// ): Fragment {
 //    return apply {
 //        arguments = Bundle().apply {
 //            val arry = params()
@@ -210,11 +222,11 @@ fun DialogFragment.isShowing(): Boolean {
 //            }
 //        }
 //    }
-//}
+// }
 //
 //
-////@kotlin.internal.InlineOnly
-//inline fun Bundle.makeParams(it: Pair<String, Any>) {
+// //@kotlin.internal.InlineOnly
+// inline fun Bundle.makeParams(it: Pair<String, Any>) {
 //    when (val value = it.second) {
 //        is Int -> putInt(it.first, value)
 //        is Long -> putLong(it.first, value)
@@ -237,4 +249,4 @@ fun DialogFragment.isShowing(): Boolean {
 //        is BooleanArray -> putBooleanArray(it.first, value)
 //        else -> throw IllegalArgumentException("Intent extra ${it.first} has wrong type ${value.javaClass.name}")
 //    }
-//}
+// }

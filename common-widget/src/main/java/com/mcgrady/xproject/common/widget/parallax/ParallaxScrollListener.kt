@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.parallax
 
 import android.util.Log
@@ -16,7 +31,6 @@ open class ParallaxScrollListener(
 
     private var itemWidth: Int = 0
 
-
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         if (itemWidth == 0) {
             itemWidth = recyclerView.getChildAt(0).width
@@ -30,10 +44,11 @@ open class ParallaxScrollListener(
 //        val currentOffset = ((first * itemWidth) + (first * decorationWidth) - offset).toInt()
         val currentOffset = ((first * itemWidth) - offset).toInt()
 
-        Log.d("ParallaxScrollListener",
+        Log.d(
+            "ParallaxScrollListener",
             """
-            ParallaxScrollListener#onScrolled 
-            dx = $dx dy = $dy 
+            ParallaxScrollListener#onScrolled
+            dx = $dx dy = $dy
             itemCount = $itemCount totalWidth = $totalWidth itemWidth = $itemWidth padding = $decorationWidth
             first = $first offset = $offset currentOffset = $currentOffset
             """.trimIndent()
@@ -41,7 +56,6 @@ open class ParallaxScrollListener(
 
         listener?.onScrolled(currentOffset, totalWidth, maxScaleDifference)
     }
-
 
     interface OnScrolledCallBack {
 

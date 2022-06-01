@@ -9,11 +9,11 @@
 
         <variable
             name="model"
-            type="com.mcgrady.xproject.model.SettingMainBean" />
+            type="com.mcgrady.xproject.main.model.SettingMainBean" />
 
         <variable
             name="handler"
-            type="com.mcgrady.xproject.util.SettingHandlers" />
+            type="com.mcgrady.xproject.main.util.SettingHandlers" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

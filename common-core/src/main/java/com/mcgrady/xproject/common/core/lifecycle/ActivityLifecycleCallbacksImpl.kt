@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.core.lifecycle
 
 import android.app.Activity
@@ -13,62 +28,62 @@ import timber.log.Timber
  */
 open class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks, IActivityLifecycle {
 
-    companion object {
+  companion object {
 
-        const val TAG = "ActivityLifecycleCallback"
+    const val TAG = "ActivityLifecycleCallback"
+  }
+
+  override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
+    super.onActivityPreCreated(activity, savedInstanceState)
+
+    registerFragmentCallbacks(activity)
+  }
+
+  override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+    Timber.i("$TAG ${activity::class.simpleName}: onCreated, taskId=${activity.taskId}")
+
+    statusBar(activity = activity as FragmentActivity) {
+      transparent()
     }
-
-    override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
-        super.onActivityPreCreated(activity, savedInstanceState)
-
-        registerFragmentCallbacks(activity)
+    @Suppress("USELESS_CAST")
+    navigationBar(activity = activity as FragmentActivity) {
+      transparent()
     }
+  }
 
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        Timber.i("$TAG ${activity::class.simpleName}: onCreated, taskId=${activity.taskId}")
+  override fun onActivityStarted(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName}: onStarted")
+  }
 
-        statusBar(activity = activity as FragmentActivity) {
-            transparent()
-        }
-        @Suppress("USELESS_CAST")
-        navigationBar(activity = activity as FragmentActivity) {
-            transparent()
-        }
-    }
+  override fun onActivityResumed(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName}: onResumed")
+  }
 
-    override fun onActivityStarted(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName}: onStarted")
-    }
+  override fun onActivityPaused(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName}: onPaused")
+  }
 
-    override fun onActivityResumed(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName}: onResumed")
-    }
+  override fun onActivityStopped(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName}: onStopped")
+  }
 
-    override fun onActivityPaused(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName}: onPaused")
-    }
+  override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+    Timber.i("$TAG ${activity::class.simpleName}: onSaveInstanceState, outState=$outState")
+  }
 
-    override fun onActivityStopped(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName}: onStopped")
-    }
+  override fun onActivityDestroyed(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName}: onDestroyed")
 
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-        Timber.i("$TAG ${activity::class.simpleName}: onSaveInstanceState, outState=${outState}")
-    }
+    unregisterFragmentCallbacks(activity)
+  }
 
-    override fun onActivityDestroyed(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName}: onDestroyed")
+  override fun registerFragmentCallbacks(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName} registerFragmentLifecycleCallbacks")
+    (activity as FragmentActivity).supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
+  }
 
-        unregisterFragmentCallbacks(activity)
-    }
-
-    override fun registerFragmentCallbacks(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName} registerFragmentLifecycleCallbacks")
-        (activity as FragmentActivity).supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
-    }
-
-    override fun unregisterFragmentCallbacks(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName} unregisterFragmentLifecycleCallbacks")
-        (activity as FragmentActivity).supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
-    }
+  override fun unregisterFragmentCallbacks(activity: Activity) {
+    Timber.i("$TAG ${activity::class.simpleName} unregisterFragmentLifecycleCallbacks")
+    (activity as FragmentActivity).supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
+  }
 }

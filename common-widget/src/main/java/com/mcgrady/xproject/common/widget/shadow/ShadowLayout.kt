@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.common.widget.shadow
 
 import android.annotation.SuppressLint
@@ -12,7 +27,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.mcgrady.xproject.common.widget.R
-import com.mcgrady.xproject.common.widget.ShapeUtils
 
 /**
  * Created by mcgrady on 2021/5/28.
@@ -297,7 +311,8 @@ class ShadowLayout @JvmOverloads constructor(
                 val verticalGravity = gravity and Gravity.VERTICAL_GRAVITY_MASK
 
                 when (absoluteGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
-                    Gravity.CENTER_HORIZONTAL -> childLeft =
+                    Gravity.CENTER_HORIZONTAL ->
+                        childLeft =
                         parentLeft + (parentRight - parentLeft - width) / 2 +
                                 lp.leftMargin - lp.rightMargin + shadowMarginLeft - shadowMarginRight
                     Gravity.RIGHT -> {
@@ -312,10 +327,12 @@ class ShadowLayout @JvmOverloads constructor(
                 }
                 when (verticalGravity) {
                     Gravity.TOP -> childTop = parentTop + lp.topMargin + shadowMarginTop
-                    Gravity.CENTER_VERTICAL -> childTop =
+                    Gravity.CENTER_VERTICAL ->
+                        childTop =
                         parentTop + (parentBottom - parentTop - height) / 2 +
                                 lp.topMargin - lp.bottomMargin + shadowMarginTop - shadowMarginBottom
-                    Gravity.BOTTOM -> childTop =
+                    Gravity.BOTTOM ->
+                        childTop =
                         parentBottom - height - lp.bottomMargin - shadowMarginBottom
                     else -> childTop = parentTop + lp.topMargin + shadowMarginTop
                 }

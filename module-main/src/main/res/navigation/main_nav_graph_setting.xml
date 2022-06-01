@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/SettingMainFragment"
-        android:name="com.mcgrady.xproject.ui.setting.SettingMainFragment"
+        android:name="com.mcgrady.xproject.main.ui.setting.SettingMainFragment"
         android:label="@string/main_setting"
         tools:layout="@layout/setting_main_fragment">
 
@@ -30,25 +30,25 @@
 
     <fragment
         android:id="@+id/SettingAccountFragment"
-        android:name="com.mcgrady.xproject.ui.setting.SettingAccountFragment"
+        android:name="com.mcgrady.xproject.main.ui.setting.SettingAccountFragment"
         android:label="@string/main_account_info"
         tools:layout="@layout/fragment_setting_secondary_page" />
 
     <fragment
         android:id="@+id/SettingAppInfoFragment"
-        android:name="com.mcgrady.xproject.ui.setting.SettingAppInfoFragment"
+        android:name="com.mcgrady.xproject.main.ui.setting.SettingAppInfoFragment"
         android:label="@string/main_current_version"
         tools:layout="@layout/fragment_setting_secondary_page" />
 
     <fragment
         android:id="@+id/SettingDeviceInfoFragment"
-        android:name="com.mcgrady.xproject.ui.setting.SettingDeviceInfoFragment"
+        android:name="com.mcgrady.xproject.main.ui.setting.SettingDeviceInfoFragment"
         android:label="@string/main_device_info"
         tools:layout="@layout/fragment_setting_secondary_page" />
 
     <dialog
         android:id="@+id/LogoutDialog"
-        android:name="com.mcgrady.xproject.ui.main.LogoutDialog"
+        android:name="com.mcgrady.xproject.main.ui.main.LogoutDialog"
         android:label="@string/main_logout"
         tools:layout="@layout/dialog_logout"/>
 

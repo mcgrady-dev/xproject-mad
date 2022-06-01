@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 @file:Suppress("NOTHING_TO_INLINE")
 
 package com.mcgrady.xarchitecture.ext
@@ -11,41 +26,41 @@ import java.security.MessageDigest
  */
 
 inline fun String?.isNotNullOrEmpty(): Boolean {
-    return !this.isNullOrEmpty()
+  return !this.isNullOrEmpty()
 }
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun String.isValidPhone(): Boolean {
-    return this.isNotNullOrEmpty() && Patterns.PHONE.matcher(this).matches()
+  return this.isNotNullOrEmpty() && Patterns.PHONE.matcher(this).matches()
 }
 
-//@kotlin.internal.InlineOnly
-//inline fun String.formatPhoneNumber(region: String): String? {
+// @kotlin.internal.InlineOnly
+// inline fun String.formatPhoneNumber(region: String): String? {
 //    val phoneNumberUtil = PhoneNumberUtil.getInstance()
 //    val number = phoneNumberUtil.parse(this, region)
 //    if (!phoneNumberUtil.isValidNumber(number))
 //        return null
 //    return phoneNumberUtil.format(number, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
-//}
+// }
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun String.isValidEmail(): Boolean {
-    return this.isNotNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+  return this.isNotNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 @Suppress("DEPRECATION")
 inline fun String.isIPAddress(): Boolean {
-    return this.isNotNullOrEmpty() && Patterns.IP_ADDRESS.matcher(this).matches()
+  return this.isNotNullOrEmpty() && Patterns.IP_ADDRESS.matcher(this).matches()
 }
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun String.isDomainName(): Boolean {
-    return this.isNotNullOrEmpty() && Patterns.DOMAIN_NAME.matcher(this).matches()
+  return this.isNotNullOrEmpty() && Patterns.DOMAIN_NAME.matcher(this).matches()
 }
 
-//@kotlin.internal.InlineOnly
+// @kotlin.internal.InlineOnly
 inline fun String.md5(): String {
-    val md = MessageDigest.getInstance("MD5")
-    return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
+  val md = MessageDigest.getInstance("MD5")
+  return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
 }
