@@ -15,7 +15,8 @@
  */
 package com.mcgrady.xproject.common.core.base
 
-import com.mcgrady.xarchitecture.base.LazyFragment
+import com.mcgrady.xarch.base.LazyFragment
+
 
 /**
  * Created by mcgrady on 2021/5/13.

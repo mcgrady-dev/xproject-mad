@@ -4,14 +4,12 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
-        // RxAndroid
         maven { url "https://oss.jfrog.org/libs-snapshot" }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
-rootProject.name = "xproject-mvvm"
+rootProject.name = "xproject-mad"
 include ':app'
-include ':xarchitecture'
 include ':module-pokemon'
 include ':common-core'
 include ':common-widget'

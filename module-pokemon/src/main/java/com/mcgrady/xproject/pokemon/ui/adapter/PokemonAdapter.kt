@@ -20,7 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
-import com.mcgrady.xarchitecture.ext.databind
+import com.mcgrady.xarch.ext.databind
 import com.mcgrady.xproject.common.widget.extensions.inflate
 import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCompat
 import com.mcgrady.xproject.pokemon.R

@@ -4,8 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
-apply from: '../config.gradle'
-apply from: 'multiple-channel.gradle'
 
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(new File("${project.getProjectDir()}/keystore.properties")))
@@ -95,3 +93,6 @@ dependencies {
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 }
+
+apply from: '../config.gradle'
+apply from: 'multiple-channel.gradle'

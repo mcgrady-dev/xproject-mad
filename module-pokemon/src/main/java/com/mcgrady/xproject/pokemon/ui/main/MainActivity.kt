@@ -17,7 +17,7 @@ package com.mcgrady.xproject.pokemon.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.mcgrady.xarchitecture.ext.databind
+import com.mcgrady.xarch.ext.databind
 import com.mcgrady.xproject.common.core.base.BaseActivity
 import com.mcgrady.xproject.pokemon.R
 import com.mcgrady.xproject.pokemon.databinding.ActivityMainBinding

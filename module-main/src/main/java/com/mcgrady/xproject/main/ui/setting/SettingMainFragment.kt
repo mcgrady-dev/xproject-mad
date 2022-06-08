@@ -20,7 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.mcgrady.xarchitecture.ext.databind
+import com.mcgrady.xarch.ext.databind
 import com.mcgrady.xproject.common.core.base.BaseFragment
 import com.mcgrady.xproject.main.databinding.SettingMainFragmentBinding
 import com.mcgrady.xproject.main.ui.adapter.SettingMainListAdapter

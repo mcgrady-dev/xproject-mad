@@ -22,7 +22,7 @@ import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.mcgrady.xarchitecture.ext.viewbind
+import com.mcgrady.xarch.ext.viewbind
 import com.mcgrady.xproject.databinding.ActivityMainBinding
 import com.tencent.vasdolly.helper.ChannelReaderUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             tvTitle.setTextColor(Color.BLACK)
             tvTitle.setOnClickListener {
                 val dm = DisplayMetrics()
+                @Suppress("DEPRECATION")
                 windowManager.defaultDisplay.getMetrics(dm)
                 val width = dm.widthPixels.coerceAtMost(dm.heightPixels)
 

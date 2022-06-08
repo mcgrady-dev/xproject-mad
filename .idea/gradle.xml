@@ -7,7 +7,6 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="Android Studio default JDK" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -17,7 +16,6 @@
             <option value="$PROJECT_DIR$/component-base" />
             <option value="$PROJECT_DIR$/module-main" />
             <option value="$PROJECT_DIR$/module-pokemon" />
-            <option value="$PROJECT_DIR$/xarchitecture" />
           </set>
         </option>
       </GradleProjectSettings>

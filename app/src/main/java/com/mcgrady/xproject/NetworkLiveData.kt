@@ -20,7 +20,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import com.mcgrady.xarchitecture.ext.runOnUiThread
+import com.mcgrady.xarch.ext.runOnUiThread
 import com.mcgrady.xproject.common.core.SingleLiveData
 import timber.log.Timber
 

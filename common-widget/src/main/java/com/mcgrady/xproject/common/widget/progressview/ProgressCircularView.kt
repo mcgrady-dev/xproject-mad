@@ -754,6 +754,7 @@ open class ProgressCircularView @JvmOverloads constructor(
                     .setIncludePad(true)
                     .build()
             } else {
+                @Suppress("DEPRECATION")
                 StaticLayout(
                     courseName,
                     innerTextPaint,
