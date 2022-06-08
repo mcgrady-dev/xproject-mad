@@ -21,7 +21,8 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import com.mcgrady.xarch.ext.runOnUiThread
-import com.mcgrady.xproject.common.core.SingleLiveData
+import com.mcgrady.xarch.util.SingleLiveData
+import com.mcgrady.xarch.util.SingletonHolder
 import timber.log.Timber
 
 /**

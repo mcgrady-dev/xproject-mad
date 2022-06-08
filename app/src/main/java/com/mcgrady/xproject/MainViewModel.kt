@@ -17,6 +17,7 @@ package com.mcgrady.xproject
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mcgrady.xarch.util.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -30,7 +31,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
         MutableLiveData<String>()
     }
 
-    val taskUpdate: SingleLiveEvent<Unit> by lazy {
-        SingleLiveEvent()
+    val taskUpdate: SingleLiveData<Unit> by lazy {
+        SingleLiveData()
     }
 }
