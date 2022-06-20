@@ -15,9 +15,12 @@
  */
 package com.mcgrady.xproject.pokemon.model
 
+import kotlinx.serialization.Serializable
+
 /**
  * Created by mcgrady on 2021/8/12.
  */
+@Serializable
 data class PokemonResponse(
     val count: Int,
     val next: String?,

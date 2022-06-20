@@ -17,11 +17,13 @@ package com.mcgrady.xproject.pokemon.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 /**
  * Created by mcgrady on 2022/1/7.
  */
 @Parcelize
+@Serializable
 data class Pokemon(var page: Int = 0, var name: String, val url: String) : Parcelable {
 
     fun getImageUrl(): String {

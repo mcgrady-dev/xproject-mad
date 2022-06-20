@@ -21,6 +21,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 /**
@@ -37,5 +38,14 @@ object PersistenceModule {
             .serializeNulls() // 序列化null
             .enableComplexMapKeySerialization()
             .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json {
+        return Json {
+            ignoreUnknownKeys = true
+            prettyPrint = true
+        }
     }
 }

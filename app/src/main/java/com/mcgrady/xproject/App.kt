@@ -18,6 +18,7 @@ package com.mcgrady.xproject
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import com.github.moduth.blockcanary.BlockCanary
 import com.mcgrady.xproject.common.core.app.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
@@ -30,16 +31,14 @@ class App : BaseApplication(), LifecycleEventObserver {
 
     override fun onCreate() {
         super.onCreate()
+
+        BlockCanary.install(this, AppBlockCanaryContext()).start()
     }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         when (event) {
-            Lifecycle.Event.ON_START -> {
-                Timber.i("LifecycleObserver: 应用回到前台")
-            }
-            Lifecycle.Event.ON_STOP -> {
-                Timber.i("LifecycleObserver: 应用退到后台")
-            }
+            Lifecycle.Event.ON_START -> Timber.i("LifecycleObserver: 应用回到前台")
+            Lifecycle.Event.ON_STOP -> Timber.i("LifecycleObserver: 应用退到后台")
             else -> {}
         }
     }
