@@ -1,9 +1,27 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.account
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import com.mcgrady.xproject.account.data.LoginDataSource
 import com.mcgrady.xproject.account.data.LoginRepository
 import com.mcgrady.xproject.account.data.Result
+import com.mcgrady.xproject.account.data.model.LoggedInUser
+import com.mcgrady.xproject.account.ui.login.LoggedInUserView
 import com.mcgrady.xproject.account.ui.login.LoginResult
 import com.mcgrady.xproject.account.ui.login.LoginViewModel
 import io.mockk.MockKAnnotations
@@ -20,9 +38,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.mcgrady.xproject.account.data.model.LoggedInUser
-import com.mcgrady.xproject.account.ui.login.LoggedInUserView
 
 /**
  * Created by mcgrady on 2022/6/10.

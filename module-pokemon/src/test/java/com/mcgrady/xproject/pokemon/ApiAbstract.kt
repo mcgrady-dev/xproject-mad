@@ -1,11 +1,11 @@
 /*
- * Designed and developed by 2020 skydoves (Jaewoong Eum)
+ * Copyright 2022 mcgrady
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.mcgrady.xproject.pokemon
 
 import com.mcgrady.xproject.pokemon.network.asConverterFactory
@@ -28,57 +27,56 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
 @RunWith(JUnit4::class)
 internal abstract class ApiAbstract<T> {
 
-  lateinit var mockWebServer: MockWebServer
+    lateinit var mockWebServer: MockWebServer
 
-  lateinit var json: Json
+    lateinit var json: Json
 
-  @Throws(IOException::class)
-  @Before
-  fun mockServer() {
-    mockWebServer = MockWebServer()
-    mockWebServer.start()
+    @Throws(IOException::class)
+    @Before
+    fun mockServer() {
+        mockWebServer = MockWebServer()
+        mockWebServer.start()
 
-    json = Json {
-      ignoreUnknownKeys = true
-      prettyPrint = true
+        json = Json {
+            ignoreUnknownKeys = true
+            prettyPrint = true
+        }
     }
-  }
 
-  @Throws(IOException::class)
-  @After
-  fun stopServer() {
-    mockWebServer.shutdown()
-  }
-
-  @Throws(IOException::class)
-  fun enqueueResponse(fileName: String) {
-    enqueueResponse(fileName, emptyMap())
-  }
-
-  @Throws(IOException::class)
-  private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
-    val inputStream = javaClass.classLoader!!.getResourceAsStream("api-response/$fileName")
-    val source = inputStream.source().buffer()
-    val mockResponse = MockResponse()
-    for ((key, value) in headers) {
-      mockResponse.addHeader(key, value)
+    @Throws(IOException::class)
+    @After
+    fun stopServer() {
+        mockWebServer.shutdown()
     }
-    mockWebServer.enqueue(mockResponse.setBody(source.readString(StandardCharsets.UTF_8)))
-  }
 
-  fun createService(clazz: Class<T>): T {
-    val contentType = "application/json".toMediaType()
-    return Retrofit.Builder()
-      .baseUrl(mockWebServer.url("/"))
-      .addConverterFactory(json.asConverterFactory(contentType))
-      .build()
-      .create(clazz)
-  }
+    @Throws(IOException::class)
+    fun enqueueResponse(fileName: String) {
+        enqueueResponse(fileName, emptyMap())
+    }
+
+    @Throws(IOException::class)
+    private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
+        val inputStream = javaClass.classLoader!!.getResourceAsStream("api-response/$fileName")
+        val source = inputStream.source().buffer()
+        val mockResponse = MockResponse()
+        for ((key, value) in headers) {
+            mockResponse.addHeader(key, value)
+        }
+        mockWebServer.enqueue(mockResponse.setBody(source.readString(StandardCharsets.UTF_8)))
+    }
+
+    fun createService(clazz: Class<T>): T {
+        val contentType = "application/json".toMediaType()
+        return Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))
+            .addConverterFactory(json.asConverterFactory(contentType))
+            .build()
+            .create(clazz)
+    }
 }
