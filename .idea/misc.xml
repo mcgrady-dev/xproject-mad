@@ -8,7 +8,12 @@
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.41770833333333335" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.41770833333333335" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2775" />
+        <entry key="appthemehelper/src/main/res/drawable/ate_check.xml" value="0.25" />
+        <entry key="appthemehelper/src/main/res/layout/ate_preference_color.xml" value="0.4112820512820513" />
+        <entry key="appthemehelper/src/main/res/layout/ate_preference_switch_support.xml" value="0.24270833333333333" />
         <entry key="module-account/src/main/res/layout/activity_login.xml" value="0.41770833333333335" />
+        <entry key="module-music-player/src/main/res/layout/list_item_view_switch.xml" value="0.24270833333333333" />
+        <entry key="module-music-player/src/main/res/layout/list_item_view_switch_no_title.xml" value="0.24270833333333333" />
       </map>
     </option>
   </component>

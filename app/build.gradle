@@ -5,11 +5,13 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+apply from: '../dependencies.gradle'
+
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(new File("${project.getProjectDir()}/keystore.properties")))
 
 android {
-    compileSdk 32
+    compileSdk versions.compileSdk
 
     defaultConfig {
         applicationId "com.mcgrady.xproject"
@@ -78,24 +80,24 @@ dependencies {
     implementation project(':common-core')
 
     //hilt
-    implementation 'com.google.dagger:hilt-android:2.38.1'
-    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
 
     implementation 'com.tencent.vasdolly:helper:3.0.4'
 
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:4.0.0'
-    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
-    testImplementation 'org.robolectric:robolectric:4.8'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.3'
-    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.mockito:mockito-core:${versions.mockito}"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:${versions.mockito}"
+    testImplementation "org.robolectric:robolectric:${versions.robolectric}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
+    testImplementation "androidx.arch.core:core-testing:${versions.archCoreTesting}"
 
-    androidTestImplementation "androidx.test:core-ktx:1.4.0"
-    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.3"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.test.ext:junit-ktx:${versions.junitKtx}"
+    androidTestImplementation "androidx.test:core-ktx:${versions.androidxTestCore}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
-    debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
+    debugImplementation "com.github.markzhai:blockcanary-android:${versions.blockcanary}"
 }
 
 apply from: '../config.gradle'
