@@ -20,20 +20,24 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.google.gson.Gson
+import com.mcgrady.xproject.common.core.app.BaseApplication
 import com.mcgrady.xproject.pokemon.BuildConfig
-import com.mcgrady.xproject.pokemon.network.PokedexClient
-import com.mcgrady.xproject.pokemon.network.PokedexService
+import com.mcgrady.xproject.pokemon.network.CacheControlInterceptor
+import com.mcgrady.xproject.pokemon.network.PokemonClient
+import com.mcgrady.xproject.pokemon.network.PokemonService
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import java.io.File
 import javax.inject.Singleton
 
 /**
@@ -53,10 +57,15 @@ object NetworkModule {
 //                addNetworkInterceptor(chuckerInterceptor.activeForType(InterceptorType.NETWORK, interceptorTypeProvider))
             }
             addInterceptor(
-                HttpLoggingInterceptor { message -> Timber.d(message) }.apply {
-                    level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+                HttpLoggingInterceptor { message -> Timber.tag("OkHttp").d(message) }.apply {
+                    level =
+                        if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
                 }
             )
+            addNetworkInterceptor(CacheControlInterceptor())
+            val httpCacheDir = File(BaseApplication.instance.cacheDir, "http-cache")
+            val cacheSize: Long = 10 * 1024 * 1024 // 10Mib
+            cache(Cache(httpCacheDir, cacheSize))
             build()
         }
     }
@@ -85,7 +94,7 @@ object NetworkModule {
             // are applied in an order they were added.
 //            .addBodyDecoder(decoder)
             // Controls Android shortcut creation. Available in SNAPSHOTS versions only at the moment
-            .createShortcut(true)
+//            .createShortcut(true)
             .build()
     }
 
@@ -102,13 +111,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providePokedexService(retrofit: Retrofit): PokedexService {
-        return retrofit.create(PokedexService::class.java)
+    fun providePokedexService(retrofit: Retrofit): PokemonService {
+        return retrofit.create(PokemonService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providePokedexClient(pokedexService: PokedexService): PokedexClient {
-        return PokedexClient(pokedexService)
+    fun providePokedexClient(pokedexService: PokemonService): PokemonClient {
+        return PokemonClient(pokedexService)
     }
 }

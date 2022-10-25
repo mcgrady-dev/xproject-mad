@@ -1,3 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -5,9 +12,11 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://oss.jfrog.org/libs-snapshot" }
-//        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
+
 rootProject.name = "xproject-mad"
 include ':app'
 include ':module-pokemon'
@@ -16,5 +25,3 @@ include ':common-widget'
 include ':module-main'
 include ':component-base'
 include ':module-account'
-include ':common-theme'
-include ':module-retromusic'

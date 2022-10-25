@@ -15,25 +15,43 @@
  */
 package com.mcgrady.xproject.pokemon.ui.adapter
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import com.bumptech.glide.Glide
+import com.bumptech.glide.ListPreloader
+import com.bumptech.glide.RequestBuilder
 import com.mcgrady.xarch.ext.databind
 import com.mcgrady.xproject.common.widget.extensions.inflate
 import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCompat
 import com.mcgrady.xproject.pokemon.R
 import com.mcgrady.xproject.pokemon.databinding.ItemPokemonBinding
 import com.mcgrady.xproject.pokemon.model.Pokemon
-import com.mcgrady.xproject.pokemon.ui.main.MainActivity
+import com.mcgrady.xproject.pokemon.ui.main.PokemonListActivity
 
 /**
  * Created by mcgrady on 2022/1/7.
  */
-class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
+class PokemonAdapter :
+    RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>(),
+    ListPreloader.PreloadModelProvider<Pokemon> {
 
     private val items: MutableList<Pokemon> = mutableListOf()
+
+    private val fullRequest: RequestBuilder<Bitmap> by lazy {
+        Glide.with(context).asBitmap()
+    }
+
+    private lateinit var context: Context
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        context = recyclerView.context
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val view = parent.inflate(R.layout.item_pokemon)
@@ -51,7 +69,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
             binding.root.setOnClickListener { v ->
                 val position =
                     bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
-                val intent = Intent(v?.context, MainActivity::class.java).apply {
+                val intent = Intent(v?.context, PokemonListActivity::class.java).apply {
                     putExtra("EXTRA_POKEMON", items[position])
                 }
                 TransformationCompat.startActivity(binding.transformationLayout, intent)
@@ -83,5 +101,13 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
                 executePendingBindings()
             }
         }
+    }
+
+    override fun getPreloadItems(position: Int): MutableList<Pokemon> {
+        return items.subList(position, position + 1)
+    }
+
+    override fun getPreloadRequestBuilder(item: Pokemon): RequestBuilder<*>? {
+        return fullRequest.load(item.getImageUrl())
     }
 }

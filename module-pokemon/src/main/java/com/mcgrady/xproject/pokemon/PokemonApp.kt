@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcgrady.xproject.pokemon.app
+package com.mcgrady.xproject.pokemon
 
 import com.mcgrady.xproject.common.core.app.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
@@ -22,4 +22,4 @@ import dagger.hilt.android.HiltAndroidApp
  * Created by mcgrady on 2022/1/7.
  */
 @HiltAndroidApp
-class PokedexApp : BaseApplication()
+class PokemonApp : BaseApplication()

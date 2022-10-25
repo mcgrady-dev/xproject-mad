@@ -8,12 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    namespace 'com.mcgrady.xproject.pokemon'
+    compileSdk versions.compileSdk
 
     defaultConfig {
         applicationId "com.mcgrady.xproject.pokemon"
-        minSdk 21
-        targetSdk 31
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -46,7 +47,7 @@ dependencies {
 
     implementation "androidx.palette:palette-ktx:${versions.palette}"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.kotlinxSerializationJson}"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.kotlinxSerialization}"
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${versions.kotlinxSerializationConverter}"
 
     //hilt
@@ -55,8 +56,16 @@ dependencies {
 
     //glide
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
+    implementation ("com.github.bumptech.glide:okhttp3-integration:${versions.glide}") {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation ("com.github.bumptech.glide:recyclerview-integration:${versions.glide}") {
+        // Excludes the support library because it's already included by Glide.
+        transitive = false
+    }
     kapt "com.github.bumptech.glide:compiler:${versions.glide}"
 
+    implementation 'com.caverock:androidsvg:1.2.1'
 
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "com.google.truth:truth:${versions.googleTruth}"
@@ -67,7 +76,5 @@ dependencies {
     androidTestImplementation "androidx.test:core-ktx:${versions.androidxTestCore}"
     androidTestImplementation "androidx.test.ext:truth:${versions.androidxTestTruth}"
 
-    //debugImplementation "com.github.chuckerteam.chucker:library:4.0.0-SNAPSHOT"
-    debugImplementation "com.github.chuckerteam.chucker:library:${versions.chuckerSnapshot}"
-    //debugImplementation "com.github.chuckerteam.chucker:library:${versions.chucker}"
+    debugImplementation "com.github.chuckerteam.chucker:library:${versions.chucker}"
 }

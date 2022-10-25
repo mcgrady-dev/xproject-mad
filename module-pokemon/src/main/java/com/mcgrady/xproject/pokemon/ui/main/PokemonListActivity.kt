@@ -17,25 +17,22 @@ package com.mcgrady.xproject.pokemon.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
-import com.bumptech.glide.ListPreloader
-import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
-import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.mcgrady.xarch.ext.databind
 import com.mcgrady.xproject.common.core.base.BaseActivity
+import com.mcgrady.xproject.common.widget.transformationlayout.onTransformationStartContainer
 import com.mcgrady.xproject.pokemon.R
-import com.mcgrady.xproject.pokemon.databinding.ActivityMainBinding
-import com.mcgrady.xproject.pokemon.model.Pokemon
+import com.mcgrady.xproject.pokemon.databinding.ActivityPokemonListBinding
 import com.mcgrady.xproject.pokemon.ui.adapter.PokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class PokemonListActivity : BaseActivity() {
 
-    private val binding: ActivityMainBinding by databind(R.layout.activity_main)
+    private val binding: ActivityPokemonListBinding by databind(R.layout.activity_pokemon_list)
     private val viewModel: PokemonViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationStartContainer()
         super.onCreate(savedInstanceState)
 
         binding.apply {
@@ -50,13 +47,13 @@ class MainActivity : BaseActivity() {
             )
             grid.addOnScrollListener(preloader)*/
 
-            lifecycleOwner = this@MainActivity
+            lifecycleOwner = this@PokemonListActivity
             adapter = PokemonAdapter()
             vm = viewModel
 
-            val sizeProvider = ViewPreloadSizeProvider<Pokemon>()
-            val preloader = RecyclerViewPreloader(Glide.with(this@MainActivity), adapter as ListPreloader.PreloadModelProvider<Pokemon>, sizeProvider, 5)
-            recyclerView.addOnScrollListener(preloader)
+//            val sizeProvider = ViewPreloadSizeProvider<Pokemon>()
+//            val preloader = RecyclerViewPreloader(Glide.with(this@PokemonListActivity), adapter as ListPreloader.PreloadModelProvider<Pokemon>, sizeProvider, 5)
+//            recyclerView.addOnScrollListener(preloader)
         }
     }
 }

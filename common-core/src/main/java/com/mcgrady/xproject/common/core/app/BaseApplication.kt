@@ -30,6 +30,7 @@ open class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
@@ -44,5 +45,9 @@ open class BaseApplication : Application() {
 
     override fun onTerminate() {
         super.onTerminate()
+    }
+
+    companion object {
+        lateinit var instance: Application
     }
 }

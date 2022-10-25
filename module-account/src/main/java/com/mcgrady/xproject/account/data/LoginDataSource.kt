@@ -23,6 +23,7 @@ import java.io.IOException
  */
 class LoginDataSource {
 
+    @Suppress("UNUSED_PARAMETER")
     fun login(username: String, password: String): Result<LoggedInUser> {
         return try {
             // TODO: handle loggedInUser authentication

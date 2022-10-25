@@ -6,20 +6,20 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:${versions.gradlePlugin}"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
-        //hilt
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.41'
-        //Navigation SafeArgs插件
-        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1'
+        //navigation-safeargs
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation}"
         //vasdolly
         classpath 'com.tencent.vasdolly:plugin:3.0.4'
-        //spotless
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.6.1"
-        //kotlinx-serialization
-        classpath "org.jetbrains.kotlin:kotlin-serialization:${versions.kotlin}"
-
     }
+}
+
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    id "com.diffplug.gradle.spotless" version "6.11.0" apply false
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.20' apply false
 }
 
 subprojects {
@@ -28,7 +28,7 @@ subprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
 

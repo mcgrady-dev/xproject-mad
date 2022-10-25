@@ -27,14 +27,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    namespace 'com.mcgrady.xproject.component.base'
 }
 
 dependencies {
 
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
-    implementation "androidx.appcompat:appcompat:${versions.appompat}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "com.google.android.material:material:${versions.material}"
 
     testImplementation "junit:junit:${versions.junit}"

@@ -22,7 +22,7 @@ import javax.inject.Inject
 /**
  * Created by mcgrady on 2021/8/12.
  */
-class  PokedexClient @Inject constructor(private val service: PokedexService) {
+class PokemonClient @Inject constructor(private val service: PokemonService) {
 
     suspend fun fetchPokemonList(
         page: Int

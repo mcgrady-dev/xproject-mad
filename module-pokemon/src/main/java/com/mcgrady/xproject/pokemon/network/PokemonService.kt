@@ -23,7 +23,7 @@ import retrofit2.http.Query
 /**
  * Created by mcgrady on 2021/8/12.
  */
-interface PokedexService {
+interface PokemonService {
 
     @GET("pokemon")
     suspend fun fetchPokemonList(

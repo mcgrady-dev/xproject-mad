@@ -22,14 +22,18 @@ import android.animation.Animator
  */
 internal fun Animator.addOnAnimationEndListener(onEnd: ((Animator?) -> Unit)) {
     addListener(object : Animator.AnimatorListener {
-        override fun onAnimationRepeat(animation: Animator?) = Unit
 
-        override fun onAnimationCancel(animation: Animator?) = Unit
+        override fun onAnimationStart(animation: Animator) {
+        }
 
-        override fun onAnimationStart(animation: Animator?) = Unit
-
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             onEnd(animation)
+        }
+
+        override fun onAnimationCancel(animation: Animator) {
+        }
+
+        override fun onAnimationRepeat(animation: Animator) {
         }
     })
 }

@@ -15,8 +15,8 @@
  */
 package com.mcgrady.xproject.pokemon.di
 
-import com.mcgrady.xproject.pokemon.network.PokedexClient
-import com.mcgrady.xproject.pokemon.repo.PokedexRepository
+import com.mcgrady.xproject.pokemon.network.PokemonClient
+import com.mcgrady.xproject.pokemon.repo.PokemonRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +32,7 @@ object RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun providePokedexRepository(pokedexClient: PokedexClient): PokedexRepository {
-        return PokedexRepository(pokedexClient)
+    fun providePokedexRepository(pokedexClient: PokemonClient): PokemonRepository {
+        return PokemonRepository(pokedexClient)
     }
 }

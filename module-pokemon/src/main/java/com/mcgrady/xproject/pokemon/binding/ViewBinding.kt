@@ -15,17 +15,14 @@
  */
 package com.mcgrady.xproject.pokemon.binding
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.PictureDrawable
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import androidx.palette.graphics.Palette
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.card.MaterialCardView
+import com.mcgrady.xproject.pokemon.network.GlideApp
+import com.mcgrady.xproject.pokemon.network.imageload.SvgSoftwareLayerSetter
 
 /**
  * Created by mcgrady on 2022/1/7.
@@ -43,71 +40,45 @@ object ViewBinding {
     @JvmStatic
     @BindingAdapter("paletteImage", "paletteCard")
     fun bindLoadImagePaletteView(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
-        val context = view.context
-//        Glide.with(context)
-//            .load(url)
-//            .listener(
-//                GlidePalette.with(url)
-//                    .use(BitmapPalette.Profile.MUTED_LIGHT)
-//                    .intoCallBack { palette ->
-//                        val rgb = palette?.dominantSwatch?.rgb
-//                        if (rgb != null) {
-//                            paletteCard.setCardBackgroundColor(rgb)
-//                        }
-//                    }.crossfade(true)
-//            ).into(view)
 
-        Glide.with(context)
-            .asBitmap()
+        GlideApp.with(view)
+            .`as`(PictureDrawable::class.java)
+            .listener(SvgSoftwareLayerSetter())
             .load(url)
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    Palette.from(resource)
-                        .generate { palette ->
-                            palette?.dominantSwatch?.rgb?.let {
-                                paletteCard.setCardBackgroundColor(it)
-                            }
-                        }
-                }
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
-            })
-    }
+            .into(view)
 
-//    @JvmStatic
-//    @BindingAdapter("paletteImage", "paletteView")
-//    fun bindLoadImagePaletteView(view: AppCompatImageView, url: String, paletteView: View) {
-//        val context = view.context
-//        Glide.with(context)
+//        Glide.with(view)
+//            .asBitmap()
 //            .load(url)
-//            .listener(
-//                GlidePalette.with(url)
-//                    .use(BitmapPalette.Profile.MUTED_LIGHT)
-//                    .intoCallBack { palette ->
-//                        val light = palette?.lightVibrantSwatch?.rgb
-//                        val domain = palette?.dominantSwatch?.rgb
-//                        if (domain != null) {
-// //                            if (light != null) {
-// //                                Rainbow(paletteView).palette {
-// //                                    +color(domain)
-// //                                    +color(light)
-// //                                }.background(orientation = RainbowOrientation.TOP_BOTTOM)
-// //                            } else {
-// //                                paletteView.setBackgroundColor(domain)
-// //                            }
+//            .listener(object: RequestListener<Bitmap> {
+//                override fun onLoadFailed(
+//                    e: GlideException?,
+//                    model: Any?,
+//                    target: Target<Bitmap>?,
+//                    isFirstResource: Boolean
+//                ): Boolean {
+//                    return false
+//                }
 //
-//                            paletteView.setBackgroundColor(domain)
-//
-//                            if (context is AppCompatActivity) {
-//                                context.window.apply {
-//                                    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//                                    statusBarColor = domain
+//                override fun onResourceReady(
+//                    resource: Bitmap?,
+//                    model: Any?,
+//                    target: Target<Bitmap>?,
+//                    dataSource: DataSource?,
+//                    isFirstResource: Boolean
+//                ): Boolean {
+//                    resource?.let { bitmap ->
+//                        Palette.from(bitmap)
+//                            .generate { palette ->
+//                                palette?.dominantSwatch?.rgb?.let {
+//                                    paletteCard.setCardBackgroundColor(it)
 //                                }
 //                            }
-//                        }
-//                    }.crossfade(true)
-//            ).into(view)
-//    }
+//                    }
+//                    return false
+//                }
+//            }).into(view)
+    }
 
     @JvmStatic
     @BindingAdapter("gone")

@@ -7,6 +7,7 @@ plugins {
 apply from: '../dependencies.gradle'
 
 android {
+    namespace 'com.mcgrady.xproject.common.widget'
     compileSdk versions.compileSdk
 
     defaultConfig {
@@ -34,7 +35,7 @@ android {
 
 dependencies {
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
-    implementation "androidx.appcompat:appcompat:${versions.appompat}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
     implementation "com.google.android.material:material:${versions.material}"
     implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"

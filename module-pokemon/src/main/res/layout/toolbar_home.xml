@@ -14,19 +14,18 @@
   limitations under the License.
 -->
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/toolbar"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:background="@color/colorPrimary">
-
-  <TextView
-    android:id="@+id/toolbar_title"
-    style="@style/TextStyle"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:maxEms="15"
-    android:text="@string/app_name"
-    android:textColor="@color/white"
-    android:textSize="21sp" />
+    android:background="@color/colorPrimary">
+
+  <androidx.appcompat.widget.AppCompatImageView
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:src="@drawable/pokeapi_256"
+      app:contentInsetLeft="0dp"
+      app:contentInsetStart="0dp"
+      />
 
 </androidx.appcompat.widget.Toolbar>

@@ -16,7 +16,7 @@
 package com.mcgrady.xproject.pokemon
 
 import com.mcgrady.xproject.pokemon.model.PokemonResponse
-import com.mcgrady.xproject.pokemon.network.PokedexService
+import com.mcgrady.xproject.pokemon.network.PokemonService
 import com.mcgrady.xproject.pokemon.network.asConverterFactory
 import com.skydoves.sandwich.ApiResponse
 import kotlinx.coroutines.runBlocking
@@ -40,7 +40,7 @@ class PokedexServiceTest {
     @Rule
 //    val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var service: PokedexService
+    private lateinit var service: PokemonService
     private lateinit var server: MockWebServer
 
     private val json = Json {
@@ -61,7 +61,7 @@ class PokedexServiceTest {
                 }.asConverterFactory(contentType)
             )
             .build()
-            .create(PokedexService::class.java)
+            .create(PokemonService::class.java)
     }
 
     @After

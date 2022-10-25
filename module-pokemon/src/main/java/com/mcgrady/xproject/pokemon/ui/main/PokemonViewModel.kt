@@ -20,7 +20,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.*
 import com.mcgrady.xproject.common.core.base.BaseViewModel
 import com.mcgrady.xproject.pokemon.model.Pokemon
-import com.mcgrady.xproject.pokemon.repo.PokedexRepository
+import com.mcgrady.xproject.pokemon.repo.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -30,7 +30,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
-    private val repository: PokedexRepository,
+    private val repository: PokemonRepository,
     private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -52,24 +52,6 @@ class PokemonViewModel @Inject constructor(
             ).asLiveDataOnViewModelScope()
         }
     }
-
-    //    @OptIn(ExperimentalCoroutinesApi::class)
-    fun fetchPokemonInfoInLiveData(page: Int) = liveData<List<Pokemon>> {
-        repository.fetchPokemonList(
-            page = page,
-            onStart = {},
-            onComplete = {},
-            onError = {}
-        )
-    }
-
-    //    @OptIn(ExperimentalCoroutinesApi::class)
-    suspend fun fetchPokemonInfoAsLiveData(page: Int) = repository.fetchPokemonList(
-        page = page,
-        onStart = {},
-        onComplete = {},
-        onError = {}
-    ).asLiveData()
 
     @MainThread
     fun fetchPokemonList() {

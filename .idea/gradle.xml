@@ -12,13 +12,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common-core" />
-            <option value="$PROJECT_DIR$/common-theme" />
             <option value="$PROJECT_DIR$/common-widget" />
             <option value="$PROJECT_DIR$/component-base" />
             <option value="$PROJECT_DIR$/module-account" />
             <option value="$PROJECT_DIR$/module-main" />
             <option value="$PROJECT_DIR$/module-pokemon" />
-            <option value="$PROJECT_DIR$/module-retromusic" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -19,8 +19,6 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.mcgrady.xproject.common.core.extensions.navigationBar
-import com.mcgrady.xproject.common.core.extensions.statusBar
 import timber.log.Timber
 
 /**
@@ -42,13 +40,13 @@ open class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbac
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         Timber.i("$TAG ${activity::class.simpleName}: onCreated, taskId=${activity.taskId}")
 
-        statusBar(activity = activity as FragmentActivity) {
-            transparent()
-        }
-        @Suppress("USELESS_CAST")
-        navigationBar(activity = activity as FragmentActivity) {
-            transparent()
-        }
+//        statusBar(activity = activity as FragmentActivity) {
+//            transparent()
+//        }
+//        @Suppress("USELESS_CAST")
+//        navigationBar(activity = activity as FragmentActivity) {
+//            transparent()
+//        }
     }
 
     override fun onActivityStarted(activity: Activity) {
