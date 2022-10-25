@@ -1,10 +1,11 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'kotlin-parcelize'
+//    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
     id 'dagger.hilt.android.plugin'
     id 'kotlinx-serialization'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -34,6 +35,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+//    kotlin {
+//        sourceSets {
+//            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
+//            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
+//        }
+//    }
+
     buildFeatures {
         dataBinding = true
     }

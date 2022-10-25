@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+//    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
     id 'dagger.hilt.android.plugin'
 }
 
@@ -17,7 +18,7 @@ android {
     defaultConfig {
         applicationId "com.mcgrady.xproject"
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -70,6 +71,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+//    kotlin {
+//        sourceSets {
+//            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
+//            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
+//        }
+//    }
 
     buildFeatures {
         viewBinding true

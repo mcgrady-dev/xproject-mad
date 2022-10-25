@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
+    id 'kotlin-kapt'
+//    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
     id 'dagger.hilt.android.plugin'
 }
 
@@ -33,12 +34,12 @@ android {
         jvmTarget = '1.8'
     }
 
-    kotlin {
-        sourceSets {
-            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
-            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
-        }
-    }
+//    kotlin {
+//        sourceSets {
+//            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
+//            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
+//        }
+//    }
 }
 
 dependencies {
@@ -70,14 +71,14 @@ dependencies {
 
     //room
     implementation("androidx.room:room-runtime:${versions.room}")
-    ksp "androidx.room:room-compiler:${versions.room}"
+    kapt "androidx.room:room-compiler:${versions.room}"
 
 //    api "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
 //    api "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
 
     //hilt
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
-    ksp "com.google.dagger:hilt-android-compiler:${versions.hilt}"
+    kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
 
     api 'com.gitee.zackratos:UltimateBarX:0.7.1'
 
