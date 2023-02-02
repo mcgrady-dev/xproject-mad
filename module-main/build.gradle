@@ -3,13 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 //    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
-    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
 }
 
-apply from: '../dependencies.gradle'
-
 android {
+    namespace 'com.mcgrady.xproject.main'
     compileSdk versions.compileSdk
 
     defaultConfig {

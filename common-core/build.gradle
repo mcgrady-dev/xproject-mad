@@ -6,8 +6,6 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-apply from: '../dependencies.gradle'
-
 android {
     namespace 'com.mcgrady.xproject.common.core'
     compileSdk versions.compileSdk
@@ -48,11 +46,10 @@ dependencies {
     }
 //    api "io.github.mcgrady-dev:xarch:${versions.xarch}"
 
-    api "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
-
     api 'androidx.activity:activity-ktx:1.6.1'
     api 'androidx.fragment:fragment-ktx:1.5.4'
     api "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
+    api "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
 
     //network
     api "com.squareup.okhttp3:okhttp:${versions.okhttp}"
@@ -66,7 +63,7 @@ dependencies {
         exclude module: 'kotlinx-coroutines-core'
     }
 
-//    api 'com.blankj:utilcodex:1.31.0'
+    api 'com.blankj:utilcodex:1.31.1'
     api "com.jakewharton.timber:timber:${versions.timber}"
 
     //room

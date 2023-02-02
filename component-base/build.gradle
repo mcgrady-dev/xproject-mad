@@ -3,9 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: '../dependencies.gradle'
-
 android {
+    namespace 'com.mcgrady.xproject.component.base'
     compileSdk versions.compileSdk
 
     defaultConfig {
@@ -29,7 +28,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    namespace 'com.mcgrady.xproject.component.base'
 }
 
 dependencies {

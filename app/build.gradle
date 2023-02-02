@@ -6,7 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-apply from: '../dependencies.gradle'
+//apply from: '../dependencies.gradle'
 
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(new File("${project.getProjectDir()}/keystore.properties")))
@@ -19,8 +19,8 @@ android {
         applicationId "com.mcgrady.xproject"
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode versions.versionCode
+        versionName versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -92,7 +92,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
     kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
 
-    implementation 'com.tencent.vasdolly:helper:3.0.4'
+    implementation 'com.tencent.vasdolly:helper:3.0.5'
 
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
@@ -109,5 +109,5 @@ dependencies {
     debugImplementation "com.github.markzhai:blockcanary-android:${versions.blockcanary}"
 }
 
-apply from: '../config.gradle'
+//apply from: '../config.gradle'
 apply from: 'multiple-channel.gradle'

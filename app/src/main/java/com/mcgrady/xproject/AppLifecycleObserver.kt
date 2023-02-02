@@ -24,10 +24,6 @@ import timber.log.Timber
  */
 open class AppLifecycleObserver : DefaultLifecycleObserver {
 
-    companion object {
-        val TAG = AppLifecycleObserver::class.simpleName
-    }
-
     /**
      * ON_CREATE 在应用程序的整个生命周期中只会被调用一次
      */
@@ -69,5 +65,9 @@ open class AppLifecycleObserver : DefaultLifecycleObserver {
      */
     override fun onDestroy(owner: LifecycleOwner) {
         Timber.d("$TAG Lifecycle.Event.ON_DESTROY")
+    }
+
+    companion object {
+        val TAG = AppLifecycleObserver::class.simpleName
     }
 }

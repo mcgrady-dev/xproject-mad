@@ -4,8 +4,6 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-apply from: '../dependencies.gradle'
-
 android {
     namespace 'com.mcgrady.xproject.common.widget'
     compileSdk versions.compileSdk

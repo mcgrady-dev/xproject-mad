@@ -22,4 +22,4 @@ import dagger.hilt.android.HiltAndroidApp
  * Created by mcgrady on 2022/2/17.
  */
 @HiltAndroidApp
-class App : BaseApplication()
+class MainApp : BaseApplication()

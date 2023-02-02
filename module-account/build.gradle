@@ -3,9 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: '../dependencies.gradle'
-
 android {
+    namespace 'com.mcgrady.xproject.account'
     compileSdk versions.compileSdk
 
     defaultConfig {
@@ -34,7 +33,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-    namespace 'com.mcgrady.xproject.account'
 }
 
 dependencies {

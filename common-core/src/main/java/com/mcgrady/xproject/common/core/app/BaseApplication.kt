@@ -36,15 +36,10 @@ open class BaseApplication : Application() {
             Timber.plant(Timber.DebugTree())
         } else {
             Timber.plant(ReleaseTree())
-//            val file: Int? = null
             Timber.plant(FileLoggingTree(internalAppCachePath()))
         }
 
         registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
-    }
-
-    override fun onTerminate() {
-        super.onTerminate()
     }
 
     companion object {
