@@ -20,11 +20,13 @@ import com.mcgrady.xarch.base.LazyFragment
 /**
  * Created by mcgrady on 2021/5/13.
  */
-abstract class BaseFragment : LazyFragment() {
+abstract class BaseFragment(override val contentLayoutId: Int) : LazyFragment(contentLayoutId) {
 
     override fun lazyInit() {
         initData()
     }
 
-    abstract fun initData()
+    protected open fun initData() {
+
+    }
 }

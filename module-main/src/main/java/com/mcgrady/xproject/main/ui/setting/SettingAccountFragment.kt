@@ -20,22 +20,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.mcgrady.xarch.ext.viewbind
+import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.common.core.base.BaseFragment
 import com.mcgrady.xproject.main.R
 import com.mcgrady.xproject.main.databinding.FragmentSettingSecondaryPageBinding
 
-class SettingAccountFragment : BaseFragment() {
+class SettingAccountFragment : BaseFragment(R.layout.fragment_setting_secondary_page) {
 
-    private val binding: FragmentSettingSecondaryPageBinding by viewbind()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.root
-    }
+    private val binding by viewBinding(FragmentSettingSecondaryPageBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +35,5 @@ class SettingAccountFragment : BaseFragment() {
             message.text = "Hello Navigation"
             context?.let { message.setTextColor(ContextCompat.getColor(it, R.color.white)) }
         }
-    }
-
-    override fun initData() {
     }
 }

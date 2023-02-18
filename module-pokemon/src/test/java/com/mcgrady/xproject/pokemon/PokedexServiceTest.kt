@@ -15,7 +15,7 @@
  */
 package com.mcgrady.xproject.pokemon
 
-import com.mcgrady.xproject.pokemon.model.PokemonResponse
+import com.mcgrady.xproject.pokemon.data.model.PokemonResponse
 import com.mcgrady.xproject.pokemon.network.PokemonService
 import com.mcgrady.xproject.pokemon.network.asConverterFactory
 import com.skydoves.sandwich.ApiResponse

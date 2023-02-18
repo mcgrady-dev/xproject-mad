@@ -17,10 +17,9 @@ package com.mcgrady.xproject.pokemon.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.mcgrady.xarch.ext.databind
+import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.common.core.base.BaseActivity
 import com.mcgrady.xproject.common.widget.transformationlayout.onTransformationStartContainer
-import com.mcgrady.xproject.pokemon.R
 import com.mcgrady.xproject.pokemon.databinding.ActivityPokemonListBinding
 import com.mcgrady.xproject.pokemon.ui.adapter.PokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PokemonListActivity : BaseActivity() {
 
-    private val binding: ActivityPokemonListBinding by databind(R.layout.activity_pokemon_list)
+    private val binding by viewBinding(ActivityPokemonListBinding::inflate)
     private val viewModel: PokemonViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,25 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcgrady.xproject.pokemon.model
+package com.mcgrady.xproject.pokemon.di.module
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
-import timber.log.Timber
+import com.mcgrady.xproject.pokemon.network.PokemonClient
+import com.mcgrady.xproject.pokemon.data.repository.PokemonRepository
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 /**
  * Created by mcgrady on 2022/1/7.
  */
-@Parcelize
-@Serializable
-data class Pokemon(var page: Int = 0, var name: String, val url: String) : Parcelable {
+@Module
+@InstallIn(ViewModelComponent::class)
+object RepositoryModule {
 
-    fun getImageUrl(): String {
-        val index = url.split("/".toRegex()).dropLast(1).last()
-//        val imageUrl = "https://pokeres.bastionbot.org/images/pokemon/$index.png"
-        val imageUrl = "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/$index.svg"
-        Timber.d(imageUrl)
-        return imageUrl
+    @Provides
+    @ViewModelScoped
+    fun providePokedexRepository(pokedexClient: PokemonClient): PokemonRepository {
+        return PokemonRepository(pokedexClient)
     }
 }

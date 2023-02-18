@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcgrady.xproject.common.core.extensions
+package com.mcgrady.xproject.common.core.extension
 
 import android.app.Application
 import androidx.fragment.app.FragmentActivity

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcgrady.xproject.pokemon.di
+package com.mcgrady.xproject.pokemon.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

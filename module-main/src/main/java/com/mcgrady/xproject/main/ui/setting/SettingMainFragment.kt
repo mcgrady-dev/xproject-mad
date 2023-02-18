@@ -16,36 +16,27 @@
 package com.mcgrady.xproject.main.ui.setting
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.mcgrady.xarch.ext.databind
+import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.common.core.base.BaseFragment
+import com.mcgrady.xproject.main.R
 import com.mcgrady.xproject.main.databinding.SettingMainFragmentBinding
 import com.mcgrady.xproject.main.ui.adapter.SettingMainListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingMainFragment : BaseFragment() {
+class SettingMainFragment : BaseFragment(R.layout.setting_main_fragment) {
 
-    private val binding: SettingMainFragmentBinding by databind()
+    private val binding by viewBinding(SettingMainFragmentBinding::bind)
     private val viewModel: SettingMainViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.apply {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
             lifecycleOwner = this@SettingMainFragment
             vm = viewModel
             adapter = SettingMainListAdapter()
-        }.root
-    }
-
-    override fun initData() {
-        with(binding) {
         }
     }
 }

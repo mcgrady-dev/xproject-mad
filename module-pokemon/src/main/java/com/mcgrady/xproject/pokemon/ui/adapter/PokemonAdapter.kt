@@ -18,19 +18,16 @@ package com.mcgrady.xproject.pokemon.ui.adapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
-import com.mcgrady.xarch.ext.databind
-import com.mcgrady.xproject.common.widget.extensions.inflate
+import com.mcgrady.xarch.extension.BindingViewHolder
 import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCompat
-import com.mcgrady.xproject.pokemon.R
 import com.mcgrady.xproject.pokemon.databinding.ItemPokemonBinding
-import com.mcgrady.xproject.pokemon.model.Pokemon
+import com.mcgrady.xproject.pokemon.data.model.Pokemon
 import com.mcgrady.xproject.pokemon.ui.main.PokemonListActivity
 
 /**
@@ -54,8 +51,8 @@ class PokemonAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        val view = parent.inflate(R.layout.item_pokemon)
-        return PokemonViewHolder(view).apply {
+//        val view = parent.inflate(R.layout.item_pokemon)
+        return PokemonViewHolder(BindingViewHolder(parent, ItemPokemonBinding::inflate).binding).apply {
 //            binding.root.setOnClickListener(object: ClickUtils.OnDebouncingClickListener() {
 //                override fun onDebouncingClick(v: View?) {
 //                    val position = bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return
@@ -65,7 +62,6 @@ class PokemonAdapter :
 //                    TransformationCompat.startActivity(binding.transformationLayout, intent)
 //                }
 //            })
-
             binding.root.setOnClickListener { v ->
                 val position =
                     bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
@@ -90,9 +86,7 @@ class PokemonAdapter :
         notifyItemRangeChanged(previousItemSize, list.size)
     }
 
-    class PokemonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        val binding: ItemPokemonBinding by databind()
+    class PokemonViewHolder(val binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
 
         @Suppress("UNUSED_PARAMETER")
         fun bindData(data: Pokemon?, position: Int) {

@@ -16,25 +16,21 @@
 package com.mcgrady.xproject.main.ui.setting
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.mcgrady.xarch.ext.viewbind
+import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.common.core.base.BaseFragment
+import com.mcgrady.xproject.main.R
 import com.mcgrady.xproject.main.databinding.FragmentSettingSecondaryPageBinding
 
-class SettingDeviceInfoFragment : BaseFragment() {
+class SettingDeviceInfoFragment : BaseFragment(R.layout.fragment_setting_secondary_page) {
 
-    private val binding: FragmentSettingSecondaryPageBinding by viewbind()
+    private val binding by viewBinding(FragmentSettingSecondaryPageBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.root
-    }
 
-    override fun initData() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+
+        }
     }
 }

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcgrady.xproject.pokemon.repo
+package com.mcgrady.xproject.pokemon.data.repository
 
 import androidx.annotation.WorkerThread
 import com.mcgrady.xproject.common.core.repo.Repository
-import com.mcgrady.xproject.pokemon.model.Pokemon
+import com.mcgrady.xproject.pokemon.data.model.Pokemon
 import com.mcgrady.xproject.pokemon.network.PokemonClient
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess

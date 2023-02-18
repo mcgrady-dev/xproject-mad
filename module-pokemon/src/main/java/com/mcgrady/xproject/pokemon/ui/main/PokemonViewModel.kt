@@ -19,8 +19,8 @@ import androidx.annotation.MainThread
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.*
 import com.mcgrady.xproject.common.core.base.BaseViewModel
-import com.mcgrady.xproject.pokemon.model.Pokemon
-import com.mcgrady.xproject.pokemon.repo.PokemonRepository
+import com.mcgrady.xproject.pokemon.data.model.Pokemon
+import com.mcgrady.xproject.pokemon.data.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject

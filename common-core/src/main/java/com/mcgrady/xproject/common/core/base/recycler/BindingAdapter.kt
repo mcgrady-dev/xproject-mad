@@ -21,7 +21,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.NonNull
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.mcgrady.xproject.common.core.extensions.binding
+import com.mcgrady.xarch.extension.dataBinding
 
 /**
  * Created by mcgrady on 2022/2/23.
@@ -37,7 +37,7 @@ abstract class BindingAdapter<T, BD : ViewDataBinding>(data: MutableList<T>? = n
     abstract fun bind(binding: BD, item: T)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BD> {
-        val binding = parent.binding<BD>(layoutResId, false)
+        val binding = parent.dataBinding<BD>(layoutResId, false)
         return BaseViewHolder(binding)
     }
 

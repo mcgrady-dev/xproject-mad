@@ -16,8 +16,8 @@
 package com.mcgrady.xproject.common.core.app
 
 import android.app.Application
+import com.mcgrady.xarch.extension.internalAppCachePath
 import com.mcgrady.xproject.common.core.BuildConfig
-import com.mcgrady.xproject.common.core.extensions.internalAppCachePath
 import com.mcgrady.xproject.common.core.lifecycle.ActivityLifecycleCallbacksImpl
 import com.mcgrady.xproject.common.core.log.tree.FileLoggingTree
 import com.mcgrady.xproject.common.core.log.tree.ReleaseTree

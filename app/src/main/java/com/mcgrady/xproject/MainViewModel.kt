@@ -17,7 +17,7 @@ package com.mcgrady.xproject
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mcgrady.xarch.util.SingleLiveData
+import com.mcgrady.xarch.utils.SingleLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

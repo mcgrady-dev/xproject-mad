@@ -21,7 +21,7 @@
 
     <variable
       name="pokemon"
-      type="com.mcgrady.xproject.pokemon.model.Pokemon" />
+      type="com.mcgrady.xproject.pokemon.data.model.Pokemon" />
 
   </data>
 

@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("NOTHING_TO_INLINE")
+package com.mcgrady.xproject.pokemon.data.model
 
-package com.mcgrady.xproject.common.core.extensions
-
-import android.content.Context
+import kotlinx.serialization.Serializable
 
 /**
- * Created by mcgrady on 2022/5/31.
+ * Created by mcgrady on 2021/8/12.
  */
-
-inline fun Context.internalAppCachePath(): String = cacheDir.absolutePath ?: ""
+@Serializable
+data class PokemonResponse(
+    val count: Int,
+    val next: String?,
+    val previous: String?,
+    val results: List<Pokemon>
+)

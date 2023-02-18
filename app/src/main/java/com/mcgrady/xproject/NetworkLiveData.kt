@@ -20,9 +20,9 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import com.mcgrady.xarch.ext.runOnUiThread
-import com.mcgrady.xarch.util.SingleLiveData
-import com.mcgrady.xarch.util.SingletonHolder
+import com.mcgrady.xarch.extension.runOnUiThread
+import com.mcgrady.xarch.utils.SingleLiveData
+import com.mcgrady.xarch.utils.SingletonHolder
 import timber.log.Timber
 
 /**
