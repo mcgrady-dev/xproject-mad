@@ -6,7 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-//apply from: '../dependencies.gradle'
+apply from: '../dependencies.gradle'
 
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(new File("${project.getProjectDir()}/keystore.properties")))
@@ -65,19 +65,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
-
-//    kotlin {
-//        sourceSets {
-//            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
-//            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
-//        }
-//    }
 
     buildFeatures {
         viewBinding true
@@ -110,4 +103,4 @@ dependencies {
 }
 
 //apply from: '../config.gradle'
-apply from: 'multiple-channel.gradle'
+//apply from: 'multiple-channel.gradle'

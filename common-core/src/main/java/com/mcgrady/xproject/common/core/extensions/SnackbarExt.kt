@@ -1,4 +1,4 @@
-package com.mcgrady.xproject.common.core.extension
+package com.mcgrady.xproject.common.core.extensions
 
 import android.view.View
 import androidx.annotation.StringRes
