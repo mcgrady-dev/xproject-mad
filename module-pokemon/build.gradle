@@ -75,7 +75,7 @@ dependencies {
     }
     kapt "com.github.bumptech.glide:compiler:${versions.glide}"
 
-    implementation 'com.caverock:androidsvg:1.2.1'
+    implementation 'com.caverock:androidsvg:1.4'
 
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "com.google.truth:truth:${versions.googleTruth}"

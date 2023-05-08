@@ -47,5 +47,5 @@ dependencies {
 
     androidTestImplementation "androidx.test.ext:junit-ktx:${versions.junitKtx}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
-    androidTestImplementation "org.mockito:mockito-android:${versions.mockitoAndroid}"
+    androidTestImplementation "org.mockito:mockito-android:${versions.mockito}"
 }
