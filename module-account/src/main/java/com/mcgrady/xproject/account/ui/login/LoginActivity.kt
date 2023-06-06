@@ -16,6 +16,7 @@
 package com.mcgrady.xproject.account.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -28,6 +29,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mcgrady.xproject.account.R
 import com.mcgrady.xproject.account.databinding.ActivityLoginBinding
+import com.mcgrady.xproject.account.ui.user.UserActivity
 import com.mcgrady.xproject.common.core.base.BaseActivity
 
 class LoginActivity : BaseActivity() {
@@ -81,15 +83,20 @@ class LoginActivity : BaseActivity() {
                 setResult(Activity.RESULT_OK)
 
                 // Complete and destroy login activity once successful
+                startActivity(Intent(this@LoginActivity, UserActivity::class.java))
                 finish()
             }
         )
 
-        username.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
-            )
+        username.apply {
+            afterTextChanged {
+                loginViewModel.loginDataChanged(
+                    username.text.toString(),
+                    password.text.toString()
+                )
+            }
+
+            setText("mcgrady911@foxmail.com")
         }
 
         password.apply {
@@ -115,6 +122,8 @@ class LoginActivity : BaseActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+
+            setText("123456")
         }
     }
 

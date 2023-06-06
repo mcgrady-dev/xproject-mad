@@ -24,26 +24,26 @@ ext.versions = [
         coordinatorlayout            : "1.2.1",
         recyclerView                 : "1.2.1",
         cardView                     : "1.0.0",
-        material                     : "1.8.0",
+        material                     : "1.9.0",
         ktx                          : "1.0.1",
         legacySupport                : "1.0.0",
         preference                   : "1.2.0",
         navigation                   : "2.5.3",
-        room                         : "2.5.0",
-        lifecycle                    : "2.5.1",
+        room                         : "2.5.1",
+        lifecycle                    : "2.6.1",
         splashscreen                 : "1.0.0-rc01",
         palette                      : "1.0.0",
         gridlayout                   : "1.0.0",
         annotation                   : "1.3.0",
         preferences                  : "1.0.0",
-        fragmentKtx                  : "1.5.5",
-        activityKtx                  : "1.6.1",
+        fragmentKtx                  : "1.5.7",
+        activityKtx                  : "1.7.1",
 
         // Compose
         compose                      : "1.0.0",
 
         // Arch Components
-        archCoreTesting              : "2.1.0",
+        archCoreTesting              : "2.2.0",
 
         // RxJava
         rxJava                       : "3.1.1",
@@ -61,13 +61,13 @@ ext.versions = [
         // Third Party
         xarch                        : "0.2.6",
         xarchSnapshot                : "0.3.1-SNAPSHOT",
-        okhttp                       : "4.10.0",
+        okhttp                       : "4.11.0",
         rxkPrefs                     : "1.2.5",
         materialDialogs              : "3.3.0",
         crashlytics                  : "17.2.2",
         glide                        : "4.15.1",
         gson                         : "2.10.1",
-        moshi                        : "1.13.0",
+        moshi                        : "1.15.0",
         retrofit                     : "2.9.0",
         retrofitGson                 : "2.3.0",
         nanoHttpd                    : "2.3.1",
@@ -75,14 +75,15 @@ ext.versions = [
         sandwich                     : "1.3.5",
         kotlinxSerializationConverter: "1.0.0",
         utilcode                     : "1.31.1",
+        therouter                    : "1.1.3-beta2",
 
         // Debug
         timber                       : "5.0.1",
         debugDb                      : "1.0.3",
-        leakcanary                   : "2.10",
+        leakcanary                   : "2.11",
         blockcanary                  : "1.5.0",
         chucker                      : "3.5.2",
-        chuckerSnapshot              : "develop-SNAPSHOT",
+        chuckerSnapshot              : "4.0.0-SNAPSHOT",
 
         // Unit Testing
         junit                        : "4.13.2",

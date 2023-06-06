@@ -16,8 +16,10 @@
 package com.mcgrady.xproject.account
 
 import com.mcgrady.xproject.common.core.app.BaseApplication
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * Created by mcgrady on 2022/6/9.
  */
+@HiltAndroidApp
 class AccountApp : BaseApplication()

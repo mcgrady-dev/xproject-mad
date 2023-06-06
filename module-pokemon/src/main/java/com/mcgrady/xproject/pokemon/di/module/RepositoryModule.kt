@@ -16,7 +16,7 @@
 package com.mcgrady.xproject.pokemon.di.module
 
 import com.mcgrady.xproject.pokemon.network.PokemonClient
-import com.mcgrady.xproject.pokemon.data.repository.PokemonRepository
+import com.mcgrady.xproject.pokemon.repo.PokemonRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

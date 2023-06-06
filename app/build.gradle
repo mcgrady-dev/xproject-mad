@@ -2,8 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-//    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
     id 'dagger.hilt.android.plugin'
+    id 'therouter'
 }
 
 apply from: '../dependencies.gradle'
@@ -17,8 +17,8 @@ android {
 
     defaultConfig {
         applicationId "com.mcgrady.xproject"
-        minSdk 21
-        targetSdk 33
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
         versionCode versions.versionCode
         versionName versions.versionName
 
@@ -73,32 +73,32 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
-        dataBinding true
+        viewBinding = true
     }
 }
 
 dependencies {
     implementation project(':common-core')
+    implementation project(':common-widget')
+
+    if (!isBuildModule.toBoolean()) {
+        runtimeOnly project(path: ':module-account')
+        runtimeOnly project(path: ':module-pokemon')
+        runtimeOnly project(path: ':module-zhihu')
+    }
 
     //hilt
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
     kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
-
-    testImplementation "junit:junit:${versions.junit}"
-    testImplementation "org.mockito:mockito-core:${versions.mockito}"
-    testImplementation "org.mockito.kotlin:mockito-kotlin:${versions.mockito}"
-    testImplementation "org.robolectric:robolectric:${versions.robolectric}"
-    testImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
-    testImplementation "androidx.arch.core:core-testing:${versions.archCoreTesting}"
-
-    androidTestImplementation "androidx.test.ext:junit-ktx:${versions.junitKtx}"
-    androidTestImplementation "androidx.test:core-ktx:${versions.androidxTestCore}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    //router
+    kapt "cn.therouter:apt:${versions.therouter}"
+    implementation "cn.therouter:router:${versions.therouter}"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
     debugImplementation "com.github.markzhai:blockcanary-android:${versions.blockcanary}"
-}
+    releaseImplementation "com.github.markzhai:blockcanary-no-op:${versions.blockcanary}"
 
-//apply from: '../config.gradle'
-//apply from: 'multiple-channel.gradle'
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.junitKtx}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+}

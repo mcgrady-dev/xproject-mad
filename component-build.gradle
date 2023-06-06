@@ -1,0 +1,95 @@
+if (isBuildModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+    apply plugin: 'therouter'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'dagger.hilt.android.plugin'
+
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdk versions.compileSdk
+
+    defaultConfig {
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "ENABLE_LOG", "true"
+            buildConfigField "boolean", "IS_BUILD_MODULE", "${isBuildModule}"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "ENABLE_LOG", "false"
+            buildConfigField "boolean", "IS_BUILD_MODULE", "${isBuildModule}"
+            minifyEnabled true
+            if (isBuildModule.toBoolean()) {
+                shrinkResources true
+            }
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java {
+                    //model的时候移除无用的包
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    if (isBuildModule.toBoolean()) {
+        //hilt
+        kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
+        //router
+        kapt "cn.therouter:apt:${versions.therouter}"
+        implementation "cn.therouter:router:${versions.therouter}"
+        //canary
+        debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
+        implementation "com.github.markzhai:blockcanary-android:${versions.blockcanary}"
+        //test
+        testImplementation "junit:junit:${versions.junit}"
+        androidTestImplementation "androidx.test.ext:junit:${versions.junitKtx}"
+        androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    } else {
+        //hilt
+        runtimeOnly "com.google.dagger:hilt-android-compiler:${versions.hilt}"
+        //router
+        runtimeOnly "cn.therouter:apt:${versions.therouter}"
+        //canary
+        runtimeOnly "com.github.markzhai:blockcanary-no-op:${versions.blockcanary}"
+    }
+}

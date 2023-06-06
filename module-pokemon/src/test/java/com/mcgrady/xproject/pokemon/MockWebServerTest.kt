@@ -21,28 +21,40 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
+import java.util.logging.Level
+import java.util.logging.Logger
 
 /**
  * Created by mcgrady on 2022/6/8.
  */
 class MockWebServerTest {
 
-    private lateinit var server: MockWebServer
+    private val server by lazy { MockWebServer() }
 
     @Before
     fun setUp() {
-        server = MockWebServer()
-        server.start()
+        try {
+            server.start()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     @After
     fun clearUp() {
-        server.shutdown()
+        try {
+            server.shutdown()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            logger.log(Level.WARNING, "MockWebServer shutdown failed", e)
+        }
     }
 
     @Test
     fun defaultMockResponse() {
         val response = MockResponse()
+        server.enqueue(response)
         Truth.assertThat(response.headers.toString()).contains("Content-Length: 0")
         Truth.assertThat(response.status).isEqualTo("HTTP/1.1 200 OK")
     }
@@ -66,5 +78,9 @@ class MockWebServerTest {
             Truth.assertThat((response.status)).isEqualTo(("HTTP/1.1 $i $expectedReason"))
             Truth.assertThat(response.headers.toString()).contains("Content-Length: 0")
         }
+    }
+
+    companion object {
+        private val logger = Logger.getLogger(MockWebServerTest::class.java.name)
     }
 }

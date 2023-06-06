@@ -15,8 +15,6 @@
  */
 package com.mcgrady.xproject.pokemon.di.module
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,15 +28,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object PersistenceModule {
-
-    @Provides
-    @Singleton
-    fun provideGson(): Gson {
-        return GsonBuilder()
-            .serializeNulls() // 序列化null
-            .enableComplexMapKeySerialization()
-            .create()
-    }
 
     @Provides
     @Singleton

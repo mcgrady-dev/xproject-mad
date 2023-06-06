@@ -16,6 +16,7 @@
 package com.mcgrady.xproject.common.core.base
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -26,6 +27,12 @@ import kotlinx.coroutines.flow.Flow
  * Created by mcgrady on 4/15/21.
  */
 abstract class BaseViewModel : ViewModel() {
+
+    protected val _isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData(false) }
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    protected val _toast: MutableLiveData<String> by lazy { MutableLiveData() }
+    val toast: LiveData<String> = _toast
 
     fun <T> Flow<T>.asLiveDataOnViewModelScope(): LiveData<T> {
         return asLiveData(viewModelScope.coroutineContext + Dispatchers.IO)

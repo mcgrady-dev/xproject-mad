@@ -30,7 +30,8 @@ data class Pokemon(var page: Int = 0, var name: String, val url: String) : Parce
     fun getImageUrl(): String {
         val index = url.split("/".toRegex()).dropLast(1).last()
 //        val imageUrl = "https://pokeres.bastionbot.org/images/pokemon/$index.png"
-        val imageUrl = "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/$index.svg"
+//        val imageUrl = "https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/$index.svg"
+        val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$index.png"
         Timber.d(imageUrl)
         return imageUrl
     }

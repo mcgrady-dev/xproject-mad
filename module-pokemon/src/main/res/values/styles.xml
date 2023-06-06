@@ -12,15 +12,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License. -->
-<resources>
-
-  <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="colorControlHighlight">@color/colorPrimary</item>
-    <item name="android:textColorPrimary">@android:color/white</item>
-  </style>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
 
   <style name="TextStyle" parent="@android:style/Widget.TextView">
     <item name="android:textColor">@android:color/white</item>

@@ -16,6 +16,7 @@
 package com.mcgrady.xproject.pokemon
 
 import com.mcgrady.xproject.pokemon.network.asConverterFactory
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.mockwebserver.MockResponse
@@ -34,33 +35,29 @@ import java.nio.charset.StandardCharsets
 internal abstract class ApiAbstract<T> {
 
     lateinit var mockWebServer: MockWebServer
-
-    lateinit var json: Json
-
-    @Throws(IOException::class)
-    @Before
-    fun mockServer() {
-        mockWebServer = MockWebServer()
-        mockWebServer.start()
-
-        json = Json {
+    internal val json by lazy {
+        Json {
             ignoreUnknownKeys = true
             prettyPrint = true
         }
     }
 
-    @Throws(IOException::class)
+
+    @Before
+    fun mockServer() {
+        mockWebServer = MockWebServer()
+        mockWebServer.start()
+    }
+
     @After
     fun stopServer() {
         mockWebServer.shutdown()
     }
 
-    @Throws(IOException::class)
     fun enqueueResponse(fileName: String) {
         enqueueResponse(fileName, emptyMap())
     }
 
-    @Throws(IOException::class)
     private fun enqueueResponse(fileName: String, headers: Map<String, String>) {
         val inputStream = javaClass.classLoader!!.getResourceAsStream("api-response/$fileName")
         val source = inputStream.source().buffer()
@@ -72,10 +69,10 @@ internal abstract class ApiAbstract<T> {
     }
 
     fun createService(clazz: Class<T>): T {
-        val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
-            .addConverterFactory(json.asConverterFactory(contentType))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
             .create(clazz)
     }

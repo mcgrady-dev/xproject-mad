@@ -12,7 +12,8 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://oss.jfrog.org/libs-snapshot" }
-//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url 'https://s01.oss.sonatype.org/content/groups/staging/' }
         maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
@@ -22,6 +23,5 @@ include ':app'
 include ':module-pokemon'
 include ':common-core'
 include ':common-widget'
-include ':module-main'
-include ':component-base'
 include ':module-account'
+include ':module-zhihu'

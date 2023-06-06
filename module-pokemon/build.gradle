@@ -1,55 +1,19 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-//    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlinx-serialization'
-    id 'kotlin-parcelize'
-}
+apply from: "../component-build.gradle"
+apply plugin: "kotlinx-serialization"
 
 android {
+    resourcePrefix "pokemon_"
     namespace 'com.mcgrady.xproject.pokemon'
-    compileSdk versions.compileSdk
 
     defaultConfig {
         applicationId "com.mcgrady.xproject.pokemon"
-        minSdk versions.minSdk
-        targetSdk versions.targetSdk
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = '17'
-    }
-
-//    kotlin {
-//        sourceSets {
-//            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
-//            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
-//        }
-//    }
 
     buildFeatures {
         buildConfig = true
         dataBinding = true
     }
 }
-
-apply from: '../dependencies.gradle'
 
 dependencies {
     implementation project(':common-core')
@@ -62,7 +26,6 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
-    kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
 
     //glide
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
@@ -75,16 +38,12 @@ dependencies {
     }
     kapt "com.github.bumptech.glide:compiler:${versions.glide}"
 
-    implementation 'com.caverock:androidsvg:1.4'
-
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "com.google.truth:truth:${versions.googleTruth}"
     testImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
-
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
     androidTestImplementation "androidx.test.ext:junit-ktx:${versions.junitKtx}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
     androidTestImplementation "androidx.test:core-ktx:${versions.androidxTestCore}"
     androidTestImplementation "androidx.test.ext:truth:${versions.androidxTestTruth}"
-
-    debugImplementation "com.github.chuckerteam.chucker:library:${versions.chucker}"
 }

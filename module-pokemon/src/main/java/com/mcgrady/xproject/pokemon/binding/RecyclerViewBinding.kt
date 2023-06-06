@@ -19,8 +19,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mcgrady.xproject.common.core.base.RecyclerViewPaginator
 import com.mcgrady.xproject.pokemon.data.model.Pokemon
-import com.mcgrady.xproject.pokemon.ui.adapter.PokemonAdapter
-import com.mcgrady.xproject.pokemon.ui.main.PokemonViewModel
+import com.mcgrady.xproject.pokemon.ui.databinding.adapter.PokemonDataBindingAdapter
+import com.mcgrady.xproject.pokemon.ui.databinding.main.PokemonDataBindingViewModel
 
 /**
  * Created by mcgrady on 2022/1/7.
@@ -37,10 +37,10 @@ object RecyclerViewBinding {
 
     @JvmStatic
     @BindingAdapter("paginationPokemonList")
-    fun paginationPokemonList(recycler: RecyclerView, viewModel: PokemonViewModel) {
+    fun paginationPokemonList(recycler: RecyclerView, viewModel: PokemonDataBindingViewModel) {
         RecyclerViewPaginator(
             recyclerView = recycler,
-            isLoading = { viewModel.isLoading.get() },
+            isLoading = { viewModel.isLoading.value as Boolean },
             loadMore = { viewModel.fetchPokemonList() },
             onLast = { false }
         ).run {
@@ -52,7 +52,7 @@ object RecyclerViewBinding {
     @BindingAdapter("submitPokemonList")
     fun bindSubmitPokemonList(recycler: RecyclerView, pokemonList: List<Pokemon>?) {
         if (!pokemonList.isNullOrEmpty()) {
-            (recycler.adapter as PokemonAdapter?)?.run {
+            (recycler.adapter as PokemonDataBindingAdapter?)?.run {
                 setPokemonList(pokemonList)
             }
         }

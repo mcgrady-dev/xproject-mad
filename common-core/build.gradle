@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-//    id 'com.google.devtools.ksp' version '1.7.20-1.0.7'
     id 'dagger.hilt.android.plugin'
 }
 
@@ -32,13 +31,6 @@ android {
         jvmTarget = '17'
     }
 
-//    kotlin {
-//        sourceSets {
-//            main.kotlin.srcDirs += 'build/generated/ksp/main/kotlin'
-//            test.kotlin.srcDirs += 'build/generated/ksp/test/kotlin'
-//        }
-//    }
-
     buildFeatures {
         buildConfig = true
     }
@@ -60,8 +52,6 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:${versions.okhttp}"
     api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
     api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-    api "com.google.code.gson:gson:${versions.gson}"
     api ("com.github.skydoves:sandwich:${versions.sandwich}") {
         exclude module: 'okhttp'
         exclude module: 'retrofit'
@@ -79,9 +69,15 @@ dependencies {
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
     kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
 
-    api 'com.gitee.zackratos:UltimateBarX:0.7.1'
+//    api 'com.gitee.zackratos:UltimateBarX:0.7.1'
+
+//    debugImplementation "com.github.chuckerteam.chucker:library:${versions.chucker}"
+//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:${versions.chucker}"
+    debugImplementation "com.github.chuckerteam.chucker:library:${versions.chuckerSnapshot}"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:${versions.chuckerSnapshot}"
 
     testImplementation "junit:junit:${versions.junit}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
     androidTestImplementation "androidx.test.ext:junit-ktx:${versions.junitKtx}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
 }

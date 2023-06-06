@@ -17,6 +17,7 @@ package com.mcgrady.xproject.pokemon.network
 
 import com.mcgrady.xproject.pokemon.data.model.PokemonResponse
 import com.skydoves.sandwich.ApiResponse
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -15,14 +15,19 @@
  */
 package com.mcgrady.xproject.pokemon.binding
 
-import android.graphics.drawable.PictureDrawable
+import android.graphics.Bitmap
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.palette.graphics.Palette
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.card.MaterialCardView
 import com.mcgrady.xproject.pokemon.network.GlideApp
-import com.mcgrady.xproject.pokemon.network.imageload.SvgSoftwareLayerSetter
 
 /**
  * Created by mcgrady on 2022/1/7.
@@ -42,42 +47,42 @@ object ViewBinding {
     fun bindLoadImagePaletteView(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
 
         GlideApp.with(view)
-            .`as`(PictureDrawable::class.java)
-            .listener(SvgSoftwareLayerSetter())
+//            .`as`(PictureDrawable::class.java)
+//            .listener(SvgSoftwareLayerSetter())
+            .asBitmap()
             .load(url)
-            .into(view)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .listener(object: RequestListener<Bitmap> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    e?.printStackTrace()
+                    paletteCard.setCardBackgroundColor(ContextCompat.getColor(view.context, com.mcgrady.xproject.common.widget.R.color.background800))
+                    return false
+                }
 
-//        Glide.with(view)
-//            .asBitmap()
-//            .load(url)
-//            .listener(object: RequestListener<Bitmap> {
-//                override fun onLoadFailed(
-//                    e: GlideException?,
-//                    model: Any?,
-//                    target: Target<Bitmap>?,
-//                    isFirstResource: Boolean
-//                ): Boolean {
-//                    return false
-//                }
-//
-//                override fun onResourceReady(
-//                    resource: Bitmap?,
-//                    model: Any?,
-//                    target: Target<Bitmap>?,
-//                    dataSource: DataSource?,
-//                    isFirstResource: Boolean
-//                ): Boolean {
-//                    resource?.let { bitmap ->
-//                        Palette.from(bitmap)
-//                            .generate { palette ->
-//                                palette?.dominantSwatch?.rgb?.let {
-//                                    paletteCard.setCardBackgroundColor(it)
-//                                }
-//                            }
-//                    }
-//                    return false
-//                }
-//            }).into(view)
+                override fun onResourceReady(
+                    resource: Bitmap?,
+                    model: Any?,
+                    target: Target<Bitmap>?,
+                    dataSource: com.bumptech.glide.load.DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    resource?.let { bitmap ->
+                        Palette.from(bitmap)
+                            .generate { palette ->
+                                palette?.dominantSwatch?.rgb?.let {
+                                    paletteCard.setCardBackgroundColor(it)
+                                }
+                            }
+                    }
+                    return false
+                }
+            })
+            .into(view)
     }
 
     @JvmStatic
