@@ -907,7 +907,7 @@ open class ProgressCircularView @JvmOverloads constructor(
         animator?.apply {
             duration = animTime?.toLong() ?: 0
             addUpdateListener { animation ->
-                percent = animation?.animatedValue as Float
+                percent = animation.animatedValue as Float
                 progressCurValue = percent * progressMaxValue
                 Log.d(
                     "onAnimationUpdate",

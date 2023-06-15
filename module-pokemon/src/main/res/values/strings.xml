@@ -1,3 +1,11 @@
 <resources>
     <string name="pokemon_app_name">Pokémon</string>
+    <string name="pokemon_weight">Weight</string>
+    <string name="pokemon_height">Height</string>
+    <string name="pokemon_base_stats">Base Stats</string>
+    <string name="pokemon_hp">HP</string>
+    <string name="pokemon_atk">ATK</string>
+    <string name="pokemon_def">DEF</string>
+    <string name="pokemon_spd">SPD</string>
+    <string name="pokemon_exp">EXP</string>
 </resources>

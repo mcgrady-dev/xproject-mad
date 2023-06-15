@@ -15,7 +15,7 @@
  */
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.mcgrady.xproject.common.core.extension
+package com.mcgrady.xproject.common.core.extensions
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

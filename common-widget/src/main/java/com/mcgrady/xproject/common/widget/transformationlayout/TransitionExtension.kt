@@ -24,14 +24,14 @@ import com.google.android.material.transition.platform.Hold
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
 /** sets an exit shared element callback to activity for implementing shared element transition. */
-public fun Activity.onTransformationStartContainer() {
+fun Activity.onTransformationStartContainer() {
     window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
     setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
     window.sharedElementsUseOverlay = false
 }
 
 /** sets an enter shared element callback to activity for implementing shared element transition. */
-public fun Activity.onTransformationEndContainer(
+fun Activity.onTransformationEndContainer(
     params: TransformationLayout.Params?
 ) {
     requireNotNull(
@@ -45,12 +45,12 @@ public fun Activity.onTransformationEndContainer(
 }
 
 /** sets an exit shared element callback to fragment for implementing shared element transition. */
-public fun Fragment.onTransformationStartContainer() {
+fun Fragment.onTransformationStartContainer() {
     exitTransition = Hold()
 }
 
 /** sets an enter shared element callback to fragment for implementing shared element transition. */
-public fun Fragment.onTransformationEndContainer(
+fun Fragment.onTransformationEndContainer(
     params: TransformationLayout.Params?
 ) {
     requireNotNull(
@@ -61,7 +61,7 @@ public fun Fragment.onTransformationEndContainer(
 
 /** adds a shared element transformation to FragmentTransaction. */
 @JvmOverloads
-public fun FragmentTransaction.addTransformation(
+fun FragmentTransaction.addTransformation(
     transformationLayout: TransformationLayout,
     transitionName: String? = null
 ): FragmentTransaction {

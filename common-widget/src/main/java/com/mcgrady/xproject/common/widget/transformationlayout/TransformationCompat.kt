@@ -26,14 +26,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
 /** Helper for accessing features in starting activities with transformation animation. */
-public object TransformationCompat {
+object TransformationCompat {
 
     /** A common definition of the activity's transition name. */
     internal const val activityTransitionName: String = "com.skydoves.transformationlayout"
 
     /** Invalidate the activity's options menu, if able. */
     @JvmStatic
-    public fun startActivity(
+    fun startActivity(
         transformationLayout: TransformationLayout,
         intent: Intent
     ) {
@@ -47,7 +47,7 @@ public object TransformationCompat {
      * result when it finished.
      */
     @JvmStatic
-    public fun startActivityForResult(
+    fun startActivityForResult(
         transformationLayout: TransformationLayout,
         intent: Intent,
         requestCode: Int
@@ -65,7 +65,7 @@ public object TransformationCompat {
      * apply the [TransformationLayout.Params] on an Activity.
      */
     @JvmStatic
-    public fun onTransformationEndContainerApplyParams(activity: Activity) {
+    fun onTransformationEndContainerApplyParams(activity: Activity) {
         activity.onTransformationEndContainer(
             activity.intent.getParcelableExtra(activityTransitionName)
         )
@@ -73,31 +73,31 @@ public object TransformationCompat {
 
     /** sets an exit shared element callback to activity for implementing shared element transition. */
     @JvmStatic
-    public fun onTransformationStartContainer(activity: Activity) {
+    fun onTransformationStartContainer(activity: Activity) {
         activity.onTransformationStartContainer()
     }
 
     /** sets an enter shared element callback to activity for implementing shared element transition. */
     @JvmStatic
-    public fun onTransformationEndContainer(activity: Activity, params: TransformationLayout.Params?) {
+    fun onTransformationEndContainer(activity: Activity, params: TransformationLayout.Params?) {
         activity.onTransformationEndContainer(params)
     }
 
     /** sets an exit shared element callback to fragment for implementing shared element transition. */
     @JvmStatic
-    public fun onTransformationStartContainer(fragment: Fragment) {
+    fun onTransformationStartContainer(fragment: Fragment) {
         fragment.onTransformationStartContainer()
     }
 
     /** sets an enter shared element callback to fragment for implementing shared element transition. */
     @JvmStatic
-    public fun onTransformationEndContainer(fragment: Fragment, params: TransformationLayout.Params?) {
+    fun onTransformationEndContainer(fragment: Fragment, params: TransformationLayout.Params?) {
         fragment.onTransformationEndContainer(params)
     }
 
     /** adds a shared element transformation to FragmentTransaction. */
     @JvmStatic
-    public fun addTransformation(
+    fun addTransformation(
         fragmentTransaction: FragmentTransaction,
         transformationLayout: TransformationLayout,
         transitionName: String? = null

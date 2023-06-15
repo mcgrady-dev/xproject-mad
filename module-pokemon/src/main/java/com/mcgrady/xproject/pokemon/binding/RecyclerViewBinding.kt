@@ -18,9 +18,13 @@ package com.mcgrady.xproject.pokemon.binding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mcgrady.xproject.common.core.base.RecyclerViewPaginator
+import com.mcgrady.xproject.common.core.base.adapter.BaseAdapter
 import com.mcgrady.xproject.pokemon.data.model.Pokemon
-import com.mcgrady.xproject.pokemon.ui.databinding.adapter.PokemonDataBindingAdapter
-import com.mcgrady.xproject.pokemon.ui.databinding.main.PokemonDataBindingViewModel
+import com.mcgrady.xproject.pokemon.data.model.PokemonInfo
+import com.mcgrady.xproject.pokemon.ui.databinding.adapter.PokemonDBAdapter
+import com.mcgrady.xproject.pokemon.ui.databinding.adapter.PokemonDetailRibbonAdapter
+import com.mcgrady.xproject.pokemon.ui.databinding.adapter.SpacesItemDecoration
+import com.mcgrady.xproject.pokemon.ui.databinding.main.PokemonListDBViewModel
 
 /**
  * Created by mcgrady on 2022/1/7.
@@ -37,7 +41,7 @@ object RecyclerViewBinding {
 
     @JvmStatic
     @BindingAdapter("paginationPokemonList")
-    fun paginationPokemonList(recycler: RecyclerView, viewModel: PokemonDataBindingViewModel) {
+    fun paginationPokemonList(recycler: RecyclerView, viewModel: PokemonListDBViewModel) {
         RecyclerViewPaginator(
             recyclerView = recycler,
             isLoading = { viewModel.isLoading.value as Boolean },
@@ -52,9 +56,18 @@ object RecyclerViewBinding {
     @BindingAdapter("submitPokemonList")
     fun bindSubmitPokemonList(recycler: RecyclerView, pokemonList: List<Pokemon>?) {
         if (!pokemonList.isNullOrEmpty()) {
-            (recycler.adapter as PokemonDataBindingAdapter?)?.run {
+            (recycler.adapter as PokemonDBAdapter?)?.run {
                 setPokemonList(pokemonList)
             }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindPokemonTypes")
+    fun bindPokemonTypes(recyclerView: RecyclerView, types: List<PokemonInfo.TypeResponse>?) {
+        if (recyclerView.adapter is PokemonDetailRibbonAdapter) {
+            (recyclerView.adapter as PokemonDetailRibbonAdapter).submitList(types)
+            recyclerView.addItemDecoration(SpacesItemDecoration())
         }
     }
 }

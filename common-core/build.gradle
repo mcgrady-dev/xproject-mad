@@ -52,24 +52,13 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:${versions.okhttp}"
     api "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
     api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    api ("com.github.skydoves:sandwich:${versions.sandwich}") {
-        exclude module: 'okhttp'
-        exclude module: 'retrofit'
-        exclude module: 'kotlinx-coroutines-core'
-    }
 
     api "com.blankj:utilcodex:${versions.utilcode}"
     api "com.jakewharton.timber:timber:${versions.timber}"
 
-    //room
-    implementation("androidx.room:room-runtime:${versions.room}")
-    kapt "androidx.room:room-compiler:${versions.room}"
-
     //hilt
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
     kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
-
-//    api 'com.gitee.zackratos:UltimateBarX:0.7.1'
 
 //    debugImplementation "com.github.chuckerteam.chucker:library:${versions.chucker}"
 //    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:${versions.chucker}"

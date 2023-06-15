@@ -1,8 +1,7 @@
 package com.mcgrady.xproject.account.network
 
-import com.mcgrady.xproject.account.data.model.BaseResponse
 import com.mcgrady.xproject.account.data.model.User
-import com.skydoves.sandwich.ApiResponse
+import com.mcgrady.xproject.common.core.network.ApiResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

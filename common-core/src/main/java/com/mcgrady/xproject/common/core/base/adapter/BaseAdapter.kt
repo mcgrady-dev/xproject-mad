@@ -70,7 +70,7 @@ abstract class BaseAdapter<T, VH: RecyclerView.ViewHolder>(open var items: List<
     protected open fun bindViewClickListener(viewHolder: VH, viewType: Int) {
         onItemClickListener?.let {
             viewHolder.itemView.setOnClickListener { v ->
-                val position = viewHolder.adapterPosition
+                val position = viewHolder.bindingAdapterPosition
                 if (position == RecyclerView.NO_POSITION) {
                     return@setOnClickListener
                 }

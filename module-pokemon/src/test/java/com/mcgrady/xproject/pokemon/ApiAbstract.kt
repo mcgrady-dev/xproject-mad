@@ -15,8 +15,8 @@
  */
 package com.mcgrady.xproject.pokemon
 
+import com.mcgrady.xproject.common.core.network.adapters.ApiResponseCallAdapterFactory
 import com.mcgrady.xproject.pokemon.network.asConverterFactory
-import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.mockwebserver.MockResponse
@@ -28,7 +28,6 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
-import java.io.IOException
 import java.nio.charset.StandardCharsets
 
 @RunWith(JUnit4::class)

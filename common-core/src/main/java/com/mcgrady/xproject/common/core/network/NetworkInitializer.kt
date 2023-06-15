@@ -1,22 +1,21 @@
 package com.mcgrady.xproject.common.core.network
 
-import com.mcgrady.xproject.common.core.network.operators.SandwichOperator
+import com.mcgrady.xproject.common.core.network.operators.IResponseOperator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okio.Timeout
 
 object NetworkInitializer {
 
-
     @JvmStatic
     var successCodeRange: IntRange = 200..299
 
     @JvmStatic
-    var sandwichOperators: MutableList<SandwichOperator> = mutableListOf()
+    var responseOperators: MutableList<IResponseOperator> = mutableListOf()
 
     @JvmSynthetic
-    var sandwichScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     @JvmStatic
-    public var sandwichTimeout: Timeout? = null
+    var timeout: Timeout? = null
 }

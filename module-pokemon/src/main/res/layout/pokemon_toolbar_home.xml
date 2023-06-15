@@ -23,7 +23,7 @@
   <androidx.appcompat.widget.AppCompatImageView
       android:layout_width="match_parent"
       android:layout_height="?actionBarSize"
-      android:src="@drawable/pokeapi_256"
+      android:src="@drawable/pokemon_pokeapi_256"
       app:contentInsetLeft="0dp"
       app:contentInsetStart="0dp"
       />

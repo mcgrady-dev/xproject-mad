@@ -160,12 +160,6 @@ public class MsgView extends AppCompatTextView {
 
         setDrawable(gd_background, backgroundColor, strokeColor);
         bg.addState(new int[] {-android.R.attr.state_pressed}, gd_background);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) { // 16
-            setBackground(bg);
-        } else {
-            //noinspection deprecation
-            setBackgroundDrawable(bg);
-        }
+        setBackground(bg);
     }
 }

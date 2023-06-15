@@ -1,12 +1,23 @@
-apply from: "../component-build.gradle"
-apply plugin: "kotlinx-serialization"
-
+buildscript {
+    apply from: "../component-build.gradle"
+}
+plugins {
+    id 'com.google.devtools.ksp' version '1.8.10-1.0.9'
+    id 'kotlinx-serialization'
+    id 'org.jetbrains.kotlin.android'
+}
 android {
     resourcePrefix "pokemon_"
     namespace 'com.mcgrady.xproject.pokemon'
 
     defaultConfig {
         applicationId "com.mcgrady.xproject.pokemon"
+        // The schemas directory contains a schema file for each version of the Room database.
+        // This is required to enable Room auto migrations.
+        // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildFeatures {
@@ -24,19 +35,24 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.kotlinxSerialization}"
     implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${versions.kotlinxSerializationConverter}"
 
-    //hilt
-    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    //room
+    implementation "androidx.room:room-runtime:${versions.room}"
+    implementation "androidx.room:room-ktx:${versions.room}"
+    ksp "androidx.room:room-compiler:${versions.room}"
 
     //glide
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
-    implementation ("com.github.bumptech.glide:okhttp3-integration:${versions.glide}") {
+    implementation("com.github.bumptech.glide:okhttp3-integration:${versions.glide}") {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
-    implementation ("com.github.bumptech.glide:recyclerview-integration:${versions.glide}") {
+    implementation("com.github.bumptech.glide:recyclerview-integration:${versions.glide}") {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
-    kapt "com.github.bumptech.glide:compiler:${versions.glide}"
+//    kapt "com.github.bumptech.glide:compiler:${versions.glide}"
+    ksp "com.github.bumptech.glide:ksp:${versions.glide}"
+
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "com.google.truth:truth:${versions.googleTruth}"

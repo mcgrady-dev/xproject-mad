@@ -76,12 +76,18 @@ open class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbac
     }
 
     override fun registerFragmentCallbacks(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName} registerFragmentLifecycleCallbacks")
-        (activity as FragmentActivity).supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
+        //FIXME
+//        Timber.i("$TAG ${activity::class.simpleName} registerFragmentLifecycleCallbacks")
+//        if (activity is FragmentActivity) {
+//            activity.supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
+//        }
     }
 
     override fun unregisterFragmentCallbacks(activity: Activity) {
-        Timber.i("$TAG ${activity::class.simpleName} unregisterFragmentLifecycleCallbacks")
-        (activity as FragmentActivity).supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
+        //FIXME
+//        Timber.i("$TAG ${activity::class.simpleName} unregisterFragmentLifecycleCallbacks")
+//        if (activity is FragmentActivity) {
+//            activity.supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
+//        }
     }
 }

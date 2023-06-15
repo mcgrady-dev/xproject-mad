@@ -15,11 +15,9 @@
  */
 package com.mcgrady.xproject.pokemon
 
-import com.google.gson.Gson
 import junit.framework.TestCase
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -120,11 +118,11 @@ class JsonUnitTest {
     """.trimIndent()
 
     private lateinit var json: Json
-    private lateinit var gson: Gson
+//    private lateinit var gson: Gson
 
     @Before
     fun setUp() {
-        gson = Gson()
+//        gson = Gson()
 
         json = Json {
             ignoreUnknownKeys = true
@@ -136,14 +134,14 @@ class JsonUnitTest {
     fun clearUp() {
     }
 
-    @Test
-    fun gsonFromJson() {
-        val user = gson.fromJson(userJson, UserBean::class.java)
-        println(user.toString())
-        TestCase.assertEquals("mcgrady", user.name)
-        TestCase.assertEquals(null, user.role)
-        TestCase.assertEquals(0, user.age)
-    }
+//    @Test
+//    fun gsonFromJson() {
+//        val user = gson.fromJson(userJson, UserBean::class.java)
+//        println(user.toString())
+//        TestCase.assertEquals("mcgrady", user.name)
+//        TestCase.assertEquals(null, user.role)
+//        TestCase.assertEquals(0, user.age)
+//    }
 
     @Test
     fun ksDecodeUserBean() {

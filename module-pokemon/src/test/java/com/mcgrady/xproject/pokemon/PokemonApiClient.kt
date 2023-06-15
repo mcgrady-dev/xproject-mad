@@ -1,8 +1,8 @@
 package com.mcgrady.xproject.pokemon
 
+import com.mcgrady.xproject.common.core.network.ApiResponse
+import com.mcgrady.xproject.common.core.network.request
 import com.mcgrady.xproject.pokemon.data.model.PokemonResponse
-import com.skydoves.sandwich.ApiResponse
-import com.skydoves.sandwich.request
 
 internal class PokemonApiClient constructor(private val service: PokemonApiService) {
 

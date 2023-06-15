@@ -20,7 +20,7 @@ import androidx.activity.ComponentActivity
 import com.mcgrady.xproject.common.widget.transformationlayout.TransformationCompat.activityTransitionName
 
 /** An abstract activity extending [ComponentActivity] with registering transformation automatically. */
-public abstract class TransformationActivity : ComponentActivity() {
+abstract class TransformationActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         onTransformationEndContainer(intent.getParcelableExtra(activityTransitionName))
