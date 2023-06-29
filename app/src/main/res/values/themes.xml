@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="Base.Theme.XProject" parent="Theme.Material3.DayNight.NoActionBar">
@@ -7,5 +7,23 @@
     </style>
 
     <style name="Theme.XProject" parent="Base.Theme.XProject" />
+
+<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--    <style name="Base.Theme.Pokémon" parent="Theme.Material3.DayNight.NoActionBar">-->
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryVariant">@color/colorPrimary</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/colorPrimary</item>-->
+<!--        <item name="colorSecondaryVariant">@color/colorPrimary</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--    </style>-->
+
+<!--    <style name="Theme.Pokémon" parent="Base.Theme.Pokémon" />-->
+
 
 </resources>

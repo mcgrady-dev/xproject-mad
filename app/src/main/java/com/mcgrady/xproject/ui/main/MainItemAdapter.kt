@@ -5,9 +5,9 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mcgrady.xproject.common.core.base.adapter.BaseAdapter
-import com.mcgrady.xproject.common.core.utils.XUtils
-import com.mcgrady.xproject.common.widget.drawable.TextDrawable
+import com.mcgrady.xproject.core.base.adapter.BaseAdapter
+import com.mcgrady.xproject.core.ui.drawable.TextDrawable
+import com.mcgrady.xproject.core.utils.XUtils
 import com.mcgrady.xproject.data.entity.MainItemEntity
 import com.mcgrady.xproject.databinding.ItemMainBinding
 

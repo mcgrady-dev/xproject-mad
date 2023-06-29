@@ -2,7 +2,7 @@ package com.mcgrady.xproject.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mcgrady.xproject.common.core.base.BaseViewModel
+import com.mcgrady.xproject.core.base.BaseViewModel
 import com.mcgrady.xproject.data.entity.MainItemEntity
 import com.mcgrady.xproject.repo.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import com.mcgrady.xarch.extension.viewBinding
-import com.mcgrady.xproject.common.core.base.BaseActivity
+import com.mcgrady.xproject.core.base.BaseActivity
 import com.mcgrady.xproject.data.entity.MainItemEntity
 import com.mcgrady.xproject.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint

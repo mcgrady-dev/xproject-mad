@@ -1,7 +1,7 @@
 package com.mcgrady.xproject.repo
 
-import com.mcgrady.xproject.common.core.repo.Repository
-import com.mcgrady.xproject.common.core.utils.XUtils
+import com.mcgrady.xproject.core.repo.Repository
+import com.mcgrady.xproject.core.utils.XUtils
 import com.mcgrady.xproject.data.entity.MainItemEntity
 
 class MainRepository : Repository {
