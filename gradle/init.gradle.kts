@@ -21,8 +21,12 @@ rootProject {
                 targetExclude("**/build/**/*.kt")
                 ktlint(ktlintVersion)
                     .setUseExperimental(true)
-                    .userData(mapOf("android" to "true"))
-                    .setEditorConfigPath("$rootDir/.editorconfig")  // sample unusual placement
+                    .userData(mapOf(
+                        "android" to "true",
+//                        "disabled_rules" to "no-wildcard-imports",
+//                        "ij_kotlin_packages_to_use_import_on_demand" to "android.graphics.*,kotlin.math.*"
+                    ))
+                    .setEditorConfigPath(rootProject.file("spotless/.editorconfig"))
                 licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             }
             format("kts") {

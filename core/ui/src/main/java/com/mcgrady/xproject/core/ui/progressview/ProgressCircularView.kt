@@ -20,8 +20,23 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.BitmapShader
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.Outline
+import android.graphics.Paint
 import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.graphics.PaintFlagsDrawFilter
+import android.graphics.Point
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
+import android.graphics.RectF
+import android.graphics.SweepGradient
+import android.graphics.Typeface
 import android.os.Build
 import android.text.Layout
 import android.text.StaticLayout
@@ -33,7 +48,6 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.mcgrady.xproject.core.ui.R
 import com.mcgrady.xproject.core.ui.progressview.animation.AnimationDrawingState
@@ -43,7 +57,12 @@ import com.mcgrady.xproject.core.ui.progressview.animation.ViewAnimationOrchestr
 import com.mcgrady.xproject.core.ui.util.SizeUtils
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import kotlin.math.*
+import kotlin.math.cos
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.pow
+import kotlin.math.sin
 
 /**
  * Created by mcgrady on 2021/6/4.
