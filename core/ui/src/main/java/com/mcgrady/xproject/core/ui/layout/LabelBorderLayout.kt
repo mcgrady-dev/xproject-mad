@@ -42,11 +42,11 @@ import com.mcgrady.xproject.core.ui.util.SizeUtils
 class LabelBorderLayout @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    private val defStyleRes: Int = 0
+    private val defStyleRes: Int = 0,
 ) : ConstraintLayout(
     context,
     attributeSet,
-    defStyleRes
+    defStyleRes,
 ) {
     private val path = Path()
 
@@ -60,7 +60,7 @@ class LabelBorderLayout @JvmOverloads constructor(
     private var labelTextSize = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
         14f,
-        context.resources.displayMetrics
+        context.resources.displayMetrics,
     )
 
     private var borderColor: Int = Color.TRANSPARENT
@@ -105,7 +105,7 @@ class LabelBorderLayout @JvmOverloads constructor(
                     height.toFloat(),
                     borderColorStart,
                     borderColorEnd,
-                    Shader.TileMode.MIRROR
+                    Shader.TileMode.MIRROR,
                 )
             }
 
@@ -131,14 +131,14 @@ class LabelBorderLayout @JvmOverloads constructor(
                 labelImageSize.toInt()
             )
             canvas.drawBitmap(labelBitmap!!, src, dst, null)
-            */
+             */
 
             // 图片资源未适配情况下，会按资源大小进行绘制 by mcgrady
             canvas.drawBitmap(
                 labelBitmap!!,
                 borderGapPoint.x,
                 paint.strokeWidth.div(2),
-                null
+                null,
             )
         }
 
@@ -148,7 +148,7 @@ class LabelBorderLayout @JvmOverloads constructor(
                 labelText!!,
                 labelImageSize.plus(borderGapPoint.x).plus(labelPadding),
                 labelImageSize.plus(borderGapPoint.y).div(2).coerceAtLeast(borderGapPoint.y),
-                paint
+                paint,
             )
         }
 
@@ -169,7 +169,7 @@ class LabelBorderLayout @JvmOverloads constructor(
             attributeSet,
             R.styleable.LabelBorderLayout,
             defStyleRes,
-            0
+            0,
         )
         with(typedArray) {
             borderColorStart = getColor(R.styleable.LabelBorderLayout_borderColorStart, -1)
@@ -180,19 +180,19 @@ class LabelBorderLayout @JvmOverloads constructor(
 
             paint.strokeWidth = getDimension(
                 R.styleable.LabelBorderLayout_borderWidth,
-                paint.strokeWidth
+                paint.strokeWidth,
             )
 
             labelTextSize = getDimension(
                 R.styleable.LabelBorderLayout_labelTextSize,
-                paint.textSize
+                paint.textSize,
             ).also { paint.textSize = it }
             labelTextColor =
                 getColor(R.styleable.LabelBorderLayout_labelTextColor, Color.TRANSPARENT)
 
             cornerRadius = getDimension(
                 R.styleable.LabelBorderLayout_cornerRadius,
-                cornerRadius
+                cornerRadius,
             )
             labelText = getString(R.styleable.LabelBorderLayout_labelText)
             labelImageRes = getResourceId(R.styleable.LabelBorderLayout_labelImage, -1)
@@ -208,7 +208,7 @@ class LabelBorderLayout @JvmOverloads constructor(
                     labelText,
                     0,
                     labelText!!.length,
-                    rect
+                    rect,
                 )
 
                 labelTextHeight = rect.height().toFloat()
@@ -218,7 +218,7 @@ class LabelBorderLayout @JvmOverloads constructor(
                     paint.strokeWidth.toInt(),
                     labelImageSize.coerceAtLeast(labelTextHeight).toInt(),
                     paint.strokeWidth.toInt(),
-                    paint.strokeWidth.toInt()
+                    paint.strokeWidth.toInt(),
                 )
             }
 
@@ -228,69 +228,70 @@ class LabelBorderLayout @JvmOverloads constructor(
     }
 
     private fun updateBorderPath(
-        textWidth: Float
+        textWidth: Float,
     ) {
         path.close()
         path.reset()
         val strokeHalf = paint.strokeWidth.div(2)
         path.apply {
-
             val offsetY = labelImageSize.div(2).coerceAtLeast(labelTextHeight.div(2))
 
             moveTo(
                 borderGapPoint.x.minus(spacing).minus(labelPadding.div(2)),
-                strokeHalf.plus(offsetY)
+                strokeHalf.plus(offsetY),
             )
 
             lineTo(
                 cornerRadius,
-                strokeHalf.plus(offsetY)
+                strokeHalf.plus(offsetY),
             )
 
             quadTo(
                 strokeHalf,
-                strokeHalf.plus(offsetY), strokeHalf, cornerRadius.plus(offsetY)
+                strokeHalf.plus(offsetY),
+                strokeHalf,
+                cornerRadius.plus(offsetY),
             )
 
             lineTo(
                 strokeHalf,
-                height.minus(strokeHalf + cornerRadius)
+                height.minus(strokeHalf + cornerRadius),
             )
 
             quadTo(
                 strokeHalf,
                 height.minus(strokeHalf),
                 cornerRadius,
-                height.minus(strokeHalf)
+                height.minus(strokeHalf),
             )
 
             lineTo(
                 width.minus(cornerRadius),
-                height.minus(strokeHalf)
+                height.minus(strokeHalf),
             )
 
             quadTo(
                 width.minus(strokeHalf),
                 height.minus(strokeHalf),
                 width.minus(strokeHalf),
-                height.minus(cornerRadius)
+                height.minus(cornerRadius),
             )
 
             lineTo(
                 width.minus(strokeHalf),
-                strokeHalf.plus(offsetY).plus(cornerRadius)
+                strokeHalf.plus(offsetY).plus(cornerRadius),
             )
 
             quadTo(
                 width.minus(strokeHalf),
                 strokeHalf.plus(offsetY),
                 width.minus(cornerRadius),
-                strokeHalf.plus(offsetY)
+                strokeHalf.plus(offsetY),
             )
 
             lineTo(
                 borderGapPoint.x.plus(textWidth),
-                strokeHalf.plus(offsetY)
+                strokeHalf.plus(offsetY),
             )
         }
     }

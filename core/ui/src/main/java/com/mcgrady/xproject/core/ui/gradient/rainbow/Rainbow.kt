@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.core.ui.gradient.rainbow
 
 import android.annotation.TargetApi
@@ -103,8 +118,13 @@ class Rainbow(val view: View) {
         if (view is TextView) {
             val paint = view.paint
             val shader = LinearGradient(
-                0f, 0f, paint.measureText(view.text.toString()), view.textSize,
-                rainbowColorList.toIntArray(), null, Shader.TileMode.CLAMP
+                0f,
+                0f,
+                paint.measureText(view.text.toString()),
+                view.textSize,
+                rainbowColorList.toIntArray(),
+                null,
+                Shader.TileMode.CLAMP,
             )
             view.paint.shader = shader
         }
@@ -121,7 +141,7 @@ class Rainbow(val view: View) {
     @RainbowDsl
     fun background(
         orientation: RainbowOrientation = RainbowOrientation.LEFT_RIGHT,
-        @Dp radius: Int = 0
+        @Dp radius: Int = 0,
     ) {
         if (emptyColors()) return
         view.background = getGradientDrawable(orientation, radius)
@@ -140,7 +160,7 @@ class Rainbow(val view: View) {
     @RainbowDsl
     fun foreground(
         orientation: RainbowOrientation = RainbowOrientation.LEFT_RIGHT,
-        @Dp radius: Int = 0
+        @Dp radius: Int = 0,
     ) {
         if (emptyColors()) return
         view.foreground = getGradientDrawable(orientation, radius)
@@ -154,14 +174,14 @@ class Rainbow(val view: View) {
     /** gets the gradation drawable which composed with palette colors. */
     fun getDrawable(
         orientation: RainbowOrientation = RainbowOrientation.LEFT_RIGHT,
-        @Dp radius: Int = 0
+        @Dp radius: Int = 0,
     ): GradientDrawable {
         return getGradientDrawable(orientation, radius)
     }
 
     private fun getGradientDrawable(
         orientation: RainbowOrientation,
-        @Dp radius: Int
+        @Dp radius: Int,
     ): GradientDrawable {
         return GradientDrawable(orientation.value, rainbowColorList.toIntArray()).apply {
             cornerRadius = view.dp2Px(radius).toFloat()
@@ -177,7 +197,7 @@ class Rainbow(val view: View) {
             states.add(android.R.attr.state_enabled)
         }
         return ColorStateList(arrayOf(states.toIntArray()), rainbowColorList.toIntArray()).withAlpha(
-            alpha
+            alpha,
         )
     }
 

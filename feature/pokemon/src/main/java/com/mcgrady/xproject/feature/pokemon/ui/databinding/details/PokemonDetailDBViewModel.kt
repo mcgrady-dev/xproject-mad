@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.feature.pokemon.ui.databinding.details
 
 import androidx.lifecycle.LiveData
@@ -13,14 +28,14 @@ import kotlinx.coroutines.flow.Flow
 
 class PokemonDetailDBViewModel @AssistedInject constructor(
     repository: PokemonDetailRepository,
-    @Assisted private val pokemonName: String
+    @Assisted private val pokemonName: String,
 ) : BaseViewModel() {
 
     private val pokemonInfoFlow: Flow<PokemonInfo> = repository.fetchPokemonInfo(
         name = pokemonName,
         onStart = { _isLoading.postValue(true) },
         onComplete = { _isLoading.postValue(false) },
-        onError = { _toast.postValue(it) }
+        onError = { _toast.postValue(it) },
     )
 
     val pokemonInfo: LiveData<PokemonInfo> = pokemonInfoFlow.asLiveDataOnViewModelScope()
@@ -44,7 +59,7 @@ class PokemonDetailDBViewModel @AssistedInject constructor(
 
         fun provideFactory(
             factory: PokemonDetailDBViewModelFactory,
-            pokemonName: String
+            pokemonName: String,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
 
             @Suppress("UNCHECKED_CAST")
@@ -53,5 +68,4 @@ class PokemonDetailDBViewModel @AssistedInject constructor(
             }
         }
     }
-
 }

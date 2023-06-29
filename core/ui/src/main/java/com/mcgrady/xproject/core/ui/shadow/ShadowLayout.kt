@@ -37,7 +37,7 @@ import com.mcgrady.xproject.core.ui.util.ShapeUtils
 class ShadowLayout @JvmOverloads constructor(
     context: Context?,
     attributeSet: AttributeSet? = null,
-    defStyleInt: Int = 0
+    defStyleInt: Int = 0,
 ) : ViewGroup(context, attributeSet, defStyleInt) {
     private val DEFAULT_CHILD_GRAVITY = Gravity.TOP or Gravity.START
 
@@ -120,14 +120,18 @@ class ShadowLayout @JvmOverloads constructor(
 
     init {
         val a = getContext().obtainStyledAttributes(
-            attributeSet, R.styleable.ShadowLayout,
-            defStyleInt, 0
+            attributeSet,
+            R.styleable.ShadowLayout,
+            defStyleInt,
+            0,
         )
         shadowColor = a.getColor(
-            R.styleable.ShadowLayout_shadowColor, Color.parseColor("#2a000000")
+            R.styleable.ShadowLayout_shadowColor,
+            Color.parseColor("#2a000000"),
         )
         foregroundColor = a.getColor(
-            R.styleable.ShadowLayout_foregroundColor, Color.parseColor("#1f000000")
+            R.styleable.ShadowLayout_foregroundColor,
+            Color.parseColor("#1f000000"),
         )
         backgroundClr = a.getColor(R.styleable.ShadowLayout_backgroundColor, Color.TRANSPARENT)
         shadowDx = a.getFloat(R.styleable.ShadowLayout_shadowDx, 0f)
@@ -192,8 +196,10 @@ class ShadowLayout @JvmOverloads constructor(
 
     private fun updatePaintShadow(radius: Float, dx: Float, dy: Float, color: Int) {
         bgPaint.setShadowLayer(
-            radius, dx, dy,
-            color
+            radius,
+            dx,
+            dy,
+            color,
         )
         invalidate()
     }
@@ -205,7 +211,7 @@ class ShadowLayout @JvmOverloads constructor(
 
         setMeasuredDimension(
             getDefaultSize(0, widthMeasureSpec),
-            getDefaultSize(0, heightMeasureSpec)
+            getDefaultSize(0, heightMeasureSpec),
         )
         val shadowMeasureWidthMatchParent =
             layoutParams.width == ViewGroup.LayoutParams.MATCH_PARENT
@@ -226,26 +232,26 @@ class ShadowLayout @JvmOverloads constructor(
             measureChildWithMargins(child, widthSpec, 0, heightSpec, 0)
             val lp = child.layoutParams as LayoutParams
             maxWidth =
-                if (shadowMeasureWidthMatchParent)
+                if (shadowMeasureWidthMatchParent) {
                     Math.max(
                         maxWidth,
-                        child.measuredWidth + lp.leftMargin + lp.rightMargin
+                        child.measuredWidth + lp.leftMargin + lp.rightMargin,
                     )
-                else
+                } else
                     Math.max(
                         maxWidth,
-                        child.measuredWidth + shadowMarginLeft + shadowMarginRight + lp.leftMargin + lp.rightMargin
+                        child.measuredWidth + shadowMarginLeft + shadowMarginRight + lp.leftMargin + lp.rightMargin,
                     )
             maxHeight =
-                if (shadowMeasureHeightMatchParent)
+                if (shadowMeasureHeightMatchParent) {
                     Math.max(
                         maxHeight,
-                        child.measuredHeight + lp.topMargin + lp.bottomMargin
+                        child.measuredHeight + lp.topMargin + lp.bottomMargin,
                     )
-                else
+                } else
                     Math.max(
                         maxHeight,
-                        child.measuredHeight + shadowMarginTop + shadowMarginBottom + lp.topMargin + lp.bottomMargin
+                        child.measuredHeight + shadowMarginTop + shadowMarginBottom + lp.topMargin + lp.bottomMargin,
                     )
 
             childState = View.combineMeasuredStates(childState, child.measuredState)
@@ -263,19 +269,21 @@ class ShadowLayout @JvmOverloads constructor(
             View.resolveSizeAndState(
                 maxWidth,
                 if (shadowMeasureWidthMatchParent) widthMeasureSpec else widthSpec,
-                childState
+                childState,
             ),
             View.resolveSizeAndState(
-                maxHeight, if (shadowMeasureHeightMatchParent) heightMeasureSpec else heightSpec,
-                childState shl View.MEASURED_HEIGHT_STATE_SHIFT
-            )
+                maxHeight,
+                if (shadowMeasureHeightMatchParent) heightMeasureSpec else heightSpec,
+                childState shl View.MEASURED_HEIGHT_STATE_SHIFT,
+            ),
         )
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         layoutChildren(left, top, right, bottom, false)
-        if (changed)
+        if (changed) {
             foregroundDrawBoundsChanged = changed
+        }
     }
 
     private fun layoutChildren(
@@ -283,7 +291,7 @@ class ShadowLayout @JvmOverloads constructor(
         top: Int,
         right: Int,
         bottom: Int,
-        forceLeftGravity: Boolean
+        forceLeftGravity: Boolean,
     ) {
         val count = childCount
 
@@ -356,7 +364,7 @@ class ShadowLayout @JvmOverloads constructor(
                 cornerRadiusTL,
                 cornerRadiusTR,
                 cornerRadiusBR,
-                cornerRadiusBL
+                cornerRadiusBL,
             )
             it.drawPath(path, bgPaint)
             canvas.clipPath(path)
@@ -378,7 +386,7 @@ class ShadowLayout @JvmOverloads constructor(
                 cornerRadiusTL,
                 cornerRadiusTR,
                 cornerRadiusBR,
-                cornerRadiusBL
+                cornerRadiusBL,
             )
             canvas.clipPath(path)
             drawForeground(canvas)
@@ -400,13 +408,18 @@ class ShadowLayout @JvmOverloads constructor(
                     selfBounds.set(0, 0, w, h)
                 } else {
                     selfBounds.set(
-                        paddingLeft, paddingTop,
-                        w - paddingRight, h - paddingBottom
+                        paddingLeft,
+                        paddingTop,
+                        w - paddingRight,
+                        h - paddingBottom,
                     )
                 }
                 Gravity.apply(
-                    foregroundDrawGravity, it.intrinsicWidth,
-                    it.intrinsicHeight, selfBounds, overlayBounds
+                    foregroundDrawGravity,
+                    it.intrinsicWidth,
+                    it.intrinsicHeight,
+                    selfBounds,
+                    overlayBounds,
                 )
                 it.bounds = overlayBounds
             }

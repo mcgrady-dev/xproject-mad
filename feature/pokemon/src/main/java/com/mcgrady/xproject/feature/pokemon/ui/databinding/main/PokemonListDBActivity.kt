@@ -34,10 +34,7 @@ class PokemonListDBActivity : BaseActivity() {
         onTransformationStartContainer()
         super.onCreate(savedInstanceState)
 
-
-
         binding.apply {
-
             /*val preloadSizeProvider: FixedPreloadSizeProvider<Photo> =
                 FixedPreloadSizeProvider<Photo>(photoSize, photoSize)
             val preloader: RecyclerViewPreloader<Pokemon> = RecyclerViewPreloader<Any?>(

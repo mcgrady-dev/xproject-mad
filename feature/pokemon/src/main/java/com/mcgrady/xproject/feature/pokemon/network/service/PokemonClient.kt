@@ -15,7 +15,6 @@
  */
 package com.mcgrady.xproject.feature.pokemon.network.service
 
-
 import com.mcgrady.xproject.core.network.ApiResponse
 import com.mcgrady.xproject.feature.pokemon.data.model.PokemonInfo
 import com.mcgrady.xproject.feature.pokemon.data.model.PokemonResponse
@@ -26,10 +25,10 @@ import javax.inject.Inject
  */
 class PokemonClient @Inject constructor(private val pokemonService: PokemonService) {
     suspend fun fetchPokemonList(
-        page: Int
+        page: Int,
     ): ApiResponse<PokemonResponse> = pokemonService.fetchPokemonList(
         limit = PAGING_SIZE,
-        offset = page * PAGING_SIZE
+        offset = page * PAGING_SIZE,
     )
 
     suspend fun fetchPokemonInfo(name: String): ApiResponse<PokemonInfo> =

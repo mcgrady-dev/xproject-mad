@@ -55,7 +55,7 @@ class NetworkLiveData private constructor(private val context: Context) : Single
 
         override fun onCapabilitiesChanged(
             network: Network,
-            networkCapabilities: NetworkCapabilities
+            networkCapabilities: NetworkCapabilities,
         ) {
             super.onCapabilitiesChanged(network, networkCapabilities)
             Timber.d("onCapabilitiesChanged = $network $networkCapabilities")

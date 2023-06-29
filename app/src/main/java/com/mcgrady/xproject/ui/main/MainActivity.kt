@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.ui.main
 
 import android.os.Bundle
@@ -28,19 +43,19 @@ class MainActivity : BaseActivity() {
                 val item = adapter.getItem(position) ?: return@setOnItemClickListener
                 when (item.id) {
                     MainItemEntity.ITEM_POKEMON -> {
-                        //startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
+                        // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
                     }
                     MainItemEntity.ITEM_ZHIHU -> {
-                        //startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
+                        // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
                     }
                     MainItemEntity.ITEM_MUSIC -> {
-                        //startActivity(Intent(this@MainActivity, WindowInsetsControllerActivity::class.java))
+                        // startActivity(Intent(this@MainActivity, WindowInsetsControllerActivity::class.java))
                     }
                     MainItemEntity.ITEM_VIDEO -> {
-                        //startActivity(Intent(this@MainActivity, ShapeActivity::class.java))
+                        // startActivity(Intent(this@MainActivity, ShapeActivity::class.java))
                     }
                     MainItemEntity.ITEM_CHAT -> {
-                        //startActivity(Intent(this@MainActivity, SampleServiceActivity::class.java))
+                        // startActivity(Intent(this@MainActivity, SampleServiceActivity::class.java))
                     }
                     else -> {}
                 }
@@ -51,6 +66,5 @@ class MainActivity : BaseActivity() {
             adapter.submitList(it)
         }
         viewModel.initMainItemEntities()
-
     }
 }

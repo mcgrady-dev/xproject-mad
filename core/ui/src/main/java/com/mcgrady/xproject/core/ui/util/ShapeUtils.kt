@@ -32,7 +32,7 @@ object ShapeUtils {
         tl: Boolean = true,
         tr: Boolean = true,
         br: Boolean = true,
-        bl: Boolean = true
+        bl: Boolean = true,
     ): Path {
         var rx = _rx
         var ry = _ry
@@ -47,32 +47,32 @@ object ShapeUtils {
         val heightMinusCorners = height - 2 * ry
 
         path.moveTo(right, top + ry)
-        if (tr)
+        if (tr) {
             path.rQuadTo(0f, -ry, -rx, -ry) // top-right corner
-        else {
+        } else {
             path.rLineTo(0f, -ry)
             path.rLineTo(-rx, 0f)
         }
         path.rLineTo(-widthMinusCorners, 0f)
-        if (tl)
+        if (tl) {
             path.rQuadTo(-rx, 0f, -rx, ry) // top-left corner
-        else {
+        } else {
             path.rLineTo(-rx, 0f)
             path.rLineTo(0f, ry)
         }
         path.rLineTo(0f, heightMinusCorners)
 
-        if (bl)
+        if (bl) {
             path.rQuadTo(0f, ry, rx, ry) // bottom-left corner
-        else {
+        } else {
             path.rLineTo(0f, ry)
             path.rLineTo(rx, 0f)
         }
 
         path.rLineTo(widthMinusCorners, 0f)
-        if (br)
+        if (br) {
             path.rQuadTo(rx, 0f, rx, -ry) // bottom-right corner
-        else {
+        } else {
             path.rLineTo(rx, 0f)
             path.rLineTo(0f, -ry)
         }
@@ -92,7 +92,7 @@ object ShapeUtils {
         _tl: Float,
         _tr: Float,
         _br: Float,
-        _bl: Float
+        _bl: Float,
     ): Path {
         var tl = _tl
         var tr = _tr
@@ -119,32 +119,32 @@ object ShapeUtils {
         }
 
         path.moveTo(right, top + tr)
-        if (tr > 0)
+        if (tr > 0) {
             path.rQuadTo(0f, -tr, -tr, -tr) // top-right corner
-        else {
+        } else {
             path.rLineTo(0f, -tr)
             path.rLineTo(-tr, 0f)
         }
         path.rLineTo(-(width - tr - tl), 0f)
-        if (tl > 0)
+        if (tl > 0) {
             path.rQuadTo(-tl, 0f, -tl, tl) // top-left corner
-        else {
+        } else {
             path.rLineTo(-tl, 0f)
             path.rLineTo(0f, tl)
         }
         path.rLineTo(0f, height - tl - bl)
 
-        if (bl > 0)
+        if (bl > 0) {
             path.rQuadTo(0f, bl, bl, bl) // bottom-left corner
-        else {
+        } else {
             path.rLineTo(0f, bl)
             path.rLineTo(bl, 0f)
         }
 
         path.rLineTo(width - bl - br, 0f)
-        if (br > 0)
+        if (br > 0) {
             path.rQuadTo(br, 0f, br, -br) // bottom-right corner
-        else {
+        } else {
             path.rLineTo(br, 0f)
             path.rLineTo(0f, -br)
         }

@@ -37,7 +37,10 @@ import java.util.*
 class JsonUnitTest {
     @Serializable
     data class UserBean(
-        val name: String, val email: String, val age: Int = 16, val role: Role = Role.Viewer
+        val name: String,
+        val email: String,
+        val age: Int = 16,
+        val role: Role = Role.Viewer,
     )
 
     enum class Role { Viewer, Editor, Owner }
@@ -47,7 +50,7 @@ class JsonUnitTest {
         val nameOfDevice: String,
         @Serializable(with = DateAsStringSerializer::class) val dateOfBuy: Date,
         @Serializable(with = DateAsTimeStampSerializer::class) val timeOfWarranty: Date,
-        @Serializable(with = DecimalAsStringSerializer::class) val price: BigDecimal
+        @Serializable(with = DecimalAsStringSerializer::class) val price: BigDecimal,
     )
 
     object DateAsStringSerializer : KSerializer<Date> {

@@ -54,19 +54,18 @@ object ViewBinding {
     @JvmStatic
     @BindingAdapter("paletteImage", "paletteCard")
     fun bindLoadImagePalette(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
-
         Glide.with(view)
 //            .`as`(PictureDrawable::class.java)
 //            .listener(SvgSoftwareLayerSetter())
             .asBitmap()
             .load(url)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .listener(object: RequestListener<Bitmap> {
+            .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     paletteCard.setCardBackgroundColor(ContextCompat.getColor(view.context, com.mcgrady.xproject.core.ui.R.color.background800))
                     return false
@@ -77,7 +76,7 @@ object ViewBinding {
                     model: Any?,
                     target: Target<Bitmap>?,
                     dataSource: com.bumptech.glide.load.DataSource?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     resource?.let { bitmap ->
                         Palette.from(bitmap)
@@ -101,12 +100,12 @@ object ViewBinding {
             .asBitmap()
             .load(url)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .listener(object: RequestListener<Bitmap> {
+            .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
                     target: Target<Bitmap>?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     paletteView.setBackgroundColor(ContextCompat.getColor(view.context, com.mcgrady.xproject.core.ui.R.color.background800))
                     return false
@@ -117,7 +116,7 @@ object ViewBinding {
                     model: Any?,
                     target: Target<Bitmap>?,
                     dataSource: com.bumptech.glide.load.DataSource?,
-                    isFirstResource: Boolean
+                    isFirstResource: Boolean,
                 ): Boolean {
                     resource?.let { bitmap ->
                         Palette.from(bitmap)

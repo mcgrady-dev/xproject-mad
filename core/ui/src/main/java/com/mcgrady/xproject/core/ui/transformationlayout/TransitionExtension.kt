@@ -32,10 +32,10 @@ fun Activity.onTransformationStartContainer() {
 
 /** sets an enter shared element callback to activity for implementing shared element transition. */
 fun Activity.onTransformationEndContainer(
-    params: TransformationLayout.Params?
+    params: TransformationLayout.Params?,
 ) {
     requireNotNull(
-        params
+        params,
     ) { "TransformationLayout.Params must not be a null. check your intent key value is correct." }
     window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
     ViewCompat.setTransitionName(findViewById(android.R.id.content), params.transitionName)
@@ -51,10 +51,10 @@ fun Fragment.onTransformationStartContainer() {
 
 /** sets an enter shared element callback to fragment for implementing shared element transition. */
 fun Fragment.onTransformationEndContainer(
-    params: TransformationLayout.Params?
+    params: TransformationLayout.Params?,
 ) {
     requireNotNull(
-        params
+        params,
     ) { "TransformationLayout.Params must not be a null. check your intent key value is correct." }
     sharedElementEnterTransition = params.getMaterialFragmentTransform()
 }
@@ -63,7 +63,7 @@ fun Fragment.onTransformationEndContainer(
 @JvmOverloads
 fun FragmentTransaction.addTransformation(
     transformationLayout: TransformationLayout,
-    transitionName: String? = null
+    transitionName: String? = null,
 ): FragmentTransaction {
     if (transitionName != null && transformationLayout.transitionName == null) {
         ViewCompat.setTransitionName(transformationLayout, transitionName)

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.core.ui.progressview
 
 import android.content.Context
@@ -18,7 +33,7 @@ import com.mcgrady.xproject.core.ui.util.dp2Px
 /** HighlightView is a view with stroke highlighting via onClickListener. */
 class HighlightView(
     context: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : FrameLayout(context, attrs) {
 
     private val bodyView = LinearLayout(context)
@@ -84,7 +99,7 @@ class HighlightView(
             GradientDrawable(
                 gradientOrientation,
                 intArrayOf(colorGradientStart, colorGradientCenter, colorGradientEnd)
-                    .filter { it != NO_COLOR }.toIntArray()
+                    .filter { it != NO_COLOR }.toIntArray(),
             ).apply {
                 applyRadius(this)
             }

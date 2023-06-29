@@ -2,5 +2,8 @@
 # This configuration is used by ktlint when spotless invokes it
 
 [*.{kt,kts}]
+ktlint_no-wildcard-imports = disabled
+ktlint_standard_no-wildcard-imports = disabled
+disabled_rules = no-wildcard-imports, standard/no-wildcard-imports
 ij_kotlin_allow_trailing_comma=true
 ij_kotlin_allow_trailing_comma_on_call_site=true

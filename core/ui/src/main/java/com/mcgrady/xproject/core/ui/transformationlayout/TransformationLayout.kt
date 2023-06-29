@@ -107,7 +107,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(
         context,
         attributeSet,
-        defStyle
+        defStyle,
     ) {
         getAttrs(attributeSet, defStyle)
     }
@@ -127,7 +127,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
                 attributeSet,
                 R.styleable.TransformationLayout,
                 defStyleAttr,
-                0
+                0,
             )
         try {
             setTypeArray(typedArray)
@@ -158,7 +158,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
         this.allContainerColors =
             a.getColor(
                 R.styleable.TransformationLayout_transformation_allContainerColor,
-                allContainerColors
+                allContainerColors,
             )
         this.scrimColor =
             a.getColor(R.styleable.TransformationLayout_transformation_scrimColor, scrimColor)
@@ -188,12 +188,12 @@ class TransformationLayout : FrameLayout, TransformationParams {
         this.elevationShadowEnabled =
             a.getBoolean(
                 R.styleable.TransformationLayout_transformation_elevationShadowEnabled,
-                elevationShadowEnabled
+                elevationShadowEnabled,
             )
         this.holdAtEndEnabled =
             a.getBoolean(
                 R.styleable.TransformationLayout_transformation_holdAtEndEnabled,
-                holdAtEndEnabled
+                holdAtEndEnabled,
             )
     }
 
@@ -271,7 +271,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
             endElevation = this@TransformationLayout.endElevation,
             elevationShadowEnabled = this@TransformationLayout.elevationShadowEnabled,
             holdAtEndEnabled = this@TransformationLayout.holdAtEndEnabled,
-            transitionName = transitionName
+            transitionName = transitionName,
         )
     }
 
@@ -303,7 +303,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
             {
                 startTransform(container)
             },
-            delay
+            delay,
         )
     }
 
@@ -336,7 +336,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
             {
                 finishTransform(container)
             },
-            delay
+            delay,
         )
     }
 
@@ -385,7 +385,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
                         onFinishTransformation()
                         onTransformFinishListener?.run { onFinish(isTransformed) }
                     }
-                }
+                },
             )
         }
     }
@@ -410,7 +410,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
         override var endElevation: Float,
         override var elevationShadowEnabled: Boolean,
         override var holdAtEndEnabled: Boolean,
-        var transitionName: String
+        var transitionName: String,
     ) : Parcelable, TransformationParams
 
     /** The [Direction] to be used by this transform. */
@@ -426,7 +426,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
         ENTER(MaterialContainerTransform.TRANSITION_DIRECTION_ENTER),
 
         /** Indicates that this is a Return transition, i.e., when elements are exiting the scene. */
-        RETURN(MaterialContainerTransform.TRANSITION_DIRECTION_RETURN)
+        RETURN(MaterialContainerTransform.TRANSITION_DIRECTION_RETURN),
     }
 
     /** The [FadeMode] to be used to swap the content of the start View with that of the end View. */
@@ -450,7 +450,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
          * Indicates that this transition should sequentially fade out the outgoing content and fade in
          * the incoming content.
          */
-        THROUGH(MaterialContainerTransform.FADE_MODE_THROUGH)
+        THROUGH(MaterialContainerTransform.FADE_MODE_THROUGH),
     }
 
     /** The [FitMode] to be used when scaling the incoming content of the end View. */
@@ -471,7 +471,7 @@ class TransformationLayout : FrameLayout, TransformationParams {
          * Indicates that this transition should fit the incoming content to the height of the outgoing
          * content during the scale animation.
          */
-        HEIGHT(MaterialContainerTransform.FIT_MODE_HEIGHT)
+        HEIGHT(MaterialContainerTransform.FIT_MODE_HEIGHT),
     }
 
     enum class Motion(private val value: Int) {
@@ -479,7 +479,8 @@ class TransformationLayout : FrameLayout, TransformationParams {
         ARC(0),
 
         /** Indicates that this transition should be drawn as the linear path. */
-        LINEAR(1);
+        LINEAR(1),
+        ;
 
         fun getPathMotion(): PathMotion? {
             if (value == 0) return MaterialArcMotion()

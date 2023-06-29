@@ -35,7 +35,6 @@ import javax.inject.Singleton
 @Retention(AnnotationRetention.BINARY)
 annotation class PokemonRetrofit
 
-
 /**
  * Created by mcgrady on 2021/8/8.
  */

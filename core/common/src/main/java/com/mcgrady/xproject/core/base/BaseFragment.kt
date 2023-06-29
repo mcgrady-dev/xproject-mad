@@ -27,6 +27,5 @@ abstract class BaseFragment(override val contentLayoutId: Int) : LazyFragment(co
     }
 
     protected open fun initData() {
-
     }
 }

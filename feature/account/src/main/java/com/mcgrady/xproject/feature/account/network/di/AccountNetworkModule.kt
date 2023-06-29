@@ -15,9 +15,9 @@
  */
 package com.mcgrady.xproject.feature.account.network.di
 
-import com.mcgrady.xproject.feature.account.network.util.AccountEnvelopingConverter
-import com.mcgrady.xproject.feature.account.network.service.AccountService
 import com.mcgrady.xproject.core.network.adapters.ApiResponseCallAdapterFactory
+import com.mcgrady.xproject.feature.account.network.service.AccountService
+import com.mcgrady.xproject.feature.account.network.util.AccountEnvelopingConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

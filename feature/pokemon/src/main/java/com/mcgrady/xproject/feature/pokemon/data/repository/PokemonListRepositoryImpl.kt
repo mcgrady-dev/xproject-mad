@@ -43,7 +43,7 @@ class PokemonListRepositoryImpl @Inject constructor(
         page: Int,
         onStart: () -> Unit,
         onComplete: () -> Unit,
-        onError: (String?) -> Unit
+        onError: (String?) -> Unit,
     ) = flow {
         var pokemons = pokemonDao.getPokemonList(page).asDomain()
         if (pokemons.isEmpty()) {
@@ -60,5 +60,4 @@ class PokemonListRepositoryImpl @Inject constructor(
             emit(pokemonDao.getAllPokemonList(page).asDomain())
         }
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
-
 }

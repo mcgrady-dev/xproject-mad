@@ -20,21 +20,32 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.BitmapShader
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.Outline
+import android.graphics.Paint
 import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.graphics.Point
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
+import android.graphics.RectF
+import android.graphics.SweepGradient
+import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
-import android.widget.ImageView
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.mcgrady.xproject.core.ui.R
@@ -45,7 +56,11 @@ import com.mcgrady.xproject.core.ui.progressview.animation.ViewAnimationOrchestr
 import com.mcgrady.xproject.core.ui.util.SizeUtils
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import kotlin.math.*
+import kotlin.math.cos
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.sin
 
 /**
  * Created by mcgrady on 2021/05/26.
@@ -53,7 +68,7 @@ import kotlin.math.*
 open class ProgressCircularImageView @JvmOverloads constructor(
     context: Context?,
     attributeSet: AttributeSet? = null,
-    defStyleInt: Int = 0
+    defStyleInt: Int = 0,
 ) : AppCompatImageView(context!!, attributeSet, defStyleInt) {
 
     private val decFormat = DecimalFormat("#.##")
@@ -61,8 +76,9 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     // 是否锁定
     private var isBlock = false
         set(value) {
-            if (field == value)
+            if (field == value) {
                 return
+            }
 
             field = value
             setup()
@@ -113,7 +129,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private val innerInset
         get() = distanceToBorder + max(
             borderThickness.toFloat(),
-            highlightedBorderThickness.toFloat()
+            highlightedBorderThickness.toFloat(),
         )
 
     private var innerBitmapWidth = 0
@@ -190,7 +206,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     var outRingWidth = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         15f,
-        resources.displayMetrics
+        resources.displayMetrics,
     )
         set(value) {
             field = value
@@ -204,7 +220,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         intArrayOf(
             Color.parseColor("#ffb900"),
             Color.parseColor("#FFFF50"),
-            Color.parseColor("#FFB900")
+            Color.parseColor("#FFB900"),
         )
 
     var progressMaxValue = 0f
@@ -222,7 +238,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     var progressWidth = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         15f,
-        resources.displayMetrics
+        resources.displayMetrics,
     )
         set(value) {
             field = value
@@ -232,7 +248,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     var progressTextSize = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         15f,
-        resources.displayMetrics
+        resources.displayMetrics,
     )
         set(value) {
             field = value
@@ -268,17 +284,17 @@ open class ProgressCircularImageView @JvmOverloads constructor(
             attachOrchestrator(it)
         }
         set(value) {
-                if (field == value) return
-                field.cancel()
-                field = value
-                attachOrchestrator(field)
-            }
+            if (field == value) return
+            field.cancel()
+            field = value
+            attachOrchestrator(field)
+        }
 
     private fun attachOrchestrator(animationOrchestrator: ViewAnimationOrchestrator) {
         animationOrchestrator.attach(animatorInterface) {
             if (isReversedAnimating) {
                 animationDrawingState = animationDrawingState.copy(
-                    rotationProgress = 0f
+                    rotationProgress = 0f,
                 )
                 isReversedAnimating = false
             }
@@ -364,7 +380,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     var badgeRadius = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         15f,
-        resources.displayMetrics
+        resources.displayMetrics,
     )
         set(value) {
             field = value
@@ -448,7 +464,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         progressColor = a.getColor(R.styleable.ProgressCircularView_cv_progress_color, Color.BLACK)
         progressTextSize = a.getDimension(
             R.styleable.ProgressCircularView_cv_progress_size,
-            150f
+            150f,
         )
 
         circleAlpha = a.getFloat(R.styleable.ProgressCircularView_cv_circle_alpha, 0f)
@@ -461,7 +477,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private fun initInnerAttrs(a: TypedArray) {
         innerBackgroundColor = a.getColor(
             R.styleable.ProgressCircularView_cv_circle_background_color,
-            Color.TRANSPARENT
+            Color.TRANSPARENT,
         )
     }
 
@@ -473,17 +489,17 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private fun initOutRingAttrs(a: TypedArray) {
         borderThickness = a.getDimensionPixelSize(
             R.styleable.ProgressCircularView_cv_border_thickness,
-            12
+            12,
         )
 
         distanceToBorder = a.getDimensionPixelSize(
             R.styleable.ProgressCircularView_cv_distance_to_border,
-            25
+            25,
         )
 
         highlightedBorderThickness = a.getDimensionPixelSize(
             R.styleable.ProgressCircularView_cv_border_thickness_highlight,
-            16
+            16,
         )
 
         isHighlighted =
@@ -492,36 +508,36 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         outRingBgColor =
             a.getColor(
                 R.styleable.ProgressCircularView_cv_outring_bg_color,
-                Color.parseColor("#33000000")
+                Color.parseColor("#33000000"),
             )
         outRingWidth = a.getDimension(
             R.styleable.ProgressCircularView_cv_outring_width,
-            15f
+            15f,
         )
 
         progressWidth = a.getDimension(
             R.styleable.ProgressCircularView_cv_progress_width,
-            15f
+            15f,
         )
 
         progressCurValue =
             a.getFloat(
                 R.styleable.ProgressCircularView_cv_progress_cur_value,
-                0f
+                0f,
             )
 
         progressMaxValue = a.getFloat(
             R.styleable.ProgressCircularView_cv_progress_max_value,
-            0f
+            0f,
         ) // 100
 
         startAngle = a.getFloat(
             R.styleable.ProgressCircularView_cv_progress_start_angle,
-            29f
+            29f,
         )
         sweepAngle = a.getFloat(
             R.styleable.ProgressCircularView_cv_sweep_angle,
-            -327f
+            -327f,
         )
 
         val progressGradientColors: Int =
@@ -553,20 +569,20 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         showBadge = a.getBoolean(R.styleable.ProgressCircularView_cv_show_badge, false)
         badgeColor = a.getColor(
             R.styleable.ProgressCircularView_cv_badge_color,
-            Color.parseColor("#66000000")
+            Color.parseColor("#66000000"),
         )
 //        badgeStrokeColor =
 //            a.getColor(R.styleable.CourseView_cv_badge_stroke_color, Defaults.BADGE_STROKE_COLOR)
         badgeStrokeWidth = a.getDimensionPixelSize(
             R.styleable.ProgressCircularView_cv_badge_stroke_width,
-            badgeStrokeWidth
+            badgeStrokeWidth,
         )
         badgeRadius = a.getDimension(R.styleable.ProgressCircularView_cv_badge_radius, badgeRadius)
 
         badgeTextPaint.textSize =
             a.getDimension(
                 R.styleable.ProgressCircularView_cv_badge_text_size,
-                initialsPaint.textSize
+                initialsPaint.textSize,
             )
         badgeTextPaint.color =
             a.getColor(R.styleable.ProgressCircularView_cv_badge_text_color, initialsPaint.color)
@@ -615,7 +631,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         boundsRect.set(calculateBounds())
         boundsRadius = min(
             (boundsRect.height() - currentBorderThickness) / 2.0f,
-            (boundsRect.width() - currentBorderThickness) / 2.0f
+            (boundsRect.width() - currentBorderThickness) / 2.0f,
         )
 
         setProgressPaint()
@@ -642,7 +658,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         middleRect.set(boundsRect)
         middleRect.inset(
             currentBorderThickness + middleThickness / 2,
-            currentBorderThickness + middleThickness / 2
+            currentBorderThickness + middleThickness / 2,
         )
 
         middleRadius =
@@ -748,13 +764,13 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 Bitmap.createBitmap(
                     2,
                     2,
-                    Bitmap.Config.RGB_565
+                    Bitmap.Config.RGB_565,
                 )
             } else {
                 Bitmap.createBitmap(
                     drawable.intrinsicWidth,
                     drawable.intrinsicHeight,
-                    Bitmap.Config.RGB_565
+                    Bitmap.Config.RGB_565,
                 )
             }
 
@@ -812,10 +828,10 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     private fun inTouchableArea(x: Float, y: Float): Boolean {
         return Math.pow(
             x - boundsRect.centerX().toDouble(),
-            2.0
+            2.0,
         ) + Math.pow(y - boundsRect.centerY().toDouble(), 2.0) <= Math.pow(
             boundsRadius.toDouble(),
-            2.0
+            2.0,
         )
     }
 
@@ -823,7 +839,6 @@ open class ProgressCircularImageView @JvmOverloads constructor(
      * 绘制内圆
      */
     private fun drawInner(canvas: Canvas) {
-
         if (innerBackgroundColor != Color.TRANSPARENT) {
             innerBgPaint.alpha =
                 if (isBlock) 128 else 255
@@ -831,7 +846,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 innerDrawableRect.centerX(),
                 innerDrawableRect.centerY(),
                 innerDrawableRadius,
-                innerBgPaint
+                innerBgPaint,
             )
         }
 
@@ -849,14 +864,14 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 innerBitmap!!,
                 0f,
                 0f,
-                bitmapPaint
+                bitmapPaint,
             )
         } else if (null != initials) {
             canvas.drawText(
                 initials!!,
                 width.div(2f) - initialsRect.width().div(2f),
                 height.div(2f) + initialsRect.height().div(2f),
-                initialsPaint
+                initialsPaint,
             )
         }
     }
@@ -895,7 +910,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                     it,
                     badgeCx - badgeRadius,
                     badgeCy - badgeRadius,
-                    badgeIconPaint
+                    badgeIconPaint,
                 )
             }
         } else {
@@ -907,7 +922,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                     it,
                     badgeCx,
                     badgeCy + rect.height() / 2,
-                    badgeTextPaint
+                    badgeTextPaint,
                 )
             }
         }
@@ -919,8 +934,11 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         }
 
         val layerId = canvas.saveLayer(
-            0f, 0f,
-            canvas.width.toFloat(), canvas.height.toFloat(), null
+            0f,
+            0f,
+            canvas.width.toFloat(),
+            canvas.height.toFloat(),
+            null,
         )
 
         drawInner(canvas)
@@ -948,7 +966,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         canvas.rotate(
             startAngle,
             mCenterPoint.x.toFloat(),
-            mCenterPoint.y.toFloat()
+            mCenterPoint.y.toFloat(),
         )
         canvas.drawArc(mRectF, 0f, sweepAngle, false, outRingPaint)
 
@@ -973,7 +991,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 progressCurValue = percent * progressMaxValue
                 Log.d(
                     "onAnimationUpdate",
-                    "percent = $percent progressCurrentValue = $progressCurValue progressMaxValue = $progressMaxValue"
+                    "percent = $percent progressCurrentValue = $progressCurValue progressMaxValue = $progressMaxValue",
                 )
                 invalidate()
             }
@@ -988,7 +1006,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
                 mCenterPoint.x.toFloat(),
                 mCenterPoint.y.toFloat(),
                 progressGradientColors,
-                null
+                null,
             )
         progressPaint.shader = mSweepGradient
     }
@@ -997,7 +1015,7 @@ open class ProgressCircularImageView @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         setMeasuredDimension(
             SizeUtils.measure(widthMeasureSpec, defaultSize),
-            SizeUtils.measure(heightMeasureSpec, defaultSize)
+            SizeUtils.measure(heightMeasureSpec, defaultSize),
         )
     }
 
@@ -1040,8 +1058,9 @@ open class ProgressCircularImageView @JvmOverloads constructor(
     }
 
     private fun setProgress(current: Float, max: Float) {
-        if (current == progressCurValue && max == progressMaxValue)
+        if (current == progressCurValue && max == progressMaxValue) {
             return
+        }
 
         percent = decFormat.format(current.div(max)).toFloat()
         progressCurValue = current

@@ -27,13 +27,13 @@ import java.lang.reflect.Type
 
 internal class Factory(
     private val contentType: MediaType,
-    private val serializer: Serializer
+    private val serializer: Serializer,
 ) : Converter.Factory() {
     @ExperimentalSerializationApi
     override fun responseBodyConverter(
         type: Type,
         annotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): Converter<ResponseBody, *>? {
         val loader = serializer(type)
         return DeserializationStrategyConverter(loader, serializer)
@@ -44,7 +44,7 @@ internal class Factory(
         type: Type,
         parameterAnnotations: Array<out Annotation>,
         methodAnnotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): Converter<*, RequestBody>? {
         val saver = serializer(type)
         return SerializationStrategyConverter(contentType, saver, serializer)

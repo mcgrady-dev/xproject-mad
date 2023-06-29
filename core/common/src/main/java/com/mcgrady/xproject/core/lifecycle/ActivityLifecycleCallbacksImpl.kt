@@ -17,9 +17,7 @@ package com.mcgrady.xproject.core.lifecycle
 
 import android.app.Activity
 import android.app.Application
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import timber.log.Timber
 
@@ -29,47 +27,47 @@ import timber.log.Timber
 open class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks, IActivityLifecycle {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onCreated, taskId=${activity.taskId}")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onCreated, taskId=${activity.taskId}")
 
         registerFragmentCallbacks(activity)
     }
 
     override fun onActivityStarted(activity: Activity) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onStarted")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onStarted")
     }
 
     override fun onActivityResumed(activity: Activity) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onResumed")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onResumed")
     }
 
     override fun onActivityPaused(activity: Activity) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onPaused")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onPaused")
     }
 
     override fun onActivityStopped(activity: Activity) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onStopped")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onStopped")
     }
 
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onSaveInstanceState outState=$outState")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onSaveInstanceState outState=$outState")
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: onDestroyed")
+        Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: onDestroyed")
 
         unregisterFragmentCallbacks(activity)
     }
 
     override fun registerFragmentCallbacks(activity: Activity) {
         if (activity is FragmentActivity) {
-            Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: registerFragmentCallbacks")
+            Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: registerFragmentCallbacks")
             activity.supportFragmentManager.registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl, true)
         }
     }
 
     override fun unregisterFragmentCallbacks(activity: Activity) {
         if (activity is FragmentActivity) {
-            Timber.tag(TAG).i( " ${activity::class.java.canonicalName}: unregisterFragmentCallbacks")
+            Timber.tag(TAG).i(" ${activity::class.java.canonicalName}: unregisterFragmentCallbacks")
             activity.supportFragmentManager.unregisterFragmentLifecycleCallbacks(FragmentLifecycleCallbacksImpl)
         }
     }

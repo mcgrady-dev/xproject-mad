@@ -18,13 +18,11 @@ package com.mcgrady.xproject.core.ui.edittext
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -39,7 +37,7 @@ import com.mcgrady.xproject.core.ui.util.SizeUtils.dp2px
 class ClearEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
+    defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle,
 ) : AppCompatEditText(context, attrs, defStyleAttr),
     View.OnTouchListener,
     View.OnFocusChangeListener,
@@ -74,7 +72,7 @@ class ClearEditText @JvmOverloads constructor(
             drawables[0],
             drawables[1],
             drawableClear,
-            drawables[3]
+            drawables[3],
         )
     }
 

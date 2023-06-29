@@ -26,8 +26,8 @@ import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
 import com.mcgrady.xarch.extension.BindingViewHolder
 import com.mcgrady.xproject.core.ui.transformationlayout.TransformationCompat
-import com.mcgrady.xproject.feature.pokemon.databinding.PokemonItemDbBinding
 import com.mcgrady.xproject.feature.pokemon.data.model.Pokemon
+import com.mcgrady.xproject.feature.pokemon.databinding.PokemonItemDbBinding
 import com.mcgrady.xproject.feature.pokemon.ui.databinding.main.PokemonListDBActivity
 
 /**

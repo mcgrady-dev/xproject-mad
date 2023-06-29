@@ -40,8 +40,8 @@ class ColorGenerator private constructor(private val colors: List<Int>) {
                     -0xa65d42,
                     -0xdf6c33,
                     -0x529d59,
-                    -0x7fa87f
-                )
+                    -0x7fa87f,
+                ),
             )
             MATERIAL = create(
                 listOf(
@@ -61,8 +61,8 @@ class ColorGenerator private constructor(private val colors: List<Int>) {
                     -0x2ab1,
                     -0x48b3,
                     -0x5e7781,
-                    -0x6f5b52
-                )
+                    -0x6f5b52,
+                ),
             )
         }
     }

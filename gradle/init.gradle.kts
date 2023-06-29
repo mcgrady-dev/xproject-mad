@@ -19,7 +19,10 @@ rootProject {
             kotlin {
                 target("**/*.kt")
                 targetExclude("**/build/**/*.kt")
-                ktlint(ktlintVersion).userData(mapOf("android" to "true"))
+                ktlint(ktlintVersion)
+                    .setUseExperimental(true)
+                    .userData(mapOf("android" to "true"))
+                    .setEditorConfigPath("$rootDir/.editorconfig")  // sample unusual placement
                 licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             }
             format("kts") {

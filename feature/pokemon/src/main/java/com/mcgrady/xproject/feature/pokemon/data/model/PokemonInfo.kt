@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.feature.pokemon.data.model
 
 import kotlinx.serialization.SerialName
@@ -16,7 +31,7 @@ data class PokemonInfo(
     val attack: Int = Random.nextInt(maxAttack),
     val defense: Int = Random.nextInt(maxDefense),
     val speed: Int = Random.nextInt(maxSpeed),
-    val exp: Int = Random.nextInt(maxExp)
+    val exp: Int = Random.nextInt(maxExp),
 ) {
 
     fun getIdString(): String = String.format("#%03d", id)

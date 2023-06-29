@@ -31,7 +31,7 @@ class ViewAnimationOrchestrator(
 
     constructor(setupAnimator: ViewValueAnimator, progressAnimator: ViewValueAnimator) : this(
         listOf(setupAnimator),
-        listOf(progressAnimator)
+        listOf(progressAnimator),
     )
 
     private val setupSet = AnimatorSet().apply {
@@ -71,7 +71,7 @@ class ViewAnimationOrchestrator(
 
     internal fun attach(
         animatorInterface: IAnimatorInterface,
-        onSetupEnd: () -> Unit = {}
+        onSetupEnd: () -> Unit = {},
     ) {
         (setupAnimators + progressAnimators).forEach { animator ->
             animator.baseAnimator.addUpdateListener {

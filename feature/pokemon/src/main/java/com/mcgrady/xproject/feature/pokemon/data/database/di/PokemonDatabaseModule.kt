@@ -17,9 +17,9 @@ package com.mcgrady.xproject.feature.pokemon.data.database.di
 
 import android.app.Application
 import androidx.room.Room
+import com.mcgrady.xproject.feature.pokemon.data.database.PokemonDatabase
 import com.mcgrady.xproject.feature.pokemon.data.database.dao.PokemonDao
 import com.mcgrady.xproject.feature.pokemon.data.database.dao.PokemonInfoDao
-import com.mcgrady.xproject.feature.pokemon.data.database.PokemonDatabase
 import com.mcgrady.xproject.feature.pokemon.data.database.util.TypeResponseConverter
 import dagger.Module
 import dagger.Provides

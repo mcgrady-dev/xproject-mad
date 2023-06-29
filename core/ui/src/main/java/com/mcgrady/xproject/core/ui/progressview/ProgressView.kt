@@ -1,3 +1,18 @@
+/*
+ * Copyright 2022 mcgrady
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.mcgrady.xproject.core.ui.progressview
 
 import android.animation.ValueAnimator
@@ -22,10 +37,10 @@ import androidx.annotation.Px
 import androidx.annotation.StringRes
 import com.mcgrady.xproject.core.ui.R
 import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation
-import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation.NORMAL
+import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation.ACCELERATEDECELERATE
 import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation.BOUNCE
 import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation.DECELERATE
-import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation.ACCELERATEDECELERATE
+import com.mcgrady.xproject.core.ui.progressview.animation.ProgressViewAnimation.NORMAL
 import com.mcgrady.xproject.core.ui.progressview.listener.OnProgressChangeListener
 import com.mcgrady.xproject.core.ui.progressview.listener.OnProgressClickListener
 import com.mcgrady.xproject.core.ui.util.applyTextForm
@@ -43,7 +58,7 @@ internal annotation class ProgressViewDSL
 @ProgressViewDSL
 inline fun progressView(
     context: Context,
-    crossinline block: ProgressView.Builder.() -> Unit
+    crossinline block: ProgressView.Builder.() -> Unit,
 ): ProgressView =
     ProgressView.Builder(context).apply(block).build()
 
@@ -254,24 +269,24 @@ class ProgressView : FrameLayout {
 
     public constructor(
         context: Context,
-        attributeSet: AttributeSet
+        attributeSet: AttributeSet,
     ) : this(context, attributeSet, 0)
 
     public constructor(
         context: Context,
         attributeSet: AttributeSet,
-        defStyle: Int
+        defStyle: Int,
     ) : super(
         context,
         attributeSet,
-        defStyle
+        defStyle,
     ) {
         getAttrs(attributeSet, defStyle)
     }
 
     private fun getAttrs(
         attributeSet: AttributeSet,
-        defStyleAttr: Int
+        defStyleAttr: Int,
     ) {
         val typedArray =
             context.obtainStyledAttributes(attributeSet, R.styleable.ProgressView, defStyleAttr, 0)
@@ -301,7 +316,7 @@ class ProgressView : FrameLayout {
             when (
                 a.getInt(
                     R.styleable.ProgressView_progressView_labelConstraints,
-                    ProgressLabelConstraints.ALIGN_PROGRESS.ordinal
+                    ProgressLabelConstraints.ALIGN_PROGRESS.ordinal,
                 )
             ) {
                 1 -> ProgressLabelConstraints.ALIGN_CONTAINER
@@ -310,7 +325,7 @@ class ProgressView : FrameLayout {
         when (
             a.getInt(
                 R.styleable.ProgressView_progressView_orientation,
-                ProgressViewOrientation.HORIZONTAL.value
+                ProgressViewOrientation.HORIZONTAL.value,
             )
         ) {
             0 -> this.orientation = ProgressViewOrientation.HORIZONTAL
@@ -319,7 +334,7 @@ class ProgressView : FrameLayout {
         when (
             a.getInt(
                 R.styleable.ProgressView_progressView_animation,
-                progressAnimation.value
+                progressAnimation.value,
             )
         ) {
             ProgressViewAnimation.NORMAL.value -> this.progressAnimation = NORMAL
@@ -361,7 +376,7 @@ class ProgressView : FrameLayout {
                 a.getColor(R.styleable.ProgressView_progressView_highlightColor, highlightColor)
             highlightThickness = a.getDimension(
                 R.styleable.ProgressView_progressView_highlightWidth,
-                highlightThickness.toFloat()
+                highlightThickness.toFloat(),
             )
                 .toInt()
             if (!a.getBoolean(R.styleable.ProgressView_progressView_highlighting, !highlighting)) {
@@ -388,7 +403,7 @@ class ProgressView : FrameLayout {
         w: Int,
         h: Int,
         oldw: Int,
-        oldh: Int
+        oldh: Int,
     ) {
         super.onSizeChanged(w, h, oldw, oldh)
         this.path.apply {
@@ -398,7 +413,7 @@ class ProgressView : FrameLayout {
             addRoundRect(
                 RectF(0f, 0f, w.toFloat(), h.toFloat()),
                 radiusArray,
-                Path.Direction.CCW
+                Path.Direction.CCW,
             )
         }
     }
@@ -453,19 +468,19 @@ class ProgressView : FrameLayout {
         if (labelGravity != null) {
             this.labelView.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
             )
             this.labelView.gravity = requireNotNull(labelGravity)
         } else if (!isVertical()) {
             this.labelView.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
             )
             this.labelView.gravity = Gravity.CENTER_VERTICAL
         } else {
             this.labelView.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.WRAP_CONTENT,
             )
             this.labelView.gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
         }
@@ -475,7 +490,7 @@ class ProgressView : FrameLayout {
                 textSize = labelSize
                 textTypeface = labelTypeface
                 textTypefaceObject = labelTypefaceObject
-            }
+            },
         )
         removeView(labelView)
         addView(labelView)
@@ -514,8 +529,8 @@ class ProgressView : FrameLayout {
     private fun getPreviousMergedProgressSize(
         @FloatRange(
             from = 0.0,
-            to = 1.0
-        ) progressRange: Float
+            to = 1.0,
+        ) progressRange: Float,
     ): Float {
         return if (getProgressSize(previousProgress) +
             getProgressSize() * progressRange <= getProgressSize()
@@ -529,7 +544,7 @@ class ProgressView : FrameLayout {
     private fun getLabelPosition(progressValue: Float = progress): Float {
         return when {
             labelView.width + labelSpace < getProgressSize(progressValue) -> getProgressSize(
-                progressValue
+                progressValue,
             ) - labelView.width - labelSpace
             else -> getProgressSize(progressValue) + labelSpace
         }
@@ -538,8 +553,8 @@ class ProgressView : FrameLayout {
     private fun getPreviousMergedLabelPosition(
         @FloatRange(
             from = 0.0,
-            to = 1.0
-        ) progressRange: Float
+            to = 1.0,
+        ) progressRange: Float,
     ): Float {
         return if (getLabelPosition(previousProgress) +
             getLabelPosition() * progressRange <= getLabelPosition()
@@ -557,8 +572,9 @@ class ProgressView : FrameLayout {
     }
 
     private fun getViewSize(view: View): Int {
-        return if (isVertical()) view.height
-        else view.width
+        return if (isVertical()) {
+            view.height
+        } else view.width
     }
 
     /** animates [ProgressView]'s progress bar. */
@@ -584,7 +600,7 @@ class ProgressView : FrameLayout {
                 }
                 doStartAndFinish(
                     start = { isAnimating = true },
-                    finish = { isAnimating = false }
+                    finish = { isAnimating = false },
                 )
             }
             .also { it.start() }

@@ -29,7 +29,7 @@ import android.view.View
 class ScrollImageView @JvmOverloads constructor(
     context: Context?,
     attributeSet: AttributeSet? = null,
-    defStyleInt: Int = 0
+    defStyleInt: Int = 0,
 ) : View(context, attributeSet, defStyleInt) {
 
     var image: Bitmap? = null

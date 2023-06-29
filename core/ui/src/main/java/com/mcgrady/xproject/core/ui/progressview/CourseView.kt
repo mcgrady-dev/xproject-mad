@@ -25,7 +25,7 @@ import android.view.ViewGroup
 class CourseView @JvmOverloads constructor(
     context: Context?,
     @Suppress("UNUSED_PARAMETER") attributeSet: AttributeSet? = null,
-    @Suppress("UNUSED_PARAMETER") defStyleInt: Int = 0
+    @Suppress("UNUSED_PARAMETER") defStyleInt: Int = 0,
 ) : ViewGroup(context) {
 
     override fun onLayout(p0: Boolean, p1: Int, p2: Int, p3: Int, p4: Int) {
@@ -36,9 +36,10 @@ class CourseView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-        @Suppress("UNUSED_VARIABLE") val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+
+        @Suppress("UNUSED_VARIABLE")
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         val sizeWidth = MeasureSpec.getSize(widthMeasureSpec)
         val sizeHeight = MeasureSpec.getSize(heightMeasureSpec)
 

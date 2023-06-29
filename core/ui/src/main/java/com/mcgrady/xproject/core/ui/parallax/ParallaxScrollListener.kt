@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 open class ParallaxScrollListener(
     var decorationWidth: Float = 0f,
     var maxScaleDifference: Float = -1f,
-    var listener: OnScrolledCallBack? = null
+    var listener: OnScrolledCallBack? = null,
 ) :
     RecyclerView.OnScrollListener() {
 
@@ -51,7 +51,7 @@ open class ParallaxScrollListener(
             dx = $dx dy = $dy
             itemCount = $itemCount totalWidth = $totalWidth itemWidth = $itemWidth padding = $decorationWidth
             first = $first offset = $offset currentOffset = $currentOffset
-            """.trimIndent()
+            """.trimIndent(),
         )
 
         listener?.onScrolled(currentOffset, totalWidth, maxScaleDifference)

@@ -25,7 +25,7 @@ object DefaultAnimationOrchestrator {
 
     fun create(
         rotationDurationInMillis: Long = DEFAULT_ROTATION_DURATION,
-        expandDurationInMillis: Long = DEFAULT_EXPANSION_DURATION
+        expandDurationInMillis: Long = DEFAULT_EXPANSION_DURATION,
     ): ViewAnimationOrchestrator {
         val expansionAnimator = createDefaultExpansionAnimator(expandDurationInMillis)
         val rotationAnimator = createDefaultRotationAnimator(rotationDurationInMillis)
@@ -38,7 +38,7 @@ object DefaultAnimationOrchestrator {
         return object : ViewValueAnimator {
             override val baseAnimator = ValueAnimator.ofFloat(
                 AnimationDrawingState.MIN_VALUE,
-                AnimationDrawingState.MAX_VALUE
+                AnimationDrawingState.MAX_VALUE,
             ).apply {
                 interpolator = LinearInterpolator()
                 duration = expandDurationInMillis
@@ -58,7 +58,7 @@ object DefaultAnimationOrchestrator {
         return object : ViewValueAnimator {
             override val baseAnimator: ValueAnimator = ValueAnimator.ofFloat(
                 AnimationDrawingState.MIN_VALUE,
-                AnimationDrawingState.MAX_VALUE
+                AnimationDrawingState.MAX_VALUE,
             ).apply {
                 repeatCount = ValueAnimator.INFINITE
                 duration = rotationDurationInMillis

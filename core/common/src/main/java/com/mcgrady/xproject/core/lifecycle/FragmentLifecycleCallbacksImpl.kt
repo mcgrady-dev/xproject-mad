@@ -38,7 +38,7 @@ object FragmentLifecycleCallbacksImpl : FragmentManager.FragmentLifecycleCallbac
         fm: FragmentManager,
         f: Fragment,
         v: View,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onFragmentViewCreated(fm, f, v, savedInstanceState)
         Timber.tag(TAG).i("${f::class.java.canonicalName}: onViewCreated")
@@ -48,7 +48,7 @@ object FragmentLifecycleCallbacksImpl : FragmentManager.FragmentLifecycleCallbac
     override fun onFragmentActivityCreated(
         fm: FragmentManager,
         f: Fragment,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onFragmentActivityCreated(fm, f, savedInstanceState)
         Timber.tag(TAG).i("${f::class.java.canonicalName}: onActivityCreated")
@@ -88,6 +88,6 @@ object FragmentLifecycleCallbacksImpl : FragmentManager.FragmentLifecycleCallbac
         super.onFragmentDetached(fm, f)
         Timber.tag(TAG).i("${f::class.java.canonicalName}: onDetached")
     }
-    
+
     private const val TAG = "FragmentLifecycle"
 }

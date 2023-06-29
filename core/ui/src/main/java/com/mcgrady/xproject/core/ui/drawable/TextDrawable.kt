@@ -15,11 +15,18 @@
  */
 package com.mcgrady.xproject.core.ui.drawable
 
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.Paint
+import android.graphics.PixelFormat
+import android.graphics.RectF
+import android.graphics.Typeface
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.shapes.RectShape
 import android.graphics.drawable.shapes.RoundRectShape
+
 /**
  * Created by mcgrady on 2021/11/11.
  */
@@ -38,7 +45,7 @@ class TextDrawable private constructor(builder: Builder) : ShapeDrawable(builder
         return Color.rgb(
             (SHADE_FACTOR * Color.red(color)).toInt(),
             (SHADE_FACTOR * Color.green(color)).toInt(),
-            (SHADE_FACTOR * Color.blue(color)).toInt()
+            (SHADE_FACTOR * Color.blue(color)).toInt(),
         )
     }
 
@@ -62,7 +69,7 @@ class TextDrawable private constructor(builder: Builder) : ShapeDrawable(builder
             text,
             (width / 2).toFloat(),
             height / 2 - (textPaint.descent() + textPaint.ascent()) / 2,
-            textPaint
+            textPaint,
         )
         canvas.restoreToCount(count)
     }
@@ -180,7 +187,7 @@ class TextDrawable private constructor(builder: Builder) : ShapeDrawable(builder
                 radius.toFloat(),
                 radius.toFloat(),
                 radius.toFloat(),
-                radius.toFloat()
+                radius.toFloat(),
             )
             shape = RoundRectShape(radii, null, null)
             return this

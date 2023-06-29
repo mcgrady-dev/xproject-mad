@@ -16,7 +16,9 @@
 package com.mcgrady.xproject.feature.pokemon.ui.databinding.main
 
 import androidx.annotation.MainThread
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import com.mcgrady.xproject.core.base.BaseViewModel
 import com.mcgrady.xproject.feature.pokemon.data.model.Pokemon
 import com.mcgrady.xproject.feature.pokemon.data.repository.PokemonListRepository
@@ -29,7 +31,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class PokemonListDBViewModel @Inject constructor(
-    private val repository: PokemonListRepository
+    private val repository: PokemonListRepository,
 ) : BaseViewModel() {
 
     private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
@@ -39,7 +41,7 @@ class PokemonListDBViewModel @Inject constructor(
                 page = page,
                 onStart = { _isLoading.postValue(true) },
                 onComplete = { _isLoading.postValue(false) },
-                onError = { _toast.postValue(it) }
+                onError = { _toast.postValue(it) },
             ).asLiveDataOnViewModelScope()
         }
 
