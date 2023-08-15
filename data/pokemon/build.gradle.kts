@@ -30,6 +30,6 @@ dependencies {
     api(project(":core:common"))
     api(project(":core:network"))
 
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit.kotlin.serialization)
+    api(libs.kotlinx.serialization.json)
+    api(libs.retrofit.kotlin.serialization)
 }

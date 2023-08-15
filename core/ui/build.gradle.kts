@@ -15,7 +15,6 @@
  */
 plugins {
     id("xproject.android.library")
-    id("kotlin-parcelize")
 }
 
 android {
@@ -27,8 +26,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.recyclerview)
-    implementation(libs.material)
+    api(libs.androidx.appcompat)
+    api(libs.androidx.constraintlayout)
+    api(libs.recyclerview)
+    api(libs.material)
 }

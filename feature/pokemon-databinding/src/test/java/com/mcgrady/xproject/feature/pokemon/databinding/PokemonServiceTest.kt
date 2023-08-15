@@ -16,7 +16,7 @@
 package com.mcgrady.xproject.feature.pokemon.databinding
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.kuke.naxos.pokemon.network.service.PokemonService
+import com.mcgrady.xproject.data.pokemon.network.service.PokemonService
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

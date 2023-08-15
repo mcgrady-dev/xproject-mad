@@ -15,7 +15,7 @@
  */
 package com.mcgrady.xproject.feature.pokemon.databinding
 
-import com.kuke.naxos.pokemon.data.model.PokemonResponse
+import com.mcgrady.xproject.data.pokemon.model.PokemonResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

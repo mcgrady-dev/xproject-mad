@@ -26,10 +26,10 @@ android {
 dependencies {
     implementation(project(":core:common"))
 
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.okhttp)
+    api(libs.kotlinx.coroutines.android)
+    api(libs.okhttp)
     implementation(libs.okhttp.logging)
-    implementation(libs.retrofit)
+    api(libs.retrofit)
 
     debugImplementation(libs.chucker.snapshot)
     releaseImplementation(libs.chucker.snapshot.noop)

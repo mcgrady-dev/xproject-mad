@@ -17,7 +17,7 @@ package com.mcgrady.xproject.feature.pokemon.databinding
 
 import com.mcgrady.xproject.core.network.ApiResponse
 import com.mcgrady.xproject.core.network.request
-import com.kuke.naxos.pokemon.data.model.PokemonResponse
+import com.mcgrady.xproject.data.pokemon.model.PokemonResponse
 
 internal class PokemonApiClient constructor(private val service: PokemonApiService) {
 

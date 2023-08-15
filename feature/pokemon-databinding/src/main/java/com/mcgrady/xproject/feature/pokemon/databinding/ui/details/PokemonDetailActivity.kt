@@ -23,7 +23,6 @@ import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.core.base.BaseActivity
 import com.mcgrady.xproject.core.ui.transformationlayout.TransformationCompat
 import com.mcgrady.xproject.core.ui.transformationlayout.TransformationLayout
-import com.mcgrady.xproject.core.ui.transformationlayout.onTransformationEndContainer
 import com.mcgrady.xproject.data.pokemon.model.Pokemon
 import com.mcgrady.xproject.feature.pokemon.databinding.databinding.PokemonActivityDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +42,7 @@ class PokemonDetailActivity : BaseActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(EXTRA_POKEMON, Pokemon::class.java) as Pokemon
         } else {
+            @Suppress("DEPRECATION")
             intent.getParcelableExtra<Pokemon>(EXTRA_POKEMON) as Pokemon
         }
     }
@@ -50,9 +50,10 @@ class PokemonDetailActivity : BaseActivity() {
     private val binding by viewBinding(PokemonActivityDetailBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        onTransformationEndContainer(
-            intent.getParcelableArrayExtra(EXTRA_TRANSITION_LAYOUT) as TransformationLayout.Params,
-        )
+//        @Suppress("DEPRECATION")
+//        onTransformationEndContainer(
+//            intent.getParcelableArrayExtra(EXTRA_TRANSITION_LAYOUT) as TransformationLayout.Params,
+//        )
         super.onCreate(savedInstanceState)
 
         binding.apply {

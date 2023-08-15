@@ -19,7 +19,7 @@
 plugins {
     id("xproject.android.feature")
     id("xproject.android.glide")
-//    id("xproject.android.room")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -34,11 +34,12 @@ android {
 
 dependencies {
 
+    implementation(project(":core:ui"))
     implementation(project(":data:pokemon"))
 
     implementation(libs.androidx.activity)
-    implementation(libs.material)
     implementation(libs.androidx.palette.ktx)
+    implementation(libs.flexbox)
 
 //    //glide
 //    implementation(libs.glide)
@@ -51,8 +52,6 @@ dependencies {
 //    }
 ////    kapt(libs.glide.compiler)
 //    ksp(libs.glide.ksp)
-
-    implementation(libs.flexbox)
 
     //test
     testImplementation(libs.okhttp.mocks)
