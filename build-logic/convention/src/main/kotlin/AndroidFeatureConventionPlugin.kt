@@ -29,6 +29,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("xproject.android.library")
                 apply("xproject.android.hilt")
+                apply("xproject.therouter")
             }
             extensions.configure<LibraryExtension> {
                 defaultConfig {

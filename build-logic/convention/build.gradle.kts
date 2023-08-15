@@ -61,5 +61,9 @@ gradlePlugin {
             id = "xproject.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("therouter") {
+            id = "xproject.therouter"
+            implementationClass = "AndroidTheRouterConventionPlugin"
+        }
     }
 }

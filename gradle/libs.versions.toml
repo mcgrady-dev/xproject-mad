@@ -58,7 +58,7 @@ timber = "5.0.1"
 xarch = "0.2.6"
 xarchSnapshot = "0.3.1-SNAPSHOT"
 flexbox = "3.0.0"
-therouter = "1.1.3-beta2"
+therouter = "1.2.0-rc1"
 protobuf = "3.23.0"
 protobufPlugin = "0.9.3"
 okhttp = "4.11.0"
@@ -226,4 +226,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-therouter = { id = "cn.therouter", version.ref = "therouter" }
+therouter-agp8 = { id = "cn.therouter.agp8", version.ref = "therouter" }

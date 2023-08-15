@@ -15,9 +15,18 @@
  */
 package com.mcgrady.xproject.core.base
 
+import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.therouter.TheRouter
 
 /**
  * Created by mcgrady on 5/5/21.
  */
-abstract class BaseActivity : AppCompatActivity()
+abstract class BaseActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onCreate(savedInstanceState, persistentState)
+        TheRouter.inject(this)
+    }
+}

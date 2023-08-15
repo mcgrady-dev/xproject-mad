@@ -18,11 +18,8 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("xproject.android.feature")
-    id("kotlinx-serialization")
-    id("kotlin-parcelize")
-    id("xproject.android.room")
     id("xproject.android.glide")
-//    id("therouter")
+//    id("xproject.android.room")
 }
 
 android {

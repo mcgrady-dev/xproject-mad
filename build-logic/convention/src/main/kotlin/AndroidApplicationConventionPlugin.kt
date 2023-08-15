@@ -28,6 +28,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
+                apply("xproject.therouter")
+                apply("therouter")
             }
 
             extensions.configure<ApplicationExtension> {
