@@ -29,7 +29,7 @@ import org.junit.Before
 import org.junit.Test
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 /**
  * Created by mcgrady on 2022/6/8.
@@ -59,7 +59,7 @@ class JsonUnitTest {
 
         override fun deserialize(decoder: Decoder): Date {
             val s = decoder.decodeString()
-            return formatter.parse(s)
+            return formatter.parse(s) as Date
         }
 
         override val descriptor: SerialDescriptor
