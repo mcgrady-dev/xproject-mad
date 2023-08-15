@@ -34,6 +34,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 defaultConfig {
                     testInstrumentationRunner = "com.mcgrady.xproject.core.testing.NiaTestRunner"
+                    //consumerProguardFiles("consumer-rules.pro")
+                    vectorDrawables {
+                        useSupportLibrary = true
+                    }
                 }
                 //configureGradleManagedDevices(this)
             }
