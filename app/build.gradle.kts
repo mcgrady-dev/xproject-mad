@@ -16,7 +16,6 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("xproject.android.application")
-//    id("xproject.android.application.flavors")
     id("xproject.android.hilt")
 }
 

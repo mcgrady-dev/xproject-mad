@@ -15,13 +15,16 @@
  */
 package com.mcgrady.xproject.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.core.base.BaseActivity
 import com.mcgrady.xproject.data.entity.MainItemEntity
 import com.mcgrady.xproject.databinding.ActivityMainBinding
+import com.mcgrady.xproject.feature.pokemon.databinding.ui.main.PokemonListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,29 +39,29 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        setSupportActionBar(binding.toolbar)
 
-        binding.apply {
-            recyclerView.adapter = this@MainActivity.adapter
-            adapter.setOnItemClickListener { adapter, view, position ->
-                val item = adapter.getItem(position) ?: return@setOnItemClickListener
-                when (item.id) {
-                    MainItemEntity.ITEM_POKEMON -> {
-                        // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
-                    }
-                    MainItemEntity.ITEM_ZHIHU -> {
-                        // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
-                    }
-                    MainItemEntity.ITEM_MUSIC -> {
-                        // startActivity(Intent(this@MainActivity, WindowInsetsControllerActivity::class.java))
-                    }
-                    MainItemEntity.ITEM_VIDEO -> {
-                        // startActivity(Intent(this@MainActivity, ShapeActivity::class.java))
-                    }
-                    MainItemEntity.ITEM_CHAT -> {
-                        // startActivity(Intent(this@MainActivity, SampleServiceActivity::class.java))
-                    }
-                    else -> {}
+        binding.recyclerView.adapter = this@MainActivity.adapter
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val item = adapter.getItem(position) ?: return@setOnItemClickListener
+            when (item.id) {
+                MainItemEntity.ITEM_POKEMON -> {
+                    // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
+                    startActivity(Intent(this@MainActivity, PokemonListActivity::class.java))
                 }
+                MainItemEntity.ITEM_ZHIHU -> {
+                    // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
+                }
+                MainItemEntity.ITEM_MUSIC -> {
+                    // startActivity(Intent(this@MainActivity, WindowInsetsControllerActivity::class.java))
+                }
+                MainItemEntity.ITEM_VIDEO -> {
+                    // startActivity(Intent(this@MainActivity, ShapeActivity::class.java))
+                }
+                MainItemEntity.ITEM_CHAT -> {
+                    // startActivity(Intent(this@MainActivity, SampleServiceActivity::class.java))
+                }
+                else -> {}
             }
         }
 
