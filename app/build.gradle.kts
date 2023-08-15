@@ -95,6 +95,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.coordinatorlayout)
     implementation(libs.material)
+    implementation(libs.androidx.core.splashscreen)
 
     debugImplementation(libs.leakcanary)
     debugImplementation(libs.blockcanary)
