@@ -80,7 +80,9 @@ android {
 dependencies {
 
     implementation(project(":feature:account"))
-    implementation(project(":feature:pokemon"))
+    implementation(project(":feature:pokemon-databinding"))
+    implementation(project(":feature:pokemon-viewbinding"))
+    implementation(project(":feature:pokemon-compose"))
     implementation(project(":feature:zhihu"))
 
     implementation(project(":core:common"))
