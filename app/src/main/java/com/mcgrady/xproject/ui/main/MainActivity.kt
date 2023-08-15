@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
     private val adapter by lazy { MainItemAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         binding.apply {

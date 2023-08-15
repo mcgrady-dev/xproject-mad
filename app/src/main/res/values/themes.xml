@@ -24,22 +24,22 @@
 
     <style name="Theme.XProject" parent="Base.Theme.XProject" />
 
-<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
-<!--    <style name="Base.Theme.Pokémon" parent="Theme.Material3.DayNight.NoActionBar">-->
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryVariant">@color/colorPrimary</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
-<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
-<!--        <item name="colorSecondary">@color/colorPrimary</item>-->
-<!--        <item name="colorSecondaryVariant">@color/colorPrimary</item>-->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
-<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-<!--    </style>-->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/white</item>
 
-<!--    <style name="Theme.Pokémon" parent="Base.Theme.Pokémon" />-->
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimationDuration">200</item>
+
+<!--        <item name="android:windowSplashScreenBrandingImage" tools:ignore="NewApi">@drawable/ic_naxos_musicbox_logo</item>-->
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.XProject</item>
+    </style>
 
 
 </resources>
