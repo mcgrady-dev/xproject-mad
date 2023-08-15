@@ -19,7 +19,8 @@ plugins {
 }
 
 android {
-    namespace = "com.mcgrady.xproject.zhihu"
+    resourcePrefix = "zhihu_"
+    namespace = "com.mcgrady.xproject.feature.zhihu"
 }
 
 dependencies {

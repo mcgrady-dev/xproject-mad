@@ -17,7 +17,6 @@ package com.mcgrady.xproject.feature.zhihu
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mcgrady.xproject.zhihu.R
 
 class ZhihuDailyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
