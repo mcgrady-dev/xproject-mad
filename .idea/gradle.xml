@@ -31,9 +31,13 @@
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/testing" />
             <option value="$PROJECT_DIR$/core/ui" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/pokemon" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/account" />
-            <option value="$PROJECT_DIR$/feature/pokemon" />
+            <option value="$PROJECT_DIR$/feature/pokemon-compose" />
+            <option value="$PROJECT_DIR$/feature/pokemon-databinding" />
+            <option value="$PROJECT_DIR$/feature/pokemon-viewbinding" />
             <option value="$PROJECT_DIR$/feature/zhihu" />
           </set>
         </option>

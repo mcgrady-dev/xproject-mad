@@ -26,6 +26,12 @@ include(":core:ui")
 include(":core:network")
 include(":core:testing")
 
+include(":data:pokemon")
+
+include(":feature:pokemon-databinding")
+include(":feature:pokemon-compose")
+include(":feature:pokemon-viewbinding")
+include(":feature:zhihu")
 include(":feature:account")
 include(":feature:pokemon")
 include(":feature:zhihu")

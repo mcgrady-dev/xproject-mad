@@ -18,18 +18,20 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("xproject.android.feature")
-    id("xproject.android.glide")
+    alias(libs.plugins.kotlin.android)
 //    id("xproject.android.room")
+//    id("xproject.android.glide")
+//    id("therouter")
 }
 
 android {
     resourcePrefix = "pokemon_"
 
     buildFeatures {
-        dataBinding = true
+        viewBinding = true
     }
 
-    namespace = "com.mcgrady.xproject.feature.pokemon.databinding"
+    namespace = "com.mcgrady.xproject.feature.pokemon.viewbinding"
 }
 
 dependencies {
@@ -40,21 +42,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.palette.ktx)
 
-//    //glide
-//    implementation(libs.glide)
-//    implementation(libs.glide.okhttp) {
-//        exclude(group = "com.squareup.okhttp3", module = "okhttp")
-//    }
-//    implementation(libs.glide.recyclerview) {
-//        // Excludes the support library because it's already included by Glide.
-//        isTransitive = false
-//    }
-////    kapt(libs.glide.compiler)
-//    ksp(libs.glide.ksp)
-
     implementation(libs.flexbox)
-
-    //test
-    testImplementation(libs.okhttp.mocks)
-    testImplementation(libs.truth)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
 }
