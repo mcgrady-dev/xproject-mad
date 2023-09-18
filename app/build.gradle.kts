@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("xproject.android.application")
     id("xproject.android.hilt")
@@ -83,21 +83,15 @@ dependencies {
     implementation(project(":feature:pokemon-viewbinding"))
     implementation(project(":feature:pokemon-compose"))
     implementation(project(":feature:zhihu"))
+    implementation(project(":feature:musicplayer"))
 
     implementation(project(":core:common"))
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
 
-    //router
-    implementation(libs.therouter.router)
-    kapt(libs.therouter.apt)
-
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.coordinatorlayout)
-    implementation(libs.material)
-    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.splashscreen)
 
     debugImplementation(libs.leakcanary)
-    debugImplementation(libs.blockcanary)
-    releaseImplementation(libs.blockcanary.noop)
+//    debugImplementation(libs.blockcanary)
+//    releaseImplementation(libs.blockcanary.noop)
 }

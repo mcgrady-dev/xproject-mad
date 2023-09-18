@@ -17,7 +17,7 @@ package com.mcgrady.xproject.feature.pokemon.databinding.ui.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mcgrady.xproject.core.base.RecyclerViewPaginator
+import com.mcgrady.xproject.core.ui.recyclerview.RecyclerViewPaginator
 import com.mcgrady.xproject.data.pokemon.model.Pokemon
 import com.mcgrady.xproject.data.pokemon.model.PokemonInfo
 import com.mcgrady.xproject.feature.pokemon.databinding.ui.adapter.PokemonAdapter

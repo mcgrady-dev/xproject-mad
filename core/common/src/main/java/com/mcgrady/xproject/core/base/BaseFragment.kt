@@ -15,17 +15,30 @@
  */
 package com.mcgrady.xproject.core.base
 
-import com.mcgrady.xarch.base.LazyFragment
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 
 /**
  * Created by mcgrady on 2021/5/13.
  */
-abstract class BaseFragment(override val contentLayoutId: Int) : LazyFragment(contentLayoutId) {
+abstract class BaseFragment(@LayoutRes contentLayoutId: Int = 0) : Fragment(contentLayoutId) {
 
-    override fun lazyInit() {
-        initData()
+    private var isLoaded = false
+
+    protected open fun initialization() {
     }
 
-    protected open fun initData() {
+    override fun onResume() {
+        super.onResume()
+        // 增加Fragment可见判断，解决Fragment嵌套Fragment下，不可见Fragment执行onResume问题
+        if (!isLoaded && !isHidden) {
+            initialization()
+            isLoaded = true
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isLoaded = false
     }
 }

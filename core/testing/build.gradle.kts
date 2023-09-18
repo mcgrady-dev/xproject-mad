@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
     id("xproject.android.library")
     id("xproject.android.hilt")
@@ -25,7 +26,7 @@ android {
 dependencies {
 
     api(libs.androidx.test.core)
-    api(libs.androidx.test.espresso.core)
+    api(libs.espresso.core)
     api(libs.androidx.test.rules)
     api(libs.androidx.test.runner)
     api(libs.hilt.android.testing)
@@ -33,6 +34,6 @@ dependencies {
     api(libs.kotlinx.coroutines.test)
     api(libs.turbine)
 
-    implementation(project(":core:common"))
-    implementation(libs.kotlinx.datetime)
+//    implementation(project(":core:common"))
+//    implementation(libs.kotlinx.datetime)
 }

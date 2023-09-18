@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
     id("xproject.android.library")
 }
@@ -26,8 +27,7 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.appcompat)
-    api(libs.androidx.constraintlayout)
+    api(libs.constraintlayout)
     api(libs.recyclerview)
     api(libs.material)
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomSheetStyle" parent="Widget.Material3.BottomSheet">
+        <item name="paddingBottomSystemWindowInsets">false</item>
+<!--        <item name="android:maxWidth">@null</item>-->
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerMedium</item>
+    </style>
+
+    <style name="TextViewNormal">
+        <item name="android:textSize">14sp</item>
+<!--        <item name="fontFamily">@font/sans</item>-->
+    </style>
+
+    <style name="BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="paddingBottomSystemWindowInsets">false</item>
+        <item name="android:maxWidth">@null</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerMedium</item>
+    </style>
+
+</resources>

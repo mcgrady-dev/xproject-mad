@@ -16,11 +16,13 @@
 package com.mcgrady.xproject.core.base
 
 import android.app.Application
-import com.mcgrady.xarch.extension.internalAppCachePath
+import android.os.Build
+import com.mcgrady.libs.core.extensions.internalAppCachePath
 import com.mcgrady.xproject.core.common.BuildConfig
 import com.mcgrady.xproject.core.lifecycle.ActivityLifecycleCallbacksImpl
 import com.mcgrady.xproject.core.log.tree.FileLoggingTree
 import com.mcgrady.xproject.core.log.tree.ReleaseTree
+import com.mcgrady.xproject.core.utils.PreferenceUtil
 import timber.log.Timber
 
 /**
@@ -39,7 +41,11 @@ open class BaseApplication : Application() {
             Timber.plant(FileLoggingTree(internalAppCachePath()))
         }
 
-        registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
+        PreferenceUtil.init(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
+        }
     }
 
     companion object {

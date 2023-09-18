@@ -1,0 +1,37 @@
+[
+  {
+    "path": "pokemon/databinding/list",
+    "className": "com.mcgrady.xproject.feature.pokemon.databinding.ui.main.PokemonListActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "feature/musicplayer/simplemediaplayer",
+    "className": "com.mcgrady.xproject.feature.musicplayer.ui.SimpleMediaPlayerActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "feature/musicplayer/player",
+    "className": "com.mcgrady.xproject.feature.musicplayer.ui.MusicPlayerActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "feature/musicplayer/main",
+    "className": "com.mcgrady.xproject.feature.musicplayer.ui.MainActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/musicplayer/main",
+    "className": "com.mcgrady.xproject.feature.musicplayer.ui.MainActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  }
+]

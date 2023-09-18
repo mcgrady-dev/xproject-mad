@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("xproject.android.library")
     id("xproject.android.hilt")
@@ -32,13 +31,16 @@ android {
 }
 
 dependencies {
-    api(libs.xarch.snapshot) {
-        isChanging = true
-    }
+    api(libs.core.ktx)
+    api(libs.appcompat)
+    api(libs.androidx.activity)
 
+    api(libs.xlabs.viewbinding) { isChanging = true }
+    api(libs.xlabs.core.ktx) { isChanging = true }
     api(libs.utilcodex)
     api(libs.timber)
-    api(libs.androidx.lifecycle.livedata.ktx)
-    api(libs.androidx.lifecycle.viewModel.ktx)
+    api(libs.lifecycle.livedata.ktx)
+    api(libs.lifecycle.viewModel.ktx)
+    api(libs.mmkv)
 
 }

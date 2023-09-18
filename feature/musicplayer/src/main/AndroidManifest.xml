@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />-->
+
+    <application>
+        <activity
+            android:name=".ui.nav.BasicActivity"
+            android:exported="false"
+            android:label="@string/title_activity_basic"
+            android:theme="@style/Theme.Xprojectmad" />
+        <activity
+            android:name=".ui.nav.BottomNavigationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_bottom_navigation" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.MusicPlayer" />
+        <activity
+            android:name=".ui.SimpleMediaPlayerActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.MusicPlayerActivity"
+            android:exported="true"
+            android:launchMode="singleTop" /> <!-- <service -->
+        <!-- android:name=".service.MediaLibraryPlaybackService" -->
+        <!-- android:exported="true" -->
+        <!-- android:foregroundServiceType="mediaPlayback" > -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="androidx.media3.session.MediaSessionService" /> -->
+        <!-- <action android:name="android.media.browse.MediaBrowserService" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <service
+            android:name=".service.MediaPlaybackService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

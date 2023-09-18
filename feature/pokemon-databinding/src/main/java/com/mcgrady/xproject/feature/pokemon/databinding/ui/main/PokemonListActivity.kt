@@ -19,7 +19,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.core.base.BaseActivity
-import com.mcgrady.xproject.core.ui.transformationlayout.onTransformationStartContainer
 import com.mcgrady.xproject.feature.pokemon.databinding.databinding.PokemonActivityListBinding
 import com.mcgrady.xproject.feature.pokemon.databinding.ui.adapter.PokemonAdapter
 import com.therouter.router.Route
@@ -33,7 +32,7 @@ class PokemonListActivity : BaseActivity() {
     private val binding by viewBinding(PokemonActivityListBinding::inflate)
     private val viewModel: PokemonListViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
-        onTransformationStartContainer()
+        //onTransformationStartContainer()
         super.onCreate(savedInstanceState)
 
         binding.apply {

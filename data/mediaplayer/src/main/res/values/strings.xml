@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="playing_notification_name">播放通知</string>
+    <string name="playing_notification_description">播放通知提供播放暂停等操作。</string>
+</resources>

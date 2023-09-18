@@ -1,6 +1,8 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+
 plugins {
     id("xproject.android.library")
+    id("xproject.android.hilt")
+    id("xproject.android.room")
     id("kotlin-parcelize")
 }
 
@@ -14,12 +16,7 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
-
-    implementation(libs.media3.exoplayer)
-    implementation(libs.media3.ui)
-    implementation(libs.media3.session)
+    implementation(project(":core:ui"))
+    implementation(project(":core:common"))
+    implementation(project(":core:network"))
 }

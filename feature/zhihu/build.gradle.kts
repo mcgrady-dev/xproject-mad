@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("xproject.android.feature")
 }
@@ -26,9 +26,4 @@ android {
 dependencies {
 
     implementation(project(":core:network"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
 }

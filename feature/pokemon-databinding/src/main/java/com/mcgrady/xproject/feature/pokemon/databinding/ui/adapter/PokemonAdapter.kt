@@ -25,9 +25,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
 import com.mcgrady.xarch.extension.BindingViewHolder
-import com.mcgrady.xproject.core.ui.transformationlayout.TransformationCompat
 import com.mcgrady.xproject.data.pokemon.model.Pokemon
 import com.mcgrady.xproject.feature.pokemon.databinding.databinding.PokemonItemBinding
+import com.mcgrady.xproject.feature.pokemon.databinding.ui.details.PokemonDetailActivity.Companion.EXTRA_POKEMON
 import com.mcgrady.xproject.feature.pokemon.databinding.ui.main.PokemonListActivity
 
 /**
@@ -66,9 +66,9 @@ class PokemonAdapter :
                 val position =
                     bindingAdapterPosition.takeIf { it != NO_POSITION } ?: return@setOnClickListener
                 val intent = Intent(v?.context, PokemonListActivity::class.java).apply {
-                    putExtra("EXTRA_POKEMON", items[position])
+                    putExtra(EXTRA_POKEMON, items[position])
                 }
-                TransformationCompat.startActivity(binding.transformationLayout, intent)
+                context.startActivity(intent)
             }
         }
     }

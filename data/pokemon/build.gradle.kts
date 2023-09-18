@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("xproject.android.library")
     id("xproject.android.hilt")
@@ -31,5 +31,5 @@ dependencies {
     api(project(":core:network"))
 
     api(libs.kotlinx.serialization.json)
-    api(libs.retrofit.kotlin.serialization)
+    api(libs.retrofit.converter.serialization)
 }

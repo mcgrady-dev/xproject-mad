@@ -25,7 +25,7 @@ class MainRepository : Repository {
         MainItemEntity(MainItemEntity.ITEM_POKEMON_DB, "Pokemon\nDataBinding", XUtils.getRandomColor(false)),
         MainItemEntity(MainItemEntity.ITEM_POKEMON, "Pokemon", XUtils.getRandomColor(false)),
         MainItemEntity(MainItemEntity.ITEM_ZHIHU, "Zhihu Daily", XUtils.getRandomColor(false)),
-        MainItemEntity(MainItemEntity.ITEM_MUSIC, "Retro Music", XUtils.getRandomColor(false)),
+        MainItemEntity(MainItemEntity.ITEM_MUSIC, "Music Player", XUtils.getRandomColor(false)),
         MainItemEntity(MainItemEntity.ITEM_VIDEO, "Video Player", XUtils.getRandomColor(false)),
         MainItemEntity(MainItemEntity.ITEM_CHAT, "Chat", XUtils.getRandomColor(false)),
     )

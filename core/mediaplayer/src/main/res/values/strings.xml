@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="notification_channel_name">Playback cannot be resumed</string>
-    <string name="notification_content_title">Playback cannot be resumed</string>
-    <string name="notification_content_text">Press on the play button on the media notification if it
-    is still present, otherwise please open the app to start the playback and re-connect the session
-    to the controller</string>
-    <string name="playing_notification_name">播放通知</string>
-    <string name="playing_notification_description">播放通知提供播放暂停等操作。</string>
+
 </resources>

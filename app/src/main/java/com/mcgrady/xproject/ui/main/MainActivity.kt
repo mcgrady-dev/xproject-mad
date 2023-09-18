@@ -19,12 +19,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import com.mcgrady.xarch.extension.viewBinding
 import com.mcgrady.xproject.core.base.BaseActivity
 import com.mcgrady.xproject.data.entity.MainItemEntity
 import com.mcgrady.xproject.databinding.ActivityMainBinding
 import com.mcgrady.xproject.feature.pokemon.databinding.ui.main.PokemonListActivity
+import com.therouter.TheRouter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,6 +53,8 @@ class MainActivity : BaseActivity() {
                     // startActivity(Intent(this@MainActivity, CustomViewActivity::class.java))
                 }
                 MainItemEntity.ITEM_MUSIC -> {
+//                    TheRouter.build("feature/musicplayer/player").navigation()
+                    TheRouter.build("feature/musicplayer/main").navigation()
                     // startActivity(Intent(this@MainActivity, WindowInsetsControllerActivity::class.java))
                 }
                 MainItemEntity.ITEM_VIDEO -> {

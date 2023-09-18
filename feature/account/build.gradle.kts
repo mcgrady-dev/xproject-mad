@@ -29,11 +29,8 @@ dependencies {
 
     implementation(project(":core:network"))
 
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-
     implementation(libs.moshi)
-    implementation(libs.retrofit.moshi)
+    implementation(libs.retrofit.converter.moshi)
 
     testImplementation(libs.mockk)
     testImplementation(libs.truth)

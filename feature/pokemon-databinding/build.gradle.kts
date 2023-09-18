@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//val buildModule: String by project
-//val isBuildModule: Boolean = buildModule.toBoolean()
-@Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("xproject.android.feature")
     id("xproject.android.glide")
@@ -37,8 +35,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":data:pokemon"))
 
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.palette.ktx)
+    implementation(libs.palette)
     implementation(libs.flexbox)
 
 //    //glide

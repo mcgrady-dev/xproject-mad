@@ -55,5 +55,5 @@ class PokemonDetailRepositoryImpl @Inject constructor(
         } else {
             emit(pokemonInfoEntity.asDomain())
         }
-    }.onStart { onStart }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
 }

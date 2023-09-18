@@ -28,14 +28,15 @@
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/common" />
-            <option value="$PROJECT_DIR$/core/mediaplayer" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/testing" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/mediaplayer" />
             <option value="$PROJECT_DIR$/data/pokemon" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/account" />
+            <option value="$PROJECT_DIR$/feature/musicplayer" />
             <option value="$PROJECT_DIR$/feature/pokemon-compose" />
             <option value="$PROJECT_DIR$/feature/pokemon-databinding" />
             <option value="$PROJECT_DIR$/feature/pokemon-viewbinding" />

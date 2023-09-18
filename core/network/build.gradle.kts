@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Suppress("DSL_SCOPE_VIOLATION")
+
 plugins {
     id("xproject.android.library")
     id("xproject.android.hilt")
@@ -31,6 +31,6 @@ dependencies {
     implementation(libs.okhttp.logging)
     api(libs.retrofit)
 
-    debugImplementation(libs.chucker.snapshot)
-    releaseImplementation(libs.chucker.snapshot.noop)
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.noop)
 }
